@@ -1,0 +1,114 @@
+<div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-7 col-12">
+        <div class="register_tab_area p-lg-5">
+          <div class="register_title  mb-4">
+            <h4>Sign In</h4>
+            <p>Please continue with your credentials</p>
+          </div>
+          <div class="register_tab">
+            <h4 class="title mb-4"> Hello, <span>Welcome Back!</span> </h4>
+            <form class="registration-form">
+              <div class="form-group">
+                <label class="primary_color spcllbl">Phone No</label>
+                <input type="email" class="form-control" placeholder="+876-9876543210">
+              </div>
+              <div class="form-group">
+                <label class="primary_color spcllbl">Password*</label>
+                <input  type="password" class="form-control password-field1" placeholder="**************">
+                <span toggle=".password-field1" class="fa fa-fw fa-eye field-icon toggle-password"></span> </div>
+              <a href="#" data-toggle="modal" data-target="#forgotpmodal" class="fwdpass primary_color text-right btn-block  mb-3">Forgot your password?</a>
+             
+              <label class="text-muted mb-4 termtick">
+                <input type="checkbox" class="mr-2">
+                I accept the Terms and Conditions and  Privacy Policy </label>
+              <div class="form-group text-center"> 
+              <a href="#" data-toggle="modal" data-target="#signotpmodal">
+                <button type="submit" class="btn btn_primary btn-sm text-uppercase" >Sign in</button>
+                </a>
+                  </div>
+                
+                <p class="text-center signnote mb-4"> New to Tanito? <a href="register.php" class="primary_color text-uppercase"> Sign up</a> </p>
+            
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-5 col-12 d-none d-md-block">
+        <div class="sign-img p-lg-4"> <img src="assets/images/sign_pic.svg" alt="Sign" class="img-fluid"> </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Otp Sent modal -->
+  <div class="modal fade modal_tanito" id="signotpmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase">OTP VERIFICATION</h5>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4">Please enter the One Time Password received on your registered mobile number or email to verify your account. </p>
+          <h6 class="mb-4">VERIFY YOUR ACCOUNT</h6>
+          <div class="form-group verfOtp_box">
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" autocomplete="off"  />
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" autocomplete="off"  />
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" autocomplete="off" />
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" autocomplete="off" />
+          </div>
+          <button  type="button" class="btn btn_primary btn-sm text-uppercase mb-2">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Forgot passowrd Modal -->
+  <div class="modal fade modal_tanito" id="forgotpmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase"> FORGOT PASSWORD</h5>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4">Please enter your registered mobile number &amp; we will send you a verification code so that you can reset your password.</p>
+          <form class="registration-form w-75 m-auto">
+            <div class="form-group mb-4">
+              <label class="primary_color spcllbl">Phone No</label>
+              <input type="number" class="form-control" placeholder="+876-9876543210">
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn_primary btn-sm text-uppercase mr-3" >Back to Login</button>
+              <button type="submit" class="btn btn_primary btn-sm text-uppercase" >Get OTP</button>
+            </div>
+          </form>
+          <p class="text-center signnote mt-4"> New to Tanito? <a href="register.php" class="primary_color text-uppercase" > Sign up</a> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Reset passowrd Modal -->
+  <div class="modal fade modal_tanito" id="resetmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase"> Reset Password</h5>
+        </div>
+        <div class="modal-body">
+          <h6 class="text-uppercase text-center mb-4">Kindly reset your password</h6>
+          <form class="registration-form w-75 m-auto">
+            <div class="form-group">
+              <label class="primary_color spcllbl">Password*</label>
+              <input  type="password" class="form-control password-field1" placeholder="**************">
+              <span toggle=".password-field1" class="fa fa-fw fa-eye field-icon toggle-password"></span> </div>
+            <div class="form-group">
+              <label class="primary_color spcllbl">Confirm password*</label>
+              <input  type="password" class="form-control password-field1" placeholder="**************">
+              <span toggle=".password-field1" class="fa fa-fw fa-eye field-icon toggle-password"></span> </div>
+            <div class="form-group mb-2 text-center">
+              <button type="submit" class="btn btn_primary btn-sm text-uppercase mr-3" >Done </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
