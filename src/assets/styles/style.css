@@ -530,3 +530,6 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .custom_options label span { position: relative; }
 .custom_options label span:before { content: ''; position: absolute; top: 5px; left: -24px; width: 15px; height: 8px; border: solid #07B507; transform: rotate(-45deg); border-width: 0px 0px 1px 1px; transition:all 0.2s; display: none; }
 .custom_options input:checked + label span:before { display: block; }
+.invalid-feedback {
+    display: block;
+}

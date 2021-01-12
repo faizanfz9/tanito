@@ -1,0 +1,7 @@
+{
+    "/tanito/Api/*": {
+        "target": "http://demo.mbrcables.com/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
