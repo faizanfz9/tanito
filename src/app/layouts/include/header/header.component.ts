@@ -23,8 +23,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogOut(event: Event) {
-    event.preventDefault()
-    this.authService.logout();
+    var r = confirm("Do you want to logout?");
+      if (r == true) {
+        event.preventDefault()
+      this.authService.logout();
+      }
   }
 
 }

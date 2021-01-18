@@ -26,6 +26,8 @@ import { FollowingComponent } from './layouts/user-timeline/network/following/fo
 import { FollowersComponent } from './layouts/user-timeline/network/followers/followers.component';
 import { ProfileSetupComponent } from './layouts/profile-setup/profile-setup.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-and-condition.component';
+import { PrivacyPolicyComponent } from './layouts/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     InboxComponent,
     FollowingComponent,
     FollowersComponent,
-    ProfileSetupComponent
+    ProfileSetupComponent,
+    TermsAndConditionComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

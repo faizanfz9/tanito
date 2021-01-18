@@ -80,7 +80,7 @@
                   </div>
                   <label class="text-muted">
                     <input type="checkbox" class="mr-2" name="terms&Condition" ngModel required>
-                    I accept the Terms and Conditions and Privacy Policy </label>
+                    I accept the <a href="#" target="_blank" routerLink="/terms-and-condition">Terms and Conditions</a> and <a href="#" target="_blank" routerLink="/privacy-policy">Privacy Policy</a></label>
                   <div class="form-group text-center">
                     <button type="submit" [disabled]="password.value !== confirmPwd.value || signUpForm.invalid" class="btn btn_primary btn-sm text-uppercase">Sign in</button>
                     <p class="text-center signnote"> Already have an account? <a href="#" routerLink="/login" class="primary_color">SIGN IN</a> 

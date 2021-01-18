@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { LoginComponent } from './layouts/login/login.component';
+import { PrivacyPolicyComponent } from './layouts/privacy-policy/privacy-policy.component';
 import { ProfileSetupComponent } from './layouts/profile-setup/profile-setup.component';
 import { RegisterComponent } from './layouts/register/register.component';
+import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-and-condition.component';
 import { InboxComponent } from './layouts/user-timeline/inbox/inbox.component';
 import { FollowersComponent } from './layouts/user-timeline/network/followers/followers.component';
 import { FollowingComponent } from './layouts/user-timeline/network/following/following.component';
@@ -37,7 +39,9 @@ const routes: Routes = [
         path: "inbox", component: InboxComponent
       }
     ] 
-  }
+  },
+  { path: "terms-and-condition", component: TermsAndConditionComponent },
+  { path: "privacy-policy", component: PrivacyPolicyComponent }
 ];
 
 @NgModule({

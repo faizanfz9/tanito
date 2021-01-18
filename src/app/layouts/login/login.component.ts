@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   showForgotModal = false;
   modalRef: any;
   @ViewChild("otpVerify") otpVerifyModal: any;
+  @ViewChild("resetPwd") resetPwdModal: any;
 
   mobile = "";
 
@@ -67,7 +68,8 @@ export class LoginComponent implements OnInit {
         alert(res.msg);
       }else {
         this.loading = false;
-        console.log(res);
+        this.modalRef.hide();
+        this.openModal(this.resetPwdModal);
       }
     })
   }
