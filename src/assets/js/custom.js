@@ -235,11 +235,27 @@ chat
 
 
       
-      $('.message_tgle').click(function() {
-          $('.msg_panel').toggleClass('right');
-          $('.chat_box_body').toggleClass('width_body');
-          $('.chat_box_ftr').toggleClass('width_body');
-      })
+$('.message_tgle').click(function() {
+	$('.msg_panel').toggleClass('right');
+	$('.chat_box_body').toggleClass('width_body');
+	$('.chat_box_ftr').toggleClass('width_body');
+})
+
+$(document).on("click", "#logindrop", function(event){
+	event.preventDefault();
+	$(".my_account_dropmenu").slideToggle(300);
+})
+
+$(document).click(function(e) {
+  var container = $("#logindrop");
+  var container2 = $("#clickable");
+  var container3 = $("#submenu_click01");
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container3.is(e.target) && container3.has(e.target).length === 0 && !container.is(e.target) && container.has(e.target).length === 0 && !container2.is(e.target) && container2.has(e.target).length === 0) 
+    {
+     $(".my_account_dropmenu").hide();
+    }
+});
 
 
 

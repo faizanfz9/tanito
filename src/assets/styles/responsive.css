@@ -1,499 +1,508 @@
- @media(max-width:1679px) {
- .media_card ul li {
- width: 32%;
- font-size: 18px;
- padding-left: 15px;
-}
-}
- @media(max-width:1600px) {
- .sideMenu_box li a img {
- margin-right: 30px;
-}
- .sideMenu_box li a {
- padding-left:30px;
-}
- .student_lft .custom_card.category_card {
- padding-left: 30px;
- padding-right: 30px;
-}
- .student_rht {
- padding-right: 0;
-}
- .hero-bg {
-padding: 60px 0;
-}
-.follow_ple .col-md-3 {
- flex:0 0 33.33%;
- max-width: 33.33%;
-}
- .student_lft .intro_box ul li img {
- margin-right: 14px;
-}
-}
- @media(max-width:1599px) {
- .profile_img {
- width: 145px;
- height: 145px;
-}
- .users_followrs_dt button {
- padding: 10px 25px 9px;
-}
-}
- @media (min-width: 1367px) {
- .container {
- max-width:82%;
-}
-.banner_content h2 {
-font-size: 4.5rem;
-line-height:4.5rem;
-}
-.head-title {
- font-size: 2.5rem;
-}
- .student_rht.network_rht {
- padding-right: 0;
-}
-}
- @media(max-width:1199px) {
- .profile_box h3 + p {
- word-break:break-all;
-}
- .profile_box .dp_box {
- width: 90px;
- height: 90px;
-}
- .profile_box h3, .followers_info h4 {
- font-size: 22px;
-}
- .sideMenu_box li a img {
- margin-right: 10px;
-}
- .follow_ple .col-md-3 {
- flex: 0 0 50%;
- max-width: 50%;
-}
- .indvsl_msg_box {
- display: block!important;
- text-align: center;
-}
- .indvsl_msg_box h3 {
- margin: 13px 0 0;
-}
- .indvsl_msg_box .col-md-2, .indvsl_msg_box .col-md-10 {
- flex: 0 0 100%;
- max-width: 100%;
-}
- .indvsl_msg_box .col-md-10 > div {
- display: block!important;
-}
- .message .col-md-1 {
- flex: 0 0 16.66%;
- max-width: 16.666667%;
-}
- .message .col-md-11 {
- flex: 0 0 83.333333%;
- max-width: 83.333333%;
-}
- .profile_img {
- width: 115px;
- height: 115px;
-}
- .user_info_btm {
- margin-top: -84px;
-}
- .user_info_btm h2 {
- font-size: 44px;
- margin-top: 2px;
-}
- .users_followrs_dt button {
- margin-bottom: 10px;
-}
-}
- @media (max-width:1025px) {
- .head-title {
-font-size:2rem;
-}
- .count-area {
- padding: 0 !important;
-}
-}
- @media (max-width:991px) {
- .banner_content h2 {
- font-size: 3.2rem;
- line-height: 3.2rem;
-}
- .student_inr .col-md-4, .student_inr .col-md-8 {
- flex:0 0 100%;
- max-width: 100%;
-}
- .tabs_wraper {
- overflow: auto;
-}
- .tabs_wraper ul {
- width: 760px;
-}
- .rate_modal .modal_body_btm form {
- padding: 0 68px;
-}
- .user_info_btm .col-md-2, .user_info_btm .col-md-10 {
- flex: 0 0 100%;
- max-width: 100%;
-}
- .user_info_btm h2 {
- color: #343a40;
-}
-}
- @media(max-width:767px) {
- .tabs_follow li {
- font-size: 18px;
-}
- .tabs_follow li:nth-child(2) {
- margin-left: 18px;
-}
- .sort_by_dropdown .dropdown-toggle {
- font-size: 18px;
-}
- .rate_modal .modal_body_btm form {
- padding: 0;
-}
- .rate_modal .modal_body_btm form .custom_checkbox {
- padding-left: 15px;
-}
- .reaction_modal .tabs_box ul {
- padding: 0 10px;
-}
- .reaction_modal .tabs_box ul li {
- margin: 0 19px 0;
-}
- .report_modal form {
- padding: 0 15px;
-}
- .chat_box_top h4 {
- font-size: 14px;
-}
- .width_body {
- width: auto;
-}
- .msg_panel {
- right: -100%;
- width: 280px;
-}
- .right {
- right: 0;
-}
- .user_info_btm h2 {
- margin-top: 20px;
-}
- .user_info_btm .col-md-10 {
- text-align: center;
-}
- .users_followrs_dt ul {
- justify-content: center;
- margin-top: 20px;
-}
- .users_followrs_dt .dropdown {
- text-align: center!important;
- margin-top: 15px;
-}
- .border_right {
- border-bottom: 1px solid #ccc;
- border-right: none;
-}
-}
- @media (max-width:576px) {
- .xsp-0 {
-padding: 0;
-}
- .limitless_learning .pr-lg-5 {
-padding-left:0 !important
-}
- .counter-box {
- font-size: 1.5rem;
- line-height: inherit;
-text-align: center;
-}
- .registration-form .form-group label.spcllbl {
- left: 40px;
- font-size: .90rem;
-}
-.hero-bg .registration-form input.form-control {
- border: 2px solid #514DC5;
- height: 45px;
- border-radius: 10px;
-}
-.container-fluid {
- padding: 0 25px;
- max-width: 100%;
-}
-.navbar-brand .head_logo {
- max-height: 70px;
-}
- .login_panel {
- padding-right: 0;
-}
- #header {
- padding: 20px 0;
-}
- .head_log {
-padding-right: 0;
-}
- .head_log li a {
- padding: 5px 13px;
-}
- .banner_content h2 {
- font-size: 1.8rem;
- line-height: 1.8rem;
- font-weight: 400;
-}
- .label_slt_click {
- font-size: .65rem;
-}
- .sign_arrow {
- text-align: center;
- margin-bottom: 20px;
-}
- .registration-form .btn_primary.btnbtn {
- padding: 8px 16px;
- min-width: 150px;
-}
-.fwdpass {
- margin-bottom: 10px !important;
- font-size: .85rem;
- font-weight: 400;
-}
- .mshow {
-display:block !important
-}
-.banner_content p {
- font-size: .80rem;
- line-height: 1.15rem;
- font-weight: 300;
-}
- .m_column-reverse {
- flex-direction: column-reverse;
-}
- .hero-bg {
- background: url(../images/banner/bg.svg) no-repeat top center #ececf7;
- width: 100%;
- min-height: inherit;
- padding-top: 25px;
-}
- .hero-bg .registration-form {
- padding-right: 0;
-}
- .banner_img {
- margin-bottom: 25px;
-}
-.logo img {
- max-height: 72px;
-}
- .head_log {
- margin-top: 20px;
-}
- .connect_section .titleshort {
- padding:  0;
-}
- .connect_section .titleshort h2 {
-font-size:.85rem;
-letter-spacing: inherit;
- margin-bottom: 15px;
-}
- .section {
- padding: 50px 0;
-}
- .row.vertical-divider > div[class^="col-"] {
- border-left: 2px solid rgb(135 132 226 / 75%);
-}
- .connect_section a.btn-sm.btn_primary {
- font-size: .60rem;
-}
- .connect_section {
-padding-bottom:50px !important
-}
- .connect_section .bodshadow {
- box-shadow: none;
- padding: 0;
-}
- .connect_section .btn_primary {
- padding: 10px 15px;
-}
-section.newsletter_area {
- padding: 0 !important;
-overflow: hidden;
-}
- .newsletter_area .img-side.img-right {
- position: relative !important;
- padding: 0 !important;
-}
-.newsletter_area .title h2 {
- font-size: 1rem;
- margin: 15px 0 10px 0 !important;
-}
-.newsletter_area .title p {
- font-size: 0.80rem;
- line-height: 1.15rem;
-}
- .form-nl button {
- height: 45px;
- text-transform: capitalize;
- padding: 0 10px;
- min-width: 92px;
- font-size: .85rem;
-}
- .form-nl input {
- height: 45px;
- padding-left: 15px;
-}
-.newsletter_area .newsletter {
-padding-bottom:25px;
-}
- .counter-box p {
-font-size: 11px;
-}
-.counter-box {
-margin: 0 9px;
-}
- .mhide {
-display:none
-}
- .people_need {
-background-color:#F5F5FC;
-padding:0;
-}
- .people_need .mb-5.primary_color {
- font-size: 1rem;
- width: 47%;
- display: inline-block;
- padding: 0px 0 0 4%;
- position: relative;
- top: 13px;
-}
-.people_need .people_need-img {
- width: 70%;
- margin: auto;
-}
- .limitless_learning {
- text-align: center;
-}
- footer {
-text-align:center
-}
-footer a.logo {
- display: block;
- width: 100%;
- margin: 0 0 15px 0;
-}
-ul.foo-social {
- margin-top: 17px;
-}
-.footermenu {
- width: 100%;
-}
- .pricing .tabs {
- margin-right: 0;
-}
- .pricing .tabs::before, .pricing .tabs::after {
- display: none;
-}
- .follow_rht div.d-flex {
- display: block!important;
- margin-bottom: 10px;
-}
- .follow_rht h3 {
- margin-bottom: 10px;
-}
- .follow_top img {
- width: 34px;
- margin-left: 0!important;
-}
- .follow_top {
- align-items: flex-start!important;
-}
- .sideMenu_box li a {
- padding-top: 15px;
- padding-bottom: 12px;
-}
-
-
-    /* 6-1-21 */
-    .connection {
- display: block!important;
-}
- .connection_rht {
- text-align: center;
-}
- .network_top {
- padding-left: 45px;
-}
- .network_btm {
- padding: 22px 45px 19px;
-}
- .follow_ple .col-md-3 {
- flex: 0 0 100%;
- max-width: 100%;
-}
- .tabs_follow li {
- padding-bottom: 12px;
-}
- .tabs_wrpr {
- overflow: auto;
-}
- .tabs_follow {
- width: 420px;
-}
- .rate_modal .modal_body_btm form .form-group .row label {
- width: 95%;
-}
- .reaction_modal .tabs_box ul {
- width: 530px;
-}
- .reaction_modal .tabs_box {
- overflow: auto;
-}
- .report_modal form .custom_checkbox label {
- font-size: 18px;
-}
- .report_modal form .custom_checkbox label:before {
- right: -28px;
-}
- .chatBoxTop_rht {
- justify-content: flex-end!important;
-}
- .user_info_top {
- min-height: 130px;
-}
- .user_info_btm h2 {
- font-size: 38px;
-}
- .student_lft .intro_box ul li {
- margin-bottom: 15px;
-}
-}
- @media(max-width:414px) {
- .network_btm {
- padding: 22px 30px 5px;
-}
- .network_top {
- padding-left: 30px;
-}
- .button_box button {
- width: 120px;
- padding: 7px 15px;
-}
- .chat_box_top h4 + img {
- width: 30px;
- margin: 6px 0 0!important;
-}
- .chat_box_top h4 {
- margin:10px 0 0;
-}
- .chatBoxTop_lft {
- display: block!important;
-}
- .chat_box_top {
- align-items: flex-start!important;
-}
- .accetp_or_rjct_box button.accept_btn {
- margin-top: 15px;
-}
-}
+@media(max-width:1679px) {
+    .media_card ul li {
+    width: 32%;
+    font-size: 18px;
+    padding-left: 15px;
+   }
+   }
+    @media(max-width:1600px) {
+    .sideMenu_box li a img {
+    margin-right: 30px;
+   }
+    .sideMenu_box li a {
+    padding-left:30px;
+   }
+    .student_lft .custom_card.category_card {
+    padding-left: 30px;
+    padding-right: 30px;
+   }
+    .student_rht {
+    padding-right: 0;
+   }
+    .hero-bg {
+   padding: 60px 0;
+   }
+   .follow_ple .col-md-3 {
+    flex:0 0 33.33%;
+    max-width: 33.33%;
+   }
+    .student_lft .intro_box ul li img {
+    margin-right: 14px;
+   }
+   }
+    @media(max-width:1599px) {
+    .profile_img {
+    width: 145px;
+    height: 145px;
+   }
+    .users_followrs_dt button {
+    padding: 10px 25px 9px;
+   }
+   }
+    @media (min-width: 1367px) {
+   
+       .search_bar_head.head_top_bar {
+         
+           margin-right: 100px;  width: 500px;
+       }
+       
+   
+   
+    .container {
+    max-width:82%;
+   }
+   .banner_content h2 {
+   font-size: 4.5rem;
+   line-height:4.5rem;
+   }
+   .head-title {
+    font-size: 2.5rem;
+   }
+    .student_rht.network_rht {
+    padding-right: 0;
+   }
+   }
+    @media(max-width:1199px) {
+    .profile_box h3 + p {
+    word-break:break-all;
+   }
+    .profile_box .dp_box {
+    width: 90px;
+    height: 90px;
+   }
+    .profile_box h3, .followers_info h4 {
+    font-size: 22px;
+   }
+    .sideMenu_box li a img {
+    margin-right: 10px;
+   }
+    .follow_ple .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+   }
+    .indvsl_msg_box {
+    display: block!important;
+    text-align: center;
+   }
+    .indvsl_msg_box h3 {
+    margin: 13px 0 0;
+   }
+    .indvsl_msg_box .col-md-2, .indvsl_msg_box .col-md-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+   }
+    .indvsl_msg_box .col-md-10 > div {
+    display: block!important;
+   }
+    .message .col-md-1 {
+    flex: 0 0 16.66%;
+    max-width: 16.666667%;
+   }
+    .message .col-md-11 {
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+   }
+    .profile_img {
+    width: 115px;
+    height: 115px;
+   }
+    .user_info_btm {
+    margin-top: -84px;
+   }
+    .user_info_btm h2 {
+    font-size: 44px;
+    margin-top: 2px;
+   }
+    .users_followrs_dt button {
+    margin-bottom: 10px;
+   }
+   }
+    @media (max-width:1025px) {
+    .head-title {
+   font-size:2rem;
+   }
+    .count-area {
+    padding: 0 !important;
+   }
+   }
+    @media (max-width:991px) {
+    .banner_content h2 {
+    font-size: 3.2rem;
+    line-height: 3.2rem;
+   }
+    .student_inr .col-md-4, .student_inr .col-md-8 {
+    flex:0 0 100%;
+    max-width: 100%;
+   }
+    .tabs_wraper {
+    overflow: auto;
+   }
+    .tabs_wraper ul {
+    width: 760px;
+   }
+    .rate_modal .modal_body_btm form {
+    padding: 0 68px;
+   }
+    .user_info_btm .col-md-2, .user_info_btm .col-md-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+   }
+    .user_info_btm h2 {
+    color: #343a40;
+   }
+   }
+    @media(max-width:767px) {
+    .tabs_follow li {
+    font-size: 18px;
+   }
+    .tabs_follow li:nth-child(2) {
+    margin-left: 18px;
+   }
+    .sort_by_dropdown .dropdown-toggle {
+    font-size: 18px;
+   }
+    .rate_modal .modal_body_btm form {
+    padding: 0;
+   }
+    .rate_modal .modal_body_btm form .custom_checkbox {
+    padding-left: 15px;
+   }
+    .reaction_modal .tabs_box ul {
+    padding: 0 10px;
+   }
+    .reaction_modal .tabs_box ul li {
+    margin: 0 19px 0;
+   }
+    .report_modal form {
+    padding: 0 15px;
+   }
+    .chat_box_top h4 {
+    font-size: 14px;
+   }
+    .width_body {
+    width: auto;
+   }
+    .msg_panel {
+    right: -100%;
+    width: 280px;
+   }
+    .right {
+    right: 0;
+   }
+    .user_info_btm h2 {
+    margin-top: 20px;
+   }
+    .user_info_btm .col-md-10 {
+    text-align: center;
+   }
+    .users_followrs_dt ul {
+    justify-content: center;
+    margin-top: 20px;
+   }
+    .users_followrs_dt .dropdown {
+    text-align: center!important;
+    margin-top: 15px;
+   }
+    .border_right {
+    border-bottom: 1px solid #ccc;
+    border-right: none;
+   }
+   }
+    @media (max-width:576px) {
+    .xsp-0 {
+   padding: 0;
+   }
+    .limitless_learning .pr-lg-5 {
+   padding-left:0 !important
+   }
+    .counter-box {
+    font-size: 1.5rem;
+    line-height: inherit;
+   text-align: center;
+   }
+    .registration-form .form-group label.spcllbl {
+    left: 40px;
+    font-size: .90rem;
+   }
+   .hero-bg .registration-form input.form-control {
+    border: 2px solid #514DC5;
+    height: 45px;
+    border-radius: 10px;
+   }
+   .container-fluid {
+    padding: 0 25px;
+    max-width: 100%;
+   }
+   .navbar-brand .head_logo {
+    max-height: 70px;
+   }
+    .login_panel {
+    padding-right: 0;
+   }
+    #header {
+    padding: 20px 0;
+   }
+    .head_log {
+   padding-right: 0;
+   }
+    .head_log li a {
+    padding: 5px 13px;
+   }
+    .banner_content h2 {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+   }
+    .label_slt_click {
+    font-size: .65rem;
+   }
+    .sign_arrow {
+    text-align: center;
+    margin-bottom: 20px;
+   }
+    .registration-form .btn_primary.btnbtn {
+    padding: 8px 16px;
+    min-width: 150px;
+   }
+   .fwdpass {
+    margin-bottom: 10px !important;
+    font-size: .85rem;
+    font-weight: 400;
+   }
+    .mshow {
+   display:block !important
+   }
+   .banner_content p {
+    font-size: .80rem;
+    line-height: 1.15rem;
+    font-weight: 300;
+   }
+    .m_column-reverse {
+    flex-direction: column-reverse;
+   }
+    .hero-bg {
+    background: url(../images/banner/bg.svg) no-repeat top center #ececf7;
+    width: 100%;
+    min-height: inherit;
+    padding-top: 25px;
+   }
+    .hero-bg .registration-form {
+    padding-right: 0;
+   }
+    .banner_img {
+    margin-bottom: 25px;
+   }
+   .logo img {
+    max-height: 72px;
+   }
+    .head_log {
+    margin-top: 20px;
+   }
+    .connect_section .titleshort {
+    padding:  0;
+   }
+    .connect_section .titleshort h2 {
+   font-size:.85rem;
+   letter-spacing: inherit;
+    margin-bottom: 15px;
+   }
+    .section {
+    padding: 50px 0;
+   }
+    .row.vertical-divider > div[class^="col-"] {
+    border-left: 2px solid rgb(135 132 226 / 75%);
+   }
+    .connect_section a.btn-sm.btn_primary {
+    font-size: .60rem;
+   }
+    .connect_section {
+   padding-bottom:50px !important
+   }
+    .connect_section .bodshadow {
+    box-shadow: none;
+    padding: 0;
+   }
+    .connect_section .btn_primary {
+    padding: 10px 15px;
+   }
+   section.newsletter_area {
+    padding: 0 !important;
+   overflow: hidden;
+   }
+    .newsletter_area .img-side.img-right {
+    position: relative !important;
+    padding: 0 !important;
+   }
+   .newsletter_area .title h2 {
+    font-size: 1rem;
+    margin: 15px 0 10px 0 !important;
+   }
+   .newsletter_area .title p {
+    font-size: 0.80rem;
+    line-height: 1.15rem;
+   }
+    .form-nl button {
+    height: 45px;
+    text-transform: capitalize;
+    padding: 0 10px;
+    min-width: 92px;
+    font-size: .85rem;
+   }
+    .form-nl input {
+    height: 45px;
+    padding-left: 15px;
+   }
+   .newsletter_area .newsletter {
+   padding-bottom:25px;
+   }
+    .counter-box p {
+   font-size: 11px;
+   }
+   .counter-box {
+   margin: 0 9px;
+   }
+    .mhide {
+   display:none
+   }
+    .people_need {
+   background-color:#F5F5FC;
+   padding:0;
+   }
+    .people_need .mb-5.primary_color {
+    font-size: 1rem;
+    width: 47%;
+    display: inline-block;
+    padding: 0px 0 0 4%;
+    position: relative;
+    top: 13px;
+   }
+   .people_need .people_need-img {
+    width: 70%;
+    margin: auto;
+   }
+    .limitless_learning {
+    text-align: center;
+   }
+    footer {
+   text-align:center
+   }
+   footer a.logo {
+    display: block;
+    width: 100%;
+    margin: 0 0 15px 0;
+   }
+   ul.foo-social {
+    margin-top: 17px;
+   }
+   .footermenu {
+    width: 100%;
+   }
+    .pricing .tabs {
+    margin-right: 0;
+   }
+    .pricing .tabs::before, .pricing .tabs::after {
+    display: none;
+   }
+    .follow_rht div.d-flex {
+    display: block!important;
+    margin-bottom: 10px;
+   }
+    .follow_rht h3 {
+    margin-bottom: 10px;
+   }
+    .follow_top img {
+    width: 34px;
+    margin-left: 0!important;
+   }
+    .follow_top {
+    align-items: flex-start!important;
+   }
+    .sideMenu_box li a {
+    padding-top: 15px;
+    padding-bottom: 12px;
+   }
+   
+   
+       /* 6-1-21 */
+       .connection {
+    display: block!important;
+   }
+    .connection_rht {
+    text-align: center;
+   }
+    .network_top {
+    padding-left: 45px;
+   }
+    .network_btm {
+    padding: 22px 45px 19px;
+   }
+    .follow_ple .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+   }
+    .tabs_follow li {
+    padding-bottom: 12px;
+   }
+    .tabs_wrpr {
+    overflow: auto;
+   }
+    .tabs_follow {
+    width: 420px;
+   }
+    .rate_modal .modal_body_btm form .form-group .row label {
+    width: 95%;
+   }
+    .reaction_modal .tabs_box ul {
+    width: 530px;
+   }
+    .reaction_modal .tabs_box {
+    overflow: auto;
+   }
+    .report_modal form .custom_checkbox label {
+    font-size: 18px;
+   }
+    .report_modal form .custom_checkbox label:before {
+    right: -28px;
+   }
+    .chatBoxTop_rht {
+    justify-content: flex-end!important;
+   }
+    .user_info_top {
+    min-height: 130px;
+   }
+    .user_info_btm h2 {
+    font-size: 38px;
+   }
+    .student_lft .intro_box ul li {
+    margin-bottom: 15px;
+   }
+   }
+    @media(max-width:414px) {
+    .network_btm {
+    padding: 22px 30px 5px;
+   }
+    .network_top {
+    padding-left: 30px;
+   }
+    .button_box button {
+    width: 120px;
+    padding: 7px 15px;
+   }
+    .chat_box_top h4 + img {
+    width: 30px;
+    margin: 6px 0 0!important;
+   }
+    .chat_box_top h4 {
+    margin:10px 0 0;
+   }
+    .chatBoxTop_lft {
+    display: block!important;
+   }
+    .chat_box_top {
+    align-items: flex-start!important;
+   }
+    .accetp_or_rjct_box button.accept_btn {
+    margin-top: 15px;
+   }
+   }
+   

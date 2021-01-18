@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxLoadingModule } from 'ngx-loading';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +24,8 @@ import { TimelineComponent } from './layouts/user-timeline/timeline/timeline.com
 import { InboxComponent } from './layouts/user-timeline/inbox/inbox.component';
 import { FollowingComponent } from './layouts/user-timeline/network/following/following.component';
 import { FollowersComponent } from './layouts/user-timeline/network/followers/followers.component';
+import { ProfileSetupComponent } from './layouts/profile-setup/profile-setup.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,13 +40,22 @@ import { FollowersComponent } from './layouts/user-timeline/network/followers/fo
     TimelineComponent,
     InboxComponent,
     FollowingComponent,
-    FollowersComponent
+    FollowersComponent,
+    ProfileSetupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatIconModule,
+    ModalModule.forRoot(),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

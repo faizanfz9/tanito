@@ -83,7 +83,7 @@
                     I accept the Terms and Conditions and Privacy Policy </label>
                   <div class="form-group text-center">
                     <button type="submit" [disabled]="password.value !== confirmPwd.value || signUpForm.invalid" class="btn btn_primary btn-sm text-uppercase">Sign in</button>
-                    <p class="text-center signnote"> Already have an account? <a href="sign-in.php" class="primary_color">SIGN IN</a> 
+                    <p class="text-center signnote"> Already have an account? <a href="#" routerLink="/login" class="primary_color">SIGN IN</a> 
                   </div>
                 </form>
               </div>
@@ -96,3 +96,24 @@
       </div>
     </div>
   </div>
+
+<div class="modal fade modal_tanito show active" id="signotpmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" [ngClass]="{'active': isSuccess }">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase">OTP VERIFICATION</h5>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4">Please enter the One Time Password received on your registered mobile number or email to verify your account. </p>
+          <h6 class="mb-4">VERIFY YOUR ACCOUNT</h6>
+          <div class="form-group verfOtp_box">
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit1 autocomplete="off">
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit2 autocomplete="off">
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit3 autocomplete="off">
+            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit4 autocomplete="off">
+          </div>
+          <button type="button" class="btn btn_primary btn-sm text-uppercase mb-2" (click)="onVerifyOtp(otpDigit1.value, otpDigit2.value, otpDigit3.value, otpDigit4.value)">Submit</button>
+        </div>
+      </div>
+    </div>
+</div>

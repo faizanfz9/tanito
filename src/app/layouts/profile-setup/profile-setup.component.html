@@ -1,0 +1,112 @@
+<div class="container setup_profile">
+  <form class="registration-form" (submit)="onDetailSave(profileSetupForm)" #profileSetupForm="ngForm">
+    <div class="row align-items-center">
+      <div class="col-12 px-5 py-3">
+        <div class="jumbotron text-center">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <h2 class="text-uppercase">SET UP YOUR PROFILE</h2>
+              <p> lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+            </div>
+          </div>
+          <hr>
+          <div class="upload_media_file">
+            <label>
+              <input 
+              type="file" 
+              class="pic-upload"
+              accept="image/*"
+              (change)="onSelectFile($event)"
+              name="userPic"
+              ngModel
+              required
+              >
+              <img [src]="imgSrc" alt="upload" class="btn-block file_img img-fluid">
+               Upload Profile Picture
+              </label>
+          </div>
+        </div>
+          <div class="form-group row mb-4">
+            <div class="col-md-6 col-12">
+              <label class="primary_color spcllbl">Qualification </label>
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter your qualification"
+              name="qualification"
+              ngModel
+              required
+              >
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="primary_color spcllbl">Total Experience</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter your qualification"
+              name="experience"
+              ngModel
+              required>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-md-6 col-12">
+              <label class="primary_color spcllbl">University Name </label>
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Your University Name"
+              name="university"
+              ngModel
+              required>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="primary_color spcllbl">Gender</label>
+              <select class="form-control" name="gender" value="select" ngModel="male" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-12">
+              <label class="primary_color spcllbl">Select Subjects</label>
+              <!-- <input type="text" name="subjects"> -->
+              <mat-form-field class="demo-chip-list" style="width: 100%">
+                <mat-chip-list #chipList>
+                  <mat-chip
+                    *ngFor="let subject of subjects"
+                    [selectable]="selectable"
+                    [removable]="removable">
+                    {{subject.name}}
+                    <mat-icon matChipRemove (click)="remove(subject)" *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New subject..."
+                    matInput
+                    #subjectInput
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let subject of filteredsubjects | async">
+                    {{ subject }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-12 text-center">
+              <button type="submit" [disabled]="profileSetupForm.invalid" class="btn btn_primary text-center btn-lg" >Submit </button>
+            </div>
+          </div>
+        <!-- </form> -->
+      </div>
+    </div>
+    </form>
+  </div>

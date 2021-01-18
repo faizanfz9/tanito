@@ -6396,8 +6396,8 @@ a.close.disabled {
 
 @media (min-width:576px) {
 	.modal-dialog {
-		max-width: 500px;
-		margin: 1.75rem auto
+		max-width: 550px;
+		margin: 0 auto
 	}
 	.modal-dialog-scrollable {
 		max-height: calc(100% - 3.5rem)
@@ -10571,4 +10571,8 @@ a.text-dark:hover {
 		color: inherit;
 		border-color: #dee2e6
 	}
+}
+
+a {
+	cursor: pointer;
 }

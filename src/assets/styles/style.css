@@ -328,7 +328,7 @@ footer.footer { padding: 30px 0 0; }
 .modal_tanito .modal-title { padding: 10px 0; text-align: center; margin: auto; color: #fff; font-size: 1.15rem; font-weight: 500; }
 .modal_tanito .modal-header { padding: 0; }
 #signotpmodal input.form-control { border: none; border-bottom: 1px solid #e9e9e9; border-radius: 0; width: 45px; display: inline-block; margin-right: 15px; text-align:center }
-.modal_tanito .modal-dialog { margin: 7rem auto 0; }
+/* .modal_tanito .modal-dialog { margin: 7rem auto 0; } */
 .modal_tanito .modal-body { padding: 25px; }
 .modal_tanito .modal-body p { letter-spacing: 0.63px; color: #747474; font-size:.95rem;
 }
@@ -338,7 +338,12 @@ button.btn.btn_primary { min-width:165px; }
 #signotpmodal input.form-control:hover { border-bottom: 1px solid #514dc5; }
 /*======================= setup_profile  ===================*/
 .setup_profile .jumbotron { background-color:#F1F1FB; }
-.file_img { max-width: 80px; margin: auto; }
+.file_img { 
+    max-width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+    object-fit: cover;
+}
 .registration-form textarea.form-control { height:115px !important; }
 .registration-form .form-group { padding-top: 12px; }
 /* student timeline 05-01-2021*/
@@ -533,3 +538,48 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .invalid-feedback {
     display: block;
 }
+.modal-dialog.tanito {
+    margin-top: 100px;
+}
+
+.modal-dialog.tanito .modal-content{
+    border: none;
+}
+
+/*  affter login header */
+.btn-sign-head { float: right; height: 50px; line-height: 50px; }
+.after_login_head { display: inline-block; height: 50px; line-height: 50px; }
+.head_top_bar { display: inline-block; padding-right:35px; vertical-align: top; }
+.premium_buy img { margin-right: 15px; }
+.premium_buy { text-transform: capitalize; }
+.search_bar_head.head_top_bar { position: relative; width: 400px; }
+.search_bar_head input.form-control { min-width: 100%; border: 2px solid #514DC5; height:50px; border-radius: 10px; padding-left:50px; }
+.search_bar_head button.submit_search_bar:after { content: ""; font-family: "Font Awesome 5 Free"; font-weight: 600; content: "\f002"; color: #737373; position: relative; }
+.account_user_icon img { height: 40px; }
+.search_bar_head button.submit_search_bar { position: absolute; top: 0; left: 0; border: none; background: transparent; height: 50px; padding: 0 18px; }
+.wishlish_icon i { font-size: 2.4rem; margin-top: 6px; color: #a9a9a9; }
+.wishlish_icon { position: relative; }
+.wishlish_icon span { position: absolute; top: 2px; background: #ff4d5e; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 13px; color: #fff; right: 0px; }
+.account_user_icon { position: relative; }
+.account_panel_head.head_top_bar { margin-right: 10px; }
+span.user_online { position: absolute; bottom: 4px; width: 10px; height: 10px; background: #4afb4a; border-radius: 100%; right: 0; border: 1px solid #fff; }
+.premium_buy.head_top_bar { font-size: 1.15rem; font-weight: 500; }
+ .account_user_icon::after {
+ content: "";
+ font-family: "Font Awesome 5 Free";
+ font-weight: 600;
+ content: "\f0d7";
+ color: #a5a5a5;
+ position: absolute;
+ right: -18px;
+ font-size: 1.25rem;
+}
+.dropdown-menu.my_account_dropmenu { min-width: 220px; box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .2); border: none; left: -80px; top: 110%; }
+.my_account_dropmenu li { display: block; }
+.my_account_dropmenu li { line-height: 40px; border-bottom: 1px solid #e9e9e9; font-size:.90rem;}
+.my_account_dropmenu li a {    display: block;    padding: 0 14px;    color: #757575;    letter-spacing: .5px;}
+.my_account_dropmenu li a:hover { color:#514DC5; }
+.my_account_dropmenu li:last-child { border-bottom:none }
+ul.btn-sign-head li { display: inline-block; }
+ul.btn-sign-head li a { padding: 5px 22px; }
+ul.btn-sign-head li a.become_partner { box-shadow: 0px 1px 1px #514DC545; border: 2px solid #514DC5; border-radius: 20px; }
