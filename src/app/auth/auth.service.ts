@@ -41,6 +41,10 @@ export class AuthService {
     return this.http.post<{status: string, msg: string}>(this.url + "/forget_password", mobile);
   }
 
+  resetPwd(newPwd: any) {
+    return this.http.post<{status: string, msg: string}>(this.url + "/set_new_password", newPwd);
+  }
+
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
     this.router.navigate(['/userTimeline']);
