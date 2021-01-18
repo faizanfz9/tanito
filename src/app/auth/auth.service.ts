@@ -7,17 +7,18 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  private url = "https://demo.mbrcables.com/tanito/Api";
   private verifiedUser = new Subject<any>();
   private isLoggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }  
 
   register(user: any) {
-    return this.http.post<{status: string, msg: string}>("https://demo.mbrcables.com/tanito/Api/register", user)
+    return this.http.post<{status: string, msg: string}>(this.url + "/register", user)
   }
 
   verifyOtp(otp: any) {
-    return this.http.post<{status: string, msg: string}>("http://demo.mbrcables.com/tanito/Api/otp_verification", otp);
+    return this.http.post<{status: string, msg: string}>(this.url + "/otp_verification", otp);
   }
 
   sendVerifiedUser(username: string, mobile: string) {
@@ -29,15 +30,15 @@ export class AuthService {
   }
 
   saveUserInfo(info: any) {
-    return this.http.post<{status: string, msg: string, data: any}>("http://demo.mbrcables.com/tanito/Api/set_your_profile", info);
+    return this.http.post<{status: string, msg: string, data: any}>(this.url + "/set_your_profile", info);
   }
 
   login(credentials: any) {
-    return this.http.post<{status: string, msg: string, data: any}>("http://demo.mbrcables.com/tanito/Api/signin", credentials);
+    return this.http.post<{status: string, msg: string, data: any}>(this.url + "/signin", credentials);
   }
 
   forgotPwd(mobile: any) {
-    return this.http.post<{status: string, msg: string}>("http://demo.mbrcables.com/tanito/Api/forget_password", mobile);
+    return this.http.post<{status: string, msg: string}>(this.url + "/forget_password", mobile);
   }
 
   storeUser(user: any) {
