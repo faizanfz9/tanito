@@ -29,6 +29,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-and-condition.component';
 import { PrivacyPolicyComponent } from './layouts/privacy-policy/privacy-policy.component';
 import { LoginFormComponent } from './layouts/login/login-form/login-form.component';
+import { UsersComponent } from './layouts/user-timeline/users/users.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LoginFormComponent } from './layouts/login/login-form/login-form.compon
     ProfileSetupComponent,
     TermsAndConditionComponent,
     PrivacyPolicyComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

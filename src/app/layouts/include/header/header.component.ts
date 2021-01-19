@@ -10,13 +10,14 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
-  userPic = "";
+  user: any;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {
     this.authService.authUser().subscribe(res => {
       this.isLoggedIn = res;
+      this.user = JSON.parse(this.userService.getUser());
     })
-    this.userPic = JSON.parse(this.userService.getUser()).profile_img
+    this.user = JSON.parse(this.userService.getUser());
   }
 
   ngOnInit(): void {

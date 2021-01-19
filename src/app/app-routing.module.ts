@@ -13,6 +13,7 @@ import { FollowingComponent } from './layouts/user-timeline/network/following/fo
 import { NetworkComponent } from './layouts/user-timeline/network/network.component';
 import { TimelineComponent } from './layouts/user-timeline/timeline/timeline.component';
 import { UserTimelineComponent } from './layouts/user-timeline/user-timeline.component';
+import { UsersComponent } from './layouts/user-timeline/users/users.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: "userTimeline", component: UserTimelineComponent, canActivate: [AuthGuard],
     children: [
       {
-        path: "", pathMatch: "full", component: TimelineComponent
+        path: "", pathMatch: "full", component: UsersComponent
       },
       {
         path: "network", component: NetworkComponent, 
