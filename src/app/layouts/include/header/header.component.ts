@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
+  userPic = "";
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) {
     this.authService.authUser().subscribe(res => {
       this.isLoggedIn = res;
     })
+    this.userPic = JSON.parse(this.userService.getUser()).profile_img
   }
 
   ngOnInit(): void {

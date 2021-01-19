@@ -42,11 +42,31 @@
                     #phone="ngModel"
                     required>
                     <div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-                      <div *ngIf="phone.errors?.pattern; else patternError">
+                      <div *ngIf="phone.errors?.pattern; else invalidPhone">
                         Please enter valid phone number!
                       </div>
-                      <ng-template #patternError>
+                      <ng-template #invalidPhone>
                         Please enter phone number!
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="primary_color spcllbl">Email</label>
+                    <input 
+                    type="email" 
+                    class="form-control" 
+                    placeholder="john@gmail.com"
+                    name="email"
+                    ngModel
+                    pattern="^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$"
+                    #email="ngModel"
+                    required>
+                    <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <div *ngIf="phone.errors?.pattern; else invalidEmail">
+                        Please enter email!
+                      </div>
+                      <ng-template #invalidEmail>
+                        Please enter valid email!
                       </ng-template>
                     </div>
                   </div>
@@ -80,10 +100,10 @@
                   </div>
                   <label class="text-muted">
                     <input type="checkbox" class="mr-2" name="terms&Condition" ngModel required>
-                    I accept the <a href="#" target="_blank" routerLink="/terms-and-condition">Terms and Conditions</a> and <a href="#" target="_blank" routerLink="/privacy-policy">Privacy Policy</a></label>
+                    I accept the <a target="_blank" routerLink="/terms-and-condition">Terms and Conditions</a> and <a target="_blank" routerLink="/privacy-policy">Privacy Policy</a></label>
                   <div class="form-group text-center">
                     <button type="submit" [disabled]="password.value !== confirmPwd.value || signUpForm.invalid" class="btn btn_primary btn-sm text-uppercase">Sign in</button>
-                    <p class="text-center signnote"> Already have an account? <a href="#" routerLink="/login" class="primary_color">SIGN IN</a> 
+                    <p class="text-center signnote"> Already have an account? <a routerLink="/login" class="primary_color">SIGN IN</a> 
                   </div>
                 </form>
               </div>
@@ -97,23 +117,27 @@
     </div>
   </div>
 
-<div class="modal fade modal_tanito show active" id="signotpmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" [ngClass]="{'active': isSuccess }">
-    <div class="modal-dialog">
-      <div class="modal-content text-center">
-        <div class="modal-header primary_bg">
-          <h5 class="modal-title text-uppercase">OTP VERIFICATION</h5>
-        </div>
-        <div class="modal-body">
-          <p class="mb-4">Please enter the One Time Password received on your registered mobile number or email to verify your account. </p>
-          <h6 class="mb-4">VERIFY YOUR ACCOUNT</h6>
-          <div class="form-group verfOtp_box">
-            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit1 autocomplete="off">
-            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit2 autocomplete="off">
-            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit3 autocomplete="off">
-            <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit4 autocomplete="off">
+  <ng-template #otpVerify>
+    <div class="modal_tanito" id="signotpmodal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">OTP VERIFICATION</h5>
           </div>
-          <button type="button" class="btn btn_primary btn-sm text-uppercase mb-2" (click)="onVerifyOtp(otpDigit1.value, otpDigit2.value, otpDigit3.value, otpDigit4.value)">Submit</button>
+          <div class="modal-body">
+            <p class="mb-4">Please enter the One Time Password received on your registered mobile number or email to verify your account. </p>
+            <h6 class="mb-4">VERIFY YOUR ACCOUNT</h6>
+            <div class="form-group verfOtp_box">
+              <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit1 autocomplete="off">
+              <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit2 autocomplete="off">
+              <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit3 autocomplete="off">
+              <input type="number" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit4 autocomplete="off">
+            </div>
+            <button type="button" class="btn btn_primary btn-sm text-uppercase mb-2" (click)="onVerifyOtp(otpDigit1.value, otpDigit2.value, otpDigit3.value, otpDigit4.value)">Submit</button>
+          </div>
         </div>
       </div>
     </div>
-</div>
+  </ng-template>
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -23,6 +23,7 @@ export class ProfileSetupComponent implements OnInit {
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = false;
+  loading = false;
 
   separatorKeysCodes = [ENTER, COMMA];
 
@@ -34,7 +35,7 @@ export class ProfileSetupComponent implements OnInit {
     { name: 'Mathematics' },
   ];
 
-  verifiedUser: any = {};
+  verifiedUser = "";
   selectedImg: any = null;
   imgSrc: any = "assets/images/svg/file-upload.svg";
 
@@ -54,6 +55,7 @@ export class ProfileSetupComponent implements OnInit {
     this.filteredsubjects = this.subjectCtrl.valueChanges
       .startWith(null)
       .map(contact => contact ? this.filter(contact) : this.allsubjects.slice());
+
   }
 
   add(event: MatChipInputEvent): void {
@@ -89,9 +91,7 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getVerifiedUser().subscribe(res => {
-      this.verifiedUser = res.mobile;
-    })
+    this.verifiedUser =  this.authService.getVerifiedUser();
   }
 
   onSelectFile(event: any) {
@@ -119,13 +119,16 @@ export class ProfileSetupComponent implements OnInit {
     userInfo.append("subjects", filledSubjects.toString());
     userInfo.append("profile", this.selectedImg);
     userInfo.append("mobile", this.verifiedUser);
+    this.loading = true;
     this.authService.saveUserInfo(userInfo).subscribe(res => {
       if(res.status == "false") {
+        this.loading = false;
         alert(res.msg);
       }else {
         var r = confirm("Do you want to save?");
         if (r == true) {
-          localStorage.setItem("user", JSON.stringify(res.data));
+          this.loading = false;
+          this.authService.storeUser(res.data);
           this.router.navigate(['/userTimeline']);
         }
       }

@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private url = "https://demo.mbrcables.com/tanito/Api";
-  private verifiedUser = new Subject<any>();
+  // private verifiedUser = new Subject<any>();
   private isLoggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }  
 
+  // User Registration
   register(user: any) {
     return this.http.post<{status: string, msg: string}>(this.url + "/register", user)
   }
@@ -21,18 +22,19 @@ export class AuthService {
     return this.http.post<{status: string, msg: string}>(this.url + "/otp_verification", otp);
   }
 
-  sendVerifiedUser(username: string, mobile: string) {
-    this.verifiedUser.next({ username: username, mobile: mobile });
+  sendVerifiedUser(mobile: string) {
+   localStorage.setItem("verifiedUser", mobile);
   }
 
-  getVerifiedUser() {
-    return this.verifiedUser.asObservable();
+  getVerifiedUser(): any {
+    return localStorage.getItem("verifiedUser");
   }
 
   saveUserInfo(info: any) {
     return this.http.post<{status: string, msg: string, data: any}>(this.url + "/set_your_profile", info);
   }
 
+  // User Login
   login(credentials: any) {
     return this.http.post<{status: string, msg: string, data: any}>(this.url + "/signin", credentials);
   }

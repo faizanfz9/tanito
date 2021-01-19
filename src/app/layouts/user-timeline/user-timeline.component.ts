@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-user-timeline',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-timeline.component.scss']
 })
 export class UserTimelineComponent implements OnInit {
+  user: any;
 
-  constructor() { }
+  constructor(private userService: UserService) { 
+    this.user = JSON.parse(this.userService.getUser());
+  }
 
   ngOnInit(): void {
   }
