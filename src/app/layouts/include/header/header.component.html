@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
      <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="isLoggedIn ? ['userTimeline'] : ['/']"> <img src="assets/images/logo.svg" alt="logo" class="img-fluid head_logo" /> </a>
-        <div class="ml-auto right-nav d-none d-md-block">
+        <div class="ml-auto">
            <div class="after_login_head" *ngIf="isLoggedIn">
               <div class="search_bar_head head_top_bar">
                  <input type="search" class="form-control" placeholder="Search here...">
@@ -25,7 +25,7 @@
                     </a>
                     <div class="dropdown-menu my_account_dropmenu">
                        <ul>
-                          <li><a>My Account</a></li>
+                          <li><a routerLink="/myProfile">My Account</a></li>
                           <li><a (click)="onLogOut($event)">Log Out</a></li>
                        </ul>
                     </div>

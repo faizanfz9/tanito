@@ -7,10 +7,9 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./user-timeline.component.scss']
 })
 export class UserTimelineComponent implements OnInit {
-  user: any;
+  
 
-  constructor(private userService: UserService) { 
-    this.user = JSON.parse(this.userService.getUser());
+  constructor() { 
   }
 
   ngOnInit(): void {

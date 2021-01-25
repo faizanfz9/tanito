@@ -30,6 +30,10 @@ import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-
 import { PrivacyPolicyComponent } from './layouts/privacy-policy/privacy-policy.component';
 import { LoginFormComponent } from './layouts/login/login-form/login-form.component';
 import { UsersComponent } from './layouts/user-timeline/users/users.component';
+import { UserProfileComponent } from './layouts/user-profile/user-profile.component';
+import { UserInfoComponent } from './layouts/user-timeline/user-info/user-info.component';
+import { DatePipe } from './pipes/date.pipe';
+import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { UsersComponent } from './layouts/user-timeline/users/users.component';
     TermsAndConditionComponent,
     PrivacyPolicyComponent,
     LoginFormComponent,
-    UsersComponent
+    UsersComponent,
+    UserProfileComponent,
+    UserInfoComponent,
+    DatePipe,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

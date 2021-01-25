@@ -1,0 +1,195 @@
+<section class="student_timeline student_sec" *ngIf="user">
+    <div class="container">
+        <div class="student_inr">
+            <div class="user_info_banner custom_card">
+                <div class="user_info_top"></div>
+                <div class="user_info_btm">
+                    <div class="row border_btm">
+                        <div class="col-md-2">
+                            <div class="profile_img"><img [src]="path + user.profile_img" [alt]="user.username" /></div>
+                        </div>
+                        <div class="col-md-10 pl-0">
+                            <h2>
+                                {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type"></span>
+                            </h2>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="user_contact_info">
+                                        <a>{{ user.email }}</a>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                            dolores et ea rebum.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="users_followrs_dt">
+                                        <ul class="d-flex align-items-center">
+                                            <li><img src="assets/images/icons/users_gray.png" alt="user" /> {{ follower }}</li>
+                                            <li><img src="assets/images/icons/user_check.png" alt="user" /> {{ following }}</li>
+                                        </ul>
+                                        <button type="button" class="message_btn purple_btn">Message</button>
+                                        <button type="button" class="follow_btn purple_btn">Follow</button>
+                                        <button type="button" class="report_btn purple_btn">Report Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- student timeline left -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="student_lft">
+                        <div class="custom_card sideMenu_box">
+                            <ul>
+                                <li>
+                                    <a href="#" routerLink="/userTimeline"> <img src="assets/images/icons/home.png" alt="home" /> Home </a>
+                                </li>
+                                <li>
+                                    <a href="#" routerLink="/userTimeline/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a>
+                                </li>
+                                <li>
+                                    <a href="#" routerLink="/userTimeline/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="custom_card intro_box">
+                            <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro</h4>
+                            <ul>
+                                <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.qualification }}</li>
+                                <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.university }}</li>
+                                <!-- <li><img src="assets/images/icons/calendar.png" alt="calendar" />Date of Birth</li> -->
+                                <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.created | datefilter }}</li>
+                                <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-9">
+                    <div class="student_rht pr-0">
+                        <div class="custom_card custom_crd_padd">
+                            <div class="follow_top d-flex align-items-center">
+                                <div class="follow_lft">
+                                    <img src="assets/images/icons/dp.png" alt="profile image" />
+                                </div>
+                                <div class="follow_rht">
+                                    <div class="d-flex align-items-center">
+                                        <h3>Gary Vaynerchuk</h3>
+                                        <img src="assets/images/icons/img_icon.png" alt="" class="ml-3 mr-3" />
+                                        <span class="dots">Following</span>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+                                    <p>10h</p>
+                                </div>
+                                <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                            </div>
+                            <div class="follow_bdy">
+                                <p>
+                                    What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                                    someone else!
+                                </p>
+                            </div>
+                            <div class="follow_ftr">
+                                <button type="button" data-toggle="modal" data-target="#reaction_mdl"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                                <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                            </div>
+                        </div>
+                        <div class="custom_card custom_crd_padd">
+                            <div class="follow_top d-flex align-items-center">
+                                <div class="follow_lft">
+                                    <img src="assets/images/icons/dp.png" alt="profile image" />
+                                </div>
+                                <div class="follow_rht">
+                                    <div class="d-flex align-items-center">
+                                        <h3>Oman jack</h3>
+                                        <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" />
+                                        <button type="button" class="purple_btn follow_btn dots">Follow</button>
+                                    </div>
+                                    <p>9th class A grade</p>
+                                    <p>10h</p>
+                                </div>
+                                <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                            </div>
+                            <div class="follow_bdy">
+                                <div class="d-flex follow_bdy_tp">
+                                    <img src="assets/images/thumbnail_img.png" alt="image" />
+                                    <h4>CANALS - Awwwards SOTD <span>sher.ly</span></h4>
+                                </div>
+                                <p>
+                                    What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                                    someone else!
+                                </p>
+                            </div>
+                            <div class="follow_ftr">
+                                <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                                <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                            </div>
+                        </div>
+                        <div class="custom_card custom_crd_padd">
+                            <div class="follow_top d-flex align-items-center">
+                                <div class="follow_lft">
+                                    <img src="assets/images/icons/dp.png" alt="profile image" />
+                                </div>
+                                <div class="follow_rht">
+                                    <div class="d-flex align-items-center">
+                                        <h3>Gary Vaynerchuk</h3>
+                                        <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" />
+                                        <span class="dots">Following</span>
+                                    </div>
+                                    <p>9th class A grade</p>
+                                    <p>10h</p>
+                                </div>
+                                <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                            </div>
+                            <div class="follow_bdy">
+                                <p>
+                                    What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                                    someone else!
+                                </p>
+                            </div>
+                            <div class="follow_ftr">
+                                <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                                <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                            </div>
+                        </div>
+                        <div class="custom_card custom_crd_padd">
+                            <div class="follow_top d-flex align-items-center">
+                                <div class="follow_lft">
+                                    <img src="assets/images/icons/dp.png" alt="profile image" />
+                                </div>
+                                <div class="follow_rht">
+                                    <div class="d-flex align-items-center">
+                                        <h3>John Doe</h3>
+                                        <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" />
+                                    </div>
+                                    <p>9th class A grade</p>
+                                    <p>10h</p>
+                                </div>
+                                <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                            </div>
+                            <div class="follow_bdy">
+                                <p class="see_more_content">
+                                    What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                                    someone else! Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school
+                                    bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll
+                                    through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                                    someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!
+                                </p>
+                                <button type="button" class="see_more_btn">See more</button>
+                                <div class="video_frame">
+                                    <img src="assets/images/video_frame.png" alt="video" class="w-100" />
+                                </div>
+                            </div>
+                            <div class="follow_ftr">
+                                <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                                <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

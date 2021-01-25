@@ -4,96 +4,20 @@
         <h3>People <img src="assets/images/icons/down-arrow.png" alt="arrow down"></h3>
       </div>
       <div class="network_btm">
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
+        <div class="connection d-flex align-items-center justify-content-between" *ngFor="let user of users; let i = index">
+          <div class="connection_lft d-flex align-items-center"> 
+              <span [routerLink]="'/user/'+ user.data.id"> <img [src]="user.data.profile_img.length > 0 ? path + user.data.profile_img : userAvatar" [alt]="user.data.username"> <img class="user-type" [src]="user.data.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> </span>
             <div class="ml-4">
-              <h4>Jackson <span>Joy</span></h4>
-              <span>Teacher at Harvard university</span> </div>
+                <h4 [routerLink]="'/user/'+ user.data.id">{{ user.data.username }}</h4>
+                <span>{{ (user.data.usertype == 3 ? "Teacher at ":"Student at ") +  user.data.university }}</span> 
+            </div>
           </div>
           <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Brent <span>Olison </span></h4>
-              <span>Student Harvard University</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Michael <span>Olison</span></h4>
-              <span>Science Teacher</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Jackson <span>Joy</span></h4>
-              <span>Teacher at Harvard university</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Brent <span>Olison </span></h4>
-              <span>Student Harvard University</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Michael <span>Olison</span></h4>
-              <span>Science Teacher</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Jackson <span>Joy</span></h4>
-              <span>Teacher at Harvard university</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Brent <span>Olison </span></h4>
-              <span>Student Harvard University</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-        </div>
-        <div class="connection d-flex align-items-center justify-content-between">
-          <div class="connection_lft d-flex align-items-center"> <span> <img src="assets/images/icons/dp.png" alt="profile image"> <img src="assets/images/icons/img_icon.png" alt="profile image"> </span>
-            <div class="ml-4">
-              <h4>Michael <span>Olison</span></h4>
-              <span>Science Teacher</span> </div>
-          </div>
-          <div class="connection_rht">
-            <button type="button" class="follow_btn">Follow</button>
+            <button type="button" (click)="onFollowUser(user.data.id, i)" class="follow_btn">{{ user.followed == true ? "Unfollow":"Follow" }}</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

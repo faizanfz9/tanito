@@ -9,6 +9,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/user.service';
 
 const COMMA = 188;
 
@@ -36,6 +37,7 @@ export class ProfileSetupComponent implements OnInit {
   ];
 
   verifiedUser = "";
+  user: any;
   selectedImg: any = null;
   imgSrc: any = "assets/images/svg/file-upload.svg";
 
@@ -51,7 +53,7 @@ export class ProfileSetupComponent implements OnInit {
 
   @ViewChild('subjectInput') subjectInput: any;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) {
     this.filteredsubjects = this.subjectCtrl.valueChanges
       .startWith(null)
       .map(contact => contact ? this.filter(contact) : this.allsubjects.slice());
@@ -92,10 +94,22 @@ export class ProfileSetupComponent implements OnInit {
 
   ngOnInit() {
     this.verifiedUser =  this.authService.getVerifiedUser();
+    this.user = JSON.parse(this.userService.getUser());
+    if(this.user.id) {
+      this.imgSrc = this.user.profile_img;
+      this.verifiedUser = this.user.mobile;
+      let subjects: any = [];
+      let subjectsSplitedArr = this.user.subjects.split(",");
+      subjectsSplitedArr.forEach(function(item: any, index: number){
+        subjects.push({name: item});
+      })
+      this.subjects = subjects;
+    }
   }
 
   onSelectFile(event: any) {
     this.selectedImg = event.target.files[0];
+    console.log(this.selectedImg);
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);

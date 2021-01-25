@@ -1,0 +1,212 @@
+<section class="student_timeline student_sec">
+    <div class="container">
+      <div class="student_inr">
+        <div class="user_info_banner custom_card">
+          <div class="user_info_top"></div>
+          <div class="user_info_btm pb-0">
+            <div class="row border_btm">
+              <div class="col-md-2">
+                <div class="profile_img"><img [src]="user.profile_img" [alt]="user.username" /></div>
+              </div>
+              <div class="col-md-10 pl-0">
+                <h2> {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type"></span> </h2>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="user_contact_info"> <a href="#">{{ user.email }}</a>
+                      <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum. </p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="users_followrs_dt">
+                      <div class="dropdown text-right">
+                        <button type="button" routerLink="/profile-setup" class="purple_btn" data-toggle="dropdown"> Edit Profile </button>
+                        <button type="button" class="purple_btn more_btn">More</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="user_info_ftr">
+              <div class="row">
+                <div class="col-md-6 d-flex align-items-center justify-content-center border_right"> <img src="assets/images/icons/users_gray.png" alt="user"> <span>{{ user.count_follower }}</span> </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center"> <img src="assets/images/icons/user_check.png" alt="user"> <span>{{ user.count_following }}</span> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row"> 
+          <!-- student timeline left -->
+          <div class="col-md-4 col-lg-3">
+            <div class="student_lft">
+              <div class="custom_card sideMenu_box">
+                <ul>
+                  <li> <a href="#" routerLink="/userTimeline"> <img src="assets/images/icons/home.png" alt="home" /> Home </a> </li>
+                  <li> <a href="#" routerLink="/userTimeline/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a> </li>
+                  <li> <a href="#" routerLink="/userTimeline/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a> </li>
+                </ul>
+              </div>
+              <div class="custom_card intro_box">
+                <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro</h4>
+                <ul>
+                    <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.qualification }}</li>
+                    <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.university }}</li>
+                    <!-- <li><img src="assets/images/icons/calendar.png" alt="calendar" />Date of Birth</li> -->
+                    <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.created | datefilter }}</li>
+                    <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-lg-9">
+            <div class="student_rht pr-0">
+              <div class="custom_card media_card">
+                <div class="tabs_wraper">
+                  <ul>
+                    <li class="active" data-item="write-something"><img src="assets/images/icons/edit_icon.png" alt="edit" />Write a post</li>
+                    <li data-item="upload-img"><img src="assets/images/icons/image_icon.png" alt="edit" />Upload a Photo</li>
+                    <li data-item="upload-video"><img src="assets/images/icons/video_icon.png" alt="edit" />Upload Video</li>
+                  </ul>
+                </div>
+                <div class="text_box" id="write-something">
+                  <textarea placeholder="Write Something.." id="writeSomething"></textarea>
+                </div>
+                <div class="upload_media media_box" id="upload-img">
+                  <input type="file" id="upload_img" class="d-none" />
+                  <label for="upload_img"> <img src="assets/images/icons/uploadImg.png" alt="image" /> Upload image </label>
+                </div>
+                <div class="upload_media media_box" id="upload-video">
+                  <input type="file" id="upload_vid" class="d-none" />
+                  <label for="upload_vid"> <img src="assets/images/icons/upload_video.png" alt="video" class="mb-2" /> Upload video </label>
+                </div>
+                <div class="custom_card_ftr">
+                  <p><span>Write an Question</span> on tanito</p>
+                  <p><span id="charCount">0</span>/2000</p>
+                </div>
+              </div>
+              <div class="custom_card custom_crd_padd">
+                <div class="follow_top d-flex align-items-center">
+                  <div class="follow_lft"> <img src="assets/images/icons/dp.png" alt="profile image" /> </div>
+                  <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                      <h3>Gary Vaynerchuk</h3>
+                      <img src="assets/images/icons/img_icon.png" alt="" class="ml-3 mr-3" /> <span class="dots">Following</span> </div>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+                    <p>10h</p>
+                  </div>
+                  <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                </div>
+                <div class="follow_bdy">
+                  <p> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else! </p>
+                </div>
+                <div class="follow_ftr">
+                  <button type="button" data-toggle="modal" data-target="#reaction_mdl"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                  <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+              </div>
+              <div class="custom_card custom_crd_padd">
+                <div class="follow_top d-flex align-items-center">
+                  <div class="follow_lft"> <img src="assets/images/icons/dp.png" alt="profile image" /> </div>
+                  <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                      <h3>Gary Vaynerchuk</h3>
+                      <img src="assets/images/icons/img_icon.png" alt="" class="ml-3 mr-3" /> <span class="dots">Following</span> </div>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+                    <p>10h</p>
+                  </div>
+                  <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                </div>
+                <div class="follow_bdy">
+                  <p> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else! </p>
+                </div>
+                <div class="follow_ftr d-flex align-items-center">
+                  <div class="btn_wraper">
+                    <button type="button"><img src="assets/images/icons/lightbulb.png" alt="icon" /></button>
+                    <button type="button"><img src="assets/images/icons/clap.png" alt="icon" /></button>
+                    <button type="button"><img src="assets/images/icons/like.png" alt="icon" /></button>
+                  </div>
+                  <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+              </div>
+              <div class="custom_card custom_crd_padd">
+                <div class="follow_top d-flex align-items-center">
+                  <div class="follow_lft"> <img src="assets/images/icons/dp.png" alt="profile image" /> </div>
+                  <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                      <h3>Oman jack</h3>
+                      <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" />
+                      <button type="button" class="purple_btn follow_btn dots">Follow</button>
+                    </div>
+                    <p>9th class A grade</p>
+                    <p>10h</p>
+                  </div>
+                  <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                </div>
+                <div class="follow_bdy">
+                  <div class="d-flex follow_bdy_tp"> <img src="assets/images/thumbnail_img.png" alt="image" />
+                    <h4>CANALS - Awwwards SOTD <span>sher.ly</span></h4>
+                  </div>
+                  <p> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else! </p>
+                </div>
+                <div class="follow_ftr">
+                  <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                  <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+              </div>
+              <div class="custom_card custom_crd_padd">
+                <div class="follow_top d-flex align-items-center">
+                  <div class="follow_lft"> <img src="assets/images/icons/dp.png" alt="profile image" /> </div>
+                  <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                      <h3>Gary Vaynerchuk</h3>
+                      <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" /> <span class="dots">Following</span> </div>
+                    <p>9th class A grade</p>
+                    <p>10h</p>
+                  </div>
+                  <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                </div>
+                <div class="follow_bdy">
+                  <p> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else! </p>
+                </div>
+                <div class="follow_ftr">
+                  <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                  <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+              </div>
+              <div class="custom_card custom_crd_padd">
+                <div class="follow_top d-flex align-items-center">
+                  <div class="follow_lft"> <img src="assets/images/icons/dp.png" alt="profile image" /> </div>
+                  <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                      <h3>John Doe</h3>
+                      <img src="assets/images/icons/icon.png" alt="" class="ml-3 mr-3" /> </div>
+                    <p>9th class A grade</p>
+                    <p>10h</p>
+                  </div>
+                  <button type="button" class="dots_btn"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+                </div>
+                <div class="follow_bdy">
+                  <p class="see_more_content"> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else! Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school
+                    bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll
+                    through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
+                    someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else! </p>
+                  <button type="button" class="see_more_btn">See more</button>
+                  <div class="video_frame"> <img src="assets/images/video_frame.png" alt="video" class="w-100" /> </div>
+                </div>
+                <div class="follow_ftr">
+                  <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+                  <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

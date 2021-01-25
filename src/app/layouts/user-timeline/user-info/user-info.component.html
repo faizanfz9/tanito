@@ -1,0 +1,123 @@
+<div class="student_lft">
+    <div class="custom_card profile_box">
+        <div class="dp_box">
+           <a routerLink="/myProfile"> <img [src]="user.profile_img" alt="profile image"> </a>
+           <img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+        </div>
+        <div class="text-center pb-2">
+            <h3 routerLink="/myProfile" class="text-center">{{ user.username }}</h3>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="followers_info d-flex">
+            <div class="followers_lft">
+                <h4>{{ user.count_follower }}</h4>
+                <p>Followers</p>
+            </div>
+            <div class="followers_rht">
+                <h4>{{ user.count_following }}</h4>
+                <p>Following</p>
+            </div>
+        </div>
+    </div>
+    <div class="custom_card sideMenu_box">
+        <ul>
+            <li>
+                <a routerLink="/userTimeline" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                  <img src="assets/images/icons/home.png" alt="home">
+                  Home
+                </a>
+            </li>
+            <li>
+                <a routerLink="network" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <img src="assets/images/icons/users.png" alt="user">
+                    My Network
+                </a>
+            </li>
+            <li>
+                <a routerLink="inbox" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <img src="assets/images/icons/message.png" alt="message">
+                    Messages
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="custom_card category_card">
+      <h3>Categories</h3>
+      <div class="category_accord">
+        <h4 class="accord_btn">Math <i class="fas fa-caret-right"></i></h4>
+        <div class="content">
+          <ul>
+            <li>Electric Charges and Fields</li>
+            <li>Current Electricity</li>
+            <li>Moving Charges and Magnetism</li>
+            <li>Magnetism and Matter</li>
+            <li>Electromagnetic Induction</li>
+            <li>Alternating Current</li>
+            <li>Electromagnetic Waves</li>
+            <li>Communication Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="category_accord">
+        <h4 class="accord_btn">Science <i class="fas fa-caret-right"></i></h4>
+        <div class="content">
+          <ul>
+            <li>Electric Charges and Fields</li>
+            <li>Current Electricity</li>
+            <li>Moving Charges and Magnetism</li>
+            <li>Magnetism and Matter</li>
+            <li>Electromagnetic Induction</li>
+            <li>Alternating Current</li>
+            <li>Electromagnetic Waves</li>
+            <li>Communication Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="category_accord">
+        <h4 class="accord_btn">GK <i class="fas fa-caret-right"></i></h4>
+        <div class="content">
+          <ul>
+            <li>Electric Charges and Fields</li>
+            <li>Current Electricity</li>
+            <li>Moving Charges and Magnetism</li>
+            <li>Magnetism and Matter</li>
+            <li>Electromagnetic Induction</li>
+            <li>Alternating Current</li>
+            <li>Electromagnetic Waves</li>
+            <li>Communication Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="category_accord">
+        <h4 class="accord_btn">Computer <i class="fas fa-caret-right"></i></h4>
+        <div class="content">
+          <ul>
+            <li>Electric Charges and Fields</li>
+            <li>Current Electricity</li>
+            <li>Moving Charges and Magnetism</li>
+            <li>Magnetism and Matter</li>
+            <li>Electromagnetic Induction</li>
+            <li>Alternating Current</li>
+            <li>Electromagnetic Waves</li>
+            <li>Communication Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="category_accord">
+        <h4 class="accord_btn">English <i class="fas fa-caret-right"></i></h4>
+        <div class="content">
+          <ul>
+            <li>Electric Charges and Fields</li>
+            <li>Current Electricity</li>
+            <li>Moving Charges and Magnetism</li>
+            <li>Magnetism and Matter</li>
+            <li>Electromagnetic Induction</li>
+            <li>Alternating Current</li>
+            <li>Electromagnetic Waves</li>
+            <li>Communication Systems</li>
+          </ul>
+        </div>
+      </div>
+      <a class="see_all_btn">See all</a>
+    </div>
+</div>

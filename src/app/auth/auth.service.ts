@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private url = "https://demo.mbrcables.com/tanito/Api";
-  // private verifiedUser = new Subject<any>();
   private isLoggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }  
