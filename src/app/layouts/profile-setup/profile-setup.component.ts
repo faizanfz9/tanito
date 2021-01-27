@@ -109,7 +109,6 @@ export class ProfileSetupComponent implements OnInit {
 
   onSelectFile(event: any) {
     this.selectedImg = event.target.files[0];
-    console.log(this.selectedImg);
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -143,7 +142,7 @@ export class ProfileSetupComponent implements OnInit {
         if (r == true) {
           this.loading = false;
           this.authService.storeUser(res.data);
-          this.router.navigate(['/userTimeline']);
+          this.router.navigate(['/feed']);
         }
       }
     })

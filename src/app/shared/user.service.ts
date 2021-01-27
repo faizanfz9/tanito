@@ -63,6 +63,7 @@ export class UserService {
     return this.http.post<{status: string, msg: string}>(this.url + "/followto", followId);
   }
 
+  // Update logged user data
   updateUser() {
     let id = new FormData();
     id.append("id", this.loggedUserId());
@@ -71,7 +72,13 @@ export class UserService {
     })
   }
 
+  // Store logged user data
   storeUpdatedUser() {
     return this.user.asObservable();
+  }
+
+  // Create post
+  createPost(id: any) {
+    return this.http.post(this.url + "/create_post", id);
   }
 }

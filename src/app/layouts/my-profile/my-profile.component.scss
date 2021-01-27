@@ -1,0 +1,120 @@
+.modal-body {
+    .user {
+        display: flex;
+        align-items: center;
+        .user-img {
+            width: 55px;
+            height: 55px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+        .user-info {
+            text-align: left;
+            margin-left: 10px;
+            h6 {
+                margin-bottom: 7px;
+                position: relative;
+                display: inline-block;
+                img {
+                    position: absolute;
+                    top: -15px;
+                    right: -50px;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .post-body {
+        // margin-bottom: 25px;
+        textarea {
+            width: 100%;
+            height: 110px;
+            outline: none;
+            border: 1px solid #cccc;
+            resize: none;
+            font-size: 16px;
+            margin: 25px 0 15px;
+            padding: 10px;
+            &::placeholder {
+                font-size: 16px;
+            }
+        }
+        .upload-media {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 0, 0, .3);
+            .upload {
+                position: relative;
+                margin-right: 30px;
+                p {
+                    margin-bottom: 0;
+                    font-weight: 500;
+                    color:  rgba(0, 0, 0, .5);
+                    i {
+                        margin-right: 3px;
+                    }
+                }
+                input {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+    .media-row {
+        text-align: left;
+        display: flex;
+        margin-top: 25px;
+        .cover {
+            position: relative;
+            margin-right: 15px;
+            &::before {
+                position: absolute;
+                content: "";
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, .3);
+            }
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+            }
+            &.video {
+                &::before {
+                    background: rgba(0, 0, 0, .5);
+                }
+                &::after {
+                    position: absolute;
+                    content: "\f144";
+                    font: normal normal normal 35px/1 FontAwesome;
+                    color: #fff;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                }
+            }
+        }
+    }
+    .form-group {
+        margin: 30px 0;
+    }
+    button {
+        min-width: 120px;
+        border-radius: 25px;
+        color: #fff;
+    }
+}

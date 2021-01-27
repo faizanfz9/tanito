@@ -48,7 +48,7 @@ export class AuthService {
 
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
-    this.router.navigate(['/userTimeline']);
+    this.router.navigate(['/feed']);
     this.isLoggedIn.next(true);
   }
 

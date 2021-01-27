@@ -18,22 +18,23 @@ import { HeaderComponent } from './layouts/include/header/header.component';
 import { FooterComponent } from './layouts/include/footer/footer.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RegisterComponent } from './layouts/register/register.component';
-import { UserTimelineComponent } from './layouts/user-timeline/user-timeline.component';
-import { NetworkComponent } from './layouts/user-timeline/network/network.component';
-import { TimelineComponent } from './layouts/user-timeline/timeline/timeline.component';
-import { InboxComponent } from './layouts/user-timeline/inbox/inbox.component';
-import { FollowingComponent } from './layouts/user-timeline/network/following/following.component';
-import { FollowersComponent } from './layouts/user-timeline/network/followers/followers.component';
+import { UserFeedComponent } from './layouts/user-feed/user-feed.component';
+import { NetworkComponent } from './layouts/user-feed/network/network.component';
+import { FeedComponent } from './layouts/user-feed/feed/feed.component';
+import { InboxComponent } from './layouts/user-feed/inbox/inbox.component';
+import { FollowingComponent } from './layouts/user-feed/network/following/following.component';
+import { FollowersComponent } from './layouts/user-feed/network/followers/followers.component';
 import { ProfileSetupComponent } from './layouts/profile-setup/profile-setup.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-and-condition.component';
 import { PrivacyPolicyComponent } from './layouts/privacy-policy/privacy-policy.component';
 import { LoginFormComponent } from './layouts/login/login-form/login-form.component';
-import { UsersComponent } from './layouts/user-timeline/users/users.component';
+import { UsersComponent } from './layouts/user-feed/users/users.component';
 import { UserProfileComponent } from './layouts/user-profile/user-profile.component';
-import { UserInfoComponent } from './layouts/user-timeline/user-info/user-info.component';
+import { UserInfoComponent } from './layouts/user-feed/user-info/user-info.component';
 import { DatePipe } from './pipes/date.pipe';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
+import { TimelineComponent } from './layouts/my-profile/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +44,9 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    UserTimelineComponent,
+    UserFeedComponent,
     NetworkComponent,
-    TimelineComponent,
+    FeedComponent,
     InboxComponent,
     FollowingComponent,
     FollowersComponent,
@@ -57,7 +58,8 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     UserProfileComponent,
     UserInfoComponent,
     DatePipe,
-    MyProfileComponent
+    MyProfileComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,

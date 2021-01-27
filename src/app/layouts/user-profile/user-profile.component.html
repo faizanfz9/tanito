@@ -29,7 +29,7 @@
                                             <li><img src="assets/images/icons/user_check.png" alt="user" /> {{ following }}</li>
                                         </ul>
                                         <button type="button" class="message_btn purple_btn">Message</button>
-                                        <button type="button" class="follow_btn purple_btn">Follow</button>
+                                        <button type="button" (click)="onFollowUser()" class="follow_btn purple_btn">{{ followed == true ? "Unfollow":"Follow" }}</button>
                                         <button type="button" class="report_btn purple_btn">Report Profile</button>
                                     </div>
                                 </div>
@@ -45,13 +45,13 @@
                         <div class="custom_card sideMenu_box">
                             <ul>
                                 <li>
-                                    <a href="#" routerLink="/userTimeline"> <img src="assets/images/icons/home.png" alt="home" /> Home </a>
+                                    <a href="#" routerLink="/feed"> <img src="assets/images/icons/home.png" alt="home" /> Home </a>
                                 </li>
                                 <li>
-                                    <a href="#" routerLink="/userTimeline/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a>
+                                    <a href="#" routerLink="/feed/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a>
                                 </li>
                                 <li>
-                                    <a href="#" routerLink="/userTimeline/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a>
+                                    <a href="#" routerLink="/feed/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a>
                                 </li>
                             </ul>
                         </div>
@@ -193,3 +193,5 @@
         </div>
     </div>
 </section>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

@@ -344,7 +344,7 @@ footer.footer { padding: 30px 0 0; }
 .modal_tanito .modal-body { padding: 25px; }
 .modal_tanito .modal-body p { letter-spacing: 0.63px; color: #747474; font-size:.95rem;
 }
-.modal_tanito .modal-dialog { max-width: 550px; }
+.modal_tanito .modal-dialog { max-width: 100% }
 button.btn.btn_primary { min-width:165px; }
 #resetmodal .registration-form .form-group label.spcllbl { left: 50px; font-size: 1rem; }
 #signotpmodal input.form-control:hover { border-bottom: 1px solid #514dc5; }
@@ -561,6 +561,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 }
 .modal-dialog.tanito {
     margin-top: 100px;
+    max-width: 650px;
 }
 
 .modal-dialog.tanito .modal-content{

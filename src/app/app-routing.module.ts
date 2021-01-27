@@ -9,20 +9,20 @@ import { ProfileSetupComponent } from './layouts/profile-setup/profile-setup.com
 import { RegisterComponent } from './layouts/register/register.component';
 import { TermsAndConditionComponent } from './layouts/terms-and-condition/terms-and-condition.component';
 import { UserProfileComponent } from './layouts/user-profile/user-profile.component';
-import { InboxComponent } from './layouts/user-timeline/inbox/inbox.component';
-import { FollowersComponent } from './layouts/user-timeline/network/followers/followers.component';
-import { FollowingComponent } from './layouts/user-timeline/network/following/following.component';
-import { NetworkComponent } from './layouts/user-timeline/network/network.component';
-import { TimelineComponent } from './layouts/user-timeline/timeline/timeline.component';
-import { UserTimelineComponent } from './layouts/user-timeline/user-timeline.component';
-import { UsersComponent } from './layouts/user-timeline/users/users.component';
+import { InboxComponent } from './layouts/user-feed/inbox/inbox.component';
+import { FollowersComponent } from './layouts/user-feed/network/followers/followers.component';
+import { FollowingComponent } from './layouts/user-feed/network/following/following.component';
+import { NetworkComponent } from './layouts/user-feed/network/network.component';
+import { FeedComponent } from './layouts/user-feed/feed/feed.component';
+import { UserFeedComponent } from './layouts/user-feed/user-feed.component';
+import { UsersComponent } from './layouts/user-feed/users/users.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "profile-setup", component: ProfileSetupComponent },
-  { path: "userTimeline", component: UserTimelineComponent, canActivate: [AuthGuard],
+  { path: "feed", component: UserFeedComponent, canActivate: [AuthGuard],
     children: [
       {
         path: "", pathMatch: "full", component: UsersComponent
