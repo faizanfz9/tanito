@@ -32,11 +32,11 @@
     <div class="custom_card custom_crd_padd" *ngFor="let feed of feeds | shuffleFeeds">
         <div class="follow_top d-flex align-items-center">
             <div class="follow_lft">
-                <img class="profile-img" [src]="feed.profile" [alt]="feed.username">
+                <img [routerLink]="'/user/'+feed.userId" class="profile-img" [src]="feed.profile" [alt]="feed.username">
             </div>
             <div class="follow_rht">
                 <div class="d-flex align-items-center">
-                    <h3>{{ feed.username }}</h3>
+                    <h3 [routerLink]="'/user/'+feed.userId">{{ feed.username }}</h3>
                     <img class="user-type" [src]="feed.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
                 </div>
                 <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | &nbsp; {{ feed.post.created | postCreated }}</p>

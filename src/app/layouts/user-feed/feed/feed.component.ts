@@ -27,6 +27,7 @@ export class FeedComponent implements OnInit {
         item.data.user_post_data.forEach((post: any) => {
           feeds.push(
             {
+              userId: item.data.results.user_id,
               username: item.data.results.username,
               usertype: item.data.results.usertype,
               university: item.data.results.university,
