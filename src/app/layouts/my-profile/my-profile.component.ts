@@ -1,5 +1,6 @@
 import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/shared/user.service';
 import { VideoProcessingService } from 'src/app/shared/video-processing.service';
@@ -17,6 +18,7 @@ export class MyProfileComponent implements OnInit {
   videoThumb: any = "";
   modalRef: any;
   @ViewChild('timeline', {static: true}) timelineBlock: any;
+  @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
@@ -33,6 +35,7 @@ export class MyProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService, 
+    private route: ActivatedRoute,
     private modalService: BsModalService,
     private videoService: VideoProcessingService ) 
   { 
@@ -44,6 +47,9 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(this.userService.getUser());
+    if(this.route.snapshot.queryParams.post) {
+      this.openModal(this.createPost); 
+    }
   }
 
   onSelectImage(event: any) {
