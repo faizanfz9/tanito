@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PlyrModule } from 'ngx-plyr';
 
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -35,6 +36,10 @@ import { UserInfoComponent } from './layouts/user-feed/user-info/user-info.compo
 import { DatePipe } from './pipes/date.pipe';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 import { TimelineComponent } from './layouts/my-profile/timeline/timeline.component';
+import { RecentPostPipe } from './pipes/recent-post.pipe';
+import { PostCratedPipe } from './pipes/post-created.pipe';
+import { UserTimelineComponent } from './layouts/user-profile/user-timeline/user-timeline.component';
+import { ShuffleFeedsPipe } from './pipes/shuffle-feeds.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,11 @@ import { TimelineComponent } from './layouts/my-profile/timeline/timeline.compon
     UserInfoComponent,
     DatePipe,
     MyProfileComponent,
-    TimelineComponent
+    TimelineComponent,
+    RecentPostPipe,
+    PostCratedPipe,
+    UserTimelineComponent,
+    ShuffleFeedsPipe
   ],
   imports: [
     BrowserModule,
@@ -72,6 +81,7 @@ import { TimelineComponent } from './layouts/my-profile/timeline/timeline.compon
     MatAutocompleteModule,
     MatInputModule,
     MatIconModule,
+    PlyrModule,
     ModalModule.forRoot(),
     NgxLoadingModule.forRoot({})
   ],

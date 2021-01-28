@@ -323,7 +323,17 @@ footer.footer { padding: 30px 0 0; }
 .follow_top { position: relative; }
 .follow_top button.dots_btn { position: absolute; top: 0; right: 0; background-color: transparent; border:none; }
 .follow_top button img { width: 100%; }
-.follow_top img { width: 52px; }
+.follow_top .profile-img { 
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.follow_top .user-type { 
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}
 .follow_rht { padding-left: 20px; }
 .follow_rht h3 { font-size: 20px; color: #000; font-weight: 500; margin: 0; }
 .follow_rht h3 span { font-size: 18px; color: #9D9D9D; }
@@ -331,6 +341,11 @@ footer.footer { padding: 30px 0 0; }
 .follow_top { border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; }
 .follow_bdy { padding: 15px 10px; }
 .follow_bdy p { font-size: 15px; }
+.follow_bdy .post-img { 
+    max-width: 100%;
+    max-height: 450px;
+    margin: 10px 0;
+}
 .follow_ftr button { background-color: transparent; border:none; }
 .dots { position: relative; display: inline-block; padding-left: 18px; }
 .dots:before { content: ''; position: absolute; top: 8px; left: 0; width: 7px; height: 7px; background-color: #e0e0e0; border-radius: 50%; }

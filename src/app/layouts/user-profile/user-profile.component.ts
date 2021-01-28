@@ -10,9 +10,6 @@ import { UserService } from 'src/app/shared/user.service';
 export class UserProfileComponent implements OnInit {
   user: any;
   id: any;
-  path: any;
-  follower: any;
-  following: any;
   loggedUser: any;
   followed: any;
   loading = false;
@@ -46,10 +43,7 @@ export class UserProfileComponent implements OnInit {
     this.loading = true;
     this.userService.getUserById(userId).subscribe(res => {
       this.loading = false;
-      this.user = res.data.results;
-      this.path = res.data.urlkey;
-      this.follower = res.data.count_follower;
-      this.following = res.data.count_following;
+      this.user = res;
       this.followed = this.loggedUser.following_id.some((user: any) => user.follower == this.id);
     })
   }

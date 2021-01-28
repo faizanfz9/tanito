@@ -1,0 +1,27 @@
+<div *ngIf="userData.data.user_post_data.length > 0">
+    <div class="custom_card custom_crd_padd" *ngFor="let post of userData.data.user_post_data | recentPost">
+        <div class="follow_top d-flex align-items-center">
+          <div class="follow_lft"> <img class="profile-img" [src]="userData.data.urlkey + userData.data.results.profile_img" [alt]="userData.data.results.username" />  </div>
+          <div class="follow_rht">
+            <div class="d-flex align-items-center">
+              <h3>{{ userData.data.results.username }}</h3>
+              <img class="user-type" [src]="userData.data.results.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+            </div>
+            <p>{{ (userData.data.results.usertype == 3 ? "Teacher at ":"Student at ") +  userData.data.results.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
+          </div>
+          <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+        </div>
+        <div class="follow_bdy">
+          <p> {{ post.body }} </p>
+          <img *ngIf="post.image.length > 0" class="post-img" [src]="imageDirPath + post.image">
+        </div>
+        <div class="follow_ftr">
+          <button type="button" data-toggle="modal" data-target="#reaction_mdl"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
+          <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="userData.data.user_post_data.length == 0" class="custom_card custom_crd_padd">
+    <h5>{{ userData.data.results.username }} did not post anything since!</h5>
+</div>

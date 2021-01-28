@@ -61,7 +61,7 @@
           </div>
           <div class="col-md-8 col-lg-9">
             <div class="student_rht pr-0">
-              <div class="custom_card media_card">
+              <div class="custom_card media_card" #timeline>
                 <div class="tabs_wraper">
                   <ul>
                     <li class="active" data-item="write-something"><img src="assets/images/icons/edit_icon.png" alt="edit" />Write a post</li>
@@ -85,7 +85,7 @@
                   <p><span id="charCount">0</span>/2000</p>
                 </div>
               </div>
-              <app-timeline></app-timeline>
+              <app-timeline [myData]="user"></app-timeline>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@
                     <input 
                     type="file" 
                     name="video"
-                    (change)="onSelectVideo()">
+                    (change)="onSelectVideo($event)">
                     <p><i class="fa fa-video-camera" aria-hidden="true"></i> Add video</p>
                   </div>
                 </div>
@@ -141,10 +141,13 @@
               <div class="media-row" *ngIf="imgThumb.length > 0 || videoThumb.length > 0">
                 <div class="cover" *ngIf="imgThumb.length > 0">
                   <img [src]="imgThumb" alt="">
+                  <i class="remove fa fa-times" (click)="removeImg()" aria-hidden="true"></i>
                 </div>
                 <div class="cover video" *ngIf="videoThumb.length > 0">
                   <img [src]="videoThumb" alt="">
+                  <i class="remove fa fa-times" (click)="removeVideo()" aria-hidden="true"></i>
                 </div>
+                
               </div>
               <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1" name="subject" ngModel="">
@@ -159,3 +162,5 @@
       </div>
     </div>
   </ng-template>
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

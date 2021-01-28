@@ -79,6 +79,16 @@ export class UserService {
 
   // Create post
   createPost(id: any) {
-    return this.http.post(this.url + "/create_post", id);
+    return this.http.post<{status: string, msg: string}>(this.url + "/create_post", id);
+  }
+
+  fetchUserFollowing() {
+    let urls: any = [];
+    JSON.parse(this.getUser()).following_id.forEach((item: any) => {
+      let userId = new FormData();
+      userId.append("id", item.follower);
+      urls.push(this.http.post<{status: string, msg: string, data: any}>(this.url + "/get_user_profile", userId))
+    })
+    return urls;
   }
 }

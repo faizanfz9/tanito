@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "feed", component: UserFeedComponent, canActivate: [AuthGuard],
     children: [
       {
-        path: "", pathMatch: "full", component: UsersComponent
+        path: "", pathMatch: "full", component: FeedComponent
       },
       {
         path: "network", component: NetworkComponent, 

@@ -1,13 +1,12 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { PlyrComponent } from 'ngx-plyr';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  selector: 'app-user-timeline',
+  templateUrl: './user-timeline.component.html',
+  styleUrls: ['./user-timeline.component.scss']
 })
-export class TimelineComponent implements OnInit {
-  @Input() myData: any;
+export class UserTimelineComponent implements OnInit {
+  @Input() userData: any;
   imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
   videoDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
@@ -17,6 +16,7 @@ export class TimelineComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.userData);
   }
 
 }
