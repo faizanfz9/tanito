@@ -26,6 +26,7 @@
     "@syncfusion/ej2-angular-buttons": "^18.4.33",
     "@syncfusion/ej2-angular-dropdowns": "^18.4.34",
     "@syncfusion/ej2-angular-inputs": "^18.4.33",
+    "@types/events": "^3.0.0",
     "bootstrap": "^4.5.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-loading": "^8.0.0",

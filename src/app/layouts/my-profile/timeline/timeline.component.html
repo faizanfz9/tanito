@@ -1,3 +1,4 @@
+<div #postBlock></div>
 <div class="custom_card custom_crd_padd" *ngFor="let post of myData.user_post_data | recentPost">
     <div class="follow_top d-flex align-items-center">
       <div class="follow_lft"> <img class="profile-img" [src]="myData.profile_img" [alt]="myData.username" />  </div>
@@ -8,7 +9,7 @@
         </div>
         <p>{{ (myData.usertype == 3 ? "Teacher at ":"Student at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
       </div>
-      <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
+      <button type="button" (click)="onDeletePost(post.id)" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><i class="fa fa-trash" aria-hidden="true"></i></button>
     </div>
     <div class="follow_bdy">
       <p> {{ post.body }} </p>
@@ -20,3 +21,5 @@
       <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
     </div>
 </div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

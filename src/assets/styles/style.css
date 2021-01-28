@@ -334,6 +334,10 @@ footer.footer { padding: 30px 0 0; }
     height: 30px;
     margin-left: 15px;
 }
+.follow_top button i {
+    font-size: 22px;
+    color: #9D9D9D;
+}
 .follow_rht { padding-left: 20px; }
 .follow_rht h3 { font-size: 20px; color: #000; font-weight: 500; margin: 0; }
 .follow_rht h3 span { font-size: 18px; color: #9D9D9D; }

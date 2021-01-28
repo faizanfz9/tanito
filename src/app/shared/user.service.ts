@@ -82,6 +82,12 @@ export class UserService {
     return this.http.post<{status: string, msg: string}>(this.url + "/create_post", id);
   }
 
+  // Delete post
+  deletePost(postInfo: any) {
+    return this.http.post<{status: string, msg: string}>(this.url + "/delete_post", postInfo);
+  }
+
+  // Fetch user following
   fetchUserFollowing() {
     let urls: any = [];
     JSON.parse(this.getUser()).following_id.forEach((item: any) => {
@@ -91,4 +97,6 @@ export class UserService {
     })
     return urls;
   }
+
+
 }
