@@ -71,6 +71,9 @@
             <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
           </div>
     </div>
+    <div *ngIf="feeds.length == 0">
+        <app-users></app-users>
+    </div>
 </div>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
