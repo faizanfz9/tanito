@@ -40,6 +40,7 @@ import { RecentPostPipe } from './pipes/recent-post.pipe';
 import { PostCratedPipe } from './pipes/post-created.pipe';
 import { UserTimelineComponent } from './layouts/user-profile/user-timeline/user-timeline.component';
 import { ShuffleFeedsPipe } from './pipes/shuffle-feeds.pipe';
+import { CountLikePipe } from './pipes/count-like.pipe';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ShuffleFeedsPipe } from './pipes/shuffle-feeds.pipe';
     RecentPostPipe,
     PostCratedPipe,
     UserTimelineComponent,
-    ShuffleFeedsPipe
+    ShuffleFeedsPipe,
+    CountLikePipe
   ],
   imports: [
     BrowserModule,

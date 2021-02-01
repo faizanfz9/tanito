@@ -95,7 +95,7 @@ export class ProfileSetupComponent implements OnInit {
   ngOnInit() {
     this.verifiedUser =  this.authService.getVerifiedUser();
     this.user = JSON.parse(this.userService.getUser());
-    if(this.user.id) {
+    if(this.user) {
       this.imgSrc = this.user.profile_img;
       this.verifiedUser = this.user.mobile;
       let subjects: any = [];

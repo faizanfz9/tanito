@@ -50,25 +50,26 @@
           </div>
           <div class="follow_ftr">
             <div class="action-btn">
-                <button type="button">
+                <button type="button" class="post-action-btn" [ngClass]="{ 'liked': feed.post.like_member_id != null ? feed.post.like_member_id.includes(loggedUser.id): false }" #likeBtn (click)="onLikePost(feed.post.id, likeType, likeBtn)">
                     <img src="assets/images/icons/like_icon.png" alt="icon" />
                 </button>
                 <div class="follow_ftr react-btn-grp">
-                    <button type="button">
+                    <button type="button" (click)="onLikePost(feed.post.id, 0, likeBtn)">
                         <img src="assets/images/icons/like_icon.png" alt="icon" />
                     </button>
-                    <button type="button">
+                    <button type="button" (click)="onLikePost(feed.post.id, 1, likeBtn)">
                         <img src="assets/images/icons/lightbulb.png" alt="icon" />
                     </button>
-                    <button type="button">
+                    <button type="button" (click)="onLikePost(feed.post.id, 2, likeBtn)">
                         <img src="assets/images/icons/clap.png" alt="icon" />
                     </button>
-                    <button type="button">
+                    <button type="button" (click)="onLikePost(feed.post.id, 3, likeBtn)">
                         <img src="assets/images/icons/like.png" alt="icon" />
                     </button>
                 </div>
             </div>
-            <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+            <span class="likes">{{ feed.post.like_member_id | countLike }}</span>
+            <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
           </div>
     </div>
     <div *ngIf="feeds.length == 0">

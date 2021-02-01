@@ -40,7 +40,7 @@ export class UserService {
       })
       users.forEach(function(user: any){
         usersArr.push({
-          followed: loggedUser.following_id.some((item: any) => item.follower == user.id),
+          followed: loggedUser.following_id ? loggedUser.following_id.some((item: any) => item.follower == user.id) : false,
           data: user
         })
       })
@@ -98,5 +98,9 @@ export class UserService {
     return urls;
   }
 
+  // Like Unlike Post
+  likePost(postInfo: any) {
+    return this.http.post(this.url + "/post_like", postInfo);
+  }
 
 }

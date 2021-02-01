@@ -1,5 +1,6 @@
 <div #postBlock></div>
-<div class="custom_card custom_crd_padd" *ngFor="let post of myData.user_post_data | recentPost">
+<div *ngIf="myData.user_post_data">
+  <div class="custom_card custom_crd_padd" *ngFor="let post of myData.user_post_data | recentPost">
     <div class="follow_top d-flex align-items-center">
       <div class="follow_lft"> <img class="profile-img" [src]="myData.profile_img" [alt]="myData.username" />  </div>
       <div class="follow_rht">
@@ -20,6 +21,11 @@
       <button type="button" data-toggle="modal" data-target="#reaction_mdl"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
       <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
     </div>
+</div>
+</div>
+
+<div *ngIf="!myData.user_post_data || myData.user_post_data.length == 0" class="custom_card custom_crd_padd">
+  <h5>You did not post anything yet!</h5>
 </div>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

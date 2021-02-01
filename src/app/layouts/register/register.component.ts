@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -10,7 +10,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  userType = 3;
+  userType = 2;
   loading = false;
   username = "";
   mobile = "";
@@ -18,8 +18,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private modalService: BsModalService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleUserType(type: number) {
     this.userType = type;
@@ -47,6 +46,25 @@ export class RegisterComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  goToNext(el: HTMLElement) {
+    let nextEl = el.nextSibling as HTMLElement;
+    let input = el as HTMLInputElement;
+    if(nextEl && input.value.length > 0) {
+      nextEl.focus();
+    }
+  }
+  
+  goToPrev(el: HTMLElement, event: any) {
+    let key = event.key; 
+    let prevEl = el.previousSibling as HTMLElement;
+    let input = el as HTMLInputElement;
+    if (key === "Backspace" || key === "Delete") { 
+      if(prevEl && input.value == "") {
+        prevEl.focus();
+      }
+    } 
   }
   
   onVerifyOtp(digit1: string,  digit2: string, digit3: string, digit4: string) {
