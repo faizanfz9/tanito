@@ -48,6 +48,27 @@ export class UserService {
     }));
   }
 
+  // Search users
+  searchUser(query: any) {
+    let loggedUserId = this.loggedUserId();
+    let loggedUser = JSON.parse(this.getUser());
+    return this.http.post(this.url + "/search_people", query).pipe(map(function(res: any){
+      let users = res.data.results;
+      let urlkey = res.data.urlkey;
+      let usersArr: any = [];
+      users = users.filter((user: any) => {
+        return user.id !== loggedUserId
+      })
+      users.forEach(function(user: any){
+        usersArr.push({
+          followed: loggedUser.following_id ? loggedUser.following_id.some((item: any) => item.follower == user.id) : false,
+          data: user
+        })
+      })
+      return { urlkey: urlkey, users: usersArr };
+    }));;
+  }
+
   // Get user followers
   getFollowers(id: any) {
     return this.http.post<{status: string, msg: string, data: any}>(this.url + "/get_follower", id);
@@ -103,4 +124,8 @@ export class UserService {
     return this.http.post(this.url + "/post_like", postInfo);
   }
 
+  // View Post Reactions
+  viewReaction(postId: any) {
+    return this.http.post(this.url + "/post_like_by_user", postId);
+  }
 }

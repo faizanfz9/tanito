@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -10,6 +10,7 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
+  @ViewChild("query") query: any;
   user: any;
 
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {
@@ -24,6 +25,10 @@ export class HeaderComponent implements OnInit {
     if(localStorage.getItem("user")) {
       this.isLoggedIn = true;
     }
+  }
+
+  onSearchUser() {
+    this.router.navigate(['/search-user'], { queryParams: { query: this.query.nativeElement.value}});
   }
 
   onLogOut(event: Event) {

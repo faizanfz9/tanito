@@ -16,6 +16,7 @@ import { NetworkComponent } from './layouts/user-feed/network/network.component'
 import { FeedComponent } from './layouts/user-feed/feed/feed.component';
 import { UserFeedComponent } from './layouts/user-feed/user-feed.component';
 import { UsersComponent } from './layouts/user-feed/users/users.component';
+import { SearchUserComponent } from './layouts/search-user/search-user.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   },
   { path: "myProfile", component: MyProfileComponent },
   { path: "user/:id", component: UserProfileComponent},
+  { path: "search-user", component: SearchUserComponent},
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent }
 ];

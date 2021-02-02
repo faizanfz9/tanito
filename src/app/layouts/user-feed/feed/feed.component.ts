@@ -1,12 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { forkJoin } from "rxjs"
 import { map } from 'rxjs/operators';
+import { TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss']
+  styleUrls: ['./feed.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FeedComponent implements OnInit {
   feeds: any = [];
@@ -14,13 +18,24 @@ export class FeedComponent implements OnInit {
   likeType = 0;
   currPostId: any;
   loading = false;
+  modalRef: any;
+  query: any;
+  @ViewChild("viewReactions") viewReactions: any;
+  totalUserReaction: any;
+  okUserReaction: any;
+  innUserReaction: any;
+  clapUserReaction: any;
+  goodUserReaction: any;
+  reactionFetched = false;
+  profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/"
   imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
   videoDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private modalService: BsModalService) { 
+  }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
@@ -89,4 +104,36 @@ export class FeedComponent implements OnInit {
     })
   }
 
+  onViewReaction(post_id: any) {
+    let postId = new FormData();
+    postId.append("post_id", post_id);
+    this.openModal(this.viewReactions);
+    this.userService.viewReaction(postId).subscribe((res: any) => {
+      this.reactionFetched = true;
+      let reactions = res.data.my_post;
+      this.totalUserReaction = reactions;
+      this.okUserReaction = reactions.filter((item: any) => {
+        return item.like_type == 0
+      });
+      this.innUserReaction = reactions.filter((item: any) => {
+        return item.like_type == 1
+      });
+      this.clapUserReaction = reactions.filter((item: any) => {
+        return item.like_type == 2
+      });
+      this.goodUserReaction = reactions.filter((item: any) => {
+        return item.like_type == 3
+      });
+    })
+  }
+
+  changeTabs(el: HTMLElement) {
+    let reactionBlock: any = document.getElementsByClassName("reactions");
+    reactionBlock.classList.remove("active");
+    el.classList.add("active");
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'reaction_modal' }));
+  }
 }

@@ -5,9 +5,10 @@
         <div class="ml-auto">
            <div class="after_login_head" *ngIf="isLoggedIn">
               <div class="search_bar_head head_top_bar">
-                 <input type="search" class="form-control" placeholder="Search here...">
-                 <button type="submit" class="submit_search_bar">
-                 </button>
+                 <form (submit)="onSearchUser()">
+                     <input type="search" class="form-control" #query placeholder="Search here...">
+                     <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
+                 </form>
               </div>
               <div class="wishlist_card_head head_top_bar">
                  <div class="wishlish_icon">

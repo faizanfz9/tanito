@@ -11,6 +11,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +42,8 @@ import { PostCratedPipe } from './pipes/post-created.pipe';
 import { UserTimelineComponent } from './layouts/user-profile/user-timeline/user-timeline.component';
 import { ShuffleFeedsPipe } from './pipes/shuffle-feeds.pipe';
 import { CountLikePipe } from './pipes/count-like.pipe';
+import { SearchUserComponent } from './layouts/search-user/search-user.component';
+import { UserFoundComponent } from './layouts/search-user/user-found/user-found.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { CountLikePipe } from './pipes/count-like.pipe';
     PostCratedPipe,
     UserTimelineComponent,
     ShuffleFeedsPipe,
-    CountLikePipe
+    CountLikePipe,
+    SearchUserComponent,
+    UserFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +88,7 @@ import { CountLikePipe } from './pipes/count-like.pipe';
     MatAutocompleteModule,
     MatInputModule,
     MatIconModule,
+    MatTabsModule,
     PlyrModule,
     ModalModule.forRoot(),
     NgxLoadingModule.forRoot({})

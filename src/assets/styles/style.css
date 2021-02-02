@@ -358,6 +358,14 @@ footer.footer { padding: 30px 0 0; }
 .follow_ftr .likes{
     font-size: 15px;
 }
+.follow_ftr .view{
+    font-size: 14px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.follow_ftr .view i{
+    margin-right: 4px;
+}
 .action-btn:hover .react-btn-grp{
     opacity: 1;
     visibility: visible;
@@ -479,7 +487,13 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .unfollow_modal .modal-dialog { max-width: 572px; margin-top: 16%; }
 .common_modal .modal-body { padding: 0; }
 .modal_body_top { padding: 15px; background-color: #514DC5; border-radius: 10px 10px 0px 0px; }
-.modal_body_top h3 { margin: 0; letter-spacing: 0.92px; color: #FFFFFF; text-transform: uppercase; text-align: center; }
+.modal_body_top h5 { margin: 0; letter-spacing: 0.92px; color: #FFFFFF; text-transform: uppercase; text-align: center; }
+.profile_dp img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 .common_modal .modal-content { border-radius: 18px; }
 .modal_body_btm { padding: 46px 15px 68px; }
 .modal_body_btm p { letter-spacing: 0.76px; color: #747474; font-size: 18px; margin-bottom: 40px; }
@@ -510,6 +524,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .reaction_modal .tabs_box ul li.active { border-bottom: 2px solid #514DC5; }
 .reaction_modal .tabs_box .badge_cst { display: inline-block; width: 27px; height: 27px; border-radius: 50%; background-color: #514DC5; font-size: 10px; color: #fff; text-align: center; line-height: 29px; }
 .reactions { display: none; }
+.reactions.active { display: block; }
 .reaction_modal .modal_body_btm { padding: 46px 45px 10px; overflow: auto; }
 .profile_dp { display: block; width: 33px; height: 33px; border-radius: 50%; margin-right: 16px; }
 .profile_dp img { width: 100%; }
@@ -631,6 +646,11 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .modal-dialog.tanito {
     margin-top: 100px;
     max-width: 650px;
+}
+
+.modal-dialog.reaction_modal {
+    margin-top: 100px;
+    max-width: 750px;
 }
 
 .modal-dialog.tanito .modal-content{
