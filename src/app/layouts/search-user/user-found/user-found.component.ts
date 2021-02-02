@@ -24,6 +24,7 @@ export class UserFoundComponent implements OnInit {
       this.query = res.query;
       this.userFound();
     })
+    
   }
 
   onFollowUser(followId: any, index: number) {
