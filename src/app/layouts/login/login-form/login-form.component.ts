@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +20,7 @@ export class LoginFormComponent implements OnInit {
 
   mobile = "";
 
-  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService) { }
+  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService, private firebaseAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }
@@ -36,7 +37,17 @@ export class LoginFormComponent implements OnInit {
       }else {
         this.loading = false;
         this.authService.storeUser(res.data);
+        this.firebaseSignIn(res.data.email, form.value.password);
       }
+    })
+  }
+
+  firebaseSignIn(email: any, pwd: any) {
+    return this.firebaseAuth.signInWithEmailAndPassword(email, pwd)
+    .then((result: any) => {
+      console.log(result);
+    }).catch((error: any) => {
+      console.log(error);
     })
   }
 

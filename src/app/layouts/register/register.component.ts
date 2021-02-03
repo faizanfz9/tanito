@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AngularFireAuth } from '@angular/fire/auth';
+// import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,10 @@ export class RegisterComponent implements OnInit {
   mobile = "";
   @ViewChild("otpVerify") otpVerifyModal: any;
 
-  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService) { }
+  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService, 
+    public firebaseAuth: AngularFireAuth
+    ) { 
+    }
 
   ngOnInit(): void {}
 
@@ -42,8 +47,18 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         this.openModal(this.otpVerifyModal);
+        this.firebaseRegister(form.value.email, form.value.password);
       }
     }, error => {
+      console.log(error);
+    })
+  }
+
+  firebaseRegister(email: any, pwd: any) {
+    return this.firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+    .then((result: any) => {
+      console.log(result);
+    }).catch((error: any) => {
       console.log(error);
     })
   }

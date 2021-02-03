@@ -12,6 +12,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,6 +47,8 @@ import { ShuffleFeedsPipe } from './pipes/shuffle-feeds.pipe';
 import { CountLikePipe } from './pipes/count-like.pipe';
 import { SearchUserComponent } from './layouts/search-user/search-user.component';
 import { UserFoundComponent } from './layouts/search-user/user-found/user-found.component';
+import { environment } from 'src/environments/environment';
+import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +80,8 @@ import { UserFoundComponent } from './layouts/search-user/user-found/user-found.
     ShuffleFeedsPipe,
     CountLikePipe,
     SearchUserComponent,
-    UserFoundComponent
+    UserFoundComponent,
+    ChatroomComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +97,10 @@ import { UserFoundComponent } from './layouts/search-user/user-found/user-found.
     MatTabsModule,
     PlyrModule,
     ModalModule.forRoot(),
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

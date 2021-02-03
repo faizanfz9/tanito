@@ -10,78 +10,16 @@
         </div>
       </div>
       <div class="chat_box_body width_body">
-        <div class="chatBox_msg_body">
-          <div class="msg_date text-center"><span>Jan 19 2018</span></div>
-          <div class="request_accpt d-flex align-items-center"> <span class="dp_box"><img src="assets/images/icons/dp.png" alt="profile" /></span>
-            <h5>Gary Vaynerchuk</h5>
-            <img src="assets/images/icons/student.png" class="ml-3" alt="teacher" /> <span class="time">04:30 PM</span> </div>
-          <div class="custom_card request_card">
-            <div class="follow_bdy">
-              <p class="see_more_content"> What's something you can help with or need help with in 2020? Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you
-                can help someone else! Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this
-                thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board.
-                Leave a comment and then scroll through the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through
-                the other comments to see if you can help someone else!Please use this thread as an old school bulletin board. Leave a comment and then scroll through the other comments to see if you can help
-                someone else! </p>
-              <button type="button" class="see_more_btn">See more</button>
-              <div class="video_frame"> <img src="assets/images/video_frame.png" alt="video" class="w-100" /> </div>
-            </div>
-            <div class="follow_ftr d-flex align-items-center justify-content-between">
-              <div class="">
-                <button type="button"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
-                <button type="button"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
-              </div>
-              <button type="button" class="ans_qust_btn">Answer to question</button>
-            </div>
-            <div class="accetp_or_rjct_box text-center">
-              <p>Gary has requested to connect with you over chat</p>
-              <button type="button" class="reject_btn">Reject</button>
-              <button type="button" class="accept_btn">Accept</button>
-            </div>
-          </div>
-          <p class="disc_msg">If you accept the chat request you will be able to continue chatting</p>
-          <div class="follow_teacher_box">
-            <div class="d-flex align-items-center"> <span class="dp_box"> <img src="assets/images/icons/dp.png" class="w-100" alt="profile"> <img src="assets/images/icons/student.png" class="tag_img" alt="tag"> </span>
-              <h4>Gary Vaynerchuk <span>Math, Science Teacher</span></h4>
-            </div>
-            <p>You don't know each other on Tanito if you want to chat together Follow</p>
-            <button type="button" class="follow_btn">Follow</button>
-          </div>
-          <div class="message">
-            <div class="row">
-              <div class="col-md-1"> <span class="dp_box"><img src="assets/images/icons/dp.png" class="w-100" alt="profile"></span> </div>
-              <div class="col-md-11">
-                <h4>Jhon Doe <img src="assets/images/icons/student.png" class="ml-3" alt="teacher"> <span>5:50 PM</span></h4>
-                <div class="msg_body msg_body_blue_bg">
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id maiores eaque fugiat explicabo distinctio ab laboriosam nostrum sequi magnam cumque ratione modi repudiandae eos molestias vero recusandae a et, quis reprehenderit excepturi minus</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="message">
-            <div class="row">
-              <div class="col-md-1"> <span class="dp_box"><img src="assets/images/icons/dp.png" class="w-100" alt="profile"></span> </div>
-              <div class="col-md-11">
-                <h4>Gary Vaynerchuk <img src="assets/images/icons/student.png" class="ml-3" alt="teacher"> <span>5:50 PM</span></h4>
-                <div class="msg_body">
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id maiores eaque fugiat explicabo distinctio ab laboriosam nostrum sequi magnam cumque ratione modi repudiandae eos molestias vero recusandae a et, quis reprehenderit excepturi minus</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center">
-            <p class="warning_msg m-0">Your are about to  reach limit.Buy a plan to send messages.</p>
-            <a href="" class="view_plan_btn">View plan</a> </div>
-        </div>
+        <app-chatroom [chatFeeds]="feeds"></app-chatroom>
       </div>
       <div class="chat_box_ftr d-flex align-items-center width_body">
-        <textarea placeholder="Write a message.."></textarea>
+        <textarea [(ngModel)]="message" placeholder="Write a message.."></textarea>
         <div class="btns d-flex align-items-center pl-2">
           <div>
             <input type="file" id="attach" class="d-none" />
             <label for="attach" class="m-0"><img src="assets/images/icons/attchment_icon.png" alt="attach icon" /></label>
           </div>
-          <button type="submit"><img src="assets/images/icons/send_icon.png" alt="send" /></button>
+          <button type="submit"><img src="assets/images/icons/send_icon.png" (click)="onSendMsg()" alt="send" /></button>
         </div>
       </div>
       <div class="msg_panel">
@@ -92,46 +30,15 @@
           </div>
         </div>
         <div class="msg_panel_inr">
-          <div class="indvsl_msg_box">
+          <div class="indvsl_msg_box" [routerLink]="'/feed/inbox/' + chatMember.data.id" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let chatMember of chatMembers">
             <div class="row">
-              <div class="col-md-2"> <span><img src="assets/images/icons/teach.png" alt="images" /></span> </div>
+              <div class="col-md-2"> <span><img [src]="profiePath + chatMember.data.profile_img" alt="images" /></span> </div>
               <div class="col-md-10">
                 <div class="d-flex align-items-center justify-content-between">
-                  <h3>Victor Richardson <span class="msg_badge">2</span></h3>
+                  <h3>{{ chatMember.data.username }}
+                     <!-- <span class="msg_badge">2</span> -->
+                    </h3>
                   <span>Jan 4</span> </div>
-                <p>You: Its awesome keep going</p>
-              </div>
-            </div>
-          </div>
-          <div class="indvsl_msg_box active">
-            <div class="row">
-              <div class="col-md-2"> <span><img src="assets/images/icons/teach.png" alt="images" /></span> </div>
-              <div class="col-md-10">
-                <div class="d-flex align-items-center justify-content-between">
-                  <h3>Howard Aug...</h3>
-                  <span>Dec 14, 2019</span> </div>
-                <p>You: Its awesome keep going</p>
-              </div>
-            </div>
-          </div>
-          <div class="indvsl_msg_box">
-            <div class="row">
-              <div class="col-md-2"> <span><img src="assets/images/icons/teach.png" alt="images" /></span> </div>
-              <div class="col-md-10">
-                <div class="d-flex align-items-center justify-content-between">
-                  <h3>Howard Aug...</h3>
-                  <span>Dec 14, 2019</span> </div>
-                <p>You: Its awesome keep going</p>
-              </div>
-            </div>
-          </div>
-          <div class="indvsl_msg_box">
-            <div class="row">
-              <div class="col-md-2"> <span><img src="assets/images/icons/teach.png" alt="images" /></span> </div>
-              <div class="col-md-10">
-                <div class="d-flex align-items-center justify-content-between">
-                  <h3>Howard Aug...</h3>
-                  <span>Dec 14, 2019</span> </div>
                 <p>You: Its awesome keep going</p>
               </div>
             </div>

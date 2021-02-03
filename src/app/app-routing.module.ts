@@ -41,6 +41,9 @@ const routes: Routes = [
       },
       {
         path: "inbox", component: InboxComponent
+      },
+      {
+        path: "inbox/:id", component: InboxComponent
       }
     ] 
   },

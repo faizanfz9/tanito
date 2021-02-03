@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tanito-e2cab": {
+      "hosting": {
+        "tanito": [
+          "tanito-e2cab"
+        ]
+      }
+    }
+  }
+}

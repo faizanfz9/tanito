@@ -18,8 +18,28 @@
       <plyr *ngIf="post.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + post.video }]"></plyr>
     </div>
     <div class="follow_ftr">
-      <button type="button" data-toggle="modal" data-target="#reaction_mdl"><img src="assets/images/icons/like_icon.png" alt="icon" /></button>
-      <button type="button" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+      <div class="action-btn">
+          <button type="button" class="post-action-btn" [ngClass]="{ 'liked': post.like_member_id != null ? post.like_member_id.includes(loggedUser.id): false }" #likeBtn (click)="onLikePost(post.id, likeType, likeBtn)">
+              <img src="assets/images/icons/like_icon.png" alt="icon" />
+          </button>
+          <div class="follow_ftr react-btn-grp">
+              <button type="button" (click)="onLikePost(post.id, 0, likeBtn)">
+                  <img src="assets/images/icons/like_icon.png" alt="icon" />
+              </button>
+              <button type="button" (click)="onLikePost(post.id, 1, likeBtn)">
+                  <img src="assets/images/icons/lightbulb.png" alt="icon" />
+              </button>
+              <button type="button" (click)="onLikePost(post.id, 2, likeBtn)">
+                  <img src="assets/images/icons/clap.png" alt="icon" />
+              </button>
+              <button type="button" (click)="onLikePost(post.id, 3, likeBtn)">
+                  <img src="assets/images/icons/like.png" alt="icon" />
+              </button>
+          </div>
+      </div>
+      <span class="likes">{{ post.like_member_id | countLike }}</span>
+      <span class="view" (click)="onViewReaction(post.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Reactions</span>
+      <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
     </div>
 </div>
 </div>
@@ -27,5 +47,74 @@
 <div *ngIf="!myData.user_post_data || myData.user_post_data.length == 0" class="custom_card custom_crd_padd">
   <h5>You did not post anything yet!</h5>
 </div>
+
+<ng-template #viewReactions>
+  <div class="modal_tanito">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal_body_top">
+                  <h5>REACTIONS</h5>
+              </div>
+              <mat-tab-group>
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          All
+                          <span class="badge badge-primary" *ngIf="reactionFetched">{{ totalUserReaction.length }}</span>
+                      </ng-template>
+                      <div class="d-flex align-items-center mb-4" *ngFor="let user of totalUserReaction">
+                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <h5>{{ user.username }}</h5>
+                      </div>
+                  </mat-tab>
+
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          <img src="assets/images/icons/ok.png" alt="reaction">
+                          <span class="badge badge-primary ml-" *ngIf="reactionFetched">{{ okUserReaction.length }}</span>
+                      </ng-template>
+                      <div class="d-flex align-items-center mb-4" *ngFor="let user of okUserReaction">
+                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <h5>{{ user.username }}</h5>
+                      </div>
+                  </mat-tab>
+                  
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          <img src="assets/images/icons/lightbulb.png" alt="reaction"> 
+                          <span class="badge badge-primary" *ngIf="reactionFetched">{{ innUserReaction.length }}</span>
+                      </ng-template>
+                      <div class="d-flex align-items-center mb-4" *ngFor="let user of innUserReaction">
+                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <h5>{{ user.username }}</h5>
+                      </div>
+                  </mat-tab>
+                  
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          <img src="assets/images/icons/clap.png" alt="reaction">
+                          <span class="badge badge-primary" *ngIf="reactionFetched">{{ clapUserReaction.length }}</span>
+                      </ng-template>
+                      <div class="d-flex align-items-center mb-4" *ngFor="let user of clapUserReaction">
+                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <h5>{{ user.username }}</h5>
+                      </div>
+                  </mat-tab>
+
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          <img src="assets/images/icons/like.png" alt="reaction">
+                          <span class="badge badge-primary" *ngIf="reactionFetched">{{ goodUserReaction.length }}</span>
+                      </ng-template>
+                      <div class="d-flex align-items-center mb-4" *ngFor="let user of goodUserReaction">
+                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <h5>{{ user.username }}</h5>
+                      </div>
+                  </mat-tab>
+              </mat-tab-group>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

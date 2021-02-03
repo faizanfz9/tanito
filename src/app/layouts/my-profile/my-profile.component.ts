@@ -1,3 +1,4 @@
+import { ViewEncapsulation } from '@angular/core';
 import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +9,8 @@ import { VideoProcessingService } from 'src/app/shared/video-processing.service'
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.scss']
+  styleUrls: ['./my-profile.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MyProfileComponent implements OnInit {
   user: any;

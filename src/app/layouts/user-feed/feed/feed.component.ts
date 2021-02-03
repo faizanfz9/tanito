@@ -20,13 +20,13 @@ export class FeedComponent implements OnInit {
   loading = false;
   modalRef: any;
   query: any;
-  @ViewChild("viewReactions") viewReactions: any;
   totalUserReaction: any;
   okUserReaction: any;
   innUserReaction: any;
   clapUserReaction: any;
   goodUserReaction: any;
   reactionFetched = false;
+  @ViewChild("viewReactions") viewReactions: any;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/"
   imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
   videoDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/video/";

@@ -1,0 +1,13 @@
+<div class="chatBox_msg_body">
+    <div class="message" *ngFor="let feed of chatFeeds">
+      <div class="row">
+        <div class="col-md-1"> <span class="dp_box"><img src="assets/images/icons/dp.png" class="w-100" alt="profile"></span> </div>
+        <div class="col-md-11">
+          <h4>{{feed.username}} <img src="assets/images/icons/student.png" class="ml-3" alt="teacher"> <span>{{ feed.timeSent }}</span></h4>
+          <div class="msg_body msg_body_blue_bg">
+            <p>{{ feed.message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

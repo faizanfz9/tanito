@@ -1,0 +1,16 @@
+.indvsl_msg_box {
+    span {
+        img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+}
+
+.chat_box_rht.no-msg {
+    background: #fff;
+    border-radius: 30px;
+    padding: 30px;
+}

@@ -3,6 +3,11 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBpGGE7t8r5Q9tM13SeRlmpDwAUBcG1iEU",
+  databaseURL: "https://tanito-e2cab-default-rtdb.firebaseio.com"
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +15,8 @@ export class UserService {
   private url = "https://demo.mbrcables.com/tanito/Api";
   // private follower = new Subject<string>();
   private user = new Subject<any>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // Get Authenticated User
   getUser(): any {

@@ -28,7 +28,10 @@ export class HeaderComponent implements OnInit {
   }
 
   onSearchUser() {
-    this.router.navigate(['/search-user'], { queryParams: { query: this.query.nativeElement.value}});
+    let query = this.query.nativeElement.value;
+    if(query.length > 0) {
+      this.router.navigate(['/search-user'], { queryParams: { query: query}});
+    } 
   }
 
   onLogOut(event: Event) {

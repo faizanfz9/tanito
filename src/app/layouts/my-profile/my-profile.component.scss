@@ -125,3 +125,18 @@
         color: #fff;
     }
 }
+
+.mat-tab-body-content {
+    height: 450px !important;
+    overflow: scroll;
+    padding: 25px;
+}
+.mat-tab-label-content {
+    .badge {
+        margin-left: 5px;
+        background: #514DC5;
+    }
+    img {
+        height: 28px;
+    }
+}
