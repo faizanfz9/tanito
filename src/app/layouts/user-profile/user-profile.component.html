@@ -28,7 +28,7 @@
                                             <li><img src="assets/images/icons/users_gray.png" alt="user" /> {{ user.data.count_follower }}</li>
                                             <li><img src="assets/images/icons/user_check.png" alt="user" /> {{ user.data.count_following }}</li>
                                         </ul>
-                                        <button type="button" class="message_btn purple_btn">Message</button>
+                                        <button type="button" (click)="goToRoom()" class="message_btn purple_btn">Message</button>
                                         <button type="button" (click)="onFollowUser()" class="follow_btn purple_btn">{{ followed == true ? "Unfollow":"Follow" }}</button>
                                         <button type="button" class="report_btn purple_btn">Report Profile</button>
                                     </div>

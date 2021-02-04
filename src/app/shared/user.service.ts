@@ -134,4 +134,9 @@ export class UserService {
   viewReaction(postId: any) {
     return this.http.post(this.url + "/post_like_by_user", postId);
   }
+
+  // to check if chat is created
+  createChat(postId: any) {
+    return this.http.post(this.url + "/create_chat", postId);
+  }
 }

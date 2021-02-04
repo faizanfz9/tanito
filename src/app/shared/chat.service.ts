@@ -12,8 +12,7 @@ export class ChatService {
 
   constructor(private userService: UserService, 
     private afAuth: AngularFireAuth, 
-    private db: AngularFireDatabase,
-    private afs: AngularFirestore) {
+    private db: AngularFireDatabase) {
     this.loggedUser = JSON.parse(this.userService.getUser()) 
     // this.afAuth.authState.subscribe(auth => {
     //   if (auth !== undefined && auth !== null) {
@@ -23,11 +22,10 @@ export class ChatService {
     // });
   }
 
-  sendMessage(msg: string) {
+  sendMessage(msg: string, chatroom: any) {
     const timestamp = this.getTimeStamp();
-    const email = "faizan@abc.com";
     let chatMessage: any = [];
-    chatMessage = this.getMessages();
+    chatMessage = this.getMessages(chatroom);
     chatMessage.push({
       message: msg,
       timeSent: timestamp,
@@ -36,8 +34,10 @@ export class ChatService {
     })
   }
 
-  getMessages() {
-    return this.db.list("/messages");
+  getMessages(receiver: any) {
+    let user_1 = receiver;
+    let user_2 = this.loggedUser.id;
+    return this.db.list("/chats/" + user_1 + "&" + user_2);
   }
 
   getTimeStamp() {
@@ -49,5 +49,18 @@ export class ChatService {
                  now.getUTCMinutes() + ':' +
                  now.getUTCSeconds();
     return (date + ' ' + time);
+  }
+
+  getRooms() {
+    return this.db.list("/members/");
+  }
+
+  createRoom(member: any) {
+    this.db.list("/members/").push({
+      memberId: member.user_id,
+      memberName: member.username,
+      memberType: member.usertype,
+      profileImg: member.profile_img,
+    })
   }
 }

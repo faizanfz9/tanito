@@ -1,0 +1,19 @@
+.message {
+    margin: 25px 0;
+    &.own-msg {
+        .row {
+            flex-direction: row-reverse;
+            h4 {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                img {
+                    order: 2;
+                }
+            }
+            .msg-body-col {
+                padding-right: 0;
+            }
+        }
+    } 
+}
