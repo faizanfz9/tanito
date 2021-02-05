@@ -1,9 +1,9 @@
 <div class="student_rht chat_box_rht">
     <div class="chat_box">
       <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched">
-        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + chatMember.profile_img" alt="profile" /></span>
-          <h4>{{ chatMember.username }} <span>{{ (chatMember.usertype == 3 ? "Teacher at ":"Student at ") +  chatMember.university }}</span> </h4>
-          <img class="user-type" [src]="chatMember.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> 
+        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" alt="profile" /></span>
+          <h4>{{ receiver.username }} <span>{{ (receiver.usertype == 3 ? "Teacher at ":"Student at ") +  receiver.university }}</span> </h4>
+          <img class="user-type" [src]="receiver.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> 
         </div>
         <div class="chatBoxTop_rht d-flex align-items-center justify-content-between">
           <h4>Messages</h4>
@@ -47,5 +47,6 @@
         </div>
       </div>
     </div>
-    
-  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

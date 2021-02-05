@@ -52,15 +52,15 @@ export class UserProfileComponent implements OnInit {
   goToRoom() {
     let member = this.user.data.results;
     let memberId = member.user_id;
-    let chatCreated = member.created_chat;
-    if(chatCreated == "false") {
-      let rooms: any = [];
-      let userId = new FormData();
-      userId.append("user_id", memberId);
-      this.userService.createChat(userId).subscribe((res: any) => {
-        this.chatService.createRoom(member);
-      })
-    }
+    // let chatCreated = member.created_chat;
+    // if(chatCreated == "false") {
+    //   let rooms: any = [];
+    //   let userId = new FormData();
+    //   userId.append("user_id", memberId);
+    //   this.userService.createChat(userId).subscribe((res: any) => {
+    //     this.chatService.createRoom(member);
+    //   })
+    // }
     this.router.navigate(['/feed/inbox/' + memberId]);
   }
 

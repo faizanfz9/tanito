@@ -12,7 +12,6 @@ export class ChatroomComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
-    console.log(this.loggedUserId);
   }
 
   ngOnInit(): void {

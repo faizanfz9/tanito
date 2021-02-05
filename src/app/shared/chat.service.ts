@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -8,12 +9,16 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class ChatService {
-  loggedUser: any;
+  sender: any;
+  senderId: any;
+  receiverId: any;
+  chatId: any;
 
   constructor(private userService: UserService, 
     private afAuth: AngularFireAuth, 
     private db: AngularFireDatabase) {
-    this.loggedUser = JSON.parse(this.userService.getUser()) 
+    this.sender = JSON.parse(this.userService.getUser());
+    this.senderId = this.sender.id
     // this.afAuth.authState.subscribe(auth => {
     //   if (auth !== undefined && auth !== null) {
     //     this.loggedUser = auth;
@@ -22,22 +27,21 @@ export class ChatService {
     // });
   }
 
-  sendMessage(msg: string, chatroom: any) {
+  sendMessage(msg: string, chatId: any) {
     const timestamp = this.getTimeStamp();
     let chatMessage: any = [];
-    chatMessage = this.getMessages(chatroom);
+    chatMessage = this.getMessages(chatId);
     chatMessage.push({
       message: msg,
       timeSent: timestamp,
       senderName: "faizan",
-      senderId: this.loggedUser.id
+      senderId: this.senderId
     })
   }
 
-  getMessages(receiver: any) {
-    let user_1 = receiver;
-    let user_2 = this.loggedUser.id;
-    return this.db.list("/chats/" + user_1 + "&" + user_2);
+  getMessages(chatId: any) {
+    console.log(chatId)
+    return this.db.list("/chats/" + chatId);
   }
 
   getTimeStamp() {
@@ -51,16 +55,30 @@ export class ChatService {
     return (date + ' ' + time);
   }
 
-  getRooms() {
-    return this.db.list("/members/");
+  getRooms(senderId: any) {
+    return this.db.list("/members/" + senderId);
   }
 
-  createRoom(member: any) {
-    this.db.list("/members/").push({
-      memberId: member.user_id,
-      memberName: member.username,
-      memberType: member.usertype,
-      profileImg: member.profile_img,
+  createRoom(receiver: any) {
+    let sender = this.sender;
+    let receiverId = this.receiverId;
+    let chatId = this.chatId;
+    let db = this.db;
+    this.db.database.ref("/members/").once("value").then(function(snapshot){
+      if(!snapshot.child(receiverId).exists()) {
+        db.list("/members/" + sender.id).push({
+          chatId: chatId,
+          memberId: receiver.user_id,
+          memberName: receiver.username,
+          profileImg: receiver.profile_img,
+        })
+        db.list("/members/" + receiverId).push({
+          chatId: chatId,
+          memberId: sender.id,
+          memberName: sender.username,
+          profileImg: sender.profile_img,
+        })
+      }
     })
   }
 }

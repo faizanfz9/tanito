@@ -13,38 +13,45 @@ export class InboxComponent implements OnInit {
   message: any = "";
   profiePath: any;
   chatRoomId: any;
-  chatMember: any;
+  receiver: any;
   chatRooms: any = [];
   loggedUserId: any;
   isFetched = false;
+  loading = false;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
   constructor(private chatService: ChatService, private userService: UserService, private route: ActivatedRoute) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
-   this.chatRoomId = this.route.snapshot.params.id;
    this.route.params.subscribe(res => {
-      this.chatRoomId = res.id;
+      let paramId = res.id;
       let memberId = new FormData();
-      memberId.append("id", this.chatRoomId);
+      memberId.append("id", paramId);
       this.userService.getUserById(memberId).subscribe(res => {
         this.isFetched = true;
-        this.chatMember = res.data.results;
+        this.receiver = res.data.results;
       })
-      this.getFeeds();
+      this.loading = true;
+      this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
+        this.chatRooms = res;
+        let isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId)
+        if(isRoomFound) {
+          this.chatRoomId = this.chatRooms.find((item: any) => item.memberId == paramId).chatId
+          this.getFeeds();
+        }else {
+          this.loading = false; 
+        }
+      })
    })
   }
 
   ngOnInit(): void {
-    this.getFeeds();
-    this.chatService.getRooms().valueChanges().subscribe(res => {
-      this.chatRooms = res;
-    })
   }
 
   getFeeds() {
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
+      this.loading = false;  
       this.feeds = res;
     });
   }
@@ -52,6 +59,7 @@ export class InboxComponent implements OnInit {
   onSendMsg() {
     this.chatService.sendMessage(this.message, this.chatRoomId);
     this.message = "";
+    this.chatService.createRoom(this.receiver);
   }
 
 }
