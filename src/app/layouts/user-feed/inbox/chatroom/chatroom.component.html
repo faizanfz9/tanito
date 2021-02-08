@@ -1,9 +1,13 @@
 <div class="chatBox_msg_body">
     <div class="message" [ngClass]="{'own-msg': feed.senderId == loggedUserId}" *ngFor="let feed of chatFeeds">
       <div class="row">
-        <div class="col-md-1"> <span class="dp_box"><img src="assets/images/icons/dp.png" class="w-100" alt="profile"></span> </div>
+        <div class="col-md-1"> 
+          <span class="dp_box">
+            <img [src]="feed.senderPic" alt="profile">
+          </span> 
+        </div>
         <div class="col-md-11 msg-body-col">
-          <h4>{{feed.username}} <img src="assets/images/icons/student.png" class="ml-3" alt="teacher"> <span>{{ feed.timeSent }}</span></h4>
+          <h4>{{feed.username}} <img [src]="feed.senderType == 3 ?  teacherIcon : studentIcon" class="ml-3" alt="teacher"> <span>{{ feed.timeSent }}</span></h4>
           <div class="msg_body msg_body_blue_bg">
             <p>{{ feed.message }}</p>
           </div>

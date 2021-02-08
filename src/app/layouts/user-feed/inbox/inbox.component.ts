@@ -1,5 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -22,32 +22,43 @@ export class InboxComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private chatService: ChatService, private userService: UserService, private route: ActivatedRoute) { 
+  constructor(private chatService: ChatService, private userService: UserService, private route: ActivatedRoute, private router: Router) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
-   this.route.params.subscribe(res => {
-      let paramId = res.id;
-      let memberId = new FormData();
-      memberId.append("id", paramId);
-      this.userService.getUserById(memberId).subscribe(res => {
-        this.isFetched = true;
-        this.receiver = res.data.results;
-      })
-      this.loading = true;
-      this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
-        this.chatRooms = res;
-        let isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId)
-        if(isRoomFound) {
-          this.chatRoomId = this.chatRooms.find((item: any) => item.memberId == paramId).chatId
-          this.getFeeds();
+    this.route.params.subscribe(res => {
+        let paramId = res.id;
+        if(paramId) {
+          let memberId = new FormData();
+          memberId.append("id", paramId);
+          this.userService.getUserById(memberId).subscribe(res => {
+            this.isFetched = true;
+            this.receiver = res.data.results;
+          })
+          this.loading = true;
+          this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
+            this.chatRooms = res;
+            let isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
+            if(isRoomFound) {
+              this.chatRoomId = this.chatRooms.find((item: any) => item.memberId == paramId).chatId
+            }else {
+              this.chatRoomId = paramId + "&" + this.loggedUserId;
+            }
+            this.getFeeds();
+          })
         }else {
-          this.loading = false; 
+          this.loading = true;
+          this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
+            if(rooms.length > 0) {
+              this.router.navigate(['/feed/inbox/'+ rooms[0]['memberId']]);
+            }
+            else {
+              this.loading = false;
+            }
+          })
         }
-      })
-   })
+    })
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getFeeds() {
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {

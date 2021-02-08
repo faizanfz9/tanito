@@ -1,5 +1,16 @@
 .message {
     margin: 25px 0;
+    .msg-body-col {
+        padding-left: 0;
+    }
+    .dp_box {
+        img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
     &.own-msg {
         .row {
             flex-direction: row-reverse;
@@ -13,6 +24,7 @@
             }
             .msg-body-col {
                 padding-right: 0;
+                padding-left: 15px;
             }
         }
     } 

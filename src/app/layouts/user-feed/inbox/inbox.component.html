@@ -1,8 +1,8 @@
-<div class="student_rht chat_box_rht">
+<div class="student_rht chat_box_rht" *ngIf="isFetched || chatRooms.length > 0">
     <div class="chat_box">
       <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched">
-        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" alt="profile" /></span>
-          <h4>{{ receiver.username }} <span>{{ (receiver.usertype == 3 ? "Teacher at ":"Student at ") +  receiver.university }}</span> </h4>
+        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
+          <h4 [routerLink]="'/user/' + receiver.user_id">{{ receiver.username }} <span>{{ (receiver.usertype == 3 ? "Teacher at ":"Student at ") +  receiver.university }}</span> </h4>
           <img class="user-type" [src]="receiver.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> 
         </div>
         <div class="chatBoxTop_rht d-flex align-items-center justify-content-between">
@@ -40,13 +40,17 @@
                      <!-- <span class="msg_badge">2</span> -->
                     </h3>
                   <span>Jan 4</span> </div>
-                <p>You: Its awesome keep going</p>
+                <p>{{ chatRoom.lastMsg }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+</div>
+
+<div class="student_rht chat_box_rht no-msg" *ngIf="!isFetched && chatRooms.length == 0">
+  <h5>You have no message!</h5>
 </div>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

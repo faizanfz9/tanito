@@ -12,6 +12,7 @@ export class ChatService {
   sender: any;
   senderId: any;
   receiverId: any;
+  lastMsg: any;
   chatId: any;
 
   constructor(private userService: UserService, 
@@ -27,32 +28,30 @@ export class ChatService {
     // });
   }
 
-  sendMessage(msg: string, chatId: any) {
+  sendMessage(msg: string, chatRoomId: any) {
     const timestamp = this.getTimeStamp();
     let chatMessage: any = [];
-    chatMessage = this.getMessages(chatId);
+    chatMessage = this.getMessages(chatRoomId);
+    this.lastMsg = msg;
     chatMessage.push({
       message: msg,
       timeSent: timestamp,
-      senderName: "faizan",
+      senderPic: this.sender.profile_img,
+      senderType: this.sender.usertype,
       senderId: this.senderId
     })
   }
 
-  getMessages(chatId: any) {
-    console.log(chatId)
-    return this.db.list("/chats/" + chatId);
+  getMessages(chatRoomId: any) {
+    this.chatId = chatRoomId;
+    return this.db.list("/chats/" + this.chatId);
   }
 
   getTimeStamp() {
     const now = new Date();
-    const date = now.getUTCFullYear() + '/' +
-                 (now.getUTCMonth() + 1) + '/' +
-                 now.getUTCDate();
-    const time = now.getUTCHours() + ':' +
-                 now.getUTCMinutes() + ':' +
-                 now.getUTCSeconds();
-    return (date + ' ' + time);
+    const time = now.getHours() + ':' +
+                 now.getMinutes();
+    return time;
   }
 
   getRooms(senderId: any) {
@@ -61,23 +60,51 @@ export class ChatService {
 
   createRoom(receiver: any) {
     let sender = this.sender;
-    let receiverId = this.receiverId;
+    let receiverId = receiver.user_id;
     let chatId = this.chatId;
+    let last_msg = this.lastMsg;
     let db = this.db;
     this.db.database.ref("/members/").once("value").then(function(snapshot){
-      if(!snapshot.child(receiverId).exists()) {
-        db.list("/members/" + sender.id).push({
+      let senderRooms: any = [];
+      let senderArr = snapshot.child(sender.id).val();
+      let receiverArr = snapshot.child(receiverId).val();
+      for (const key in senderArr) {
+        senderRooms.push(senderArr[key]);
+      }
+      let isRoomExist = senderRooms.some((item: any) => item.memberId == receiverId);
+      if(!isRoomExist) {
+         db.list("/members/" + sender.id).push({
           chatId: chatId,
-          memberId: receiver.user_id,
+          memberId: receiverId,
           memberName: receiver.username,
           profileImg: receiver.profile_img,
+          lastMsg: "You: " + last_msg
         })
         db.list("/members/" + receiverId).push({
           chatId: chatId,
           memberId: sender.id,
           memberName: sender.username,
-          profileImg: sender.profile_img,
+          profileImg: sender.profile_img.slice(sender.profile_img.lastIndexOf("/") + 1),
+          lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg
         })
+      }
+      else {
+        for (const key in senderArr) {
+          if(senderArr[key].memberId == receiverId) {
+            db.list("/members/" + sender.id).update(key, {
+              lastMsg: "You: " + last_msg
+            })
+            break;
+          }
+        }
+        for (const key in receiverArr) {
+          if(receiverArr[key].memberId == sender.id) {
+            db.list("/members/" + receiverId).update(key, {
+              lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg
+            })
+            break;
+          }
+        }
       }
     })
   }
