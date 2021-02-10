@@ -44,10 +44,15 @@
                 <ul>
                   <li> <a href="#" routerLink="/feed"> <img src="assets/images/icons/home.png" alt="home" /> Home </a> </li>
                   <li> <a href="#" routerLink="/feed/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a> </li>
-                  <li> <a href="#" routerLink="/feed/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a> </li>
                   <li>
-                    <a routerLink="/feed/my-plans">
+                    <a [routerLink]="defaultChatroom == 0 ? '/feed/inbox' : '/feed/inbox/'+ defaultChatroom" routerLinkActive="active">
                         <img src="assets/images/icons/message.png" alt="message">
+                        Messages
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="my-plans">
+                      <img src="assets/images/icons/premium.svg" alt="plans">
                         My Plans
                     </a>
                   </li>

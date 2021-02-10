@@ -1,8 +1,9 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-inbox',
@@ -18,6 +19,7 @@ export class InboxComponent implements OnInit{
   chatRooms: any = [];
   isRoomFound: any;
   loggedUserId: any;
+  @ViewChild("buyPremium") buyPremium: any;
   isFetched = false;
   loading = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
@@ -25,7 +27,10 @@ export class InboxComponent implements OnInit{
   studentIcon = "assets/images/icons/student.png";
   eventsSubject: Subject<void> = new Subject<void>();
 
-  constructor(private chatService: ChatService, private userService: UserService, private route: ActivatedRoute, private router: Router) { 
+  constructor(private chatService: ChatService, 
+    private userService: UserService, 
+    private route: ActivatedRoute, 
+    private modalService: BsModalService) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.route.params.subscribe(res => {
       let paramId: any;
@@ -76,8 +81,12 @@ export class InboxComponent implements OnInit{
         this.message = "";
       }
     }else {
-      alert("You have used your free message credit limit. Now explore our premium plans!");
+      this.openModal(this.buyPremium);
     }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
 
 }

@@ -19,7 +19,15 @@ export class ChatService {
     private afAuth: AngularFireAuth, 
     private db: AngularFireDatabase) {
     this.sender = JSON.parse(this.userService.getUser());
-    this.senderId = this.sender.id
+    this.senderId = this.sender.id;
+
+    this.getRooms(this.senderId).valueChanges().subscribe((rooms: any) => {
+      if(rooms.length > 0) {
+        localStorage.setItem("defaultChatroom",  rooms[0].memberId)
+      }else {
+        localStorage.setItem("defaultChatroom",  '0')
+      }
+    })
     // this.afAuth.authState.subscribe(auth => {
     //   if (auth !== undefined && auth !== null) {
     //     this.loggedUser = auth;

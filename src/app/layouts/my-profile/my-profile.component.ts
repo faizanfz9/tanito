@@ -3,6 +3,7 @@ import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } f
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 import { VideoProcessingService } from 'src/app/shared/video-processing.service';
 
@@ -19,6 +20,8 @@ export class MyProfileComponent implements OnInit {
   imgThumb: any = "";
   videoThumb: any = "";
   modalRef: any;
+  loggedUserId: any;
+  defaultChatroom: any;
   @ViewChild('timeline', {static: true}) timelineBlock: any;
   @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
@@ -39,7 +42,8 @@ export class MyProfileComponent implements OnInit {
     private userService: UserService, 
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private videoService: VideoProcessingService ) 
+    private videoService: VideoProcessingService,
+    private chatService: ChatService ) 
   { 
     this.userService.storeUpdatedUser().subscribe(res => {
       this.user.user_post_data = res.user_post_data;
@@ -52,6 +56,8 @@ export class MyProfileComponent implements OnInit {
     if(this.route.snapshot.queryParams.post) {
       this.openModal(this.createPost); 
     }
+
+    this.defaultChatroom = localStorage.getItem("defaultChatroom");
   }
 
   onSelectImage(event: any) {
@@ -111,4 +117,5 @@ export class MyProfileComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
+  
 }

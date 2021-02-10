@@ -20,7 +20,10 @@ export class LoginFormComponent implements OnInit {
 
   mobile = "";
 
-  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService, private firebaseAuth: AngularFireAuth) { }
+  constructor(private authService: AuthService, 
+   private modalService: BsModalService, 
+   private firebaseAuth: AngularFireAuth) 
+   { }
 
   ngOnInit(): void {
   }
