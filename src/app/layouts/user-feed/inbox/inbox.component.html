@@ -11,15 +11,15 @@
         </div>
       </div>
       <div class="chat_box_body width_body">
-        <app-chatroom [chatFeeds]="feeds"></app-chatroom>
+        <app-chatroom [events]="eventsSubject.asObservable()" [chatFeeds]="feeds"></app-chatroom>
       </div>
       <div class="chat_box_ftr d-flex align-items-center width_body">
-        <textarea [(ngModel)]="message" placeholder="Write a message.."></textarea>
+        <textarea [(ngModel)]="message" (keyup.enter)="onSendMsg()" placeholder="Write a message.."></textarea>
         <div class="btns d-flex align-items-center pl-2">
-          <div>
+          <!-- <div>
             <input type="file" id="attach" class="d-none" />
             <label for="attach" class="m-0"><img src="assets/images/icons/attchment_icon.png" alt="attach icon" /></label>
-          </div>
+          </div> -->
           <button type="submit"><img src="assets/images/icons/send_icon.png" (click)="onSendMsg()" alt="send" /></button>
         </div>
       </div>
@@ -32,12 +32,12 @@
         </div>
         <div class="msg_panel_inr">
           <div class="indvsl_msg_box" [routerLink]="'/feed/inbox/' + chatRoom.memberId" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let chatRoom of chatRooms">
-            <div class="row">
+            <div class="row" (click)="onMsgRead(chatRoom.memberId)">
               <div class="col-md-2"> <span><img [src]="profilePath + chatRoom.profileImg" alt="images" /></span> </div>
               <div class="col-md-10">
                 <div class="d-flex align-items-center justify-content-between">
                   <h3>{{ chatRoom.memberName }}
-                     <!-- <span class="msg_badge">2</span> -->
+                     <span *ngIf="!chatRoom.msgSeen" class="msg_badge">1</span>
                     </h3>
                   <span>Jan 4</span> </div>
                 <p>{{ chatRoom.lastMsg }}</p>

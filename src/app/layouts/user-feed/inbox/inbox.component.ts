@@ -1,5 +1,6 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -8,24 +9,27 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.scss']
 })
-export class InboxComponent implements OnInit {
+export class InboxComponent implements OnInit{
   feeds: any = [];
   message: any = "";
   profiePath: any;
   chatRoomId: any;
   receiver: any;
   chatRooms: any = [];
+  isRoomFound: any;
   loggedUserId: any;
   isFetched = false;
   loading = false;
-  profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/";
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
+  eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private chatService: ChatService, private userService: UserService, private route: ActivatedRoute, private router: Router) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.route.params.subscribe(res => {
-        let paramId = res.id;
+      let paramId: any;
+      paramId = res.id;
         if(paramId) {
           let memberId = new FormData();
           memberId.append("id", paramId);
@@ -36,41 +40,44 @@ export class InboxComponent implements OnInit {
           this.loading = true;
           this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
             this.chatRooms = res;
-            let isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
-            if(isRoomFound) {
-              this.chatRoomId = this.chatRooms.find((item: any) => item.memberId == paramId).chatId
+            this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
+            if(this.isRoomFound) {
+              let chatRoom = this.chatRooms.find((item: any) => item.memberId == paramId);
+              this.chatRoomId = chatRoom.chatId;
             }else {
               this.chatRoomId = paramId + "&" + this.loggedUserId;
             }
             this.getFeeds();
           })
-        }else {
-          this.loading = true;
-          this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
-            if(rooms.length > 0) {
-              this.router.navigate(['/feed/inbox/'+ rooms[0]['memberId']]);
-            }
-            else {
-              this.loading = false;
-            }
-          })
-        }
+        } 
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { 
+  }
+
+  onMsgRead(member_id: any) {
+    this.chatService.readNewMsg(member_id);
+  }
 
   getFeeds() {
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
       this.loading = false;  
       this.feeds = res;
+      this.eventsSubject.next();
     });
   }
 
   onSendMsg() {
-    this.chatService.sendMessage(this.message, this.chatRoomId);
-    this.message = "";
-    this.chatService.createRoom(this.receiver);
+    if(this.chatRooms.length < 5 || this.isRoomFound) {
+      if(this.message.length > 0) {
+        this.chatService.sendMessage(this.message, this.chatRoomId);
+        this.chatService.createRoom(this.receiver);
+        this.message = "";
+      }
+    }else {
+      alert("You have used your free message credit limit. Now explore our premium plans!");
+    }
   }
 
 }

@@ -27,9 +27,9 @@ export class FeedComponent implements OnInit {
   goodUserReaction: any;
   reactionFetched = false;
   @ViewChild("viewReactions") viewReactions: any;
-  profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/"
-  imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
-  videoDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/video/";
+  profilePath = "http://13.234.255.67/tanito/assets/user-profile/"
+  imageDirPath = "http://13.234.255.67/tanito/assets/user-post-media/image/";
+  videoDirPath = "http://13.234.255.67/tanito/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

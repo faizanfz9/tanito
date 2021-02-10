@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
@@ -7,14 +8,15 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlyrModule } from 'ngx-plyr';
 
-import {MatChipsModule} from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +51,8 @@ import { SearchUserComponent } from './layouts/search-user/search-user.component
 import { UserFoundComponent } from './layouts/search-user/user-found/user-found.component';
 import { environment } from 'src/environments/environment';
 import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.component';
+import { PlansComponent } from './layouts/plans/plans.component';
+import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
 
 @NgModule({
   declarations: [
@@ -81,10 +85,13 @@ import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.c
     CountLikePipe,
     SearchUserComponent,
     UserFoundComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    PlansComponent,
+    MyPlansComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -101,6 +108,7 @@ import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.c
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

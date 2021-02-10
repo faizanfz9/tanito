@@ -28,17 +28,23 @@
                 </a>
             </li>
             <li>
-                <a routerLink="network" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="network" routerLinkActive="active">
                     <img src="assets/images/icons/users.png" alt="user">
                     My Network
                 </a>
             </li>
             <li>
-                <a routerLink="inbox" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="defaultChatroom !== undefined ? 'inbox/'+ defaultChatroom : 'inbox'" routerLinkActive="active">
                     <img src="assets/images/icons/message.png" alt="message">
                     Messages
                 </a>
             </li>
+            <li>
+              <a routerLink="my-plans" routerLinkActive="active">
+                <img src="assets/images/icons/premium.svg" alt="plans">
+                  My Plans
+              </a>
+          </li>
         </ul>
     </div>
     <div class="custom_card category_card">

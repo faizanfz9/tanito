@@ -21,7 +21,7 @@
                     <div class="users_followrs_dt">
                       <div class="dropdown text-right">
                         <button type="button" routerLink="/profile-setup" class="purple_btn" data-toggle="dropdown"> Edit Profile </button>
-                        <button type="button" class="purple_btn more_btn">More</button>
+                        <button type="button" routerLink="/feed/my-plans" class="purple_btn more_btn">More</button>
                       </div>
                     </div>
                   </div>
@@ -45,6 +45,12 @@
                   <li> <a href="#" routerLink="/feed"> <img src="assets/images/icons/home.png" alt="home" /> Home </a> </li>
                   <li> <a href="#" routerLink="/feed/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a> </li>
                   <li> <a href="#" routerLink="/feed/inbox"> <img src="assets/images/icons/message.png" alt="message" /> Messages </a> </li>
+                  <li>
+                    <a routerLink="/feed/my-plans">
+                        <img src="assets/images/icons/message.png" alt="message">
+                        My Plans
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div class="custom_card intro_box">
@@ -85,6 +91,7 @@
                   <p><span id="charCount">0</span>/2000</p>
                 </div>
               </div>
+              <router-outlet></router-outlet>
               <app-timeline [myData]="user"></app-timeline>
             </div>
           </div>

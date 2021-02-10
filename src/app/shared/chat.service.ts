@@ -78,21 +78,25 @@ export class ChatService {
           memberId: receiverId,
           memberName: receiver.username,
           profileImg: receiver.profile_img,
-          lastMsg: "You: " + last_msg
+          lastMsg: "You: " + last_msg,
+          msgSeen: true
         })
         db.list("/members/" + receiverId).push({
           chatId: chatId,
           memberId: sender.id,
           memberName: sender.username,
           profileImg: sender.profile_img.slice(sender.profile_img.lastIndexOf("/") + 1),
-          lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg
+          lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg,
+          newMsg: 1,
+          msgSeen: false
         })
       }
       else {
         for (const key in senderArr) {
           if(senderArr[key].memberId == receiverId) {
             db.list("/members/" + sender.id).update(key, {
-              lastMsg: "You: " + last_msg
+              lastMsg: "You: " + last_msg,
+              msgSeen: true
             })
             break;
           }
@@ -100,10 +104,29 @@ export class ChatService {
         for (const key in receiverArr) {
           if(receiverArr[key].memberId == sender.id) {
             db.list("/members/" + receiverId).update(key, {
-              lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg
+              lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg,
+              newMsg: 1,
+              msgSeen: false
             })
             break;
           }
+        }
+      }
+    })
+  }
+
+  readNewMsg(receiver_id: any) {
+    let sender = this.sender;
+    let receiverId = receiver_id;
+    let db = this.db;
+    this.db.database.ref("/members/").once("value").then(function(snapshot){
+      let senderArr = snapshot.child(sender.id).val();
+      for (const key in senderArr) {
+        if(senderArr[key].memberId == receiverId) {
+          db.list("/members/" + sender.id).update(key, {
+            msgSeen: true
+          })
+          break;
         }
       }
     })

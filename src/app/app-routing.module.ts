@@ -17,6 +17,8 @@ import { FeedComponent } from './layouts/user-feed/feed/feed.component';
 import { UserFeedComponent } from './layouts/user-feed/user-feed.component';
 import { UsersComponent } from './layouts/user-feed/users/users.component';
 import { SearchUserComponent } from './layouts/search-user/search-user.component';
+import { PlansComponent } from './layouts/plans/plans.component';
+import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -44,12 +46,16 @@ const routes: Routes = [
       },
       {
         path: "inbox/:id", component: InboxComponent
-      }
+      },
+      {
+        path: "my-plans", component: MyPlansComponent
+      },
     ] 
   },
   { path: "myProfile", component: MyProfileComponent },
   { path: "user/:id", component: UserProfileComponent},
   { path: "search-user", component: SearchUserComponent},
+  { path: "plans", component: PlansComponent},
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent }
 ];
