@@ -53,6 +53,7 @@ import { environment } from 'src/environments/environment';
 import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.component';
 import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
+import { ChatService } from './shared/chat.service';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ChatService } from 'src/app/shared/chat.service';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -8,15 +6,15 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit, AfterContentChecked {
   user: any;
   loggedUserId: any;
-  defaultChatroom: any;
+  myInbox: any;
   userAvatar = "assets/images/icons/user.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private chatService: ChatService, private router: Router) { 
+  constructor(private userService: UserService) { 
     this.user = JSON.parse(this.userService.getUser());
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.userService.storeUpdatedUser().subscribe(res => {
@@ -26,14 +24,22 @@ export class UserInfoComponent implements OnInit {
     })
   }
 
+  get inbox(): any {
+    return localStorage.getItem("inbox");
+  }
+
   ngOnInit(): void {
-    this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
-      if(rooms.length > 0) {
-        this.defaultChatroom = rooms[0].memberId;
-      }else {
-        this.defaultChatroom = undefined
-      }
-    })
+  }
+
+  ngAfterContentChecked() {
+    if(this.inbox) {
+      this.myInbox = JSON.parse(this.inbox);
+    }else {
+      this.myInbox = {
+        defaultChatroom: 0,
+        newMsgs: 0
+      };
+    }
   }
 
 }

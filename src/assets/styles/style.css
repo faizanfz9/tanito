@@ -565,8 +565,6 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .chatBox_msg_body { 
     height: 600px; 
     transition:width 0.2s;
-    overflow-y: scroll;
-    overflow-x: hidden; 
 }
 .chat_box_body { overflow: auto; padding: 20px 30px; transition: all 0.2s; }
 .msg_panel { position: absolute; top: 90px; right: 0; width: 40%; background-color: #fff; overflow: auto; transition: all 0.2s; }

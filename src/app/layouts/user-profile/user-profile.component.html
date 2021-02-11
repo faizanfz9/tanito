@@ -51,9 +51,9 @@
                                     <a href="#" routerLink="/feed/network"> <img src="assets/images/icons/users.png" alt="user" /> My Network </a>
                                 </li>
                                 <li>
-                                    <a [routerLink]="defaultChatroom == 0 ? '/feed/inbox' : '/feed/inbox/'+ defaultChatroom" routerLinkActive="active">
+                                    <a [routerLink]="myInbox.defaultChatroom == 0 ? '/feed/inbox' : '/feed/inbox/'+ myInbox.defaultChatroom" routerLinkActive="active"> 
                                         <img src="assets/images/icons/message.png" alt="message">
-                                        Messages
+                                        Messages <span class="badge badge-danger" [hidden]="myInbox.newMsgs == 0">{{ myInbox.newMsgs }}</span>
                                     </a>
                                   </li>
                             </ul>

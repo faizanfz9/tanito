@@ -1,4 +1,5 @@
-<div class="student_rht chat_box_rht" *ngIf="isFetched || chatRooms.length > 0">
+<div #chatBox>
+  <div class="student_rht chat_box_rht" *ngIf="isFetched || chatRooms.length > 0">
     <div class="chat_box">
       <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched">
         <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
@@ -11,7 +12,7 @@
         </div>
       </div>
       <div class="chat_box_body width_body">
-        <app-chatroom [events]="eventsSubject.asObservable()" [chatFeeds]="feeds"></app-chatroom>
+        <app-chatroom [chatFeeds]="feeds"></app-chatroom>
       </div>
       <div class="chat_box_ftr d-flex align-items-center width_body">
         <textarea [(ngModel)]="message" (keyup.enter)="onSendMsg()" placeholder="Write a message.."></textarea>
@@ -47,6 +48,7 @@
         </div>
       </div>
     </div>
+</div>
 </div>
 
 <div class="student_rht chat_box_rht no-msg" *ngIf="!isFetched && chatRooms.length == 0">

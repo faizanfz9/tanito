@@ -1,4 +1,4 @@
-import { ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, ViewEncapsulation } from '@angular/core';
 import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { VideoProcessingService } from 'src/app/shared/video-processing.service'
   styleUrls: ['./my-profile.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, AfterContentChecked {
   user: any;
   selectedImg: any;
   selectedVideo: any;
@@ -21,7 +21,7 @@ export class MyProfileComponent implements OnInit {
   videoThumb: any = "";
   modalRef: any;
   loggedUserId: any;
-  defaultChatroom: any;
+  myInbox: any;
   @ViewChild('timeline', {static: true}) timelineBlock: any;
   @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
@@ -51,13 +51,28 @@ export class MyProfileComponent implements OnInit {
     })
   }
 
+  get inbox(): any {
+    return localStorage.getItem("inbox");
+  }
+
   ngOnInit(): void {
     this.user = JSON.parse(this.userService.getUser());
     if(this.route.snapshot.queryParams.post) {
       this.openModal(this.createPost); 
     }
 
-    this.defaultChatroom = localStorage.getItem("defaultChatroom");
+    this.myInbox = JSON.parse(this.inbox);
+  }
+
+  ngAfterContentChecked() {
+    if(this.inbox) {
+      this.myInbox = JSON.parse(this.inbox);
+    }else {
+      this.myInbox = {
+        defaultChatroom: 0,
+        newMsgs: 0
+      };
+    }
   }
 
   onSelectImage(event: any) {

@@ -1,4 +1,4 @@
-<div class="chatBox_msg_body" #chatBody>
+<div class="chatBox_msg_body">
   <div class="inner-wrap">
     <div class="message" [ngClass]="{'own-msg': feed.senderId == loggedUserId}" *ngFor="let feed of chatFeeds">
       <div class="row">

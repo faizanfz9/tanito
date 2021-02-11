@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -8,12 +8,12 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, AfterContentChecked {
   user: any;
   id: any;
   loggedUser: any;
   followed: any;
-  defaultChatroom: any;
+  myInbox: any;
   loading = false;
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
@@ -56,9 +56,24 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/feed/inbox/' + memberId]);
   }
 
+  get inbox(): any {
+    return localStorage.getItem("inbox");
+  }
+
   ngOnInit(): void {
     this.getUserProfile();
-    this.defaultChatroom = localStorage.getItem("defaultChatroom");
+    this.myInbox = JSON.parse(this.inbox);
+  }
+
+  ngAfterContentChecked() {
+    if(this.inbox) {
+      this.myInbox = JSON.parse(this.inbox);
+    }else {
+      this.myInbox = {
+        defaultChatroom: 0,
+        newMsgs: 0
+      };
+    }
   }
 
 }

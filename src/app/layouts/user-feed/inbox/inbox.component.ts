@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ChatService } from 'src/app/shared/chat.service';
@@ -20,12 +20,12 @@ export class InboxComponent implements OnInit{
   isRoomFound: any;
   loggedUserId: any;
   @ViewChild("buyPremium") buyPremium: any;
+  @ViewChild("chatBox", {static: true}) chatBox: any;
   isFetched = false;
   loading = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
-  eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private chatService: ChatService, 
     private userService: UserService, 
@@ -69,7 +69,7 @@ export class InboxComponent implements OnInit{
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
       this.loading = false;  
       this.feeds = res;
-      this.eventsSubject.next();
+      this.scrollToBottom();
     });
   }
 
@@ -83,6 +83,12 @@ export class InboxComponent implements OnInit{
     }else {
       this.openModal(this.buyPremium);
     }
+  }
+
+  scrollToBottom() {
+    let chatBodyel = this.chatBox.nativeElement.querySelectorAll(".chat_box_body")[0];
+    let innerChatBody = chatBodyel.querySelectorAll(".inner-wrap")[0];
+    chatBodyel.scrollTop = innerChatBody.offsetHeight;
   }
 
   openModal(template: TemplateRef<any>) {

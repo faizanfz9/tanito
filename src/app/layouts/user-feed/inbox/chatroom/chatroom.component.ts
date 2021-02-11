@@ -10,7 +10,6 @@ import { UserService } from 'src/app/shared/user.service';
 export class ChatroomComponent implements OnInit {
   @Input() chatFeeds: any;
   @Input() events: any;
-  @ViewChild("chatBody", {static: true}) chatBody: any;
   loggedUserId: any;
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -20,13 +19,13 @@ export class ChatroomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.events.subscribe(() => this.scrollToBottom());
+    // this.events.subscribe(() => this.scrollToBottom());
   }
 
   scrollToBottom() {
-    let chatBodyel = this.chatBody.nativeElement;
-    let innerChatBody = chatBodyel.children[0]; 
-    chatBodyel.scrollTop = 80 + innerChatBody.offsetHeight;
+    // let chatBodyel = this.chatBody.nativeElement;
+    // let innerChatBody = chatBodyel.children[0]; 
+    // chatBodyel.scrollTop = 80 + innerChatBody.offsetHeight;
   }
 
 }

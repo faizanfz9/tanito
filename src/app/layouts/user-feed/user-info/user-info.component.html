@@ -34,9 +34,9 @@
                 </a>
             </li>
             <li>
-                <a [routerLink]="defaultChatroom !== undefined ? 'inbox/'+ defaultChatroom : 'inbox'" routerLinkActive="active">
+                <a [routerLink]="myInbox.defaultChatroom == 0 ? '/feed/inbox' : '/feed/inbox/'+ myInbox.defaultChatroom" routerLinkActive="active"> 
                     <img src="assets/images/icons/message.png" alt="message">
-                    Messages
+                    Messages <span class="badge badge-danger" [hidden]="myInbox.newMsgs == 0">{{ myInbox.newMsgs }}</span>
                 </a>
             </li>
             <li>
