@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -25,54 +25,29 @@ export class ProfileSetupComponent implements OnInit {
   removable: boolean = true;
   addOnBlur: boolean = false;
   loading = false;
-
   separatorKeysCodes = [ENTER, COMMA];
-
   subjectCtrl = new FormControl();
-
-  filteredsubjects: Observable<any[]>;
-
-  subjects = [
-    { name: 'Mathematics' },
-  ];
+  filteredsubjects: any;
+  subjects: any = [];
 
   verifiedUser = "";
   user: any;
   selectedImg: any = null;
   imgSrc: any = "assets/images/svg/file-upload.svg";
 
-
-  allsubjects = [
-    'Mathematics',
-    'Polynomials',
-    'Statistics',
-    'Science',
-    'Social Science',
-    'English',
-  ];
-
+  allsubjects: any = [];
   @ViewChild('subjectInput') subjectInput: any;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) {
-    this.filteredsubjects = this.subjectCtrl.valueChanges
+    this.userService.getSubjects().subscribe((res: any) => {
+      res.data.subjects.forEach((item: any) => {
+        this.allsubjects.push(item.subject);
+      })
+      this.subjects.push({name : this.allsubjects[0]})
+      this.filteredsubjects = this.subjectCtrl.valueChanges
       .startWith(null)
       .map(contact => contact ? this.filter(contact) : this.allsubjects.slice());
-
-  }
-
-  add(event: MatChipInputEvent): void {
-    let input = event.input;
-    let value = event.value;
-
-    // Add our person
-    if ((value || '').trim()) {
-      this.subjects.push({ name: value.trim() });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    })
   }
 
   remove(subject: any): void {
@@ -83,11 +58,15 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   filter(name: string) {
-    return this.allsubjects.filter(subject =>
+    return this.allsubjects.filter((subject: any) =>
       subject.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  selected(event: MatAutocompleteSelectedEvent): any {
+    if(this.subjects.some((item: any) => item.name == event.option.viewValue)) {
+      alert("This subject is already selected!");
+      return false;
+    }
     this.subjects.push({ name: event.option.viewValue });
     this.subjectInput.nativeElement.value = '';
   }
@@ -120,7 +99,7 @@ export class ProfileSetupComponent implements OnInit {
 
   onDetailSave(form: NgForm) {
     let filledSubjects: any = [];
-    this.subjects.forEach(function(item, index){
+    this.subjects.forEach(function(item: any){
       filledSubjects.push(item.name);
     })
     

@@ -71,14 +71,13 @@
           <div class="form-group row mb-3">
             <div class="col-12">
               <label class="primary_color spcllbl">Select Subjects</label>
-              <!-- <input type="text" name="subjects"> -->
               <mat-form-field class="demo-chip-list" style="width: 100%">
                 <mat-chip-list #chipList>
                   <mat-chip
                     *ngFor="let subject of subjects"
                     [selectable]="selectable"
                     [removable]="removable">
-                    {{subject.name}}
+                    {{subject.name | titlecase}}
                     <mat-icon matChipRemove (click)="remove(subject)" *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
                   <input
@@ -88,12 +87,11 @@
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)"
                   />
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                   <mat-option *ngFor="let subject of filteredsubjects | async">
-                    {{ subject }}
+                    {{ subject | titlecase }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>

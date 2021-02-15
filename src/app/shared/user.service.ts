@@ -75,6 +75,16 @@ export class UserService {
     }));;
   }
 
+  // Get subjects
+  getSubjects() {
+    return this.http.get(this.url + "/select_subject");
+  }
+
+  // Get tags
+  getTags() {
+    return this.http.get(this.url + "/get_tags");
+  }
+
   // Get user followers
   getFollowers(id: any) {
     return this.http.post<{status: string, msg: string, data: any}>(this.url + "/get_follower", id);
@@ -139,4 +149,5 @@ export class UserService {
   createChat(postId: any) {
     return this.http.post(this.url + "/create_chat", postId);
   }
+
 }

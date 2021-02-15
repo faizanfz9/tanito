@@ -10,6 +10,7 @@ export class UserInfoComponent implements OnInit, AfterContentChecked {
   user: any;
   loggedUserId: any;
   myInbox: any;
+  subjects: any = [];
   userAvatar = "assets/images/icons/user.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -29,6 +30,11 @@ export class UserInfoComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    this.userService.getSubjects().subscribe((res: any) => {
+      res.data.subjects.forEach((item: any) => {
+        this.subjects.push(item.subject);
+      })
+    })
   }
 
   ngAfterContentChecked() {

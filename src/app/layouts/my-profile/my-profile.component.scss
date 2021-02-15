@@ -33,15 +33,15 @@
         }
     }
     .post-body {
-        // margin-bottom: 25px;
+        margin-bottom: 30px;
         textarea {
             width: 100%;
-            height: 110px;
+            height: 130px;
             outline: none;
             border: 1px solid #cccc;
             resize: none;
             font-size: 16px;
-            margin: 25px 0 15px;
+            margin: 30px 0 20px;
             padding: 10px;
             &::placeholder {
                 font-size: 16px;
@@ -117,12 +117,22 @@
         }
     }
     .form-group {
-        margin: 30px 0;
+        margin: 15px 0;
     }
     button {
         min-width: 120px;
         border-radius: 25px;
         color: #fff;
+    }
+    .mat-form-field-infix {
+        box-shadow: 0px 3px 3px #7D3B8A24;
+        border: 2px solid #514DC5;
+        border-radius: 12px;
+        padding: 15px 10px !important;
+    }
+    
+    .ng-tns-c59-0.ng-star-inserted {
+        opacity: 0;
     }
 }
 
@@ -139,4 +149,8 @@
     img {
         height: 28px;
     }
+}
+
+.cdk-overlay-container {
+    z-index: 1100;
 }

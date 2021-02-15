@@ -10,6 +10,7 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
+  showMenu = false;
   @ViewChild("query") query: any;
   user: any;
 
@@ -40,6 +41,10 @@ export class HeaderComponent implements OnInit {
         event.preventDefault()
       this.authService.logout();
       }
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu; 
   }
 
 }

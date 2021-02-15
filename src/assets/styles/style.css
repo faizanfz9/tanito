@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; color: #2a2a2a }
 input[type=number] { -moz-appearance: textfield; }
 input:focus { outline:none !important; box-shadow:none !important; }
 .container-fluid { max-width:82%; padding: 0; }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1600px) {
     .container-fluid { max-width:100%; padding: 0 20px; }
 }
 
@@ -38,6 +38,86 @@ header .navbar-brand .head_logo{
 }
 header .navbar{
     padding: 10px 0;
+}
+header .navbar{
+    padding: 10px 0;
+}
+header .inner-wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+@media (max-width: 991px) {
+    header .inner-wrap {
+        display: block;
+    }
+    header .inner-wrap .toggle-menu{
+        display: block !important;
+    }
+    header .navbar-brand .head_logo {
+        width: 65px;
+    }
+    header .head_top_bar {
+        display: none;
+    }
+    header .inner-wrap .collapse-menu{
+        position: absolute;
+        top: 92px;
+        right: 0;
+        width: 100%;
+        background: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9;
+        transition: all .3s ease-in-out;
+        padding: 10px 20px 40px;
+        box-shadow: 0 5px 10px rgb(0 0 0 / 0.15);
+    }
+    header .inner-wrap .collapse-menu .mobile-links{
+        display: block !important;
+    }
+    header .inner-wrap .collapse-menu .mobile-links li a{
+        color: #4F4F4F;
+        font-size: 18px;
+    }
+    header .inner-wrap .collapse-menu .mobile-links .search_bar_head{
+        display: block;
+        margin-top: 10px;
+        width: auto;
+    }
+    header .inner-wrap .collapse-menu.show{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+header .inner-wrap .collapse-menu .mobile-links{
+    display: none;
+}
+header .inner-wrap .toggle-menu{
+    position: absolute;
+    top: 15px;
+    right: 0px;
+    display: none;
+    cursor: pointer;
+    z-index: 19;
+}
+header .inner-wrap .toggle-menu.show span:first-child{
+    transform: translate(0px, 8px) rotate(45deg);
+}
+header .inner-wrap .toggle-menu.show span:nth-child(2){
+    opacity: 0;
+    visibility: hidden;
+}
+header .inner-wrap .toggle-menu.show span:last-child{
+    transform: translate(0px, -8px) rotate(-45deg);
+}
+header .inner-wrap .toggle-menu span{
+    width: 27px;
+    height: 3px;
+    background: #514DC5;
+    display: block;
+    margin: 5px 0;
+    transition: all .3s ease-in-out;
 }
 .right-nav { margin-right: 0px; }
 .right-nav li { display: inline-block; }
@@ -306,8 +386,30 @@ footer.footer { padding: 30px 0 0; }
 .category_card .see_all_btn { font-size: 13px; color: #514DC5; font-weight: 500; padding-left: 7px; }
 /* .student_rht { padding-right: 15%; } */
 .media_card { padding: 20px 0; }
-.media_card ul { border-bottom: 1px solid #e0e0e0; }
-.media_card ul li { display: inline-block; width: 33%; font-size: 20px; color: #000; padding-bottom: 15px; cursor: pointer; padding-left: 30px; min-height: 49px; }
+.media_card ul { 
+    border-bottom: 1px solid #e0e0e0; 
+    display: flex;
+}
+.media_card ul li { 
+    width: 100%; 
+    font-size: 20px; 
+    color: #000; 
+    padding-bottom: 15px; 
+    cursor: pointer; 
+    padding-left: 30px; 
+    min-height: 49px; 
+}
+
+@media (max-width: 767px) {
+    .media_card ul li {
+        display: none;
+    }
+    .media_card ul li:first-child {
+        display: block;
+        width: 100%;
+    }
+}
+
 .media_card ul li.active { font-weight: 500; border-bottom: 2px solid #514DC5; }
 .media_card ul li img { margin-right: 15px; filter: invert(1) grayscale(1) brightness(1); -webkit-filter: invert(1) grayscale(1) brightness(1); }
 .media_card ul li.active img { filter: invert(0) grayscale(0) brightness(1); -webkit-filter: invert(0) grayscale(0) brightness(1); }
@@ -359,8 +461,10 @@ footer.footer { padding: 30px 0 0; }
     font-size: 15px;
 }
 .follow_ftr .view{
-    font-size: 14px;
     margin-left: 30px;
+}
+.follow_ftr span{
+    font-size: 14px;
     cursor: pointer;
 }
 .follow_ftr .view i{
@@ -369,7 +473,6 @@ footer.footer { padding: 30px 0 0; }
 .action-btn:hover .react-btn-grp{
     opacity: 1;
     visibility: visible;
-    top: -50px;
 }
 .post-action-btn {
     width: 40px;
@@ -392,7 +495,7 @@ footer.footer { padding: 30px 0 0; }
 }
 .follow_ftr .react-btn-grp{
     position: absolute;
-    top: -20px;
+    top: -45px;
     left: 6px;
     background: #fff;
     box-shadow: 0 0px 7px rgba(0,0,0,.3);
@@ -657,7 +760,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 }
 .modal-dialog.tanito {
     margin-top: 100px;
-    max-width: 650px;
+    max-width: 750px;
 }
 
 .modal-dialog.reaction_modal {

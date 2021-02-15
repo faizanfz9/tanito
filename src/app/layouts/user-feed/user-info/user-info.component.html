@@ -1,8 +1,9 @@
-<div class="student_lft">
+<div class="student_lft row">
+  <div class="col-12">
     <div class="custom_card profile_box">
         <div class="dp_box">
-           <a routerLink="/myProfile"> <img [src]="user.profile_img" alt="profile image"> </a>
-           <img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+          <a routerLink="/myProfile"> <img [src]="user.profile_img" alt="profile image"> </a>
+          <img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
         </div>
         <div class="text-center pb-2">
             <h3 routerLink="/myProfile" class="text-center">{{ user.username }}</h3>
@@ -19,6 +20,8 @@
             </div>
         </div>
     </div>
+  </div>
+  <div class="col-md-6 col-lg-12">
     <div class="custom_card sideMenu_box">
         <ul>
             <li>
@@ -47,83 +50,14 @@
           </li>
         </ul>
     </div>
+  </div>
+  <div class="col-md-6 col-lg-12">
     <div class="custom_card category_card">
       <h3>Categories</h3>
-      <div class="category_accord">
-        <h4 class="accord_btn">Math <i class="fas fa-caret-right"></i></h4>
-        <div class="content">
-          <ul>
-            <li>Electric Charges and Fields</li>
-            <li>Current Electricity</li>
-            <li>Moving Charges and Magnetism</li>
-            <li>Magnetism and Matter</li>
-            <li>Electromagnetic Induction</li>
-            <li>Alternating Current</li>
-            <li>Electromagnetic Waves</li>
-            <li>Communication Systems</li>
-          </ul>
-        </div>
+      <div class="category_accord" *ngFor="let subject of subjects">
+        <h4 class="accord_btn" routerLink="/feed" [queryParams]="{ cat: subject.replace(' ', '_')}">{{ subject }}</h4>
       </div>
-      <div class="category_accord">
-        <h4 class="accord_btn">Science <i class="fas fa-caret-right"></i></h4>
-        <div class="content">
-          <ul>
-            <li>Electric Charges and Fields</li>
-            <li>Current Electricity</li>
-            <li>Moving Charges and Magnetism</li>
-            <li>Magnetism and Matter</li>
-            <li>Electromagnetic Induction</li>
-            <li>Alternating Current</li>
-            <li>Electromagnetic Waves</li>
-            <li>Communication Systems</li>
-          </ul>
-        </div>
-      </div>
-      <div class="category_accord">
-        <h4 class="accord_btn">GK <i class="fas fa-caret-right"></i></h4>
-        <div class="content">
-          <ul>
-            <li>Electric Charges and Fields</li>
-            <li>Current Electricity</li>
-            <li>Moving Charges and Magnetism</li>
-            <li>Magnetism and Matter</li>
-            <li>Electromagnetic Induction</li>
-            <li>Alternating Current</li>
-            <li>Electromagnetic Waves</li>
-            <li>Communication Systems</li>
-          </ul>
-        </div>
-      </div>
-      <div class="category_accord">
-        <h4 class="accord_btn">Computer <i class="fas fa-caret-right"></i></h4>
-        <div class="content">
-          <ul>
-            <li>Electric Charges and Fields</li>
-            <li>Current Electricity</li>
-            <li>Moving Charges and Magnetism</li>
-            <li>Magnetism and Matter</li>
-            <li>Electromagnetic Induction</li>
-            <li>Alternating Current</li>
-            <li>Electromagnetic Waves</li>
-            <li>Communication Systems</li>
-          </ul>
-        </div>
-      </div>
-      <div class="category_accord">
-        <h4 class="accord_btn">English <i class="fas fa-caret-right"></i></h4>
-        <div class="content">
-          <ul>
-            <li>Electric Charges and Fields</li>
-            <li>Current Electricity</li>
-            <li>Moving Charges and Magnetism</li>
-            <li>Magnetism and Matter</li>
-            <li>Electromagnetic Induction</li>
-            <li>Alternating Current</li>
-            <li>Electromagnetic Waves</li>
-            <li>Communication Systems</li>
-          </ul>
-        </div>
-      </div>
-      <a class="see_all_btn">See all</a>
+      <a class="see_all_btn" [hidden]="subjects.length <= 6">See all</a>
     </div>
+  </div>
 </div>

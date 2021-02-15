@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FeedComponent implements OnInit {
   feeds: any = [];
+  filteredFeeds: any = [];
   loggedUser: any;
   likeType = 0;
   currPostId: any;
@@ -27,15 +28,23 @@ export class FeedComponent implements OnInit {
   goodUserReaction: any;
   reactionFetched = false;
   @ViewChild("viewReactions") viewReactions: any;
-  profilePath = "http://13.234.255.67/tanito/assets/user-profile/"
-  imageDirPath = "http://13.234.255.67/tanito/assets/user-post-media/image/";
-  videoDirPath = "http://13.234.255.67/tanito/assets/user-post-media/video/";
+  @ViewChild('feedBlock') feedBlock: any;
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
+  imageDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/image/";
+  videoDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private modalService: BsModalService) { 
-  }
+  constructor(private userService: UserService, private modalService: BsModalService, public route: ActivatedRoute) { 
+    this.route.queryParams.subscribe(query => {
+      // this.loading = false;
+      // this.feedBlock.nativeElement.scrollIntoView({behavior:'smooth'});
+      this.filteredFeeds = this.feeds.filter((feed: any) => {
+        return feed.post.subject == query.cat;
+      })
+    })
+  } 
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());

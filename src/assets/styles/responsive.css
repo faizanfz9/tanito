@@ -137,9 +137,9 @@
     .tabs_wraper {
     overflow: auto;
    }
-    .tabs_wraper ul {
+    /* .tabs_wraper ul {
     width: 760px;
-   }
+   } */
     .rate_modal .modal_body_btm form {
     padding: 0 68px;
    }
@@ -403,26 +403,68 @@
     .pricing .tabs::before, .pricing .tabs::after {
     display: none;
    }
-    .follow_rht div.d-flex {
+    /* .follow_rht div.d-flex {
     display: block!important;
     margin-bottom: 10px;
-   }
-    .follow_rht h3 {
+   } */
+    /* .follow_rht h3 {
     margin-bottom: 10px;
-   }
-    .follow_top img {
+   } */
+    /* .follow_top img {
     width: 34px;
     margin-left: 0!important;
-   }
-    .follow_top {
+   } */
+    /* .follow_top {
     align-items: flex-start!important;
+   } */
+   .follow_top .profile-img {
+       width: 45px;
+       height: 45px;
    }
+   .follow_rht h3 {
+       font-size: 18px;
+   }
+   .follow_rht p {
+       font-size: 14px;
+    }
+    .follow_rht p span{
+     display: block;
+     line-height: 1.2;
+     margin-top: 2px;
+    }
+    .follow_ftr .view {
+        margin-left: 25px;
+        font-size: 13px;
+    }
+    .post-action-btn {
+        width: 35px;
+        height: 35px;
+        padding: 0 7px;
+    }
+    .custom_card_ftr p {
+        font-size: 14px;
+    }
+    .media_card ul li {
+        font-size: 16px;
+    }
+    .media_card ul li img{
+        width: 30px;
+        margin-right: 12px;
+    }
     .sideMenu_box li a {
-    padding-top: 15px;
-    padding-bottom: 12px;
+      padding-top: 15px;
+      padding-bottom: 12px;
    }
-   
-   
+   .follow_top .user-type {
+       width: 25px;
+       height: 25px;
+   }
+   .custom_crd_padd {
+       padding: 25px;
+    }
+    .follow_bdy {
+        padding: 15px 0px;
+    }
        /* 6-1-21 */
        .connection {
     display: block!important;

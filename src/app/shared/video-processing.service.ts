@@ -23,7 +23,7 @@ export class VideoProcessingService {
         resolve(fileInput.files[0]);
       });
       // prompt for video file
-      fileInput.click();
+      // fileInput.click();
     });
   }
 
@@ -34,6 +34,11 @@ export class VideoProcessingService {
     return new Promise<string>((resolve, reject) => {
       canvas.addEventListener('error',  reject);
       video.addEventListener('error',  reject);
+      video.onloadedmetadata = function() {
+        if(video.duration > 30) {
+          reject("Upload video of less than 30 seconds!")
+        }
+      };
       video.addEventListener('canplay', event => {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
