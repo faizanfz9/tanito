@@ -23,6 +23,7 @@ export class InboxComponent implements OnInit{
   @ViewChild("chatBox", {static: true}) chatBox: any;
   isFetched = false;
   loading = false;
+  showRooms = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -34,6 +35,7 @@ export class InboxComponent implements OnInit{
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.route.params.subscribe(res => {
       let paramId: any;
+      this.showRooms = false;
       paramId = res.id;
         if(paramId) {
           let memberId = new FormData();
@@ -93,6 +95,10 @@ export class InboxComponent implements OnInit{
 
   openModal(template: TemplateRef<any>) {
     this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
+  }
+
+  toggleRooms() {
+    this.showRooms = !this.showRooms;
   }
 
 }

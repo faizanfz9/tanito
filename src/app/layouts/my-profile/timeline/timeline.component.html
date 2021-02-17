@@ -22,8 +22,8 @@
     </div>
     <div class="follow_ftr">
       <div class="action-btn">
-          <button type="button" class="post-action-btn" [ngClass]="{ 'liked': post.like_member_id != null ? post.like_member_id.includes(loggedUser.id): false }" #likeBtn (click)="onLikePost(post.id, likeType, likeBtn)">
-              <img src="assets/images/icons/like_icon.png" alt="icon" />
+          <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(post.likes) }" #likeBtn (click)="onLikePost(post.id, getLikeType(post.likes), likeBtn)">
+              <img [src]="checkLikeType(post.likes)" alt="icon" />
           </button>
           <div class="follow_ftr react-btn-grp">
               <button type="button" (click)="onLikePost(post.id, 0, likeBtn)">
@@ -40,7 +40,7 @@
               </button>
           </div>
       </div>
-      <span class="likes">{{ post.like_member_id | countLike }}</span>
+      <span class="likes">{{ post.likes.length }}</span>
       <span class="view" (click)="onViewReaction(post.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Reactions</span>
       <span class="subjects" [hidden]="post.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ post.subject | titlecase }}</span>
       <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>

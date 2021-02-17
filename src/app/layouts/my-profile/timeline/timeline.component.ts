@@ -18,7 +18,6 @@ export class TimelineComponent implements OnInit {
   clapUserReaction: any;
   goodUserReaction: any;
   modalRef: any;
-  likeType = 0;
   reactionFetched = false;
   @ViewChild("viewReactions") viewReactions: any;
   @ViewChild('postBlock', {static: true}) postBlock: any;
@@ -113,6 +112,36 @@ export class TimelineComponent implements OnInit {
         return item.like_type == 3
       });
     })
+  }
+
+  isPostLiked(likes: any) {
+    return likes.some((item: any) => item.user_id == this.loggedUser.id)
+  }
+
+  checkLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      if(myLike.like_type == 1) {
+        return "assets/images/icons/lightbulb.png"
+      }else if(myLike.like_type == 2) {
+        return "assets/images/icons/clap.png"
+      }else if(myLike.like_type == 3) {
+        return "assets/images/icons/like.png"
+      }else {
+        return "assets/images/icons/like_icon.png"
+      }
+    }else {
+      return "assets/images/icons/like_icon.png"
+    }
+  }
+
+  getLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      return myLike.like_type;
+    }else {
+      return 0
+    }
   }
 
   changeTabs(el: HTMLElement) {

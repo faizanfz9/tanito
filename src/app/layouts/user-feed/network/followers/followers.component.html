@@ -1,12 +1,16 @@
 <div class="row">
-  <div class="col-md-3" *ngFor="let follower of followers">
-    <div class="testi-content text-center"> <img [src]="path + follower.profile_img" alt="" class="img-fluid mx-auto d-block rounded-circle user-img">
-      <h5 class="mt-4 mb-4">{{ follower.username }} &nbsp;</h5>
+  <div class="col-sm-6 col-xl-3" *ngFor="let follower of followers">
+    <div class="testi-content text-center"> 
+      <img [src]="path + follower.profile_img" 
+      [alt]="follower.username" 
+      [routerLink]="'/user/' + follower.user_id" 
+      class="img-fluid mx-auto d-block rounded-circle user-img">
+      <h5 class="mt-4 mb-4" [routerLink]="'/user/' + follower.user_id">{{ follower.username }} &nbsp;</h5>
       <p class="mb-4">{{ (follower.usertype == 3 ? 'Teacher at ':'Student at ') + follower.university }}</p>
-      <p class="mb-4"> <img src="assets/images/icons/arrow.svg" alt="arrow icon" class="arrow_img"> 4 Total networks</p>
-      <!-- <a class="btn-sm btn_primary"> Remove</a> </div> -->
   </div>
 </div>
 
-<h5 *ngIf="followers.length == 0">You don't have any follower!</h5>
+<h5 *ngIf="followers.length == 0 && !loading">You don't have any follower!</h5>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
 

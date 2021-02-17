@@ -1,12 +1,16 @@
 <div class="row">
-  <div class="col-md-3" *ngFor="let followingEach of following">
-    <div class="testi-content text-center"> <img [src]="path + followingEach.profile_img" alt="" class="img-fluid mx-auto d-block rounded-circle user-img">
-      <h5 class="mt-4 mb-4">{{ followingEach.username }} &nbsp;</h5>
+  <div class="col-sm-6 col-xl-3" *ngFor="let followingEach of following">
+    <div class="testi-content text-center"> 
+      <img [src]="path + followingEach.profile_img" 
+      [alt]="followingEach.username" 
+      [routerLink]="'/user/' + followingEach.follower" 
+      class="img-fluid mx-auto d-block rounded-circle user-img">
+      <h5 class="mt-4 mb-4" [routerLink]="'/user/' + followingEach.follower">{{ followingEach.username }} &nbsp;</h5>
       <p class="mb-4">{{ (followingEach.usertype == 3 ? 'Teacher at ':'Student at ') + followingEach.university }}</p>
-      <p class="mb-4"> <img src="assets/images/icons/arrow.svg" alt="arrow icon" class="arrow_img"> 4 Total networks</p>
-      <!-- <a class="btn-sm btn_primary"> Remove</a> </div> -->
   </div>
 </div>
 <!-- <button type="button" class="see_all_btn">See all</button> -->
 
-<h5 *ngIf="following.length == 0">You are not following anyone!</h5>
+<h5 *ngIf="following.length == 0 && !loading">You are not following anyone!</h5>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

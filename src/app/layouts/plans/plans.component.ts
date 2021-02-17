@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { PlanService } from 'src/app/shared/plan.service';
 
 @Component({
   selector: 'app-plans',
@@ -8,36 +9,14 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   encapsulation: ViewEncapsulation.None
 })
 export class PlansComponent implements OnInit {
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: true,
-    items: 3,
-    center: true,
-    margin: 30,
-    navText: ['', ''],
-    // responsive: {
-    //   0: {
-    //     items: 1
-    //   },
-    //   400: {
-    //     items: 2
-    //   },
-    //   740: {
-    //     items: 3
-    //   },
-    //   940: {
-    //     items: 3
-    //   }
-    // },
-    nav: false
-  }
+  plans: any;
 
-  constructor() { }
+  constructor(private planService: PlanService) { }
 
   ngOnInit(): void {
+    this.planService.getPlans().subscribe((res: any) => {
+      this.plans = res.data.results;
+    })
   }
 
 }

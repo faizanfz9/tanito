@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: "121851149069",
     appId: "1:121851149069:web:4f2acf9707447e59bb4e44",
     measurementId: "G-C3HKZ0RE7J"
-  }
+  },
+  baseUrl: "https://demo.mbrcables.com/tanito/Api"
 };

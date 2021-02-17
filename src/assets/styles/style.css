@@ -285,7 +285,7 @@ footer.footer { padding: 30px 0 0; }
  background: url(../images/pricing_card_bg.png) no-repeat;
  z-index: -1;
 }
-.pricing .intro { text-align: center; }
+.pricing .intro { text-align: center; margin-bottom: 70px;}
 .pricing .tabs { position: relative; display: inline-block; text-align: center; border: 2px solid #514DC5; border-radius: 16px; margin: 30px 90px 40px 0; }
 .pricing .slider-wrap .card-wrap .list li.na { opacity: .75; }
  .pricing .tabs::before {
@@ -573,7 +573,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
  border: none;
 }
 .sort_by_dropdown .dropdown-toggle img { width: 13px; }
-.student_rht.network_rht { padding-right: 8%; }
+/* .student_rht.network_rht { padding-right: 8%; } */
 .network_rht .custom_card { padding: 27px 40px; }
 .tabs_follow { border-bottom: 1px solid #E0E0E0; margin-bottom: 30px; }
 .tabs_follow li { display: inline-block; font-size: 20px; font-weight: 500; color: #212121; padding-bottom: 27px; cursor: pointer; }
@@ -656,21 +656,20 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
     object-fit: cover;
 }
 .chat_box_top h4 { font-size: 20px; margin-left: 15px; font-weight: 500; margin-bottom: 0; }
-.chat_box_top h4 span { display: block; color: #808080; font-size: 12px; }
-.chat_box_top h4 + img { 
-    width: 30px; 
-    margin-left: 10px;
-    margin-bottom: 6px;
-}
+.chat_box_top h4 span { display: block; color: #808080; font-size: 12px; position: relative;}
+.chat_box_top h4 span img{ position: absolute; top: -20px; right: -45px; width: 35px;}
 .chatBoxTop_lft { flex: 0 0 60%; max-width: 60%; }
 .chatBoxTop_rht { flex: 0 0 40%; max-width: 40%; }
-.chatBoxTop_rht button { border: none; background-color: transparent; }
+.chatBoxTop_rht button { display: none; border: none; background-color: transparent; }
 .chatBox_msg_body { 
     height: 600px; 
     transition:width 0.2s;
 }
 .chat_box_body { overflow: auto; padding: 20px 30px; transition: all 0.2s; }
 .msg_panel { position: absolute; top: 90px; right: 0; width: 40%; background-color: #fff; overflow: auto; transition: all 0.2s; }
+.msg_panel.show {
+    right: 0;
+}
 .msg_panel_inr { height: 590px; }
 .right { right:-100%; }
 .width_body { width: 60%; }

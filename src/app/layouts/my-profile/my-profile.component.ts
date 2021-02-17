@@ -1,9 +1,8 @@
 import { AfterContentChecked, ViewEncapsulation } from '@angular/core';
-import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 import { VideoProcessingService } from 'src/app/shared/video-processing.service';
 import { ENTER } from '@angular/cdk/keycodes';
@@ -11,6 +10,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+var Filter = require('bad-words'), filter = new Filter();
 
 const COMMA = 188;
 
@@ -32,6 +32,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   @ViewChild('timeline', {static: true}) timelineBlock: any;
   @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
+  filter = new Filter();
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -154,29 +155,33 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   }
 
   onCreatePost(form: NgForm) {
-    let post = new FormData();
-    post.append("user_id", this.user.id);
-    post.append("body", form.value.body);
-    post.append("image", this.selectedImg);
-    post.append("video", this.selectedVideo);
-    post.append("subject", form.value.subject);
-    post.append("tags", this.selectedTags.toString());
-    this.loading = true;
-    this.userService.createPost(post).subscribe(res => {
-      if(res.status == "false") {
-        this.loading = false;
-        alert(res.msg);
-      }else {
-        this.loading = false;
-        form.reset();
-        this.imgThumb = "";
-        this.videoThumb = "";
-        this.userService.updateUser();
-        this.router.navigate(['/myProfile']);
-        this.modalRef.hide();
-        this.timelineBlock.nativeElement.scrollIntoView({behavior:'smooth'});
-      }
-    })
+    if(filter.isProfane(form.value.body)) {
+      alert("The post content contains offensive words!");
+    }else {
+      let post = new FormData();
+      post.append("user_id", this.user.id);
+      post.append("body", form.value.body);
+      post.append("image", this.selectedImg);
+      post.append("video", this.selectedVideo);
+      post.append("subject", form.value.subject);
+      post.append("tags", this.selectedTags.toString());
+      this.loading = true;
+      this.userService.createPost(post).subscribe(res => {
+        if(res.status == "false") {
+          this.loading = false;
+          alert(res.msg);
+        }else {
+          this.loading = false;
+          form.reset();
+          this.imgThumb = "";
+          this.videoThumb = "";
+          this.userService.updateUser();
+          this.router.navigate(['/myProfile']);
+          this.modalRef.hide();
+          this.timelineBlock.nativeElement.scrollIntoView({behavior:'smooth'});
+        }
+      })
+    }
   }
 
   openModal(template: TemplateRef<any>) {

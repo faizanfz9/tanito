@@ -484,12 +484,16 @@
    }
     .tabs_follow li {
     padding-bottom: 12px;
+    font-size: 12px;
    }
     .tabs_wrpr {
     overflow: auto;
    }
-    .tabs_follow {
+    /* .tabs_follow {
     width: 420px;
+   } */
+   .network_rht .custom_card {
+    padding: 27px 30px;
    }
     .rate_modal .modal_body_btm form .form-group .row label {
     width: 95%;
@@ -509,6 +513,18 @@
     .chatBoxTop_rht {
     justify-content: flex-end!important;
    }
+   .chatBox_msg_body {
+       height: 400px;
+   }
+   .chatBoxTop_rht h4 {
+    display: none;
+    }
+    .chat_box_top h4 span {
+        display: inline-block;
+    }
+    .chatBoxTop_rht button {
+        display: block;
+    }
     .user_info_top {
     min-height: 130px;
    }
@@ -534,12 +550,12 @@
     width: 30px;
     margin: 6px 0 0!important;
    }
-    .chat_box_top h4 {
+    /* .chat_box_top h4 {
     margin:10px 0 0;
-   }
-    .chatBoxTop_lft {
+   } */
+    /* .chatBoxTop_lft {
     display: block!important;
-   }
+   } */
     .chat_box_top {
     align-items: flex-start!important;
    }

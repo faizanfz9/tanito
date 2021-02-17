@@ -1,88 +1,25 @@
 <section class="pricing">
-    <div class="container">
-      <div class="intro">
-        <h4>Pricing and Plans</h4>
-        <p>lorem ipsum, lorem ipsum, lorem ipsum</p>
-        <ul class="tabs">
-          <li class="active" id="monthly">Monthly</li>
-          <li id="yearly">Yearly</li>
-        </ul>
-      </div>
-      <div class="slider-wrap">
-        <owl-carousel-o class="plans-slider" [options]="customOptions">
-            <ng-template carouselSlide>
-                <div class="card-wrap purple">
-                    <div class="title">
-                      <h4><img src="assets/images/message.svg" alt="message"> STANDARD</h4>
-                    </div>
-                    <ul class="list">
-                      <li>Lorem ipsum dolor sit</li>
-                      <li>Lorem ipsum dolor</li>
-                      <li>Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem</li>
-                      <li class="na">Lorem ipsum dolor</li>
-                      <li class="na">Lorem</li>
-                    </ul>
-                    <h3>₹1200 <span>/month</span></h3>
-                    <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
-                  </div>
-            </ng-template>  
-            <ng-template class="slide-item" carouselSlide>
-                <div class="card-wrap purple">
-                    <div class="title">
-                      <h4><img src="assets/images/message.svg" alt="message"> STANDARD</h4>
-                    </div>
-                    <ul class="list">
-                      <li>Lorem ipsum dolor sit</li>
-                      <li>Lorem ipsum dolor</li>
-                      <li>Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem</li>
-                      <li class="na">Lorem ipsum dolor</li>
-                      <li class="na">Lorem</li>
-                    </ul>
-                    <h3>₹1200 <span>/month</span></h3>
-                    <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
-                  </div>
-            </ng-template>  
-            <ng-template class="slide-item" carouselSlide>
-                <div class="card-wrap purple">
-                    <div class="title">
-                      <h4><img src="assets/images/message.svg" alt="message"> STANDARD</h4>
-                    </div>
-                    <ul class="list">
-                      <li>Lorem ipsum dolor sit</li>
-                      <li>Lorem ipsum dolor</li>
-                      <li>Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem</li>
-                      <li class="na">Lorem ipsum dolor</li>
-                      <li class="na">Lorem</li>
-                    </ul>
-                    <h3>₹1200 <span>/month</span></h3>
-                    <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
-                  </div>
-            </ng-template>  
-            <ng-template class="slide-item" carouselSlide>
-                <div class="card-wrap purple">
-                    <div class="title">
-                      <h4><img src="assets/images/message.svg" alt="message"> STANDARD</h4>
-                    </div>
-                    <ul class="list">
-                      <li>Lorem ipsum dolor sit</li>
-                      <li>Lorem ipsum dolor</li>
-                      <li>Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem ipsum dolor sit</li>
-                      <li class="na">Lorem</li>
-                      <li class="na">Lorem ipsum dolor</li>
-                      <li class="na">Lorem</li>
-                    </ul>
-                    <h3>₹1200 <span>/month</span></h3>
-                    <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
-                  </div>
-            </ng-template>  
-          </owl-carousel-o>
+  <div class="container">
+    <div class="intro">
+      <h4>Pricing and Plans</h4>
+      <p>lorem ipsum, lorem ipsum, lorem ipsum</p>
+      <!-- <ul class="tabs">
+        <li class="active" id="monthly">Monthly</li>
+        <li id="yearly">Yearly</li>
+      </ul> -->
+    </div>
+    <div class="row slider-wrap justify-content-center">
+      <div class="col-4" *ngFor="let plan of plans">
+        <div class="card-wrap purple">
+          <div class="title">
+            <h4><img src="assets/images/message.svg" alt="message">{{ plan.plan }}</h4>
+          </div>
+          <div [innerHtml]="plan.description" class="list"></div>
+          <!-- <h3>₹1200 <span>/month</span></h3> -->
+          <h3>{{ plan.amount | currency:'₹' }} /<span> {{ plan.validity }} Months</span></h3>
+          <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

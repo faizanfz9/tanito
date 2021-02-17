@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { forkJoin } from "rxjs"
 import { map } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class FeedComponent implements OnInit {
   feeds: any = [];
   filteredFeeds: any = [];
   loggedUser: any;
-  likeType = 0;
+  likeType: any;
   currPostId: any;
   loading = false;
   modalRef: any;
@@ -27,53 +27,70 @@ export class FeedComponent implements OnInit {
   clapUserReaction: any;
   goodUserReaction: any;
   reactionFetched = false;
+  catChanged = false;
   @ViewChild("viewReactions") viewReactions: any;
-  @ViewChild('feedBlock') feedBlock: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
   imageDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/image/";
   videoDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
+  @ViewChild("feedBlock") feedBlock: any;
 
-  constructor(private userService: UserService, private modalService: BsModalService, public route: ActivatedRoute) { 
+  constructor(private userService: UserService, private modalService: BsModalService, public route: ActivatedRoute) {
+    this.loggedUser = JSON.parse(this.userService.getUser());
     this.route.queryParams.subscribe(query => {
-      // this.loading = false;
-      // this.feedBlock.nativeElement.scrollIntoView({behavior:'smooth'});
-      this.filteredFeeds = this.feeds.filter((feed: any) => {
-        return feed.post.subject == query.cat;
-      })
+      if(this.catChanged) {
+        this.feedBlock.nativeElement.scrollIntoView({behavior:'smooth'});
+      }else {
+        this.catChanged = true;
+      }
+      this.query = query.cat;
+      this.getFeeds();
     })
   } 
 
   ngOnInit(): void {
-    this.loggedUser = JSON.parse(this.userService.getUser());
-    if(this.loggedUser.following_id) {
-      if(this.loggedUser.following_id.length > 0) {
-        this.loading = true;
-        forkJoin(this.userService.fetchUserFollowing()).pipe(map(res => {
-          let feeds: any = [];
-            res.forEach((item: any, index: number) => {
-            item.data.user_post_data.forEach((post: any) => {
-              feeds.push(
-                {
-                  userId: item.data.results.user_id,
-                  username: item.data.results.username,
-                  usertype: item.data.results.usertype,
-                  university: item.data.results.university,
-                  profile: item.data.urlkey + item.data.results.profile_img,
-                  post: post
-                }
-              )
-            })
+    this.getFeeds();
+  }
+
+  getFeeds() {
+      if(this.loggedUser.following_id) {
+        if(this.loggedUser.following_id.length > 0) {
+          this.loading = true;
+          forkJoin(this.userService.fetchUserFollowing()).pipe(map(res => {
+            if(this.query) {
+                let feeds = this.convertToFeeds(res);
+                return feeds.filter((feed: any) => {
+                  return feed.post.subject == this.query;
+                });
+            }
+            return this.convertToFeeds(res);
+          })).subscribe(res => {
+              this.loading = false;
+              this.feeds = res;
           })
-          return feeds;
-        })).subscribe(res => {
-            this.loading = false;
-            this.feeds = res;
-        })
+        }
       }
-    }
+  }
+
+  convertToFeeds(data: any) {
+    let feeds: any = [];
+    data.forEach((item: any, index: number) => {
+      item.data.user_post_data.forEach((post: any) => {
+        feeds.push(
+          {
+            userId: item.data.results.user_id,
+            username: item.data.results.username,
+            usertype: item.data.results.usertype,
+            university: item.data.results.university,
+            profile: item.data.urlkey + item.data.results.profile_img,
+            post: post
+          }
+        )
+      })
+    })
+    return feeds;
   }
   
   onLikePost(postId: any, likeType: any, el: HTMLElement) {
@@ -104,11 +121,15 @@ export class FeedComponent implements OnInit {
         el.classList.add("liked");
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
+        this.likeType = likeType;
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1
         likesEl.innerHTML = totalLikes;
         likeTypeEl.setAttribute("src", "assets/images/icons/like_icon.png");
+        this.likeType = 0;
+      }else {
+        this.likeType = likeType;
       }
     })
   }
@@ -134,6 +155,36 @@ export class FeedComponent implements OnInit {
         return item.like_type == 3
       });
     })
+  }
+
+  isPostLiked(likes: any) {
+    return likes.some((item: any) => item.user_id == this.loggedUser.id)
+  }
+
+  checkLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      if(myLike.like_type == 1) {
+        return "assets/images/icons/lightbulb.png"
+      }else if(myLike.like_type == 2) {
+        return "assets/images/icons/clap.png"
+      }else if(myLike.like_type == 3) {
+        return "assets/images/icons/like.png"
+      }else {
+        return "assets/images/icons/like_icon.png"
+      }
+    }else {
+      return "assets/images/icons/like_icon.png"
+    }
+  }
+
+  getLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      return +myLike.like_type;
+    }else {
+      return 0;
+    }
   }
 
   changeTabs(el: HTMLElement) {
