@@ -10,7 +10,9 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import "bad-words"
 var Filter = require('bad-words'), filter = new Filter();
+declare var require: any
 
 const COMMA = 188;
 
@@ -32,7 +34,6 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   @ViewChild('timeline', {static: true}) timelineBlock: any;
   @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
-  filter = new Filter();
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
