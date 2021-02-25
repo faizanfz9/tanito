@@ -13,7 +13,7 @@
             </div>
           </div>
           <div class="connection_rht">
-            <button type="button" (click)="onFollowUser(user.data.id, i)" class="follow_btn">{{ user.followed == true ? "Unfollow":"Follow" }}</button>
+            <button type="button" (click)="onFollowUser(user.data.id, user.data.profile_img, i)" class="follow_btn">{{ user.followed == true ? "Unfollow":"Follow" }}</button>
           </div>
         </div>
       </div>

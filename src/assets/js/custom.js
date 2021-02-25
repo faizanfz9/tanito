@@ -241,10 +241,10 @@ $('.message_tgle').click(function() {
 	$('.chat_box_ftr').toggleClass('width_body');
 })
 
-$(document).on("click", "#logindrop", function(event){
-	event.preventDefault();
-	$(".my_account_dropmenu").slideToggle(300);
-})
+// $(document).on("click", "#logindrop", function(event){
+// 	event.preventDefault();
+// 	$(".my_account_dropmenu").slideToggle(300);
+// })
 
 $(document).click(function(e) {
   var container = $("#logindrop");

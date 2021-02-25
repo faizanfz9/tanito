@@ -16,12 +16,13 @@ export class PlansComponent implements OnInit {
   public rzp: any;
 
   public options: any = {
-    key: 'rzp_live_hP7avQ6j1hJLeE', // add razorpay key here
-    name: 'Faizan',
-    description: 'Shopping',
-    amount: 100, // razorpay takes amount in paisa
+    key: 'rzp_test_hTt9ODldtNfwN7', // add razorpay key here\
+    name: 'Tanito Learning Platform',
+    description: '',
+    amount: 0, // razorpay takes amount in paisa
+    order_id: '',
     prefill: {
-      name: 'Faizan',
+      name: 'Tanito Learning Platform',
       email: '', // add your email id
     },
     notes: {},
@@ -50,7 +51,9 @@ export class PlansComponent implements OnInit {
     })
   }
 
-  initPay(): void {
+  initPay(plan: any, planAmt: any): void {
+    this.options.description = plan;
+    this.options.amount = planAmt * 100
     this.rzp = new this.winRef.nativeWindow["Razorpay"](this.options);
     this.rzp.open();
   }
@@ -58,6 +61,7 @@ export class PlansComponent implements OnInit {
   paymentHandler(res: any) {
     this.zone.run(() => {
       // add API call here
+      alert("payment success!");
     });
   }
 

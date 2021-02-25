@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-feed',
@@ -37,7 +38,11 @@ export class FeedComponent implements OnInit {
   studentIcon = "assets/images/icons/student.png";
   @ViewChild("feedBlock") feedBlock: any;
 
-  constructor(private userService: UserService, private modalService: BsModalService, public route: ActivatedRoute) {
+  constructor(private userService: UserService, 
+    private modalService: BsModalService, 
+    public route: ActivatedRoute,
+    private notificationService: NotificationService
+    ) {
     this.loggedUser = JSON.parse(this.userService.getUser());
     this.route.queryParams.subscribe(query => {
       if(this.catChanged) {
@@ -94,7 +99,7 @@ export class FeedComponent implements OnInit {
     return feeds;
   }
   
-  onLikePost(postId: any, likeType: any, el: HTMLElement) {
+  onLikePost(postId: any, likeType: any, el: HTMLElement, feed: any) {
     let postInfo = new FormData();
     postInfo.append("user_id", this.loggedUser.id);
     postInfo.append("post_id", postId);
@@ -123,6 +128,7 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
+        this.notificationService.sendNotification(feed.userId, feed.profile, this.loggedUser.username + " has liked your post: " + feed.post.body);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

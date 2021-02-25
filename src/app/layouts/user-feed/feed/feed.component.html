@@ -54,20 +54,20 @@
               </div>
               <div class="follow_ftr">
                 <div class="action-btn">
-                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.post.likes) }" #likeBtn (click)="onLikePost(feed.post.id, likeType ? likeType : getLikeType(feed.post.likes), likeBtn)">
+                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.post.likes) }" #likeBtn (click)="onLikePost(feed.post.id, likeType ? likeType : getLikeType(feed.post.likes), likeBtn, feed)">
                         <img [src]="checkLikeType(feed.post.likes)" alt="icon" />
                     </button>
                     <div class="follow_ftr react-btn-grp">
-                        <button type="button" (click)="onLikePost(feed.post.id, 0, likeBtn)">
+                        <button type="button" (click)="onLikePost(feed.post.id, 0, likeBtn, feed)">
                             <img src="assets/images/icons/like_icon.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 1, likeBtn)">
+                        <button type="button" (click)="onLikePost(feed.post.id, 1, likeBtn, feed)">
                             <img src="assets/images/icons/lightbulb.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 2, likeBtn)">
+                        <button type="button" (click)="onLikePost(feed.post.id, 2, likeBtn, feed)">
                             <img src="assets/images/icons/clap.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 3, likeBtn)">
+                        <button type="button" (click)="onLikePost(feed.post.id, 3, likeBtn, feed)">
                             <img src="assets/images/icons/like.png" alt="icon" />
                         </button>
                     </div>

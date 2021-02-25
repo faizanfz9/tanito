@@ -18,19 +18,21 @@
                </div>
                <div class="wishlist_card_head head_top_bar">
                   <div class="wishlish_icon">
-                     <a>
-                     <i class="fa fa-bell"></i>
-                     <span> 11</span>
-                     </a>
+                     <a (click)="showNotification = !showNotification"> <i class="fa fa-bell"></i> <span>{{ notifications.length }}</span> </a>
+                     <div class="dropdown-menu my_account_dropmenu notification" [ngClass]="{'show': showNotification }">
+                        <ul>
+                           <li *ngFor="let item of notifications"><img [src]="item.userPic" alt="userpic">  {{ item.notification }}</li>
+                        </ul>
+                     </div>
                   </div>
                </div>
                <div class="account_panel_head head_top_bar">
                   <div class="account_user_icon">
-                     <a id="logindrop">
+                     <a id="logindrop" (click)="showDropdown = !showDropdown">
                      <img [src]="user.profile_img" alt="user image">
                      <span class="user_online"></span>
                      </a>
-                     <div class="dropdown-menu my_account_dropmenu">
+                     <div class="dropdown-menu my_account_dropmenu" [ngClass]="{'show': showDropdown }">
                         <ul>
                            <li><a routerLink="/myProfile">My Account</a></li>
                            <li><a (click)="onLogOut($event)">Log Out</a></li>
