@@ -60,11 +60,15 @@ export class UserTimelineComponent implements OnInit {
         el.classList.add("liked");
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
+        this.likeType = likeType;
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1
         likesEl.innerHTML = totalLikes;
         likeTypeEl.setAttribute("src", "assets/images/icons/like_icon.png");
+        this.likeType = 0;
+      }else {
+        this.likeType = likeType;
       }
     })
   }
@@ -90,6 +94,36 @@ export class UserTimelineComponent implements OnInit {
         return item.like_type == 3
       });
     })
+  }
+
+  isPostLiked(likes: any) {
+    return likes.some((item: any) => item.user_id == this.loggedUser.id)
+  }
+
+  checkLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      if(myLike.like_type == 1) {
+        return "assets/images/icons/lightbulb.png"
+      }else if(myLike.like_type == 2) {
+        return "assets/images/icons/clap.png"
+      }else if(myLike.like_type == 3) {
+        return "assets/images/icons/like.png"
+      }else {
+        return "assets/images/icons/like_icon.png"
+      }
+    }else {
+      return "assets/images/icons/like_icon.png"
+    }
+  }
+
+  getLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.user_id == this.loggedUser.id);
+    if(myLike) {
+      return myLike.like_type;
+    }else {
+      return 0
+    }
   }
 
   changeTabs(el: HTMLElement) {

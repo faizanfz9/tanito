@@ -17,7 +17,7 @@
           <div [innerHtml]="plan.description" class="list"></div>
           <!-- <h3>₹1200 <span>/month</span></h3> -->
           <h3>{{ plan.amount | currency:'₹' }} /<span> {{ plan.validity }} Months</span></h3>
-          <a href="#" class="btn" data-toggle="modal" data-target="#pricing_success_modal">Choose Plan</a>
+          <a (click)="initPay()" class="btn" data-target="#pricing_success_modal">Choose Plan</a>
         </div>
       </div>
     </div>
