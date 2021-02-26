@@ -127,7 +127,7 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
-        this.notificationService.sendNotification(feed.userId, feed.profile, this.loggedUser.username + " has liked your post: " + feed.post.body);
+        this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.post.body);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

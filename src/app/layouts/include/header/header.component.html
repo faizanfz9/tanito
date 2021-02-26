@@ -21,7 +21,8 @@
                      <a (click)="showNotification = !showNotification"> <i class="fa fa-bell"></i> <span>{{ notifications.length }}</span> </a>
                      <div class="dropdown-menu my_account_dropmenu notification" [ngClass]="{'show': showNotification }">
                         <ul>
-                           <li *ngFor="let item of notifications"><img [src]="item.userPic" alt="userpic">  {{ item.notification }}</li>
+                           <li *ngFor="let item of notifications"><img [src]="item.userPic" alt="userpic"> 
+                              <p>{{ item.notification }}</p> </li>
                         </ul>
                      </div>
                   </div>

@@ -24,6 +24,7 @@ export class InboxComponent implements OnInit{
   isFetched = false;
   loading = false;
   showRooms = false;
+  isPlanActive = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -61,6 +62,17 @@ export class InboxComponent implements OnInit{
   }
 
   ngOnInit(): void { 
+    let loggedUser = JSON.parse(this.userService.getUser());
+    let purchasedPlan = loggedUser.plan_subcription[loggedUser.plan_subcription.length - 1];
+    if(purchasedPlan) {
+      let planEndDate = new Date(purchasedPlan.end_date);
+      let currDate = new Date();
+      if(currDate > planEndDate) {
+        this.isPlanActive = false;
+      }else {
+        this.isPlanActive = true;
+      }
+    }
   }
 
   onMsgRead(member_id: any) {
@@ -76,14 +88,22 @@ export class InboxComponent implements OnInit{
   }
 
   onSendMsg() {
-    if(this.chatRooms.length < 5 || this.isRoomFound) {
+    if(!this.isPlanActive) {
+      if(this.chatRooms.length < 5 || this.isRoomFound) {
+        if(this.message.length > 0) {
+          this.chatService.sendMessage(this.message, this.chatRoomId);
+          this.chatService.createRoom(this.receiver);
+          this.message = "";
+        }
+      }else {
+        this.openModal(this.buyPremium);
+      }
+    }else {
       if(this.message.length > 0) {
         this.chatService.sendMessage(this.message, this.chatRoomId);
         this.chatService.createRoom(this.receiver);
         this.message = "";
       }
-    }else {
-      this.openModal(this.buyPremium);
     }
   }
 
