@@ -17,7 +17,8 @@ export class LoginFormComponent implements OnInit {
   modalRef: any;
   @ViewChild("otpVerify") otpVerifyModal: any;
   @ViewChild("resetPwd") resetPwdModal: any;
-
+  showPwd = false;
+  showConfirmPwd = false;
   mobile = "";
 
   constructor(private authService: AuthService, 
@@ -71,6 +72,25 @@ export class LoginFormComponent implements OnInit {
     })
   }
 
+  goToNext(el: HTMLElement) {
+    let nextEl = el.nextSibling as HTMLElement;
+    let input = el as HTMLInputElement;
+    if(nextEl && input.value.length > 0) {
+      nextEl.focus();
+    }
+  }
+  
+  goToPrev(el: HTMLElement, event: any) {
+    let key = event.key; 
+    let prevEl = el.previousSibling as HTMLElement;
+    let input = el as HTMLInputElement;
+    if (key === "Backspace" || key === "Delete") { 
+      if(prevEl && input.value == "") {
+        prevEl.focus();
+      }
+    } 
+  }
+
   onVerifyOtp(digit1: string,  digit2: string, digit3: string, digit4: string) {
     let otp: any = new FormData();
     otp.append("mobile", this.mobile);
@@ -104,6 +124,14 @@ export class LoginFormComponent implements OnInit {
         this.modalRef.hide();
       }
     })
+  }
+
+  togglePwd() {
+    this.showPwd = !this.showPwd;
+  }
+
+  toggleConfirmPwd() {
+    this.showConfirmPwd = !this.showConfirmPwd;
   }
 
   openModal(template: TemplateRef<any>) {
