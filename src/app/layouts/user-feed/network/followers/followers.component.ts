@@ -22,7 +22,6 @@ export class FollowersComponent implements OnInit {
       this.loading = false;
       this.path = res.data.urlkey;
       this.followers = res.data.follower;
-      console.log(res.data.follower);
     })
   }
 

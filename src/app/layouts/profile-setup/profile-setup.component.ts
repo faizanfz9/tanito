@@ -65,9 +65,11 @@ export class ProfileSetupComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): any {
     if(this.subjects.some((item: any) => item.name == event.option.viewValue)) {
       alert("This subject is already selected!");
+      this.subjectInput.nativeElement.blur();
       return false;
     }
     this.subjects.push({ name: event.option.viewValue });
+    this.subjectInput.nativeElement.blur();
     this.subjectInput.nativeElement.value = '';
   }
 

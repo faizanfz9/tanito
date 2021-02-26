@@ -4,18 +4,19 @@
         <h3>My Plans</h3>
       </div>
       <div class="network_btm">
-        <div class=" w-75 m-auto">
+        
+        <div class=" w-75 m-auto" *ngIf="activePlan">
           <h4 class="primary_color mb-3">Active Plan</h4>
           <div class="card card_plan card_plan01 ">
             <ul>
-              <li> Standard Plan</li>
-              <li class="pricelist"> <span>₹1500 </span>/month</li>
+              <li>{{ activePlan.plan }} Plan</li>
+              <li class="pricelist"> <span>{{ activePlan.amount | currency:'₹' }}</span></li>
             </ul>
-            <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr</p>
-            <p> Pack Duration : 1 Month <br>
-              Pack Expires on : 01 January 2021</p>
+            <p>{{ activePlan.description }}</p>
+            <p>Pack Duration : {{ activePlan.validity }} Month <br>
+              Pack Expires on : {{ activePlan.end_date }} </p>
           </div>
-          <h4 class="primary_color  mb-3">Expired Plan</h4>
+          <!-- <h4 class="primary_color  mb-3">Expired Plan</h4>
           <div class="card card_plan card_plan02 ">
             <ul>
               <li> Standard Plan</li>
@@ -24,7 +25,8 @@
             <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr</p>
             <p> Expired on : 10 November 2020</p>
           </div>
-          <a href="#" class="primary_color"> View all</a> </div>
+          <a href="#" class="primary_color"> View all</a> </div> -->
       </div>
+      <h5 *ngIf="!activePlan">You have no plan!</h5>
     </div>
   </div>

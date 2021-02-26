@@ -6,7 +6,7 @@
       <div class="follow_rht">
         <div class="d-flex align-items-center">
           <h3>{{ myData.username }}</h3>
-          <img class="user-type" [src]="myData.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+          <img class="user-type" [src]="myData.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
         </div>
         <p>{{ (myData.usertype == 3 ? "Teacher at ":"Student at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
       </div>

@@ -23,10 +23,13 @@ export class RegisterComponent implements OnInit {
     ) { 
     }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.userType);
+  }
 
   toggleUserType(type: number) {
     this.userType = type;
+    // console.log(this.userType);
   }
 
   onSignUp(form: NgForm) {

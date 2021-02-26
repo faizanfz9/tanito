@@ -9,7 +9,7 @@
                 <div class="profile_img"><img [src]="user.profile_img" [alt]="user.username" /></div>
               </div>
               <div class="col-md-10 pl-0">
-                <h2> {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type"></span> </h2>
+                <h2> {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.usertype == 3 ? studentIcon : teacherIcon" alt="user type"></span> </h2>
                 <div class="row mt-3">
                   <div class="col-md-6">
                     <div class="user_contact_info"> <a href="#">{{ user.email }}</a>

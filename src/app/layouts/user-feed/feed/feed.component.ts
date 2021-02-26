@@ -61,7 +61,6 @@ export class FeedComponent implements OnInit {
 
   getFeeds() {
       if(this.loggedUser.following_id) {
-        console.log(this.loggedUser.following_id.length);
         if(this.loggedUser.following_id.length > 0) {
           this.loading = true;
           forkJoin(this.userService.fetchUserFollowing()).pipe(map(res => {

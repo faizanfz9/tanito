@@ -13,14 +13,29 @@
         <div class="card-wrap purple">
           <div class="title">
             <h4><img src="assets/images/message.svg" alt="message">{{ plan.plan }}</h4>
-            {{plan.id}}
           </div>
           <div [innerHtml]="plan.description" class="list content"></div>
           <!-- <h3>₹1200 <span>/month</span></h3> -->
           <h3>{{ plan.amount | currency:'₹' }} /<span> {{ plan.validity }} Months</span></h3>
-          <a (click)="initPay(plan.plan, plan.amount)" class="btn" data-target="#pricing_success_modal">Choose Plan</a>
+          <a (click)="initPay(plan.plan, plan.id, plan.amount)" class="btn" data-target="#pricing_success_modal">Choose Plan</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<ng-template #confirmationBox>
+  <div class="modal_tanito" id="signotpmodal">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase">Plan</h5>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4">Hey, you have subscribed our <strong>{{ options.description | titlecase }}</strong>! Now explore your plans here.</p>
+          <button type="button" (click)="navigateToPlans()" class="text-purple btn_primary btn-sm">My Plans</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

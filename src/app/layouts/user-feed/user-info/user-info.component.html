@@ -3,7 +3,7 @@
     <div class="custom_card profile_box">
         <div class="dp_box">
           <a routerLink="/myProfile"> <img [src]="user.profile_img" alt="profile image"> </a>
-          <img class="user-type" [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+          <img class="user-type" [src]="user.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
         </div>
         <div class="text-center pb-2">
             <h3 routerLink="/myProfile" class="text-center">{{ user.username }}</h3>

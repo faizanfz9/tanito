@@ -1,7 +1,9 @@
-import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Component, NgZone, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PlanService } from 'src/app/shared/plan.service';
 import { ICustomWindow, WindowRefService } from 'src/app/shared/window-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { UserService } from 'src/app/shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plans',
@@ -11,7 +13,10 @@ import { ICustomWindow, WindowRefService } from 'src/app/shared/window-ref.servi
 })
 export class PlansComponent implements OnInit {
   plans: any;
-
+  selectedPlanId: any;
+  loggedUser: any;
+  @ViewChild("confirmationBox") confirmationBox: any;
+  
   private _window: ICustomWindow;
   public rzp: any;
 
@@ -41,8 +46,17 @@ export class PlansComponent implements OnInit {
 
   constructor(private planService: PlanService,
     private zone: NgZone,
+    private modalService: BsModalService,
+    private userService: UserService,
+    private router: Router,
     private winRef: WindowRefService) { 
+    this.loggedUser = JSON.parse(this.userService.getUser());  
     this._window = this.winRef.nativeWindow;
+
+    this.userService.storeUpdatedUser().subscribe(res => {
+      this.loggedUser.plan_subcription = res.plan_subcription;
+      localStorage.setItem("user", JSON.stringify(this.loggedUser));
+    })
   }
 
   ngOnInit(): void {
@@ -51,18 +65,39 @@ export class PlansComponent implements OnInit {
     })
   }
 
-  initPay(plan: any, planAmt: any): void {
-    this.options.description = plan;
-    this.options.amount = planAmt * 100
-    this.rzp = new this.winRef.nativeWindow["Razorpay"](this.options);
-    this.rzp.open();
+  initPay(plan: any, planId: any, planAmt: any): void {
+    this.selectedPlanId = planId;
+    if(this.loggedUser.plan_subcription.some((item: any) => item.id == planId)) {
+      alert("You have already subscribed this plan!")
+    }else {
+      this.options.description = plan;
+      this.options.amount = planAmt * 100;
+      this.rzp = new this.winRef.nativeWindow["Razorpay"](this.options);
+      this.rzp.open();
+    }
+    
   }
 
   paymentHandler(res: any) {
     this.zone.run(() => {
       // add API call here
-      alert("payment success!");
+      let planInfo = new FormData();
+      planInfo.append("plan_id", this.selectedPlanId);
+      planInfo.append("user_id", this.loggedUser.id);
+      this.planService.buyPlan(planInfo).subscribe((res: any) => {
+        this.openModal(this.confirmationBox);
+        this.userService.updateUser();
+      })
     });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
+  }
+
+  navigateToPlans() {
+    this.modalService.hide();
+    this.router.navigate(['/feed/my-plans']);
   }
 
 }

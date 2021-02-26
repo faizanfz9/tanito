@@ -30,11 +30,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let loggedUserId;
     if(localStorage.getItem("user")) {
       this.isLoggedIn = true;
+      loggedUserId = JSON.parse(this.userService.getUser()).id;
     }
-
-    let loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.notificationService.getNotification(loggedUserId).valueChanges().subscribe(res => {
       this.notifications = res;
     })

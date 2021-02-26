@@ -14,4 +14,8 @@ export class PlanService {
     return this.http.get(this.url + "/get_plan_list");
   }
 
+  buyPlan(planInfo: any) {
+    return this.http.post(this.url + "/subscribe_plan", planInfo);
+  }
+
 }
