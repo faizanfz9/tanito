@@ -522,9 +522,13 @@ footer.footer { padding: 30px 0 0; }
 #signotpmodal input.form-control { border: none; border-bottom: 1px solid #e9e9e9; border-radius: 0; width: 45px; display: inline-block; margin-right: 15px; text-align:center }
 /* .modal_tanito .modal-dialog { margin: 7rem auto 0; } */
 .modal_tanito .modal-body { padding: 25px; }
-.modal_tanito .modal-body p { letter-spacing: 0.63px; color: #747474; font-size:.95rem;
-}
+.modal_tanito .modal-body p { letter-spacing: 0.63px; color: #747474; font-size:.95rem; margin-bottom: 20px;}
 .modal_tanito .modal-dialog { max-width: 100% }
+
+.modal_tanito.report_modal .modal-body{
+    text-align: left;
+}
+
 button.btn.btn_primary { min-width:165px; }
 #resetmodal .registration-form .form-group label.spcllbl { left: 50px; font-size: 1rem; }
 #signotpmodal input.form-control:hover { border-bottom: 1px solid #514dc5; }
@@ -635,11 +639,21 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .reactiontyp_wraper { height: 445px; }
 .report_modal .modal-dialog { max-width: 948px; }
 .report_modal form .custom_checkbox label { width: 95%; color: #000000; font-size: 22px; }
-.report_modal form { padding: 0 90px; }
+.report_modal form { padding: 0 50px; }
 .report_modal .custom_checkbox label { position: relative; cursor: pointer; }
 .report_modal form .custom_checkbox label:before { content: ''; position: absolute; right: -48px; width: 23px; height: 23px; border:1px solid #22700B; }
-.report_modal input:checked + label:after { content: ''; display: block; position: absolute; right: -41px; width: 8px; height: 15px; border: solid #22700B; border-width: 0 2px 2px 0; transform: rotate(52deg); top: 2px; }
-.report_modal form textarea { width: 100%; box-shadow: 0px 11px 26px #B8B8B829; border: 1px solid #38383894; border-radius: 20px; height: 132px; resize: none; padding: 20px; outline: none; margin-bottom: 20px; }
+/* .report_modal input:checked + label:after { content: ''; display: block; position: absolute; right: -41px; width: 8px; height: 15px; border: solid #22700B; border-width: 0 2px 2px 0; transform: rotate(52deg); top: 2px; } */
+.report_modal form textarea { 
+    width: 100%; 
+    box-shadow: 0px 11px 26px #B8B8B829; 
+    border: 1px solid #38383894; 
+    border-radius: 20px; 
+    height: 100px; 
+    resize: none; 
+    padding: 15px; 
+    outline: none; 
+    margin: 10px 0; 
+}
 .report_modal .custom_checkbox input[type="checkbox"] { padding: 0; margin-bottom: 0; visibility: hidden; position: absolute; cursor: pointer; width: 0; }
 .report_modal .button_box button, .report_modal .button_box a { background-color: #514DC5; color: #fff; }
 .report_modal .modal_body_btm p { font-size: 16px; }

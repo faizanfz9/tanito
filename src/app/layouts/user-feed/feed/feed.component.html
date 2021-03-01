@@ -33,48 +33,48 @@
         <div class="custom_card custom_crd_padd" *ngFor="let feed of feeds | shuffleFeeds">
             <div class="follow_top d-flex align-items-center">
                 <div class="follow_lft">
-                    <img [routerLink]="'/user/'+feed.userId" class="profile-img" [src]="feed.profile" [alt]="feed.username">
+                    <img [routerLink]="'/user/'+ feed.user_id" class="profile-img" [src]="feed.profile_img == null ? userAvatar : profilePath + feed.profile_img" [alt]="feed.username">
                 </div>
                 <div class="follow_rht">
                     <div class="d-flex align-items-center">
-                        <h3 [routerLink]="'/user/'+feed.userId">{{ feed.username }}</h3>
+                        <h3 [routerLink]="'/user/'+feed.user_id">{{ feed.username }}</h3>
                         <img class="user-type" [src]="feed.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
                     </div>
-                    <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | <span>{{ feed.post.created | postCreated }}</span></p>
+                    <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
                 </div>
                 <!-- <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots"></button> -->
             </div>
             <div class="follow_bdy">
-                <p> {{ feed.post.body }} </p>
-                <ul [hidden]="feed.post.tags.length == 0" class="hashtags">
-                    <li *ngFor="let tag of feed.post.tags.split(',')">#{{ tag | lowercase }}</li>
+                <p> {{ feed.body }} </p>
+                <ul [hidden]="feed.tags.length == 0" class="hashtags">
+                    <li *ngFor="let tag of feed.tags.split(',')">#{{ tag | lowercase }}</li>
                 </ul>
-                <img *ngIf="feed.post.image.length > 0" class="post-img" [src]="imageDirPath + feed.post.image">
-                <plyr *ngIf="feed.post.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + feed.post.video }]"></plyr>
+                <img *ngIf="feed.image.length > 0" class="post-img" [src]="imageDirPath + feed.image">
+                <plyr *ngIf="feed.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + feed.video }]"></plyr>
               </div>
               <div class="follow_ftr">
                 <div class="action-btn">
-                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.post.likes) }" #likeBtn (click)="onLikePost(feed.post.id, likeType ? likeType : getLikeType(feed.post.likes), likeBtn, feed)">
-                        <img [src]="checkLikeType(feed.post.likes)" alt="icon" />
+                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
+                        <img [src]="checkLikeType(feed.likes)" alt="icon" />
                     </button>
                     <div class="follow_ftr react-btn-grp">
-                        <button type="button" (click)="onLikePost(feed.post.id, 0, likeBtn, feed)">
+                        <button type="button" (click)="onLikePost(feed.id, 0, likeBtn, feed)">
                             <img src="assets/images/icons/like_icon.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 1, likeBtn, feed)">
+                        <button type="button" (click)="onLikePost(feed.id, 1, likeBtn, feed)">
                             <img src="assets/images/icons/lightbulb.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 2, likeBtn, feed)">
+                        <button type="button" (click)="onLikePost(feed.id, 2, likeBtn, feed)">
                             <img src="assets/images/icons/clap.png" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.post.id, 3, likeBtn, feed)">
+                        <button type="button" (click)="onLikePost(feed.id, 3, likeBtn, feed)">
                             <img src="assets/images/icons/like.png" alt="icon" />
                         </button>
                     </div>
                 </div>
-                <span class="likes">{{ feed.post.likes.length }}</span>
-                <span class="view" (click)="onViewReaction(feed.post.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                <span class="subjects" [hidden]="feed.post.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.post.subject | titlecase }}</span>
+                <span class="likes">{{ feed.likes.length }}</span>
+                <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                <span class="subjects" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
                 <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
               </div>
         </div>

@@ -30,7 +30,7 @@
                                         </ul>
                                         <button type="button" (click)="goToRoom()" class="message_btn purple_btn">Message</button>
                                         <button type="button" (click)="onFollowUser()" class="follow_btn purple_btn">{{ followed == true ? "Unfollow":"Follow" }}</button>
-                                        <button type="button" class="report_btn purple_btn">Report Profile</button>
+                                        <button type="button" (click)="reportModal()" class="report_btn purple_btn">Report Profile</button>
                                     </div>
                                 </div>
                             </div>
@@ -79,5 +79,33 @@
         </div>
     </div>
 </section>
+
+<ng-template #reportProfile>
+    <div class="modal_tanito report_modal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">Report Profile</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="form-check" *ngFor="let reason of reportReason; let i = index">
+                    <input class="form-check-input" (change)="selectedReason = reason" type="radio" name="reason" id="{{ 'reason' + - + i }}">
+                    <label class="form-check-label" for="{{ 'reason' + - + i }}">
+                      <h6>{{ reason }}</h6>
+                    </label>
+                </div>
+                <textarea [(ngModel)]="specifiedReason"name="message" placeholder="Type your message.."></textarea>
+                <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                <div class="button_box d-flex align-items-center justify-content-center">
+                  <a href="index.php" class="back_to_home_btn mr-2">Back to Home</a>  
+                  <button (click)="onReportProfile()" type="button" class="ml-2">Submit</button>  
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

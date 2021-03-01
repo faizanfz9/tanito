@@ -119,6 +119,11 @@ export class UserService {
     return this.http.post<{status: string, msg: string}>(this.url + "/delete_post", postInfo);
   }
 
+  // Get all post
+  getAllPost() {
+    return this.http.get(this.url + "/get_all_post");
+  }
+
   // Fetch user following
   fetchUserFollowing() {
     let urls: any = [];
@@ -143,6 +148,11 @@ export class UserService {
   // to check if chat is created
   createChat(postId: any) {
     return this.http.post(this.url + "/create_chat", postId);
+  }
+
+  // Report user 
+  reportUser(reportCriteria: any) {
+    return this.http.post(this.url + "/user_report", reportCriteria);
   }
 
 }

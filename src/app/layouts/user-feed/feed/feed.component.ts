@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
-import { forkJoin } from "rxjs"
-import { map } from 'rxjs/operators';
 import { TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
@@ -60,42 +58,9 @@ export class FeedComponent implements OnInit {
   }
 
   getFeeds() {
-      if(this.loggedUser.following_id) {
-        if(this.loggedUser.following_id.length > 0) {
-          this.loading = true;
-          forkJoin(this.userService.fetchUserFollowing()).pipe(map(res => {
-            if(this.query) {
-                let feeds = this.convertToFeeds(res);
-                return feeds.filter((feed: any) => {
-                  return feed.post.subject == this.query;
-                });
-            }
-            return this.convertToFeeds(res);
-          })).subscribe(res => {
-              this.loading = false;
-              this.feeds = res;
-          })
-        }
-      }
-  }
-
-  convertToFeeds(data: any) {
-    let feeds: any = [];
-    data.forEach((item: any, index: number) => {
-      item.data.user_post_data.forEach((post: any) => {
-        feeds.push(
-          {
-            userId: item.data.results.user_id,
-            username: item.data.results.username,
-            usertype: item.data.results.usertype,
-            university: item.data.results.university,
-            profile: item.data.urlkey + item.data.results.profile_img,
-            post: post
-          }
-        )
-      })
+    this.userService.getAllPost().subscribe((res: any) => {
+      this.feeds = res.data.user_post;
     })
-    return feeds;
   }
   
   onLikePost(postId: any, likeType: any, el: HTMLElement, feed: any) {
@@ -127,7 +92,7 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
-        this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.post.body);
+        this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.body);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

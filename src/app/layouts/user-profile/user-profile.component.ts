@@ -1,6 +1,6 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatService } from 'src/app/shared/chat.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -16,6 +16,11 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   followed: any;
   myInbox: any;
   loading = false;
+  modalRef: any;
+  reportReason = ["Pretending to be someone", "Fake account", "Posting inappropriate things", "Harassment or bullying", "Something else, specify in comment"];
+  selectedReason = "";
+  specifiedReason = "";
+  @ViewChild("reportProfile") reportProfile: any;
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
@@ -23,7 +28,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   constructor(private userService: UserService, 
     private route: ActivatedRoute, 
     private router: Router, 
-    private chatService: ChatService,
+    private modalService: BsModalService,
     private notificationService: NotificationService) { 
     this.loggedUser = JSON.parse(this.userService.getUser());
     this.userService.storeUpdatedUser().subscribe(res => {
@@ -82,6 +87,37 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
         newMsgs: 0
       };
     }
+  }
+
+  reportModal() {
+    this.openModal(this.reportProfile);
+  }
+
+  onReportProfile() {
+    this.selectedReason = this.selectedReason == this.reportReason[this.reportReason.length - 1] ? this.specifiedReason : this.selectedReason;
+    if(this.selectedReason.length > 0) {
+      let reportCriteria = new FormData();
+      reportCriteria.append("from_id", this.loggedUser.id);
+      reportCriteria.append("to_id", this.id);
+      reportCriteria.append("reason", this.selectedReason);
+      this.userService.reportUser(reportCriteria).subscribe((res: any) => {
+        if(res.status == false) {
+          alert(res.msg);
+        }
+        alert(res.msg);
+        this.modalRef.hide();
+      })
+    }else {
+      if(this.specifiedReason.length == 0) {
+        alert("Please specify in comment!");
+      }else {
+        alert("Please select a reason!");
+      }
+    }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
 
 }

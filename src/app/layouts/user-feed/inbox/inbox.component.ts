@@ -93,7 +93,6 @@ export class InboxComponent implements OnInit{
           this.loading = false;  
           this.feeds = res;
           this.scrollToBottom();
-          this.onMsgRead(this.route.snapshot.params.id);
         });
       }
     })
