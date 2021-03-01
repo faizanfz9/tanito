@@ -534,13 +534,13 @@ button.btn.btn_primary { min-width:165px; }
 #signotpmodal input.form-control:hover { border-bottom: 1px solid #514dc5; }
 /*======================= setup_profile  ===================*/
 .setup_profile .jumbotron { background-color:#F1F1FB; }
-.file_img { 
+/* .file_img { 
     max-width: 80px;
     height: 80px;
     margin: 0 auto 10px;
     object-fit: cover;
     border-radius: 50%;
-}
+} */
 .registration-form textarea.form-control { height:115px !important; }
 .registration-form .form-group { padding-top: 12px; }
 /* student timeline 05-01-2021*/

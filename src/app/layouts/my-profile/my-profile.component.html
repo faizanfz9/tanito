@@ -6,10 +6,12 @@
           <div class="user_info_btm pb-0">
             <div class="row border_btm">
               <div class="col-md-2">
-                <div class="profile_img"><img [src]="user.profile_img" [alt]="user.username" /></div>
+                <div class="profile_img">
+                  <img [src]="user.user.profile_img.length > 0 ? profilePath + user.user.profile_img : userAvatar" alt="user image">
+                </div>
               </div>
               <div class="col-md-10 pl-0">
-                <h2> {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.usertype == 3 ? studentIcon : teacherIcon" alt="user type"></span> </h2>
+                <h2> {{ user.username }} <span class="tag_img"><img class="user-type" [src]="user.user.usertype == 3 ? studentIcon : teacherIcon" alt="user type"></span> </h2>
                 <div class="row mt-3">
                   <div class="col-md-6">
                     <div class="user_contact_info"> <a href="#">{{ user.email }}</a>
@@ -61,11 +63,11 @@
               <div class="custom_card intro_box">
                 <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro</h4>
                 <ul>
-                    <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.qualification }}</li>
-                    <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.university }}</li>
+                    <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.user.qualification }}</li>
+                    <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.user.university }}</li>
                     <!-- <li><img src="assets/images/icons/calendar.png" alt="calendar" />Date of Birth</li> -->
-                    <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.created | datefilter }}</li>
-                    <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
+                    <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.user.created | datefilter }}</li>
+                    <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.user.gender | titlecase }}</li>
                 </ul>
               </div>
             </div>

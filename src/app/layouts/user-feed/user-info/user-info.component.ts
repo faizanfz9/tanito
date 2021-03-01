@@ -11,7 +11,8 @@ export class UserInfoComponent implements OnInit, AfterContentChecked {
   loggedUserId: any;
   myInbox: any;
   subjects: any = [];
-  userAvatar = "assets/images/icons/user.svg";
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
+  userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 

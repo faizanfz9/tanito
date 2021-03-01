@@ -33,6 +33,7 @@ export class ProfileSetupComponent implements OnInit {
   verifiedUser = "";
   user: any;
   selectedImg: any = null;
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   imgSrc: any = "assets/images/svg/file-upload.svg";
 
   allsubjects: any = [];
@@ -77,10 +78,10 @@ export class ProfileSetupComponent implements OnInit {
     this.verifiedUser =  this.authService.getVerifiedUser();
     this.user = JSON.parse(this.userService.getUser());
     if(this.user) {
-      this.imgSrc = this.user.profile_img;
-      this.verifiedUser = this.user.mobile;
+      this.imgSrc = this.user.user.profile_img.length > 0 ? this.profilePath + this.user.user.profile_img : "assets/images/svg/file-upload.svg";
+      this.verifiedUser = this.user.user.mobile;
       let subjects: any = [];
-      let subjectsSplitedArr = this.user.subjects.split(",");
+      let subjectsSplitedArr = this.user.user.subjects.split(",");
       subjectsSplitedArr.forEach(function(item: any, index: number){
         subjects.push({name: item});
       })
@@ -90,6 +91,7 @@ export class ProfileSetupComponent implements OnInit {
 
   onSelectFile(event: any) {
     this.selectedImg = event.target.files[0];
+    console.log(this.selectedImg);
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -99,13 +101,19 @@ export class ProfileSetupComponent implements OnInit {
     }
   }
 
+  resetProfilePic() {
+    this.imgSrc = "assets/images/svg/file-upload.svg";
+    this.selectedImg = new File([], "", undefined);
+  }
+
+  
   onDetailSave(form: NgForm) {
     let filledSubjects: any = [];
     this.subjects.forEach(function(item: any){
       filledSubjects.push(item.name);
     })
-    
     let userInfo: FormData = new FormData();
+    console.log(this.selectedImg);
     userInfo.append("qualification", form.value.qualification);
     userInfo.append("experience", form.value.experience);
     userInfo.append("university", form.value.university);
@@ -124,6 +132,8 @@ export class ProfileSetupComponent implements OnInit {
           this.loading = false;
           this.authService.storeUser(res.data);
           this.router.navigate(['/feed']);
+        }else {
+          this.loading = false;
         }
       }
     })

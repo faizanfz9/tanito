@@ -38,7 +38,7 @@
                 <div class="follow_rht">
                     <div class="d-flex align-items-center">
                         <h3 [routerLink]="'/user/'+feed.user_id">{{ feed.username }}</h3>
-                        <img class="user-type" [src]="feed.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+                        <img class="user-type" [src]="feed.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
                     </div>
                     <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
                 </div>
