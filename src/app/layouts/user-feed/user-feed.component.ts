@@ -13,18 +13,16 @@ export class UserFeedComponent implements OnInit {
 
   constructor(private userService: UserService, private chatService: ChatService, private afAuth: AngularFireAuth) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
-    // this.afAuth.authState.subscribe(auth => {
-    //   if(auth !== undefined && auth !== null) {
-      
-    //   }
-    // })
-    this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
-      let inbox = {
-        defaultChatroom: rooms.length > 0 ? +rooms[0].memberId : 0,
-        newMsgs: rooms.length > 0 ? rooms.filter((room: any) => room.msgSeen == false).length : 0
+    this.afAuth.authState.subscribe(auth => {
+      if(auth !== undefined && auth !== null) {
+        this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
+          let inbox = {
+            defaultChatroom: rooms.length > 0 ? +rooms[0].memberId : 0,
+            newMsgs: rooms.length > 0 ? rooms.filter((room: any) => room.msgSeen == false).length : 0
+          }
+          localStorage.setItem("inbox",  JSON.stringify(inbox))
+        })
       }
-      console.log(inbox);
-      localStorage.setItem("inbox",  JSON.stringify(inbox))
     })
   }
 
