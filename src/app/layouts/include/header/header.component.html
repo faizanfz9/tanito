@@ -18,22 +18,29 @@
                </div>
                <div class="wishlist_card_head head_top_bar">
                   <div class="wishlish_icon">
-                     <a (click)="showNotification = !showNotification"> <i class="fa fa-bell"></i> <span>{{ notifications.length }}</span> </a>
-                     <div class="dropdown-menu my_account_dropmenu notification" [ngClass]="{'show': showNotification }">
+                     <a (click)="onCheckNotification()" appShowMenu> 
+                        <i class="fa fa-bell"></i> 
+                        <span>{{ newNotifications.length }}</span> 
+                     </a>
+                     <div class="dropdown-menu my_account_dropmenu notification">
                         <ul>
-                           <li *ngFor="let item of notifications"><img [src]="item.userPic" alt="userpic"> 
-                              <p>{{ item.notification }}</p> </li>
+                           <li *ngFor="let item of notifications">
+                              <img [src]="item.userPic" alt="userpic"> 
+                              <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
+                                 <strong>{{ item.timestamp | postCreated }}</strong>
+                              </p> 
+                           </li>
                         </ul>
                      </div>
                   </div>
                </div>
                <div class="account_panel_head head_top_bar">
                   <div class="account_user_icon">
-                     <a id="logindrop" (click)="showDropdown = !showDropdown">
-                     <img [src]="user.profile_img" alt="user image">
-                     <span class="user_online"></span>
+                     <a id="logindrop" appShowMenu>
+                        <img [src]="user.profile_img" alt="user image">
+                        <span class="user_online"></span>
                      </a>
-                     <div class="dropdown-menu my_account_dropmenu" [ngClass]="{'show': showDropdown }">
+                     <div class="dropdown-menu my_account_dropmenu">
                         <ul>
                            <li><a routerLink="/myProfile">My Account</a></li>
                            <li><a (click)="onLogOut($event)">Log Out</a></li>

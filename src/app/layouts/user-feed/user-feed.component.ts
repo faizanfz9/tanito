@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -10,13 +11,19 @@ import { UserService } from 'src/app/shared/user.service';
 export class UserFeedComponent implements OnInit {
   loggedUserId: any;
 
-  constructor(private userService: UserService, private chatService: ChatService) { 
+  constructor(private userService: UserService, private chatService: ChatService, private afAuth: AngularFireAuth) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
+    // this.afAuth.authState.subscribe(auth => {
+    //   if(auth !== undefined && auth !== null) {
+      
+    //   }
+    // })
     this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
       let inbox = {
         defaultChatroom: rooms.length > 0 ? +rooms[0].memberId : 0,
         newMsgs: rooms.length > 0 ? rooms.filter((room: any) => room.msgSeen == false).length : 0
       }
+      console.log(inbox);
       localStorage.setItem("inbox",  JSON.stringify(inbox))
     })
   }

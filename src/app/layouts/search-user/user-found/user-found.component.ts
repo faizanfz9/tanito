@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class UserFoundComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private route: ActivatedRoute) { 
+  constructor(private userService: UserService, private route: ActivatedRoute, private notificationService: NotificationService) { 
     this.loggedUser = JSON.parse(this.userService.getUser());
     this.route.queryParams.subscribe(res => {
       this.query = res.query;
@@ -32,10 +33,13 @@ export class UserFoundComponent implements OnInit {
     let followMatch = new FormData();
     followMatch.append("user_id", this.userService.loggedUserId())
     followMatch.append("follow_id", followId);
-    this.userService.followUser(followMatch).subscribe(res => {
+    this.userService.followUser(followMatch).subscribe((res: any) => {
       this.loading = false;
       this.userService.updateUser();
       this.users[index].followed = !this.users[index].followed;
+      if(res.followed == "true") {
+        this.notificationService.sendNotification(followId, this.loggedUser.profile_img, this.loggedUser.username + " has started following you!");
+      }
     })
   }
 

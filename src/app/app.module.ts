@@ -54,6 +54,7 @@ import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.c
 import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
 import { ChatService } from './shared/chat.service';
+import { ShowMenuDirective } from './directives/show-menu.directive';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { ChatService } from './shared/chat.service';
     UserFoundComponent,
     ChatroomComponent,
     PlansComponent,
-    MyPlansComponent
+    MyPlansComponent,
+    ShowMenuDirective
   ],
   imports: [
     BrowserModule,

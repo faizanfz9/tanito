@@ -49,7 +49,6 @@ export class LoginFormComponent implements OnInit {
   firebaseSignIn(email: any, pwd: any) {
     return this.firebaseAuth.signInWithEmailAndPassword(email, pwd)
     .then((result: any) => {
-      console.log(result);
     }).catch((error: any) => {
       console.log(error);
     })

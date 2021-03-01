@@ -34,9 +34,8 @@ export class UsersComponent implements OnInit {
       this.loading = false;
       this.userService.updateUser();
       this.users[index].followed = !this.users[index].followed;
-      console.log(res);
       if(res.followed == "true") {
-        this.notificationService.sendNotification(followId, userPic, this.loggedUser.username + " has started following you!");
+        this.notificationService.sendNotification(followId, this.loggedUser.profile_img, this.loggedUser.username + " has started following you!");
       }
     })
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private url = "https://demo.mbrcables.com/tanito/Api";
-  private isLoggedIn = new Subject<boolean>();
+  // isLoggedIn = new Subject<boolean>();
+  user = new BehaviorSubject<any>({});
 
   constructor(private http: HttpClient, private router: Router) { }  
 
@@ -49,17 +50,27 @@ export class AuthService {
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
     this.router.navigate(['/feed']);
-    this.isLoggedIn.next(true);
+    // this.isLoggedIn.next(true);
+    // this.loggedUser.next(user);
+    this.user.next({
+      isLoggedIn: true,
+      data: user
+    })
   }
 
-  authUser() {
-    return this.isLoggedIn.asObservable();
-  }
+  // authUser() {
+  //   return this.isLoggedIn.asObservable();
+  // }
   
   logout() {
     localStorage.clear();
     this.router.navigate(['/']);
-    this.isLoggedIn.next(false);
+    // this.isLoggedIn.next(false);
+    // this.loggedUser.next(null);
+    this.user.next({
+      isLoggedIn: false,
+      data: null
+    });
   }
 
 }

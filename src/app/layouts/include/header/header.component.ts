@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -15,30 +16,32 @@ export class HeaderComponent implements OnInit {
   @ViewChild("query") query: any;
   user: any;
   notifications: any = [];
-  showNotification = false;
-  showDropdown = false;
+  newNotifications: any = [];
+  isRead: any = false;
 
   constructor(private router: Router, 
     private authService: AuthService, 
+    private afAuth: AngularFireAuth,
     private userService: UserService,
     private notificationService: NotificationService) {
-    this.authService.authUser().subscribe(res => {
-      this.isLoggedIn = res;
-      this.user = JSON.parse(this.userService.getUser());
-      console.log(this.user);
-      // this.notificationService.getNotification(this.user.id).valueChanges().subscribe(res => {
-      //   this.notifications = res;
-      // })
+    this.authService.user.subscribe(res => {
+      this.isLoggedIn = res.isLoggedIn;
+      this.user = res.data;
+      this.afAuth.authState.subscribe(auth => {
+        if(auth !== undefined && auth !== null) {
+           this.notificationService.getNotification(this.user == null ? 0 : this.user.id).valueChanges().subscribe(res => {
+            this.notifications = res.reverse();
+            this.newNotifications = res.filter((item: any) => item.isRead == false);
+          })
+        }
+      })
     })
     this.user = JSON.parse(this.userService.getUser());
   }
 
-  ngOnInit(): void {
-    // let loggedUserId;
+  ngOnInit(): any {
     if(localStorage.getItem("user")) {
       this.isLoggedIn = true;
-      // loggedUserId = JSON.parse(this.userService.getUser()).id;
-      
     }
   }
 
@@ -53,9 +56,14 @@ export class HeaderComponent implements OnInit {
     var r = confirm("Do you want to logout?");
       if (r == true) {
         event.preventDefault()
-      this.authService.logout();
-      this.showDropdown = false;
+        this.authService.logout();
       }
+  }
+
+  onCheckNotification() {
+    setTimeout(()=> {
+      this.notificationService.readNotification();
+    }, 2000)
   }
 
   toggleMenu() {

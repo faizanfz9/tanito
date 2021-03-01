@@ -1,6 +1,7 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -19,7 +20,11 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private chatService: ChatService) { 
+  constructor(private userService: UserService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private chatService: ChatService,
+    private notificationService: NotificationService) { 
     this.loggedUser = JSON.parse(this.userService.getUser());
     this.userService.storeUpdatedUser().subscribe(res => {
       this.loggedUser.count_following = res.count_following;
@@ -33,8 +38,11 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
     let followMatch = new FormData();
     followMatch.append("user_id", this.userService.loggedUserId())
     followMatch.append("follow_id", this.id);
-    this.userService.followUser(followMatch).subscribe(res => {
+    this.userService.followUser(followMatch).subscribe((res: any) => {
       this.userService.updateUser();
+      if(res.followed == "true") {
+        this.notificationService.sendNotification(this.id, this.loggedUser.profile_img, this.loggedUser.username + " has started following you!");
+      }
     })
   }
 

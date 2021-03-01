@@ -1,9 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-inbox',
@@ -24,6 +24,7 @@ export class InboxComponent implements OnInit{
   isFetched = false;
   loading = false;
   showRooms = false;
+  
   isPlanActive = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
@@ -31,6 +32,7 @@ export class InboxComponent implements OnInit{
 
   constructor(private chatService: ChatService, 
     private userService: UserService, 
+    private afAuth: AngularFireAuth, 
     private route: ActivatedRoute, 
     private modalService: BsModalService) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
@@ -46,6 +48,12 @@ export class InboxComponent implements OnInit{
             this.receiver = res.data.results;
           })
           this.loading = true;
+          // this.onMsgRead(paramId);
+          // this.afAuth.authState.subscribe(auth => {
+          //   if(auth !== undefined && auth !== null) {
+              
+          //   }
+          // })
           this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
             this.chatRooms = res;
             this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
@@ -80,10 +88,15 @@ export class InboxComponent implements OnInit{
   }
 
   getFeeds() {
+    // this.afAuth.authState.subscribe(auth => {
+    //   if(auth !== undefined && auth !== null) {
+       
+    //   }
+    // })
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
       this.loading = false;  
       this.feeds = res;
-      this.scrollToBottom();
+      // this.scrollToBottom();
     });
   }
 
@@ -108,8 +121,8 @@ export class InboxComponent implements OnInit{
   }
 
   scrollToBottom() {
-    let chatBodyel = this.chatBox.nativeElement.querySelectorAll(".chat_box_body")[0];
-    let innerChatBody = chatBodyel.querySelectorAll(".inner-wrap")[0];
+    let chatBodyel = this.chatBox.nativeElement.querySelector(".chat_box_body");
+    let innerChatBody = chatBodyel.querySelector(".inner-wrap");
     chatBodyel.scrollTop = innerChatBody.offsetHeight;
   }
 
