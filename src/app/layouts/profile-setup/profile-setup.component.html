@@ -20,7 +20,7 @@
               type="file" 
               class="pic-upload"
               accept="image/*"
-              (change)="onSelectFile($event)"
+              (change)="onSelectProfile($event)"
               name="userPic"
               ngModel
               [required]="!user"
@@ -37,7 +37,7 @@
               class="form-control" 
               placeholder="Enter your qualification"
               name="qualification"
-              [ngModel]="user ? user.user.qualification: '' "
+              [ngModel]="user ? user.qualification: '' "
               required
               >
             </div>
@@ -48,7 +48,7 @@
               class="form-control" 
               placeholder="Enter your qualification"
               name="experience"
-              [ngModel]="user ? user.user.experience: '' "
+              [ngModel]="user ? user.experience: '' "
               required>
             </div>
           </div>
@@ -60,18 +60,18 @@
               class="form-control" 
               placeholder="Your University Name"
               name="university"
-              [ngModel]="user ? user.user.university: '' "
+              [ngModel]="user ? user.university: '' "
               required>
             </div>
             <div class="col-md-6 col-12">
               <label class="primary_color spcllbl">Gender</label>
-              <select class="form-control" name="gender" value="select" [ngModel]="user ? user.user.gender:'male'" required>
+              <select class="form-control" name="gender" value="select" [ngModel]="user ? user.gender:'male'" required>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </div>
           </div>
-          <div class="form-group row mb-3">
+          <div class="form-group row mb-0">
             <div class="col-12">
               <label class="primary_color spcllbl">Select Subjects</label>
               <mat-form-field class="demo-chip-list" style="width: 100%">
@@ -98,6 +98,17 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row mb-3" [hidden]="user.usertype == 3">
+            <div class="col-12">
+              <label class="primary_color spcllbl">Upload 30 Second Video</label>
+              <input 
+                #video
+                type="file" 
+                accept="video/mp4"
+                (change)="onSelectVideo($event, video)"
+                class="form-control video-upload">
             </div>
           </div>
           <div class="form-group row mb-3">

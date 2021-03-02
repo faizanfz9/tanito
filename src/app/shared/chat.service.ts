@@ -12,6 +12,7 @@ export class ChatService {
   receiverId: any;
   lastMsg: any;
   chatId: any;
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
 
   constructor(private userService: UserService, 
     private afAuth: AngularFireAuth, 
@@ -35,7 +36,7 @@ export class ChatService {
     chatMessage.push({
       message: msg,
       timeSent: timestamp,
-      senderPic: this.sender.profile_img,
+      senderPic: this.profilePath + this.sender.profile_img,
       senderType: this.sender.usertype,
       senderId: this.senderId
     })

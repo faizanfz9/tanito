@@ -74,6 +74,7 @@ export class FeedComponent implements OnInit {
       let likesEl = parentEl?.nextSibling as HTMLElement;
       let totalLikes = +likesEl.innerHTML as any;
       let likeTypeEl = el.firstChild as HTMLElement;
+      console.log(res);
       switch(likeType) {
         case 1:
           likeTypeEl.setAttribute("src", "assets/images/icons/lightbulb.png");

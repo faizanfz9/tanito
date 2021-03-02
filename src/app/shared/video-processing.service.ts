@@ -32,8 +32,8 @@ export class VideoProcessingService {
     const canvas: HTMLCanvasElement = this.document.createElement('canvas');
     const context: any = canvas.getContext('2d');
     return new Promise<string>((resolve, reject) => {
-      canvas.addEventListener('error',  reject);
-      video.addEventListener('error',  reject);
+      // canvas.addEventListener('error',  reject);
+      // video.addEventListener('error',  reject);
       video.onloadedmetadata = function() {
         if(video.duration > 30) {
           reject("Upload video of less than 30 seconds!")

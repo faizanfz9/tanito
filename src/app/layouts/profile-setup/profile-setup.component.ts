@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
+import { VideoProcessingService } from 'src/app/shared/video-processing.service';
 
 const COMMA = 188;
 
@@ -32,7 +33,8 @@ export class ProfileSetupComponent implements OnInit {
 
   verifiedUser = "";
   user: any;
-  selectedImg: any = null;
+  selectedImg: any = new File([], "", undefined);
+  selectedVideo: any = new File([], "", undefined);
   imgSrc: any = "assets/images/svg/file-upload.svg";
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
   userAvatar = "assets/images/icons/user_avatar.svg";
@@ -42,7 +44,7 @@ export class ProfileSetupComponent implements OnInit {
   allsubjects: any = [];
   @ViewChild('subjectInput') subjectInput: any;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private videoService: VideoProcessingService) {
     this.userService.getSubjects().subscribe((res: any) => {
       res.data.subjects.forEach((item: any) => {
         this.allsubjects.push(item.subject);
@@ -92,7 +94,7 @@ export class ProfileSetupComponent implements OnInit {
     }
   }
 
-  onSelectFile(event: any) {
+  onSelectProfile(event: any) {
     this.selectedImg = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -101,6 +103,16 @@ export class ProfileSetupComponent implements OnInit {
         this.imgSrc = event.target.result;
       }
     }
+  }
+
+  onSelectVideo(event: any, el: any) {
+    this.selectedVideo = event.target.files[0];
+    this.videoService.generateThumbnail(this.selectedVideo).
+    then(thumbnailData => {
+    }).catch(error => {
+      alert(error);
+      el.value = "";
+    })
   }
 
   onDetailSave(form: NgForm) {
@@ -117,6 +129,7 @@ export class ProfileSetupComponent implements OnInit {
     userInfo.append("subjects", filledSubjects.toString());
     userInfo.append("profile", this.selectedImg);
     userInfo.append("mobile", this.verifiedUser);
+    userInfo.append("video", this.selectedVideo);
     this.loading = true;
     this.authService.saveUserInfo(userInfo).subscribe(res => {
       if(res.status == "false") {
@@ -128,6 +141,8 @@ export class ProfileSetupComponent implements OnInit {
           this.loading = false;
           this.authService.storeUser(res.data);
           this.router.navigate(['/feed']);
+        }else {
+          this.loading = false;
         }
       }
     })

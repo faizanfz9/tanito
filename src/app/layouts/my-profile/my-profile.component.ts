@@ -35,6 +35,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   @ViewChild('createPost', {static: true}) createPost: any;
   loading = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
+  teacherVideoPath = "http://demo.mbrcables.com/tanito/assets/teacher-video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
