@@ -23,7 +23,6 @@
               (change)="onSelectProfile($event)"
               name="userPic"
               ngModel
-              [required]="!user"
               >
                 {{ user ? 'Change Profile Picture' : 'Upload Profile Picture' }}
               </label>
@@ -100,7 +99,7 @@
               </mat-form-field>
             </div>
           </div>
-          <div class="form-group row mb-3" [hidden]="user.usertype == 3">
+          <div class="form-group row mb-3" [hidden]="userType == 3">
             <div class="col-12">
               <label class="primary_color spcllbl">Upload 30 Second Video</label>
               <input 
@@ -121,5 +120,21 @@
     </div>
     </form>
   </div>
+
+  <ng-template #signUpAlert>
+    <div class="modal_tanito" id="signotpmodal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">Confirmation Pending</h5>
+          </div>
+          <div class="modal-body">
+            <p class="mb-4">Hi, your profile is pending and we have received your detail. We will let you know once your profile is approved!</p>
+            <button type="button" (click)="goToHomepage()" class="text-purple btn_primary btn-sm">Go to homepage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

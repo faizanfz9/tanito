@@ -58,8 +58,14 @@ export class FeedComponent implements OnInit {
   }
 
   getFeeds() {
+    this.loading = true;
     this.userService.getAllPost().subscribe((res: any) => {
-      this.feeds = res.data.user_post;
+      this.loading = false;
+      if(this.query) {
+        this.feeds = res.data.user_post.filter((item: any) => item.subject == this.query);
+      }else {
+        this.feeds = res.data.user_post;
+      }
     })
   }
   

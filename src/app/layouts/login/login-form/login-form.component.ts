@@ -34,8 +34,8 @@ export class LoginFormComponent implements OnInit {
     let credentials: FormData = new FormData;
     credentials.append("mobile", form.value.phone);
     credentials.append("password", form.value.password);
-    this.authService.login(credentials).subscribe(res => {
-      if(res.status == "false") {
+    this.authService.login(credentials).subscribe((res: any) => {
+      if(res.status == false) {
         this.loading = false;
         alert(res.msg);
       }else {

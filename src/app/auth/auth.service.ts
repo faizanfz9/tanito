@@ -22,8 +22,8 @@ export class AuthService {
     return this.http.post<{status: string, msg: string}>(this.url + "/otp_verification", otp);
   }
 
-  sendVerifiedUser(mobile: string) {
-   localStorage.setItem("verifiedUser", mobile);
+  sendVerifiedUser(mobile: string, userType: any) {
+   localStorage.setItem("verifiedUser", JSON.stringify({mobile: mobile, userType: userType}));
   }
 
   getVerifiedUser(): any {

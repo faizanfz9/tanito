@@ -53,8 +53,8 @@ import { environment } from 'src/environments/environment';
 import { ChatroomComponent } from './layouts/user-feed/inbox/chatroom/chatroom.component';
 import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
-import { ChatService } from './shared/chat.service';
 import { ShowMenuDirective } from './directives/show-menu.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -111,7 +111,8 @@ import { ShowMenuDirective } from './directives/show-menu.directive';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    CarouselModule
+    CarouselModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

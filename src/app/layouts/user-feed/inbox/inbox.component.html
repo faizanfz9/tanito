@@ -6,7 +6,7 @@
           <h4 [routerLink]="'/user/' + receiver.user_id">
             {{ receiver.username }} 
             <span>{{ (receiver.usertype == 3 ? "Teacher at ":"Student at ") +  receiver.university }}
-              <img class="user-type" [src]="receiver.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> 
+              <img class="user-type" [src]="receiver.usertype == 3 ? studentIcon : teacherIcon " alt="user type"> 
             </span> 
           </h4>
         </div>

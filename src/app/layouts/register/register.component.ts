@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         this.otpVerifyModal.hide();
-        this.authService.sendVerifiedUser(this.mobile);
+        this.authService.sendVerifiedUser(this.mobile, this.userType);
         this.router.navigate(['/profile-setup']);
       }
     })

@@ -42,7 +42,14 @@
                     </div>
                     <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
                 </div>
-                <!-- <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots"></button> -->
+                <div class="option">
+                    <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
+                    <div class="dropdown-menu report my_account_dropmenu">
+                        <ul>
+                           <li><a>Report Post</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="follow_bdy">
                 <p> {{ feed.body }} </p>
