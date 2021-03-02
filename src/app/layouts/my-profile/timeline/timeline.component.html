@@ -2,7 +2,9 @@
 <div *ngIf="myData.user_post_data">
   <div class="custom_card custom_crd_padd" *ngFor="let post of myData.user_post_data | recentPost">
     <div class="follow_top d-flex align-items-center">
-      <div class="follow_lft"> <img class="profile-img" [src]="myData.profile_img" [alt]="myData.username" />  </div>
+      <div class="follow_lft profile-pic"> 
+        <img [src]="myData.profile_img.length > 0 ? profilePath + myData.profile_img : userAvatar" alt="profile image">
+        </div>
       <div class="follow_rht">
         <div class="d-flex align-items-center">
           <h3>{{ myData.username }}</h3>

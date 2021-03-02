@@ -32,6 +32,7 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
+    this.userService.updateUser();
     this.userService.storeUpdatedUser().subscribe(res => {
       this.myData.user_post_data = res.user_post_data;
       localStorage.setItem("user", JSON.stringify(this.myData));

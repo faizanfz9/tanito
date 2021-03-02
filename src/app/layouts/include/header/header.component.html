@@ -1,76 +1,76 @@
 <header class="navbar-header clearfix">
-  <nav class="navbar navbar-expand-lg">
-     <div class="container-fluid">
-        <div class="inner-wrap">
-         <a class="navbar-brand" [routerLink]="isLoggedIn ? ['feed'] : ['/']"> <img src="assets/images/logo.svg" alt="logo" class="img-fluid head_logo" /> </a>
-         <div class="toggle-menu" [ngClass]="{ 'show': showMenu }" (click)="toggleMenu()">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+   <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+         <div class="inner-wrap">
+          <a class="navbar-brand" [routerLink]="isLoggedIn ? ['feed'] : ['/']"> <img src="assets/images/logo.svg" alt="logo" class="img-fluid head_logo" /> </a>
+          <div class="toggle-menu" [ngClass]="{ 'show': showMenu }" (click)="toggleMenu()">
+             <span class="bar"></span>
+             <span class="bar"></span>
+             <span class="bar"></span>
+          </div>
+          <div class="ml-auto collapse-menu" [ngClass]="{ 'show': showMenu }">
+             <div class="after_login_head" *ngIf="isLoggedIn">
+                <div class="search_bar_head head_top_bar">
+                   <form (submit)="onSearchUser()">
+                       <input type="search" class="form-control" #query placeholder="Search here...">
+                       <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
+                   </form>
+                </div>
+                <div class="wishlist_card_head head_top_bar">
+                   <div class="wishlish_icon">
+                      <a (click)="onCheckNotification()" appShowMenu> 
+                         <i class="fa fa-bell"></i> 
+                         <span>{{ newNotifications.length }}</span> 
+                      </a>
+                      <div class="dropdown-menu my_account_dropmenu notification">
+                         <ul>
+                            <li *ngFor="let item of notifications">
+                               <img [src]="item.userPic" alt="userpic"> 
+                               <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
+                                  <strong>{{ item.timestamp | postCreated }}</strong>
+                               </p> 
+                            </li>
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+                <div class="account_panel_head head_top_bar">
+                   <div class="account_user_icon">
+                      <a id="logindrop" appShowMenu>
+                         <img [src]="user.profile_img.length > 0 ? profilePath + user.profile_img : userAvatar" alt="profile image">
+                         <span class="user_online"></span>
+                      </a>
+                      <div class="dropdown-menu my_account_dropmenu">
+                         <ul>
+                            <li><a routerLink="/myProfile">My Account</a></li>
+                            <li><a (click)="onLogOut($event)">Log Out</a></li>
+                         </ul>
+                      </div>
+                   </div>
+                </div>
+                <div class="mobile-links">
+                   <ul>
+                      <li><a routerLink="/myProfile"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My Account</a></li>
+                      <li><a (click)="onLogOut($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
+                      <li><a routerLink="/plans"><i class="fa fa-diamond" aria-hidden="true"></i> Try Tanito Premium</a></li>
+                   </ul>
+                   <div class="search_bar_head head_top_bar">
+                      <form (submit)="onSearchUser()">
+                          <input type="search" class="form-control" #query placeholder="Search here...">
+                          <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
+                      </form>
+                   </div>
+                </div>
+                <div class="premium_buy head_top_bar">
+                   <a class="primary_color" routerLink="/plans"><img src="assets/images/diamond.svg" alt="diamond"> try Tanito Premium </a>
+                </div>
+             </div>
+             <ul class="btn-sign-head" *ngIf="!isLoggedIn">
+                <li> <a routerLink="login"> Login </a> </li>
+                <li> <a routerLink="register" class="become_partner"> Join Now</a> </li>
+             </ul>
+          </div>
          </div>
-         <div class="ml-auto collapse-menu" [ngClass]="{ 'show': showMenu }">
-            <div class="after_login_head" *ngIf="isLoggedIn">
-               <div class="search_bar_head head_top_bar">
-                  <form (submit)="onSearchUser()">
-                      <input type="search" class="form-control" #query placeholder="Search here...">
-                      <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
-                  </form>
-               </div>
-               <div class="wishlist_card_head head_top_bar">
-                  <div class="wishlish_icon">
-                     <a (click)="onCheckNotification()" appShowMenu> 
-                        <i class="fa fa-bell"></i> 
-                        <span>{{ newNotifications.length }}</span> 
-                     </a>
-                     <div class="dropdown-menu my_account_dropmenu notification">
-                        <ul>
-                           <li *ngFor="let item of notifications">
-                              <img [src]="item.userPic" alt="userpic"> 
-                              <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
-                                 <strong>{{ item.timestamp | postCreated }}</strong>
-                              </p> 
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="account_panel_head head_top_bar">
-                  <div class="account_user_icon">
-                     <a id="logindrop" appShowMenu>
-                        <img [src]="user.user.profile_img.length > 0 ? profilePath + user.user.profile_img : userAvatar" alt="user image">
-                        <span class="user_online"></span>
-                     </a>
-                     <div class="dropdown-menu my_account_dropmenu">
-                        <ul>
-                           <li><a routerLink="/myProfile">My Account</a></li>
-                           <li><a (click)="onLogOut($event)">Log Out</a></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="mobile-links">
-                  <ul>
-                     <li><a routerLink="/myProfile"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My Account</a></li>
-                     <li><a (click)="onLogOut($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
-                     <li><a routerLink="/plans"><i class="fa fa-diamond" aria-hidden="true"></i> Try Tanito Premium</a></li>
-                  </ul>
-                  <div class="search_bar_head head_top_bar">
-                     <form (submit)="onSearchUser()">
-                         <input type="search" class="form-control" #query placeholder="Search here...">
-                         <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
-                     </form>
-                  </div>
-               </div>
-               <div class="premium_buy head_top_bar">
-                  <a class="primary_color" routerLink="/plans"><img src="assets/images/diamond.svg" alt="diamond"> try Tanito Premium </a>
-               </div>
-            </div>
-            <ul class="btn-sign-head" *ngIf="!isLoggedIn">
-               <li> <a routerLink="login"> Login </a> </li>
-               <li> <a routerLink="register" class="become_partner"> Join Now</a> </li>
-            </ul>
-         </div>
-        </div>
-     </div>
-  </nav>
-</header>
+      </div>
+   </nav>
+ </header>

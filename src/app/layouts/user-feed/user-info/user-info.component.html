@@ -2,12 +2,12 @@
   <div class="col-12">
     <div class="custom_card profile_box">
         <div class="dp_box">
-          <a routerLink="/myProfile"> <img [src]="user.user.profile_img.length > 0 ? profilePath + user.user.profile_img : userAvatar" alt="user image"> </a>
-          <img class="user-type" [src]="user.user.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
+          <a routerLink="/myProfile"> <img [src]="user.profile_img.length > 0 ? profilePath + user.profile_img : userAvatar" alt="user image"> </a>
+          <img class="user-type" [src]="user.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
         </div>
         <div class="text-center pb-2">
-            <h3 routerLink="/myProfile" class="text-center">{{ user.user.username }}</h3>
-            <p>{{ user.user.email }}</p>
+            <h3 routerLink="/myProfile" class="text-center">{{ user.username }}</h3>
+            <p>{{ user.email }}</p>
         </div>
         <div class="followers_info d-flex">
             <div class="followers_lft">
