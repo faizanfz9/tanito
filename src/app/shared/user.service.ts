@@ -124,6 +124,11 @@ export class UserService {
     return this.http.get(this.url + "/get_all_post");
   }
 
+  // Get all post
+  getPostById(id: any) {
+    return this.http.get(this.url + "/get_post_by_id/" + id);
+  }
+
   // Fetch user following
   fetchUserFollowing() {
     let urls: any = [];

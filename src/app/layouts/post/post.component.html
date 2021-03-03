@@ -1,0 +1,47 @@
+<section class="student_timeline student_sec" *ngIf="!loading">
+    <div class="container">
+        <div class="custom_card custom_crd_padd">
+            <div class="follow_top d-flex align-items-center">
+                <div class="follow_lft">
+                    <img class="profile-img" [src]="post.profile_img == null ? userAvatar : profilePath + post.profile_img" [alt]="post.username">
+                </div>
+                <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                        <h3 [routerLink]="'/user/'+post.user_id">{{ post.username }}</h3>
+                        <img class="user-type" [src]="post.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
+                    </div>
+                    <p>{{ (post.usertype == 3 ? "Teacher at ":"Student at ") +  post.university }} &nbsp; | <span>{{ post.created | postCreated }}</span></p>
+                </div>
+                <div class="option">
+                    <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
+                    <div class="dropdown-menu report my_account_dropmenu">
+                        <ul>
+                           <li><a (click)="reportModal(post.id)">Report Post</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="follow_bdy">
+                <p> {{ post.body }} </p>
+                <ul [hidden]="post.tags.length == 0" class="hashtags">
+                    <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
+                </ul>
+                <img *ngIf="post.image.length > 0" class="post-img" [src]="imageDirPath + post.image">
+                <plyr *ngIf="post.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + post.video }]"></plyr>
+              </div>
+        </div>
+
+        <div class="row align-items-center m_column-reverse">
+            <div class="col-lg-5 offset-lg-1">
+              <div class="pr-lg-5 mt-4">
+                <h3 class="mb-5 primary_color"> Find the people you need </h3>
+                <a href="student-home.php" class="text-purple text-uppercase btn_primary btn-sm">Get Started</a> </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="people_need-img mt-4"> <img src="assets/images/fing.svg" alt="find people" class="img-fluid mx-auto d-block"> </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

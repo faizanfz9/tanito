@@ -15,16 +15,16 @@ import { FollowingComponent } from './layouts/user-feed/network/following/follow
 import { NetworkComponent } from './layouts/user-feed/network/network.component';
 import { FeedComponent } from './layouts/user-feed/feed/feed.component';
 import { UserFeedComponent } from './layouts/user-feed/user-feed.component';
-import { UsersComponent } from './layouts/user-feed/users/users.component';
 import { SearchUserComponent } from './layouts/search-user/search-user.component';
 import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
+import { PostComponent } from './layouts/post/post.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "profile-setup", component: ProfileSetupComponent },
+  { path: "profile-setup", component: ProfileSetupComponent},
   { path: "feed", component: UserFeedComponent, canActivate: [AuthGuard],
     children: [
       {
@@ -52,10 +52,11 @@ const routes: Routes = [
       },
     ] 
   },
-  { path: "myProfile", component: MyProfileComponent },
-  { path: "user/:id", component: UserProfileComponent},
-  { path: "search-user", component: SearchUserComponent},
-  { path: "plans", component: PlansComponent},
+  { path: "myProfile", component: MyProfileComponent, canActivate: [AuthGuard] },
+  { path: "user/:id", component: UserProfileComponent, canActivate: [AuthGuard]},
+  { path: "search-user", component: SearchUserComponent, canActivate: [AuthGuard]},
+  { path: "plans", component: PlansComponent, canActivate: [AuthGuard]},
+  { path: "post/:id", component: PostComponent},
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent }
 ];

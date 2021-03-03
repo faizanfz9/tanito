@@ -20,6 +20,7 @@ export class FeedComponent implements OnInit {
   loading = false;
   modalRef: any;
   query: any;
+  host: any;
   totalUserReaction: any;
   okUserReaction: any;
   innUserReaction: any;
@@ -60,6 +61,7 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFeeds();
+    this.host = window.location.host;
   }
 
   getFeeds() {
@@ -206,5 +208,14 @@ export class FeedComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'reaction_modal' }));
+  }
+
+  toggleShareGroup(el: any) {
+    let shareBtnGroup = el.previousSibling;
+    if(shareBtnGroup.classList.contains("show")) {
+      shareBtnGroup.classList.remove("show");
+    }else {
+      shareBtnGroup.classList.add("show");
+    }
   }
 }

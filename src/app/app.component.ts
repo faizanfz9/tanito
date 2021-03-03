@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'tanito';
 
-  constructor(private router: Router) {
-    if(localStorage.getItem("user")) {
+  constructor(private router: Router, private location: Location) {
+    let currentPath = this.location.path();
+    if(localStorage.getItem("user") && !currentPath.includes("post")) {
       this.router.navigate(['/feed']);
     }
   }
