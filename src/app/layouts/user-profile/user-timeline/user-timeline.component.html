@@ -7,9 +7,8 @@
               <h3>{{ userData.data.results.username }}</h3>
               <img class="user-type" [src]="userData.data.results.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
             </div>
-            <p>{{ (userData.data.results.usertype == 3 ? "Teacher at ":"Student at ") +  userData.data.results.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
+            <p>{{ (userData.data.results.usertype == 3 ? "Student at ":"Teacher at ") +  userData.data.results.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
           </div>
-          <button type="button" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><img src="assets/images/icons/dots.png" alt="dots" /></button>
         </div>
         <div class="follow_bdy">
           <p> {{ post.body }} </p>
@@ -37,7 +36,10 @@
             </div>
             <span class="likes">{{ post.likes.length }}</span>
             <span class="view" (click)="onViewReaction(post.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Reactions</span>
-          <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+            <div class="share-post">
+                <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + post.id"></share-buttons>
+                <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+              </div>
         </div>
     </div>
 </div>

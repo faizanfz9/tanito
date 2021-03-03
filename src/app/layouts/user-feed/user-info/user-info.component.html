@@ -55,7 +55,7 @@
     <div class="custom_card category_card">
       <h3>Categories</h3>
       <div class="category_accord" *ngFor="let subject of subjects">
-        <h4 class="accord_btn" routerLink="/feed" [queryParams]="{ cat: subject.replace(' ', '_')}">{{ subject }}</h4>
+        <h4 class="accord_btn" routerLink="/feed" [queryParams]="{ cat: subject}">{{ subject }}</h4>
       </div>
       <a class="see_all_btn" [hidden]="subjects.length <= 6">See all</a>
     </div>

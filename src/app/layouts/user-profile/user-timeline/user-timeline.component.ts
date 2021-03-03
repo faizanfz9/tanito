@@ -18,6 +18,7 @@ export class UserTimelineComponent implements OnInit {
   clapUserReaction: any;
   goodUserReaction: any;
   reactionFetched = false;
+  baseurl: any;
   @ViewChild("viewReactions") viewReactions: any;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/"
   imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
@@ -30,6 +31,7 @@ export class UserTimelineComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
+    this.baseurl = window.location.origin;
   }
 
   onLikePost(postId: any, likeType: any, el: HTMLElement) {
@@ -134,6 +136,15 @@ export class UserTimelineComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'reaction_modal' }));
+  }
+
+  toggleShareGroup(el: any) {
+    let shareBtnGroup = el.previousSibling;
+    if(shareBtnGroup.classList.contains("show")) {
+      shareBtnGroup.classList.remove("show");
+    }else {
+      shareBtnGroup.classList.add("show");
+    }
   }
   
 }

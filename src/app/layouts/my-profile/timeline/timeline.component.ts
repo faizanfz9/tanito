@@ -19,6 +19,7 @@ export class TimelineComponent implements OnInit {
   goodUserReaction: any;
   modalRef: any;
   reactionFetched = false;
+  baseurl: any;
   @ViewChild("viewReactions") viewReactions: any;
   @ViewChild('postBlock', {static: true}) postBlock: any;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/";
@@ -37,6 +38,7 @@ export class TimelineComponent implements OnInit {
       this.myData.user_post_data = res.user_post_data;
       localStorage.setItem("user", JSON.stringify(this.myData));
     })
+    this.baseurl = window.location.origin;
   }
 
   onDeletePost(postId: any) {
@@ -153,6 +155,15 @@ export class TimelineComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'reaction_modal' }));
+  }
+
+  toggleShareGroup(el: any) {
+    let shareBtnGroup = el.previousSibling;
+    if(shareBtnGroup.classList.contains("show")) {
+      shareBtnGroup.classList.remove("show");
+    }else {
+      shareBtnGroup.classList.add("show");
+    }
   }
 
 }

@@ -40,7 +40,7 @@
                         <h3 [routerLink]="'/user/'+feed.user_id">{{ feed.username }}</h3>
                         <img class="user-type" [src]="feed.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
                     </div>
-                    <p>{{ (feed.usertype == 3 ? "Teacher at ":"Student at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
+                    <p>{{ (feed.usertype == 3 ? "Student at ":"Teacher at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
                 </div>
                 <div class="option">
                     <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>

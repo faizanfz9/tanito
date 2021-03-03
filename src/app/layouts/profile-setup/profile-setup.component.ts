@@ -87,18 +87,20 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mobile = JSON.parse(this.authService.getVerifiedUser()).mobile;
-    this.userType = JSON.parse(this.authService.getVerifiedUser()).userType;
     this.user = JSON.parse(this.userService.getUser());
     if(this.user) {
       this.imgSrc = this.user.profile_img.length > 0 ? this.profilePath + this.user.profile_img : "assets/images/svg/file-upload.svg";
       this.mobile = this.user.mobile;
+      this.userType = this.user.usertype;
       let subjects: any = [];
       let subjectsSplitedArr = this.user.subjects.split(",");
       subjectsSplitedArr.forEach(function(item: any, index: number){
         subjects.push({name: item});
       })
       this.subjects = subjects;
+    }else {
+      this.mobile = JSON.parse(this.authService.getVerifiedUser()).mobile;
+      this.userType = JSON.parse(this.authService.getVerifiedUser()).userType;
     }
   }
 

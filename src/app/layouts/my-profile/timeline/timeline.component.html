@@ -10,9 +10,17 @@
           <h3>{{ myData.username }}</h3>
           <img class="user-type" [src]="myData.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
         </div>
-        <p>{{ (myData.usertype == 3 ? "Teacher at ":"Student at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
+        <p>{{ (myData.usertype == 3 ? "Student at ":"Teacher at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
       </div>
-      <button type="button" (click)="onDeletePost(post.id)" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      <!-- <button type="button" (click)="onDeletePost(post.id)" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+      <div class="option">
+        <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
+        <div class="dropdown-menu report my_account_dropmenu">
+            <ul>
+               <li><a (click)="onDeletePost(post.id)">Delete Post</a></li>
+            </ul>
+        </div>
+    </div>
     </div>
     <div class="follow_bdy">
       <p> {{ post.body }} </p>
@@ -45,7 +53,10 @@
       <span class="likes">{{ post.likes.length }}</span>
       <span class="view" (click)="onViewReaction(post.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Reactions</span>
       <span class="subjects" [hidden]="post.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ post.subject | titlecase }}</span>
-      <button type="button" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+      <div class="share-post">
+        <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + post.id"></share-buttons>
+        <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+      </div>
     </div>
 </div>
 </div>
