@@ -155,4 +155,9 @@ export class UserService {
     return this.http.post(this.url + "/user_report", reportCriteria);
   }
 
+  // Report post 
+  reportPost(reportCriteria: any) {
+    return this.http.post(this.url + "/post_report", reportCriteria);
+  }
+
 }

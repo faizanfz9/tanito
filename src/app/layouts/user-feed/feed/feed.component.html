@@ -46,7 +46,7 @@
                     <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
                     <div class="dropdown-menu report my_account_dropmenu">
                         <ul>
-                           <li><a>Report Post</a></li>
+                           <li><a (click)="reportModal(feed.id)">Report Post</a></li>
                         </ul>
                     </div>
                 </div>
@@ -159,6 +159,34 @@
                 </mat-tab-group>
             </div>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #reportPost>
+    <div class="modal_tanito report_modal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">Report Post</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="form-check" *ngFor="let reason of reportReason; let i = index">
+                    <input class="form-check-input" (change)="selectedReason = reason" type="radio" name="reason" id="{{ 'reason' + - + i }}">
+                    <label class="form-check-label" for="{{ 'reason' + - + i }}">
+                      <h6>{{ reason }}</h6>
+                    </label>
+                </div>
+                <textarea [(ngModel)]="specifiedReason"name="message" placeholder="Type your message.."></textarea>
+                <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                <div class="button_box d-flex align-items-center justify-content-center">
+                  <a href="index.php" class="back_to_home_btn mr-2">Back to Home</a>  
+                  <button (click)="onReportProfile()" type="button" class="ml-2">Submit</button>  
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 </ng-template>
 

@@ -27,6 +27,11 @@ export class FeedComponent implements OnInit {
   goodUserReaction: any;
   reactionFetched = false;
   catChanged = false;
+  reportReason = ["Violence", "Harassment", "False Information", "Span", "Something else, specify in comment"];
+  selectedReason = "";
+  specifiedReason = "";
+  selectedPost: any;
+  @ViewChild("reportPost") reportPost: any;
   @ViewChild("viewReactions") viewReactions: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
   imageDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/image/";
@@ -169,6 +174,34 @@ export class FeedComponent implements OnInit {
     let reactionBlock: any = document.getElementsByClassName("reactions");
     reactionBlock.classList.remove("active");
     el.classList.add("active");
+  }
+
+  reportModal(postId: any) {
+    this.selectedPost = postId;
+    this.openModal(this.reportPost);
+  }
+
+  onReportProfile() {
+    this.selectedReason = this.selectedReason == this.reportReason[this.reportReason.length - 1] ? this.specifiedReason : this.selectedReason;
+    if(this.selectedReason.length > 0) {
+      let reportCriteria = new FormData();
+      reportCriteria.append("from_id", this.loggedUser.id);
+      reportCriteria.append("post_id", this.selectedPost);
+      reportCriteria.append("reason", this.selectedReason);
+      this.userService.reportPost(reportCriteria).subscribe((res: any) => {
+        if(res.status == false) {
+          alert(res.msg);
+        }
+        alert(res.msg);
+        this.modalRef.hide();
+      })
+    }else {
+      if(this.specifiedReason.length == 0) {
+        alert("Please specify in comment!");
+      }else {
+        alert("Please select a reason!");
+      }
+    }
   }
 
   openModal(template: TemplateRef<any>) {
