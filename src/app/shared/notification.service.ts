@@ -8,6 +8,7 @@ import { UserService } from './user.service';
 })
 export class NotificationService { 
   loggedUser: any;
+  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
 
   constructor(private db: AngularFireDatabase, private authService: AuthService, private userService: UserService) { 
     this.authService.user.subscribe((res: any) => {
@@ -21,7 +22,7 @@ export class NotificationService {
     let notifications = this.getNotification(userId);
     notifications.push({
       notification: notification,
-      userPic: userPic,
+      userPic: this.profilePath + userPic,
       timestamp: timestamp,
       isRead: false
     })

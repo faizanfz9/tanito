@@ -49,24 +49,21 @@ export class AuthService {
 
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("mobile", user.mobile);
     this.router.navigate(['/feed']);
-    // this.isLoggedIn.next(true);
-    // this.loggedUser.next(user);
     this.user.next({
       isLoggedIn: true,
       data: user
     })
   }
 
-  // authUser() {
-  //   return this.isLoggedIn.asObservable();
-  // }
+  authUser() {
+    return this.user.asObservable();
+  }
   
   logout() {
     localStorage.clear();
     this.router.navigate(['/']);
-    // this.isLoggedIn.next(false);
-    // this.loggedUser.next(null);
     this.user.next({
       isLoggedIn: false,
       data: null

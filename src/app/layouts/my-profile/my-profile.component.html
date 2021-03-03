@@ -127,9 +127,9 @@
               <div class="user-info">
                 <h6>
                   <span>{{ user.username }}</span>
-                  <img [src]="user.usertype == 3 ? teacherIcon : studentIcon" alt="user type">
+                  <img [src]="user.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
                 </h6>
-                <p>{{ (user.usertype == 3 ? "Teacher at ":"Student at ") +  user.university }}</p> 
+                <p>{{ (user.usertype == 3 ? "Student at ":"Teacher at ") +  user.university }}</p> 
               </div>
             </div>
             <form action="#" class="registration-form" (submit)="onCreatePost(createPostForm)" #createPostForm="ngForm">
@@ -146,7 +146,7 @@
                     type="file" 
                     name="image"
                     accept="image/*"
-                    (change)="onSelectImage($event)">
+                    (change)="onSelectImage($event)" multiple>
                     <p><i class="fa fa-picture-o" aria-hidden="true"></i> Add picture</p>
                   </div>
                   <div class="upload">

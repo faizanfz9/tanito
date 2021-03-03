@@ -11,9 +11,9 @@ export class AppComponent {
   title = 'tanito';
 
   constructor(private router: Router, private location: Location) {
-    let currentPath = this.location.path();
-    if(localStorage.getItem("user") && !currentPath.includes("post")) {
-      this.router.navigate(['/feed']);
-    }
+    // let currentPath = this.location.path();
+    // if(localStorage.getItem("user") && !currentPath.includes("post")) {
+    //   this.router.navigate(['/feed']);
+    // }
   }
 }

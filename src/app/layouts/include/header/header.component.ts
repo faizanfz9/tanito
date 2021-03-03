@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private notificationService: NotificationService) {
     this.authService.user.subscribe(res => {
-      this.isLoggedIn = res.isLoggedIn;
+      this.isLoggedIn = res.isLoggedIn ? res.isLoggedIn : false;
       this.user = res.data;
       this.afAuth.authState.subscribe(auth => {
         if(auth !== undefined && auth !== null) {
@@ -44,8 +44,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): any {
-    if(localStorage.getItem("user")) {
-      this.isLoggedIn = true;
+    let userMobile = JSON.parse(this.userService.getUser()).mobile;
+    if(userMobile) {
+      if(userMobile == localStorage.getItem("mobile")) {
+        this.isLoggedIn = true;
+      }
     }
   }
 
