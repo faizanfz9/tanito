@@ -20,7 +20,7 @@ export class FeedComponent implements OnInit {
   loading = false;
   modalRef: any;
   query: any;
-  host: any;
+  baseurl: any;
   totalUserReaction: any;
   okUserReaction: any;
   innUserReaction: any;
@@ -61,7 +61,7 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFeeds();
-    this.host = window.location.host;
+    this.baseurl = window.location.origin;
   }
 
   getFeeds() {
