@@ -19,6 +19,7 @@ import { SearchUserComponent } from './layouts/search-user/search-user.component
 import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
 import { PostComponent } from './layouts/post/post.component';
+import { AboutUsComponent } from './layouts/about-us/about-us.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -58,7 +59,8 @@ const routes: Routes = [
   { path: "plans", component: PlansComponent, canActivate: [AuthGuard]},
   { path: "post/:id", component: PostComponent},
   { path: "terms-and-condition", component: TermsAndConditionComponent },
-  { path: "privacy-policy", component: PrivacyPolicyComponent }
+  { path: "privacy-policy", component: PrivacyPolicyComponent },
+  { path: "about-us", component: AboutUsComponent }
 ];
 
 @NgModule({

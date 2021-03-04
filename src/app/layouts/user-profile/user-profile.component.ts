@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -7,7 +7,8 @@ import { UserService } from 'src/app/shared/user.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserProfileComponent implements OnInit, AfterContentChecked {
   user: any;
@@ -22,6 +23,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   specifiedReason = "";
   @ViewChild("reportProfile") reportProfile: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
+  teacherVideoPath = "http://demo.mbrcables.com/tanito/assets/teacher-video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

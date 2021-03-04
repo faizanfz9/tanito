@@ -12,7 +12,11 @@
         </div>
         <div class="follow_bdy">
           <p> {{ post.body }} </p>
+          <ul [hidden]="post.tags.length == 0" class="hashtags">
+            <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
+          </ul>
           <img *ngIf="post.image.length > 0" class="post-img" [src]="imageDirPath + post.image">
+          <plyr *ngIf="post.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + post.video }]"></plyr>
         </div>
         <div class="follow_ftr">
             <div class="action-btn">

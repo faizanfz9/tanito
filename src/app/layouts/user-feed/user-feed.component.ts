@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ChatService } from 'src/app/shared/chat.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -10,8 +10,10 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class UserFeedComponent implements OnInit {
   loggedUserId: any;
+  loggedUser: any;
+  activePlan: any;
 
-  constructor(private userService: UserService, private chatService: ChatService, private afAuth: AngularFireAuth) { 
+  constructor(private userService: UserService, private chatService: ChatService, private notification: NotificationService) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
       let inbox = {
@@ -20,6 +22,24 @@ export class UserFeedComponent implements OnInit {
       }
       localStorage.setItem("inbox",  JSON.stringify(inbox))
     })
+
+    this.loggedUser = JSON.parse(this.userService.getUser());
+    if(this.loggedUser.plan_subcription.length > 0) {
+      this.activePlan = this.loggedUser.plan_subcription[0];
+      let planEndDate: any = new Date(this.activePlan.end_date);
+      let currDate: any = new Date();
+      let timeBetween = Math.abs(planEndDate - currDate);
+      let dayBetween = Math.ceil(timeBetween / (1000 * 60 * 60 * 24));
+      if(dayBetween == 3) {
+        this.notification.sendNotification(this.loggedUser.id,  this.loggedUser.profile_img, "Your plan is about to expire in " + dayBetween + " days");
+      }
+      if(dayBetween == 2) {
+        this.notification.sendNotification(this.loggedUser.id,  this.loggedUser.profile_img, "Your plan is about to expire in " + dayBetween + " days");
+      }
+      if(dayBetween == 1) {
+        this.notification.sendNotification(this.loggedUser.id,  this.loggedUser.profile_img, "Your plan is about to expire in " + dayBetween + " days");
+      }
+    }
   }
 
   ngOnInit(): void {

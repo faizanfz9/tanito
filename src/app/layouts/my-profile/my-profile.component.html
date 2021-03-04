@@ -70,7 +70,7 @@
                     <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
                 </ul>
               </div>
-              <div class="custom_card intro_box" *ngIf="user.usertype == 2">
+              <div class="custom_card intro_box" *ngIf="user.video.length > 0">
                 <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro Video</h4>
                 <plyr plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: teacherVideoPath + user.video }]"></plyr>
               </div>

@@ -59,6 +59,7 @@ import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.componen
 import { ShowMenuDirective } from './directives/show-menu.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostComponent } from './layouts/post/post.component';
+import { AboutUsComponent } from './layouts/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { PostComponent } from './layouts/post/post.component';
     PlansComponent,
     MyPlansComponent,
     ShowMenuDirective,
-    PostComponent
+    PostComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { ICustomWindow, WindowRefService } from 'src/app/shared/window-ref.servi
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-plans',
@@ -49,7 +50,8 @@ export class PlansComponent implements OnInit {
     private modalService: BsModalService,
     private userService: UserService,
     private router: Router,
-    private winRef: WindowRefService) { 
+    private winRef: WindowRefService,
+    private notification: NotificationService) { 
     this.loggedUser = JSON.parse(this.userService.getUser());  
     this._window = this.winRef.nativeWindow;
 
@@ -87,6 +89,7 @@ export class PlansComponent implements OnInit {
       this.planService.buyPlan(planInfo).subscribe((res: any) => {
         this.openModal(this.confirmationBox);
         this.userService.updateUser();
+        this.notification.sendNotification(this.loggedUser.id, this.loggedUser.profile_img , "You have subscribed our " + this.options.description + " plan")
       })
     });
   }

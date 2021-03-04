@@ -49,10 +49,6 @@ export class InboxComponent implements OnInit{
           })
           this.loading = true;
           this.onMsgRead(paramId);
-          // this.afAuth.authState.subscribe(auth => {
-          //   if(auth !== undefined && auth !== null) {
-          //   }
-          // })
           this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
             this.chatRooms = res;
             this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
@@ -87,10 +83,6 @@ export class InboxComponent implements OnInit{
   }
 
   getFeeds() {
-    // this.afAuth.authState.subscribe(auth => {
-    //   if(auth !== undefined && auth !== null) {
-    //   }
-    // })
     this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
       this.loading = false;  
       this.feeds = res;

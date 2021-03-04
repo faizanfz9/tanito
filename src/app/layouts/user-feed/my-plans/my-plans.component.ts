@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class MyPlansComponent implements OnInit {
   activePlan: any;
   loggedUser: any;
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService, private notification: NotificationService) { 
     this.loggedUser = JSON.parse(this.userService.getUser());
   }
 
