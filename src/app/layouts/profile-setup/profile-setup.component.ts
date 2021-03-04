@@ -117,7 +117,7 @@ export class ProfileSetupComponent implements OnInit {
 
   onSelectVideo(event: any, el: any) {
     this.selectedVideo = event.target.files[0];
-    this.videoService.generateThumbnail(this.selectedVideo).
+    this.videoService.generateThumbnail(this.selectedVideo, false).
     then(thumbnailData => {
     }).catch(error => {
       alert(error);

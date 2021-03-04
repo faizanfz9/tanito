@@ -6,7 +6,7 @@
       [routerLink]="'/user/' + follower.user_id" 
       class="img-fluid mx-auto d-block rounded-circle user-img">
       <h5 class="mt-4 mb-4" [routerLink]="'/user/' + follower.user_id">{{ follower.username }} &nbsp;</h5>
-      <p class="mb-4">{{ (follower.usertype == 3 ? 'Teacher at ':'Student at ') + follower.university }}</p>
+      <p class="mb-4">{{ (follower.usertype == 3 ? 'Student at ':'Teacher at ') + follower.university }}</p>
   </div>
 </div>
 

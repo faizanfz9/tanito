@@ -6,7 +6,7 @@
       [routerLink]="'/user/' + followingEach.follower" 
       class="img-fluid mx-auto d-block rounded-circle user-img">
       <h5 class="mt-4 mb-4" [routerLink]="'/user/' + followingEach.follower">{{ followingEach.username }} &nbsp;</h5>
-      <p class="mb-4">{{ (followingEach.usertype == 3 ? 'Teacher at ':'Student at ') + followingEach.university }}</p>
+      <p class="mb-4">{{ (followingEach.usertype == 3 ? 'Student at ':'Teacher at ') + followingEach.university }}</p>
   </div>
 </div>
 <!-- <button type="button" class="see_all_btn">See all</button> -->

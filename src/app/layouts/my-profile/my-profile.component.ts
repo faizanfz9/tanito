@@ -149,7 +149,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
 
   onSelectVideo(event: any) {
     this.selectedVideo = event.target.files[0];
-    this.videoService.generateThumbnail(this.selectedVideo).
+    this.videoService.generateThumbnail(this.selectedVideo, true).
     then(thumbnailData => {
       this.videoThumb = thumbnailData;
     }).catch(error => {

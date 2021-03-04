@@ -27,7 +27,7 @@ export class VideoProcessingService {
     });
   }
 
-  public generateThumbnail(videoFile: Blob): Promise<string> {
+  public generateThumbnail(videoFile: Blob, isPostVideo: any): Promise<string> {
     const video: HTMLVideoElement = this.document.createElement('video');
     const canvas: HTMLCanvasElement = this.document.createElement('canvas');
     const context: any = canvas.getContext('2d');
@@ -35,8 +35,14 @@ export class VideoProcessingService {
       // canvas.addEventListener('error',  reject);
       // video.addEventListener('error',  reject);
       video.onloadedmetadata = function() {
-        if(video.duration > 30) {
-          reject("Upload video of less than 30 seconds!")
+        if(isPostVideo) {
+          if(video.duration > 180) {
+            reject("Upload video of less than 30 seconds!")
+          }
+        }else {
+          if(video.duration > 30) {
+            reject("Upload video of less than 30 seconds!")
+          }
         }
       };
       video.addEventListener('canplay', event => {
