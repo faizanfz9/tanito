@@ -49,20 +49,20 @@ export class InboxComponent implements OnInit{
           })
           this.loading = true;
           this.onMsgRead(paramId);
-          this.afAuth.authState.subscribe(auth => {
-            if(auth !== undefined && auth !== null) {
-              this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
-                this.chatRooms = res;
-                this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
-                if(this.isRoomFound) {
-                  let chatRoom = this.chatRooms.find((item: any) => item.memberId == paramId);
-                  this.chatRoomId = chatRoom.chatId;
-                }else {
-                  this.chatRoomId = paramId + "&" + this.loggedUserId;
-                }
-                this.getFeeds();
-              })
+          // this.afAuth.authState.subscribe(auth => {
+          //   if(auth !== undefined && auth !== null) {
+          //   }
+          // })
+          this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
+            this.chatRooms = res;
+            this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
+            if(this.isRoomFound) {
+              let chatRoom = this.chatRooms.find((item: any) => item.memberId == paramId);
+              this.chatRoomId = chatRoom.chatId;
+            }else {
+              this.chatRoomId = paramId + "&" + this.loggedUserId;
             }
+            this.getFeeds();
           })
         } 
     })
@@ -87,15 +87,15 @@ export class InboxComponent implements OnInit{
   }
 
   getFeeds() {
-    this.afAuth.authState.subscribe(auth => {
-      if(auth !== undefined && auth !== null) {
-        this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
-          this.loading = false;  
-          this.feeds = res;
-          this.scrollToBottom();
-        });
-      }
-    })
+    // this.afAuth.authState.subscribe(auth => {
+    //   if(auth !== undefined && auth !== null) {
+    //   }
+    // })
+    this.chatService.getMessages(this.chatRoomId).valueChanges().subscribe(res => {
+      this.loading = false;  
+      this.feeds = res;
+      this.scrollToBottom();
+    });
   }
 
   onSendMsg() {

@@ -149,7 +149,7 @@ export class ProfileSetupComponent implements OnInit {
         var r = confirm("Do you want to save?");
         if (r == true) {
           this.loading = false;
-          if(this.userType == 2) {
+          if(res.data.status == 0) {
             this.openModal(this.signUpAlert);
           }else {
             this.authService.storeUser(res.data);

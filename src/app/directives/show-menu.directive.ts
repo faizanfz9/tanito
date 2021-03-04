@@ -10,7 +10,6 @@ export class ShowMenuDirective {
 
   @HostListener('click', ['$event']) onClick(event: Event) {
     event.stopPropagation();
-    console.log(this.el);
     let dropdownMenu = this.el.nativeElement.nextSibling;
     if(dropdownMenu.classList.contains("show")) {
       this.renderer.removeClass(dropdownMenu, "show");

@@ -50,21 +50,21 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         this.openModal(this.otpVerifyModal);
-        this.firebaseRegister(form.value.email, form.value.password);
+        // this.firebaseRegister(form.value.email, form.value.password);
       }
     }, error => {
       console.log(error);
     })
   }
 
-  firebaseRegister(email: any, pwd: any) {
-    return this.firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-    .then((result: any) => {
-      console.log(result);
-    }).catch((error: any) => {
-      console.log(error);
-    })
-  }
+  // firebaseRegister(email: any, pwd: any) {
+  //   return this.firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+  //   .then((result: any) => {
+  //     console.log(result);
+  //   }).catch((error: any) => {
+  //     console.log(error);
+  //   })
+  // }
 
   goToNext(el: HTMLElement) {
     let nextEl = el.nextSibling as HTMLElement;

@@ -31,13 +31,13 @@ export class HeaderComponent implements OnInit {
     this.authService.user.subscribe(res => {
       this.isLoggedIn = res.isLoggedIn ? res.isLoggedIn : false;
       this.user = res.data;
-      this.afAuth.authState.subscribe(auth => {
-        if(auth !== undefined && auth !== null) {
-           this.notificationService.getNotification(this.user == null ? 0 : this.user.id).valueChanges().subscribe(res => {
-            this.notifications = res.reverse();
-            this.newNotifications = res.filter((item: any) => item.isRead == false);
-          })
-        }
+      // this.afAuth.authState.subscribe(auth => {
+      //   if(auth !== undefined && auth !== null) {
+      //   }
+      // })
+      this.notificationService.getNotification(this.user == null ? 0 : this.user.id).valueChanges().subscribe(res => {
+        this.notifications = res.reverse();
+        this.newNotifications = res.filter((item: any) => item.isRead == false);
       })
     })
     this.user = JSON.parse(this.userService.getUser());

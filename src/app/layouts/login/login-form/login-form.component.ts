@@ -41,18 +41,18 @@ export class LoginFormComponent implements OnInit {
       }else {
         this.loading = false;
         this.authService.storeUser(res.data);
-        this.firebaseSignIn(res.data.email, form.value.password);
+        // this.firebaseSignIn(res.data.email, form.value.password);
       }
     })
   }
 
-  firebaseSignIn(email: any, pwd: any) {
-    return this.firebaseAuth.signInWithEmailAndPassword(email, pwd)
-    .then((result: any) => {
-    }).catch((error: any) => {
-      console.log(error);
-    })
-  }
+  // firebaseSignIn(email: any, pwd: any) {
+  //   return this.firebaseAuth.signInWithEmailAndPassword(email, pwd)
+  //   .then((result: any) => {
+  //   }).catch((error: any) => {
+  //     console.log(error);
+  //   })
+  // }
 
   onForgotPwd(form: NgForm) {
     let mobile = new FormData;
