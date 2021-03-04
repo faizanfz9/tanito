@@ -44,9 +44,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): any {
-    let userMobile = JSON.parse(this.userService.getUser()).mobile;
-    if(userMobile) {
-      if(userMobile == localStorage.getItem("mobile")) {
+    let user = JSON.parse(this.userService.getUser());
+    if(user) {
+      if(user.mobile == localStorage.getItem("mobile")) {
         this.isLoggedIn = true;
       }
     }

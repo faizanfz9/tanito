@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
     this.authService.user.subscribe(res => {
       this.isLoggedIn = res.isLoggedIn;
     })
-    let userMobile = JSON.parse(this.userService.getUser()).mobile;
-    if(userMobile) {
-      if(userMobile == localStorage.getItem("mobile")) {
+    let user = JSON.parse(this.userService.getUser());
+    if(user) {
+      if(user.mobile == localStorage.getItem("mobile")) {
         this.isLoggedIn = true;
       }
     }
