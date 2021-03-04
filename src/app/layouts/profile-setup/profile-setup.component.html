@@ -41,11 +41,11 @@
               >
             </div>
             <div class="col-md-6 col-12">
-              <label class="primary_color spcllbl">Total Experience</label>
+              <label class="primary_color spcllbl">Total Experience (in years)</label>
               <input 
-              type="text" 
+              type="number" 
               class="form-control" 
-              placeholder="Enter your qualification"
+              placeholder="Enter your experience"
               name="experience"
               [ngModel]="user ? user.experience: '' "
               required>
