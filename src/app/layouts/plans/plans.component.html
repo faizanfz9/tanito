@@ -3,13 +3,9 @@
     <div class="intro">
       <h4>Pricing and Plans</h4>
       <p>lorem ipsum, lorem ipsum, lorem ipsum</p>
-      <!-- <ul class="tabs">
-        <li class="active" id="monthly">Monthly</li>
-        <li id="yearly">Yearly</li>
-      </ul> -->
     </div>
     <div class="row slider-wrap justify-content-center">
-      <div class="col-4" *ngFor="let plan of plans">
+      <div class="col-12 col-sm-6 col-lg-4 col-wrap" *ngFor="let plan of plans">
         <div class="card-wrap purple">
           <div class="title">
             <h4><img src="assets/images/message.svg" alt="message">{{ plan.plan }}</h4>

@@ -1,11 +1,8 @@
-.plans-slider {
-    .owl-dots {
-        display: block;
+.pricing {
+    .col-wrap {
+        margin-bottom: 30px;
+        .content {
+            color: #fff;
+        }
     }
-}
-.owl-nav, .owl-dots {
-    display: none;
-}
-.content {
-    color: #fff;
 }

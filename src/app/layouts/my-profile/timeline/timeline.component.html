@@ -28,8 +28,9 @@
           <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
       </ul>
       <img *ngIf="post.image.length > 0" class="post-img" [src]="imageDirPath + post.image">
-      <plyr *ngIf="post.video.length > 0" style="display: block; width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + post.video }]"></plyr>
+      <plyr *ngIf="post.video.length > 0" style="display: block; max-width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + post.video }]"></plyr>
     </div>
+    <p class="subject d-block d-sm-none" [hidden]="post.subject.length == 0"> {{ post.subject | titlecase }}</p>
     <div class="follow_ftr">
       <div class="action-btn">
           <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(post.likes) }" #likeBtn (click)="onLikePost(post.id, getLikeType(post.likes), likeBtn)">
@@ -52,7 +53,7 @@
       </div>
       <span class="likes">{{ post.likes.length }}</span>
       <span class="view" (click)="onViewReaction(post.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Reactions</span>
-      <span class="subjects" [hidden]="post.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ post.subject | titlecase }}</span>
+      <span class="subjects d-none d-sm-block" [hidden]="post.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ post.subject | titlecase }}</span>
       <div class="share-post">
         <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + post.id"></share-buttons>
         <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>

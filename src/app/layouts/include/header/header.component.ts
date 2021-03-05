@@ -43,15 +43,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): any {
     let user = JSON.parse(this.userService.getUser());
-    if(user) {
-      if(user.mobile == localStorage.getItem("mobile")) {
-        this.isLoggedIn = true;
-      }
+    if(user.mobile == localStorage.getItem("mobile")) {
+      this.isLoggedIn = true;
+      console.log('check');
     }
   }
 
-  onSearchUser() {
-    let query = this.query.nativeElement.value;
+  onSearchUser(query: any) {
+    // let query = this.query.nativeElement.value;
     if(query.length > 0) {
       this.router.navigate(['/search-user'], { queryParams: { query: query}});
     } 

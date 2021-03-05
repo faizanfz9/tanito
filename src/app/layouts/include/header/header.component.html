@@ -11,9 +11,9 @@
           <div class="ml-auto collapse-menu" [ngClass]="{ 'show': showMenu }">
              <div class="after_login_head" *ngIf="isLoggedIn">
                 <div class="search_bar_head head_top_bar">
-                   <form (submit)="onSearchUser()">
+                   <form (submit)="onSearchUser(query.value)">
                        <input type="search" class="form-control" #query placeholder="Search here...">
-                       <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
+                       <button type="submit" (click)="onSearchUser(query.value)" class="submit_search_bar"></button>
                    </form>
                 </div>
                 <div class="wishlist_card_head head_top_bar">
@@ -55,9 +55,9 @@
                       <li><a routerLink="/plans"><i class="fa fa-diamond" aria-hidden="true"></i> Try Tanito Premium</a></li>
                    </ul>
                    <div class="search_bar_head head_top_bar">
-                      <form (submit)="onSearchUser()">
-                          <input type="search" class="form-control" #query placeholder="Search here...">
-                          <button type="submit" (click)="onSearchUser()" class="submit_search_bar"></button>
+                      <form (submit)="onSearchUser(querySm.value)">
+                          <input type="search" class="form-control" #querySm placeholder="Search here...">
+                          <button type="submit" (click)="onSearchUser(querySm.value)" class="submit_search_bar"></button>
                       </form>
                    </div>
                 </div>
