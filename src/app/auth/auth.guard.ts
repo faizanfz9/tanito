@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       this.isLoggedIn = res.isLoggedIn;
     })
     let user = JSON.parse(this.userService.getUser());
-    if(user) {
+    if(user.mobile) {
       if(user.mobile == localStorage.getItem("mobile")) {
         this.isLoggedIn = true;
       }

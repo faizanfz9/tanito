@@ -42,6 +42,8 @@ export class FeedComponent implements OnInit {
   studentIcon = "assets/images/icons/student.png";
   @ViewChild("feedBlock") feedBlock: any;
 
+  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+
   constructor(private userService: UserService, 
     private modalService: BsModalService, 
     public route: ActivatedRoute,

@@ -13,6 +13,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -121,6 +122,7 @@ import { AboutUsComponent } from './layouts/about-us/about-us.component';
     CarouselModule,
     ShareButtonsModule,
     ShareIconsModule,
+    ScrollingModule,
     NgbModule
   ],
   providers: [

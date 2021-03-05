@@ -6,10 +6,10 @@
       <div class="network_btm">
         <div class="connection d-flex align-items-center justify-content-between" *ngFor="let user of users; let i = index">
           <div class="connection_lft d-flex align-items-center"> 
-              <span [routerLink]="'/user/'+ user.data.id"> <img [src]="user.data.profile_img == null ? userAvatar : path + user.data.profile_img" [alt]="user.data.username"> <img class="user-type" [src]="user.data.usertype == 3 ? teacherIcon : studentIcon" alt="user type"> </span>
+              <span [routerLink]="'/user/'+ user.data.id"> <img [src]="user.data.profile_img == null ? userAvatar : path + user.data.profile_img" [alt]="user.data.username"> <img class="user-type" [src]="user.data.usertype == 3 ? studentIcon : teacherIcon" alt="user type"> </span>
             <div class="ml-4">
                 <h4 [routerLink]="'/user/'+ user.data.id">{{ user.data.username }}</h4>
-                <span *ngIf="user.data.university !== null">{{ (user.data.usertype == 3 ? "Teacher at ":"Student at ") +  user.data.university }}</span> 
+                <span *ngIf="user.data.university !== null">{{ (user.data.usertype == 3 ? "Student at ":"Teacher at ") +  user.data.university }}</span> 
             </div>
           </div>
           <div class="connection_rht">
