@@ -431,6 +431,8 @@ footer.footer { padding: 30px 0 0; }
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
+    outline: none;
 }
 .follow_top .user-type { 
     width: 30px;
@@ -442,7 +444,15 @@ footer.footer { padding: 30px 0 0; }
     color: #9D9D9D;
 }
 .follow_rht { padding-left: 20px; }
-.follow_rht h3 { font-size: 20px; color: #000; font-weight: 500; margin: 0; }
+.follow_rht h3 { 
+    font-size: 20px; color: #000; font-weight: 500; margin: 0; 
+    outline: none;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.follow_rht h3:hover { 
+    color: #514DC5;
+}
 .follow_rht h3 span { font-size: 18px; color: #9D9D9D; }
 .follow_rht p { font-size: 15px; color: #9D9D9D; margin: 0; }
 .follow_top { border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; }
@@ -581,7 +591,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 /* .student_rht.network_rht { padding-right: 8%; } */
 .network_rht .custom_card { padding: 27px 40px; }
 .tabs_follow { border-bottom: 1px solid #E0E0E0; margin-bottom: 30px; }
-.tabs_follow li { display: inline-block; font-size: 20px; font-weight: 500; color: #212121; padding-bottom: 27px; cursor: pointer; }
+.tabs_follow li { display: inline-block; font-size: 20px; font-weight: 500; color: #212121; padding-bottom: 27px; outline: none; cursor: pointer; }
 .tabs_follow li.active { color: #514DC5; border-bottom: 2px solid #514DC5; }
  .tabs_follow li:nth-child(2) {
  margin-left: 58px;
