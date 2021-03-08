@@ -20,6 +20,7 @@ import { PlansComponent } from './layouts/plans/plans.component';
 import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.component';
 import { PostComponent } from './layouts/post/post.component';
 import { AboutUsComponent } from './layouts/about-us/about-us.component';
+import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -60,7 +61,9 @@ const routes: Routes = [
   { path: "post/:id", component: PostComponent},
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent },
-  { path: "about-us", component: AboutUsComponent }
+  { path: "about-us", component: AboutUsComponent },
+  { path: "404", component: PageNotFoundComponent },
+  { path: "**", redirectTo: "404" }
 ];
 
 @NgModule({

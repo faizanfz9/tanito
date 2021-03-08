@@ -61,6 +61,7 @@ import { ShowMenuDirective } from './directives/show-menu.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostComponent } from './layouts/post/post.component';
 import { AboutUsComponent } from './layouts/about-us/about-us.component';
+import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { AboutUsComponent } from './layouts/about-us/about-us.component';
     MyPlansComponent,
     ShowMenuDirective,
     PostComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

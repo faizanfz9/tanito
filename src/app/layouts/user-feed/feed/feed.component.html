@@ -1,39 +1,37 @@
  <div class="student_rht">
-    <div class="custom_card media_card" routerLink="/myProfile" [queryParams]="{ post: 'create' }">
-        <div class="tabs_wraper">
-            <ul>
-                <li class="active" data-item="write-something"><img src="assets/images/icons/edit_icon.png" alt="edit">Write a Feed</li>
-                <!-- <li data-item="upload-img"><img src="assets/images/icons/image_icon.png" alt="edit">Upload a Photo</li>
-                <li data-item="upload-video"><img src="assets/images/icons/video_icon.png" alt="edit">Upload Video</li> -->
-            </ul>
-        </div>
-        <div class="text_box" id="write-something">
-            <textarea placeholder="Write Something.." id="writeSomething"></textarea>
-        </div>
-        <div class="upload_media media_box" id="upload-img">
-            <input type="file" id="upload_img" class="d-none">
-            <label for="upload_img">
-                <img src="assets/images/icons/uploadImg.png" alt="image">
-                Upload image
-            </label>
-        </div>
-        <div class="upload_media media_box" id="upload-video">
-            <input type="file" id="upload_vid" class="d-none">
-            <label for="upload_vid">
-                <img src="assets/images/icons/upload_video.png" alt="video" class="mb-2">
-                Upload video
-            </label>
-        </div>
-        <div class="custom_card_ftr">
-            <p><span>Write a Question</span>  on tanito</p>
-            <p><span id="charCount">0</span>/2000</p>
-        </div>
-    </div>
     <div #feedBlock>
+        <cdk-virtual-scroll-viewport itemSize="200" class="viewport">
+        <div class="custom_card media_card" routerLink="/myProfile" [queryParams]="{ post: 'create' }">
+            <div class="tabs_wraper">
+                <ul>
+                    <li class="active" data-item="write-something"><img src="assets/images/icons/edit_icon.png" alt="edit">Write a Feed</li>
+                </ul>
+            </div>
+            <div class="text_box" id="write-something">
+                <textarea placeholder="Write Something.." id="writeSomething"></textarea>
+            </div>
+            <div class="upload_media media_box" id="upload-img">
+                <input type="file" id="upload_img" class="d-none">
+                <label for="upload_img">
+                    <img src="assets/images/icons/uploadImg.png" alt="image">
+                    Upload image
+                </label>
+            </div>
+            <div class="upload_media media_box" id="upload-video">
+                <input type="file" id="upload_vid" class="d-none">
+                <label for="upload_vid">
+                    <img src="assets/images/icons/upload_video.png" alt="video" class="mb-2">
+                    Upload video
+                </label>
+            </div>
+            <div class="custom_card_ftr">
+                <p><span>Write a Question</span>  on tanito</p>
+                <p><span id="charCount">0</span>/2000</p>
+            </div>
+        </div>
         <div class="custom_card custom_crd_padd" *ngIf="feeds.length == 0 && query">
             <h5>No Post Found!</h5>
         </div>
-        <cdk-virtual-scroll-viewport itemSize="200" class="viewport">
             <div class="custom_card custom_crd_padd feeds" *cdkVirtualFor="let feed of feeds | shuffleFeeds">
                 <div class="follow_top d-flex align-items-center">
                     <div class="follow_lft">
