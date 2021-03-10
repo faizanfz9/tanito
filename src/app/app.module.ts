@@ -15,8 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
@@ -119,8 +119,8 @@ import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.c
     ModalModule.forRoot(),
     NgxLoadingModule.forRoot({}),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     CarouselModule,
     ShareButtonsModule,
     ShareIconsModule,

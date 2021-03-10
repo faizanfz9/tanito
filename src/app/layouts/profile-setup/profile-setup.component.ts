@@ -41,7 +41,7 @@ export class ProfileSetupComponent implements OnInit {
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
-  @ViewChild("signUpAlert") signUpAlert: any;
+  // @ViewChild("signUpAlert") signUpAlert: any;
 
   allsubjects: any = [];
   @ViewChild('subjectInput') subjectInput: any;
@@ -136,6 +136,7 @@ export class ProfileSetupComponent implements OnInit {
     userInfo.append("experience", form.value.experience);
     userInfo.append("university", form.value.university);
     userInfo.append("gender", form.value.gender);
+    userInfo.append("description", form.value.description);
     userInfo.append("subjects", filledSubjects.toString());
     userInfo.append("profile", this.selectedImg);
     userInfo.append("mobile", this.mobile);
@@ -149,12 +150,8 @@ export class ProfileSetupComponent implements OnInit {
         var r = confirm("Do you want to save?");
         if (r == true) {
           this.loading = false;
-          if(res.data.status == 0) {
-            this.openModal(this.signUpAlert);
-          }else {
-            this.authService.storeUser(res.data);
-            this.router.navigate(['/feed']);
-          }
+          this.authService.storeUser(res.data);
+          this.router.navigate(['/feed']);
         }else {
           this.loading = false;
         }

@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage'
+import { VideoProcessingService } from 'src/app/shared/video-processing.service';
 
 @Component({
   selector: 'app-inbox',
@@ -21,9 +22,13 @@ export class InboxComponent implements OnInit{
   loggedUserId: any;
   @ViewChild("buyPremium") buyPremium: any;
   @ViewChild("chatBox", {static: true}) chatBox: any;
+  @ViewChild("fileInput") fileInput: any;
   isFetched = false;
   loading = false;
   showRooms = false;
+  file: any;
+  fileUrl: any = "";
+  vdoRegex = new RegExp(/\.(mp4|avi|mov|wmv|webm|mkv|flv)/g);
 
   isPlanActive = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
@@ -32,7 +37,8 @@ export class InboxComponent implements OnInit{
 
   constructor(private chatService: ChatService, 
     private userService: UserService, 
-    private afAuth: AngularFireAuth, 
+    private storage: AngularFireStorage,
+    private videoService: VideoProcessingService,
     private route: ActivatedRoute, 
     private modalService: BsModalService) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
@@ -93,19 +99,21 @@ export class InboxComponent implements OnInit{
   onSendMsg() {
     if(!this.isPlanActive) {
       if(this.chatRooms.length < 5 || this.isRoomFound) {
-        if(this.message.length > 0) {
-          this.chatService.sendMessage(this.message, this.chatRoomId);
+        if(this.message.length > 0 || this.fileUrl.length > 0) {
+          this.chatService.sendMessage(this.message, this.fileUrl, this.chatRoomId);
           this.chatService.createRoom(this.receiver);
           this.message = "";
+          this.fileReset();
         }
       }else {
         this.openModal(this.buyPremium);
       }
     }else {
-      if(this.message.length > 0) {
-        this.chatService.sendMessage(this.message, this.chatRoomId);
+      if(this.message.length > 0 || this.fileUrl.length > 0) {
+        this.chatService.sendMessage(this.message, this.fileUrl, this.chatRoomId);
         this.chatService.createRoom(this.receiver);
         this.message = "";
+        this.fileReset();
       }
     }
   }
@@ -122,6 +130,40 @@ export class InboxComponent implements OnInit{
 
   toggleRooms() {
     this.showRooms = !this.showRooms;
+  }
+
+  onSelectFile(event: any) {
+    this.file = event.target.files[0];
+    if(this.file.name.search(this.vdoRegex) !== -1) {
+      this.videoService.generateThumbnail(this.file, false).
+      then(res => {
+        this.loading = true;
+        this.storage.upload(this.file.name, this.file).then(res => {
+          res.ref.getDownloadURL().then(url => {
+            this.loading = false;
+            this.fileUrl = url;
+          });
+        });
+      })
+      .catch(error => {
+        alert(error);
+        this.fileReset();
+      })
+    }else {
+      this.loading = true;
+      this.storage.upload(this.file.name, this.file).then(res => {
+        res.ref.getDownloadURL().then(url => {
+          this.loading = false;
+          this.fileUrl = url;
+        });
+      });
+    }
+  }
+
+  fileReset() {
+    this.file = null;
+    this.fileInput.nativeElement.value = "";
+    this.fileUrl = "";
   }
 
 }

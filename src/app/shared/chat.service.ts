@@ -19,22 +19,16 @@ export class ChatService {
     private db: AngularFireDatabase) {
     this.sender = JSON.parse(this.userService.getUser());
     this.senderId = this.sender.id;
-    
-    // this.afAuth.authState.subscribe(auth => {
-    //   if (auth !== undefined && auth !== null) {
-    //     this.loggedUser = auth;
-    //     console.log(this.loggedUser);
-    //   }
-    // });
   }
 
-  sendMessage(msg: string, chatRoomId: any) {
+  sendMessage(msg: string, attachment: any, chatRoomId: any) {
     const timestamp = this.getTimeStamp();
     let chatMessage: any = [];
     chatMessage = this.getMessages(chatRoomId);
     this.lastMsg = msg;
     chatMessage.push({
       message: msg,
+      attachment: attachment,
       timeSent: timestamp,
       senderPic: this.profilePath + this.sender.profile_img,
       senderType: this.sender.usertype,
@@ -78,7 +72,7 @@ export class ChatService {
           memberId: receiverId,
           memberName: receiver.username,
           profileImg: receiver.profile_img,
-          lastMsg: "You: " + last_msg,
+          lastMsg: "You: " + (last_msg.length > 0 ? last_msg : "File"),
           msgSeen: true
         })
         db.list("/members/" + receiverId).push({
@@ -86,7 +80,7 @@ export class ChatService {
           memberId: sender.id,
           memberName: sender.username,
           profileImg: sender.profile_img.slice(sender.profile_img.lastIndexOf("/") + 1),
-          lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg,
+          lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + (last_msg.length > 0 ? last_msg : "File"),
           newMsg: 1,
           msgSeen: false
         })
@@ -95,7 +89,7 @@ export class ChatService {
         for (const key in senderArr) {
           if(senderArr[key].memberId == receiverId) {
             db.list("/members/" + sender.id).update(key, {
-              lastMsg: "You: " + last_msg,
+              lastMsg: "You: " + (last_msg.length > 0 ? last_msg : "File"),
               msgSeen: true
             })
             break;
@@ -104,7 +98,7 @@ export class ChatService {
         for (const key in receiverArr) {
           if(receiverArr[key].memberId == sender.id) {
             db.list("/members/" + receiverId).update(key, {
-              lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + last_msg,
+              lastMsg: sender.username.slice(0, sender.username.indexOf(" ")) + ": " + (last_msg.length > 0 ? last_msg : "File"),
               newMsg: 1,
               msgSeen: false
             })

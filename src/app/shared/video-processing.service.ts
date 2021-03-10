@@ -35,13 +35,14 @@ export class VideoProcessingService {
       // canvas.addEventListener('error',  reject);
       // video.addEventListener('error',  reject);
       video.onloadedmetadata = function() {
+        console.log(video.duration);
         if(isPostVideo) {
-          if(video.duration > 180) {
+          if(video.duration > 30) {
             reject("Upload video of less than 30 seconds!")
           }
         }else {
-          if(video.duration > 30) {
-            reject("Upload video of less than 30 seconds!")
+          if(video.duration > 180) {
+            reject("Upload video of less than 180 seconds!")
           }
         }
       };

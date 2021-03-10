@@ -15,8 +15,7 @@
                 <div class="row mt-3">
                   <div class="col-md-6">
                     <div class="user_contact_info"> <a href="#">{{ user.email }}</a>
-                      <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores et ea rebum. </p>
+                      <p>{{ user.description }}</p>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -65,7 +64,6 @@
                 <ul>
                     <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.qualification | uppercase }}</li>
                     <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.university | titlecase }}</li>
-                    <li><img src="assets/images/icons/work.svg" alt="work" />{{ user.experience + " Year" | titlecase }}</li>
                     <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.created | datefilter }}</li>
                     <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
                 </ul>

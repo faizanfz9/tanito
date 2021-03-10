@@ -11,6 +11,8 @@ export class ChatroomComponent implements OnInit {
   @Input() chatFeeds: any;
   @Input() events: any;
   loggedUserId: any;
+  imgRegex = new RegExp(/\.(gif|jpe?g|tiff?|png|webp|bmp)/g);
+  vdoRegex = new RegExp(/\.(mp4|avi|mov|wmv|webm|mkv|flv)/g);
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 

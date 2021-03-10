@@ -720,7 +720,7 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 .indvsl_msg_box h3 + span { font-size: 13px; color: #A1A1A1; }
 .chat_box_ftr { box-shadow: 0px -7px 13px #BEBBBB1F; border-radius: 0px 0px 0px 30px; padding: 26px 30px; }
 .chat_box_ftr textarea { width: 100%; border: none; resize: none; font-size: 15px; outline: none; }
-.chat_box_ftr button { border: none; background-color: transparent; margin-left: 30px; }
+.chat_box_ftr button { border: none; background-color: transparent; margin-left: 20px; }
 .msg_date span { font-size: 12px; color: #BDBDBD; }
 .request_accpt { margin:25px 0 15px; }
 .request_accpt h5 { margin: 0; font-size: 15px; margin-left: 10px; }
