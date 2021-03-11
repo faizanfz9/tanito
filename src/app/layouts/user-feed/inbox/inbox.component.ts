@@ -151,7 +151,7 @@ export class InboxComponent implements OnInit{
       })
     }else {
       this.loading = true;
-      this.storage.upload(this.file.name, this.file).then(res => {
+      this.storage.upload(this.file.name.toLowerCase(), this.file).then(res => {
         res.ref.getDownloadURL().then(url => {
           this.loading = false;
           this.fileUrl = url;
