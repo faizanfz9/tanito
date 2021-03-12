@@ -101,12 +101,13 @@
           </div>
           <div class="form-group row mb-3">
             <div class="col-12">
-              <label class="primary_color spcllbl">Description</label>
+              <label class="primary_color spcllbl">Description (100 words)</label>
               <textarea 
               type="text" 
               class="form-control" 
               placeholder="Write about yourself"
-              name="description"
+              name="description" 
+              maxlength="100"
               [ngModel]="user ? user.description: '' "
               required>
               </textarea>
