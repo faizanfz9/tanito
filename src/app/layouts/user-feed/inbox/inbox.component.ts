@@ -87,16 +87,23 @@ export class InboxComponent implements OnInit{
 
     setTimeout(() => {
       if(this.feeds.length > 0 && this.receiver.usertype == 2) {
-        let lastMsg = this.feeds[this.feeds.length - 1];
-        if(lastMsg.senderId == this.loggedUserId) {
-          let msgDate: any = new Date(lastMsg.timeSent);
-          let currDate: any = new Date();
-          let timeBetween = Math.abs(currDate - msgDate);
-          let dayBetween = Math.ceil(timeBetween / (1000 * 60 * 60 * 24));
-          if(dayBetween > 3) {
-            this.openModal(this.rateTeacher);
+        let loggedUserId = new FormData();
+        loggedUserId.append("id", this.loggedUserId);
+        this.userService.getRating(loggedUserId).subscribe((res: any) => {
+          let check = res.data.result.some((item: any) => item.to_id == this.receiver.user_id);
+          if (!check) {
+            let lastMsg = this.feeds[this.feeds.length - 1];
+            if(lastMsg.senderId == this.loggedUserId) {
+              let msgDate: any = new Date(lastMsg.timeSent);
+              let currDate: any = new Date();
+              let timeBetween = Math.abs(currDate - msgDate);
+              let dayBetween = Math.ceil(timeBetween / (1000 * 60 * 60 * 24));
+              if(dayBetween > 3) {
+                this.openModal(this.rateTeacher);
+              }
+            }  
           }
-        }
+        })
       }
     }, 3000)
   }
@@ -104,7 +111,7 @@ export class InboxComponent implements OnInit{
   onRateTeacher() {
     let rateCriteria = new FormData();
     rateCriteria.append('from_id', this.loggedUserId);
-    rateCriteria.append('to_id', this.receiver.id);
+    rateCriteria.append('to_id', this.receiver.user_id);
     rateCriteria.append('remarks', this.currentRate.toString());
     this.loading = true;
     this.userService.rateTeacher(rateCriteria).subscribe(res => {

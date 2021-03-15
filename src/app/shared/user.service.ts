@@ -170,4 +170,9 @@ export class UserService {
     return this.http.post(this.url + "/user_rating", rateCriteria);
   }
 
+  // Get rating
+  getRating(id: any) {
+    return this.http.post(this.url + "/ratingByID", id);
+  }
+
 }
