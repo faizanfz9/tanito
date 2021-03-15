@@ -7,13 +7,18 @@
     <div class="row slider-wrap justify-content-center">
       <div class="col-12 col-sm-6 col-lg-4 col-wrap" *ngFor="let plan of plans">
         <div class="card-wrap purple">
-          <div class="title">
-            <h4><img src="assets/images/message.svg" alt="message">{{ plan.plan }}</h4>
+          <div class="inner-wrap">
+            <div class="top-block">
+              <div class="title">
+                <h4><img src="assets/images/message.svg" alt="message">{{ plan.plan }}</h4>
+              </div>
+              <div [innerHtml]="plan.description" class="list content"></div>
+            </div>
+            <div class="bottom-block">
+              <h3>{{ plan.amount | currency:'₹' }} /<span> {{ plan.validity }} Months</span></h3>
+              <a (click)="initPay(plan.plan, plan.id, plan.amount)" class="btn" data-target="#pricing_success_modal">Choose Plan</a>
+            </div>
           </div>
-          <div [innerHtml]="plan.description" class="list content"></div>
-          <!-- <h3>₹1200 <span>/month</span></h3> -->
-          <h3>{{ plan.amount | currency:'₹' }} /<span> {{ plan.validity }} Months</span></h3>
-          <a (click)="initPay(plan.plan, plan.id, plan.amount)" class="btn" data-target="#pricing_success_modal">Choose Plan</a>
         </div>
       </div>
     </div>
