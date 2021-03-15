@@ -27,3 +27,18 @@
     margin-left: 20px;
     color: #9D9D9D;
 }
+
+.rating {
+    display: block !important;
+    text-align: center;
+    ngb-rating {
+        outline: none;
+    }
+    .star {
+        font-size: 50px;
+        color: #b0c4de;
+    }
+    .filled {
+        color: #514DC5;
+    }
+}

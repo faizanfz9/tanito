@@ -77,4 +77,31 @@
   </div>
 </ng-template>
 
+<ng-template #rateTeacher>
+  <div class="modal_tanito report_modal">
+    <div class="modal-dialog">
+      <div class="modal-content text-center">
+        <div class="modal-header primary_bg">
+          <h5 class="modal-title text-uppercase">Rate Teacher</h5>
+        </div>
+        <div class="modal-body">
+          <div class="rating">
+            <ngb-rating [(rate)]="currentRate" [max]="5">
+              <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+              </ng-template>
+            </ngb-rating>
+            <hr>
+            <p>Share your experience by give rating to {{ receiver.username }}</p>
+          </div>
+          <div class="button_box d-flex align-items-center justify-content-center">
+            <a href="#" routerLink="/" class="back_to_home_btn mr-2">Back to Home</a>  
+            <button (click)="onRateTeacher()" type="button" class="ml-2">Submit</button>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

@@ -8,7 +8,7 @@
           </span> 
         </div>
         <div class="col-md-11 msg-body-col">
-          <h4>{{feed.username}} <img [src]="feed.senderType == 3 ? studentIcon : teacherIcon" class="ml-3" alt="teacher"> <span>{{ feed.timeSent }}</span></h4>
+          <h4>{{feed.username}} <img [src]="feed.senderType == 3 ? studentIcon : teacherIcon" class="ml-3" alt="teacher"> <span>{{ feed.timeSent | chatTime }}</span></h4>
           <div class="msg_body msg_body_blue_bg" [hidden]="feed.message.length == 0">
             <p>{{ feed.message }}</p>
           </div>

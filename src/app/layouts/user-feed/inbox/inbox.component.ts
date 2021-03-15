@@ -21,11 +21,13 @@ export class InboxComponent implements OnInit{
   isRoomFound: any;
   loggedUserId: any;
   @ViewChild("buyPremium") buyPremium: any;
+  @ViewChild("rateTeacher") rateTeacher: any;
   @ViewChild("chatBox", {static: true}) chatBox: any;
   @ViewChild("fileInput") fileInput: any;
   isFetched = false;
   loading = false;
   showRooms = false;
+  currentRate = 0;
   file: any;
   fileUrl: any = "";
   vdoRegex = new RegExp(/\.(mp4|avi|mov|wmv|webm|mkv|flv)/g);
@@ -82,6 +84,34 @@ export class InboxComponent implements OnInit{
         this.isPlanActive = true;
       }
     }
+
+    setTimeout(() => {
+      if(this.feeds.length > 0 && this.receiver.usertype == 3) {
+        let lastMsg = this.feeds[this.feeds.length - 1];
+        if(lastMsg.senderId == this.loggedUserId) {
+          let msgDate: any = new Date(lastMsg.timeSent);
+          let currDate: any = new Date();
+          let timeBetween = Math.abs(currDate - msgDate);
+          let dayBetween = Math.ceil(timeBetween / (1000 * 60 * 60 * 24));
+          if(dayBetween > 3) {
+            this.openModal(this.rateTeacher);
+          }
+        }
+      }
+    }, 3000)
+  }
+
+  onRateTeacher() {
+    let rateCriteria = new FormData();
+    rateCriteria.append('from_id', this.loggedUserId);
+    rateCriteria.append('to_id', this.receiver.id);
+    rateCriteria.append('remarks', this.currentRate.toString());
+    this.loading = true;
+    this.userService.rateTeacher(rateCriteria).subscribe(res => {
+      this.loading = false;
+      alert('Rating Submitted!');
+      this.modalService.hide();
+    })
   }
 
   onMsgRead(member_id: any) {
@@ -167,3 +197,7 @@ export class InboxComponent implements OnInit{
   }
 
 }
+function d(d: any) {
+  throw new Error('Function not implemented.');
+}
+

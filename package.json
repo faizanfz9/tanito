@@ -37,6 +37,7 @@
     "bootstrap": "^4.5.0",
     "firebase": "^7.24.0",
     "ng-click-outside": "^7.0.1",
+    "ng-starrating": "^1.0.20",
     "ngx-bootstrap": "^6.2.0",
     "ngx-loading": "^8.0.0",
     "ngx-owl-carousel-o": "^5.0.0",

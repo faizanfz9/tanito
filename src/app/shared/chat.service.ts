@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { UserService } from './user.service';
 
@@ -14,22 +13,21 @@ export class ChatService {
   chatId: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
 
-  constructor(private userService: UserService, 
-    private afAuth: AngularFireAuth, 
+  constructor(private userService: UserService,
     private db: AngularFireDatabase) {
     this.sender = JSON.parse(this.userService.getUser());
     this.senderId = this.sender.id;
   }
 
   sendMessage(msg: string, attachment: any, chatRoomId: any) {
-    const timestamp = this.getTimeStamp();
+    // const timestamp = this.getTimeStamp();
     let chatMessage: any = [];
     chatMessage = this.getMessages(chatRoomId);
     this.lastMsg = msg;
     chatMessage.push({
       message: msg,
       attachment: attachment,
-      timeSent: timestamp,
+      timeSent: Date(),
       senderPic: this.profilePath + this.sender.profile_img,
       senderType: this.sender.usertype,
       senderId: this.senderId
@@ -41,12 +39,12 @@ export class ChatService {
     return this.db.list("/chats/" + this.chatId);
   }
 
-  getTimeStamp() {
-    const now = new Date();
-    const time = now.getHours() + ':' +
-                 now.getMinutes();
-    return time;
-  }
+  // getTimeStamp() {
+  //   const now = new Date();
+  //   // const time = now.toLocaleDateString() + " | " + now.getHours() + ':' +
+  //   //              now.getMinutes();
+  //   return now;
+  // }
 
   getRooms(senderId: any) {
     return this.db.list("/members/" + senderId);
