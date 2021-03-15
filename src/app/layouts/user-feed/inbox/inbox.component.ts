@@ -86,7 +86,7 @@ export class InboxComponent implements OnInit{
     }
 
     setTimeout(() => {
-      if(this.feeds.length > 0 && this.receiver.usertype == 3) {
+      if(this.feeds.length > 0 && this.receiver.usertype == 2) {
         let lastMsg = this.feeds[this.feeds.length - 1];
         if(lastMsg.senderId == this.loggedUserId) {
           let msgDate: any = new Date(lastMsg.timeSent);
