@@ -18,4 +18,8 @@ export class PlanService {
     return this.http.post(this.url + "/subscribe_plan", planInfo);
   }
 
+  applyPromo(promocode: any) {
+    return this.http.post(this.url + "/check_promocode", promocode);
+  }
+
 }

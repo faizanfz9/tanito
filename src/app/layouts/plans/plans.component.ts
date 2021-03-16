@@ -15,8 +15,13 @@ import { NotificationService } from 'src/app/shared/notification.service';
 export class PlansComponent implements OnInit {
   plans: any;
   selectedPlanId: any;
+  planDescription: any;
+  planAmt: any;
   loggedUser: any;
+  discount: any;
+  discountApplied = false;
   @ViewChild("confirmationBox") confirmationBox: any;
+  @ViewChild("applyPromocode") applyPromocode: any;
   
   private _window: ICustomWindow;
   public rzp: any;
@@ -65,19 +70,47 @@ export class PlansComponent implements OnInit {
     this.planService.getPlans().subscribe((res: any) => {
       this.plans = res.data.results;
     })
+    this.modalService.onHidden.subscribe((res: any) => {
+      this.planAmt = 0;
+      this.discount = 0;
+      this.discountApplied = false;
+    })
   }
 
   initPay(plan: any, planId: any, planAmt: any): void {
     this.selectedPlanId = planId;
-    if(this.loggedUser.plan_subcription.some((item: any) => item.id == planId)) {
+    this.planDescription = plan;
+    this.planAmt = planAmt;
+    this.openModal(this.applyPromocode);
+  }
+
+  onApplyPromo(promocode: any) {
+    if(promocode.length == 0) {
+      alert("Please enter any promocode first!");
+    }else {
+      let promo = new FormData();
+      promo.append("promocode", promocode);
+      this.planService.applyPromo(promo).subscribe((res: any) => {
+        if(res.status == false) {
+          alert(res.msg);
+        }else {
+          this.discount = res.data.amount;
+          this.planAmt = this.planAmt - this.discount; 
+          this.discountApplied = true;
+        }
+      })
+    }
+  }
+
+  proceedToPay() {
+    if(this.loggedUser.plan_subcription.some((item: any) => item.id == this.selectedPlanId)) {
       alert("You have already subscribed this plan!")
     }else {
-      this.options.description = plan;
-      this.options.amount = planAmt * 100;
+      this.options.description = this.planDescription;
+      this.options.amount = this.planAmt * 100;
       this.rzp = new this.winRef.nativeWindow["Razorpay"](this.options);
       this.rzp.open();
     }
-    
   }
 
   paymentHandler(res: any) {

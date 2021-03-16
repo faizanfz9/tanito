@@ -8,7 +8,7 @@
              <span class="bar"></span>
              <span class="bar"></span>
           </div>
-          <div class="ml-auto collapse-menu" [ngClass]="{ 'show': showMenu }">
+          <div class="collapse-menu" [ngClass]="{ 'show': showMenu }">
              <div class="after_login_head" *ngIf="isLoggedIn">
                 <div class="search_bar_head head_top_bar">
                    <form (submit)="onSearchUser(query.value)">
@@ -16,53 +16,55 @@
                        <button type="submit" (click)="onSearchUser(query.value)" class="submit_search_bar"></button>
                    </form>
                 </div>
-                <div class="wishlist_card_head head_top_bar">
-                   <div class="wishlish_icon">
-                      <a (click)="onCheckNotification()" appShowMenu> 
-                         <i class="fa fa-bell"></i> 
-                         <span *ngIf="newNotifications.length > 0">{{ newNotifications.length }}</span> 
-                      </a>
-                      <div *ngIf="notifications.length > 0" class="dropdown-menu my_account_dropmenu notification">
-                         <ul>
-                            <li *ngFor="let item of notifications">
-                               <img [src]="item.userPic" alt="userpic"> 
-                               <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
-                                  <strong>{{ item.timestamp | postCreated }}</strong>
-                               </p> 
-                            </li>
-                         </ul>
-                      </div>
-                   </div>
-                </div>
-                <div class="account_panel_head head_top_bar">
-                   <div class="account_user_icon">
-                      <a id="logindrop" appShowMenu>
-                         <img [src]="user.profile_img.length > 0 ? profilePath + user.profile_img : userAvatar" alt="profile image">
-                         <span class="user_online"></span>
-                      </a>
-                      <div class="dropdown-menu my_account_dropmenu">
-                         <ul>
-                            <li><a routerLink="/myProfile">My Account</a></li>
-                            <li><a (click)="onLogOut($event)">Log Out</a></li>
-                         </ul>
-                      </div>
-                   </div>
-                </div>
-                <div class="mobile-links">
-                   <ul>
-                      <li><a routerLink="/myProfile"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My Account</a></li>
-                      <li><a (click)="onLogOut($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
-                      <li><a routerLink="/plans"><i class="fa fa-diamond" aria-hidden="true"></i> Try Tanito Premium</a></li>
-                   </ul>
-                   <div class="search_bar_head head_top_bar">
-                      <form (submit)="onSearchUser(querySm.value)">
-                          <input type="search" class="form-control" #querySm placeholder="Search here...">
-                          <button type="submit" (click)="onSearchUser(querySm.value)" class="submit_search_bar"></button>
-                      </form>
-                   </div>
-                </div>
-                <div class="premium_buy head_top_bar">
-                   <a class="primary_color" routerLink="/plans"><img src="assets/images/diamond.svg" alt="diamond"> try Tanito Premium </a>
+                <div class="nav">
+                  <div class="wishlist_card_head head_top_bar">
+                     <div class="wishlish_icon">
+                        <a (click)="onCheckNotification()" appShowMenu> 
+                           <i class="fa fa-bell"></i> 
+                           <span *ngIf="newNotifications.length > 0">{{ newNotifications.length }}</span> 
+                        </a>
+                        <div *ngIf="newNotifications.length > 0" class="dropdown-menu my_account_dropmenu notification">
+                           <ul>
+                              <li *ngFor="let item of notifications">
+                                 <img [src]="item.userPic" alt="userpic"> 
+                                 <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
+                                    <strong>{{ item.timestamp | postCreated }}</strong>
+                                 </p> 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="account_panel_head head_top_bar">
+                     <div class="account_user_icon">
+                        <a id="logindrop" appShowMenu>
+                           <img [src]="user.profile_img.length > 0 ? profilePath + user.profile_img : userAvatar" alt="profile image">
+                           <span class="user_online"></span>
+                        </a>
+                        <div class="dropdown-menu my_account_dropmenu">
+                           <ul>
+                              <li><a routerLink="/myProfile">My Account</a></li>
+                              <li><a (click)="onLogOut($event)">Log Out</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mobile-links">
+                     <ul>
+                        <li><a routerLink="/myProfile"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My Account</a></li>
+                        <li><a (click)="onLogOut($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a></li>
+                        <li><a routerLink="/plans"><i class="fa fa-diamond" aria-hidden="true"></i> Try Tanito Premium</a></li>
+                     </ul>
+                     <div class="search_bar_head head_top_bar">
+                        <form (submit)="onSearchUser(querySm.value)">
+                            <input type="search" class="form-control" #querySm placeholder="Search here...">
+                            <button type="submit" (click)="onSearchUser(querySm.value)" class="submit_search_bar"></button>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="premium_buy head_top_bar">
+                     <a class="primary_color" routerLink="/plans"><img src="assets/images/diamond.svg" alt="diamond"> try Tanito Premium </a>
+                  </div>
                 </div>
              </div>
              <ul class="btn-sign-head" *ngIf="!isLoggedIn">

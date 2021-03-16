@@ -1,6 +1,5 @@
  <div class="student_rht">
     <div #feedBlock>
-        <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
         <div class="custom_card media_card" routerLink="/myProfile" [queryParams]="{ post: 'create' }">
             <div class="tabs_wraper">
                 <ul>
@@ -25,73 +24,73 @@
                 </label>
             </div>
             <div class="custom_card_ftr">
-                <p><span>Write a Question</span>  on tanito</p>
+                <p><span>Put a Question</span>  on tanito</p>
                 <p><span id="charCount">0</span>/2000</p>
             </div>
         </div>
         <div class="custom_card custom_crd_padd" *ngIf="feeds.length == 0 && query">
             <h5>No Post Found!</h5>
         </div>
-            <div class="custom_card custom_crd_padd feeds" *cdkVirtualFor="let feed of feeds | shuffleFeeds">
-                <div class="follow_top d-flex align-items-center">
-                    <div class="follow_lft">
-                        <img [routerLink]="'/user/'+ feed.user_id" class="profile-img" [src]="feed.profile_img == null ? userAvatar : profilePath + feed.profile_img" [alt]="feed.username">
+        <div class="custom_card custom_crd_padd feeds" *ngFor="let feed of feeds | shuffleFeeds">
+            <div class="follow_top d-flex align-items-center">
+                <div class="follow_lft">
+                    <img [routerLink]="'/user/'+ feed.user_id" class="profile-img" [src]="feed.profile_img == null ? userAvatar : profilePath + feed.profile_img" [alt]="feed.username">
+                </div>
+                <div class="follow_rht">
+                    <div class="d-flex align-items-center">
+                        <h3 [routerLink]="feed.user_id == loggedUser.id ? '/myProfile' : '/user/'+feed.user_id">{{ feed.username }}</h3>
+                        <img class="user-type" [src]="feed.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
                     </div>
-                    <div class="follow_rht">
-                        <div class="d-flex align-items-center">
-                            <h3 [routerLink]="feed.user_id == loggedUser.id ? '/myProfile' : '/user/'+feed.user_id">{{ feed.username }}</h3>
-                            <img class="user-type" [src]="feed.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
-                        </div>
-                        <p>{{ (feed.usertype == 3 ? "Student at ":"Teacher at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
-                    </div>
-                    <div class="option">
-                        <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
-                        <div class="dropdown-menu report my_account_dropmenu">
-                            <ul>
-                               <li><a (click)="reportModal(feed.id)">Report Post</a></li>
-                            </ul>
-                        </div>
+                    <p *ngIf="feed.usertype == 0">Promoted Post | <span>{{ feed.created | postCreated }}</span></p>
+                    <p *ngIf="feed.usertype != 0">{{ (feed.usertype == 3 ? "Student at ":"Teacher at ") +  feed.university }} &nbsp; | <span>{{ feed.created | postCreated }}</span></p>
+                </div>
+                <div class="option">
+                    <button type="button" class="dots_btn" appShowMenu><img src="assets/images/icons/dots.png" alt="dots"></button>
+                    <div class="dropdown-menu report my_account_dropmenu">
+                        <ul>
+                            <li><a (click)="reportModal(feed.id)">Report Post</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="follow_bdy">
-                    <p> {{ feed.body }} </p>
-                    <ul [hidden]="feed.tags.length == 0" class="hashtags">
-                        <li *ngFor="let tag of feed.tags.split(',')">#{{ tag | lowercase }}</li>
-                    </ul>
-                    <img *ngIf="feed.image.length > 0" class="post-img" [src]="imageDirPath + feed.image">
-                    <plyr *ngIf="feed.video.length > 0" style="display: block; max-width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + feed.video }]"></plyr>
-                  </div>
-                  <p class="subject d-block d-sm-none" [hidden]="feed.subject.length == 0"> {{ feed.subject | titlecase }}</p>
-                  <div class="follow_ftr">
-                    <div class="action-btn">
-                        <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
-                            <img [src]="checkLikeType(feed.likes)" alt="icon" />
-                        </button>
-                        <div class="follow_ftr react-btn-grp">
-                            <button type="button" (click)="onLikePost(feed.id, 0, likeBtn, feed)">
-                                <img src="assets/images/icons/like_icon.png" alt="icon" />
-                            </button>
-                            <button type="button" (click)="onLikePost(feed.id, 1, likeBtn, feed)">
-                                <img src="assets/images/icons/lightbulb.png" alt="icon" />
-                            </button>
-                            <button type="button" (click)="onLikePost(feed.id, 2, likeBtn, feed)">
-                                <img src="assets/images/icons/clap.png" alt="icon" />
-                            </button>
-                            <button type="button" (click)="onLikePost(feed.id, 3, likeBtn, feed)">
-                                <img src="assets/images/icons/like.png" alt="icon" />
-                            </button>
-                        </div>
-                    </div>
-                    <span class="likes">{{ feed.likes.length }}</span>
-                    <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                    <span class="subjects d-none d-sm-block" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
-                    <div class="share-post">
-                        <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
-                        <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
-                    </div>
-                  </div>
             </div>
-          </cdk-virtual-scroll-viewport>
+            <div class="follow_bdy">
+                <p> {{ feed.body }} </p>
+                <ul [hidden]="feed.tags.length == 0" class="hashtags">
+                    <li *ngFor="let tag of feed.tags.split(',')">#{{ tag | lowercase }}</li>
+                </ul>
+                <img *ngIf="feed.image.length > 0" class="post-img" [src]="imageDirPath + feed.image">
+                <plyr *ngIf="feed.video.length > 0" style="display: block; max-width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + feed.video }]"></plyr>
+                </div>
+                <p class="subject d-block d-sm-none" [hidden]="feed.subject.length == 0"> {{ feed.subject | titlecase }}</p>
+                <div class="follow_ftr">
+                <div class="action-btn">
+                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
+                        <img [src]="checkLikeType(feed.likes)" alt="icon" />
+                    </button>
+                    <div class="follow_ftr react-btn-grp">
+                        <button type="button" (click)="onLikePost(feed.id, 0, likeBtn, feed)">
+                            <img src="assets/images/icons/like_icon.png" alt="icon" />
+                        </button>
+                        <button type="button" (click)="onLikePost(feed.id, 1, likeBtn, feed)">
+                            <img src="assets/images/icons/lightbulb.png" alt="icon" />
+                        </button>
+                        <button type="button" (click)="onLikePost(feed.id, 2, likeBtn, feed)">
+                            <img src="assets/images/icons/clap.png" alt="icon" />
+                        </button>
+                        <button type="button" (click)="onLikePost(feed.id, 3, likeBtn, feed)">
+                            <img src="assets/images/icons/like.png" alt="icon" />
+                        </button>
+                    </div>
+                </div>
+                <span class="likes">{{ feed.likes.length }}</span>
+                <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                <span class="subjects d-none d-sm-block" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
+                <div class="share-post">
+                    <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
+                    <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
+                </div>
+                </div>
+        </div>
     </div>
     <div *ngIf="feeds.length == 0 && !query">
         <app-users></app-users>

@@ -3,3 +3,10 @@
         max-height: 250px;
     }
 }
+
+.users_followrs_dt {
+    white-space: nowrap;
+    @media screen and (max-width:1199px){
+        white-space: normal;
+    }
+}

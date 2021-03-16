@@ -1,0 +1,17 @@
+.collapse-menu {
+    width: 100%;
+    .after_login_head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        @media screen and (max-width: 991px) {
+            height: auto;
+        }
+        .search_bar_head {
+            margin-left: 60px;
+            @media screen and (max-width: 1199px) {
+                margin-left: 0;
+            }
+        }
+    }
+}
