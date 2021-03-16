@@ -18,6 +18,7 @@ export class PlansComponent implements OnInit {
   planDescription: any;
   planAmt: any;
   loggedUser: any;
+  promocode: any;
   discount: any;
   discountApplied = false;
   @ViewChild("confirmationBox") confirmationBox: any;
@@ -85,6 +86,7 @@ export class PlansComponent implements OnInit {
   }
 
   onApplyPromo(promocode: any) {
+    this.promocode = promocode;
     if(promocode.length == 0) {
       alert("Please enter any promocode first!");
     }else {
@@ -122,7 +124,10 @@ export class PlansComponent implements OnInit {
       this.planService.buyPlan(planInfo).subscribe((res: any) => {
         this.openModal(this.confirmationBox);
         this.userService.updateUser();
-        this.notification.sendNotification(this.loggedUser.id, this.loggedUser.profile_img , "You have subscribed our " + this.options.description + " plan")
+        this.notification.sendNotification(this.loggedUser.id, this.loggedUser.profile_img , "You have subscribed our " + this.options.description + " plan");
+        let promo = new FormData();
+        promo.append("promocode", this.promocode);
+        this.planService.redeemPromo(promo).subscribe(res);
       })
     });
   }

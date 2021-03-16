@@ -378,7 +378,7 @@ footer.footer { padding: 30px 0 0; }
 .sideMenu_box li a img { width: 31px; margin-right: 50px; filter: invert(1) grayscale(1) brightness(1); -webkit-filter: invert(1) grayscale(1) brightness(1); }
 .student_lft .custom_card.category_card { padding-left: 60px; padding-right: 60px; }
 .category_card h3 { font-size: 20px; color: #514DC5; margin: 0; border-bottom: 1px solid #E0E0E0; padding-bottom: 8px; margin-bottom: 20px; }
-.category_card .accord_btn { font-size:15px; color: #828282; cursor: pointer; display: flex; align-items: center; justify-content: space-between; background-color: #F4F4F4; padding: 10px 15px; border-radius: 30px; }
+.category_card .accord_btn { font-size:15px; color: #828282; cursor: pointer; display: flex; align-items: center; justify-content: space-between; background-color: #F4F4F4; padding: 10px 15px; border-radius: 30px; outline: none; }
 .category_card .content { display: none; }
 .category_card .content ul { padding-left: 15px; }
 .category_card .content ul li { margin-bottom: 10px; font-size: 13px; font-weight: 500; }
@@ -415,7 +415,7 @@ footer.footer { padding: 30px 0 0; }
 .media_card ul li.active img { filter: invert(0) grayscale(0) brightness(1); -webkit-filter: invert(0) grayscale(0) brightness(1); }
 .text_box textarea { height: 145px; width: 100%; border: none; padding: 25px 30px; resize: none; outline: none; }
 .custom_card_ftr { border-top: 1px solid #e0e0e0; padding:15px 30px 0; display: flex; align-items: center; justify-content: space-between; }
-.custom_card_ftr p { margin: 0; font-size: 16px; color: #848484; }
+.custom_card_ftr p { margin: 0; font-size: 16px; color: #848484; cursor: pointer; }
 .custom_card_ftr p:first-child span { color: #514DC5; font-weight: 500; }
 .upload_media { padding:35px 30px 0; }
 .upload_media label { display: block; text-align: center; }
@@ -460,7 +460,7 @@ footer.footer { padding: 30px 0 0; }
 .follow_bdy p { font-size: 15px; }
 .follow_bdy .post-img { 
     max-width: 100%;
-    max-height: 450px;
+    max-height: 350px;
     margin: 10px 0;
 }
 .follow_ftr {

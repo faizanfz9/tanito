@@ -22,4 +22,7 @@ export class PlanService {
     return this.http.post(this.url + "/check_promocode", promocode);
   }
 
+  redeemPromo(promocode: any) {
+    return this.http.post(this.url + "/use_promocode", promocode);
+  }
 }

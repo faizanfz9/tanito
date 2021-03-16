@@ -76,7 +76,7 @@
           </div>
           <div class="col-md-8 col-lg-9">
             <div class="student_rht pr-0">
-              <div class="custom_card media_card" #timeline>
+              <div class="custom_card media_card" (click)="openModal(createPost)" #timeline>
                 <div class="tabs_wraper">
                   <ul>
                     <li class="active" data-item="write-something"><img src="assets/images/icons/edit_icon.png" alt="edit" />Write a post</li>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="text_box" id="write-something">
-                  <textarea (focus)="openModal(createPost)" placeholder="Write Something.." id="writeSomething"></textarea>
+                  <textarea placeholder="Write Something.." id="writeSomething"></textarea>
                 </div>
                 <div class="upload_media media_box" id="upload-img">
                   <input type="file" id="upload_img" class="d-none" />
@@ -97,7 +97,7 @@
                   <label for="upload_vid"> <img src="assets/images/icons/upload_video.png" alt="video" class="mb-2" /> Upload video </label>
                 </div>
                 <div class="custom_card_ftr">
-                  <p (click)="openModal(createPost)"><span>Write a Question</span> on tanito</p>
+                  <p><span>Put a Question</span> on tanito</p>
                   <p><span id="charCount">0</span>/2000</p>
                 </div>
               </div>
