@@ -1,5 +1,8 @@
  <div class="student_rht">
-    <div #feedBlock>
+    <div
+    infiniteScroll 
+    (scrolled)="onScroll()"
+    #feedBlock>
         <div class="custom_card media_card" routerLink="/myProfile" [queryParams]="{ post: 'create' }">
             <div class="tabs_wraper">
                 <ul>
@@ -24,7 +27,7 @@
                 </label>
             </div>
             <div class="custom_card_ftr">
-                <p><span>Put a Question</span>  on tanito</p>
+                <p><span>Put a Question or Post</span>  on tanito</p>
                 <p><span id="charCount">0</span>/2000</p>
             </div>
         </div>
@@ -63,32 +66,106 @@
                 </div>
                 <p class="subject d-block d-sm-none" [hidden]="feed.subject.length == 0"> {{ feed.subject | titlecase }}</p>
                 <div class="follow_ftr">
-                <div class="action-btn">
-                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
-                        <img [src]="checkLikeType(feed.likes)" alt="icon" />
-                    </button>
-                    <div class="follow_ftr react-btn-grp">
-                        <button type="button" (click)="onLikePost(feed.id, 0, likeBtn, feed)">
-                            <img src="assets/images/icons/like_icon.png" alt="icon" />
+                    <div class="action-btn">
+                        <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
+                            <img [src]="checkLikeType(feed.likes)" alt="icon" />
                         </button>
-                        <button type="button" (click)="onLikePost(feed.id, 1, likeBtn, feed)">
-                            <img src="assets/images/icons/lightbulb.png" alt="icon" />
-                        </button>
-                        <button type="button" (click)="onLikePost(feed.id, 2, likeBtn, feed)">
-                            <img src="assets/images/icons/clap.png" alt="icon" />
-                        </button>
-                        <button type="button" (click)="onLikePost(feed.id, 3, likeBtn, feed)">
-                            <img src="assets/images/icons/like.png" alt="icon" />
-                        </button>
+                        <div class="follow_ftr react-btn-grp">
+                            <button type="button" (click)="onLikePost(feed.id, 0, likeBtn, feed)">
+                                <img src="assets/images/icons/like_icon.png" alt="icon" />
+                            </button>
+                            <button type="button" (click)="onLikePost(feed.id, 1, likeBtn, feed)">
+                                <img src="assets/images/icons/lightbulb.png" alt="icon" />
+                            </button>
+                            <button type="button" (click)="onLikePost(feed.id, 2, likeBtn, feed)">
+                                <img src="assets/images/icons/clap.png" alt="icon" />
+                            </button>
+                            <button type="button" (click)="onLikePost(feed.id, 3, likeBtn, feed)">
+                                <img src="assets/images/icons/like.png" alt="icon" />
+                            </button>
+                        </div>
+                    </div>
+                    <span class="likes">{{ feed.likes.length }}</span>
+                    <svg
+                        version="1.1"
+                        fill="#474747"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        width="612px"
+                        height="612px"
+                        viewBox="0 0 612 612"
+                        style="enable-background: new 0 0 612 612;"
+                        xml:space="preserve"
+                        class="comment"
+                        appShowCommentBox
+                        >
+                    <g>
+                        <g id="_x32__26_">
+                            <g>
+                                <path
+                            d="M401.625,325.125h-191.25c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h191.25
+                        c10.557,0,19.125-8.568,19.125-19.125S412.182,325.125,401.625,325.125z M439.875,210.375h-267.75
+                        c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h267.75c10.557,0,19.125-8.568,19.125-19.125
+                        S450.432,210.375,439.875,210.375z M306,0C137.012,0,0,119.875,0,267.75c0,84.514,44.848,159.751,114.75,208.826V612
+                        l134.047-81.339c18.552,3.061,37.638,4.839,57.203,4.839c169.008,0,306-119.875,306-267.75C612,119.875,475.008,0,306,0z
+                        M306,497.25c-22.338,0-43.911-2.601-64.643-7.019l-90.041,54.123l1.205-88.701C83.5,414.133,38.25,345.513,38.25,267.75
+                        c0-126.741,119.875-229.5,267.75-229.5c147.875,0,267.75,102.759,267.75,229.5S453.875,497.25,306,497.25z"
+                        />
+                    </g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                    </svg>
+                    <span class="likes">{{ feed.comment.length }}</span>
+                    <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <span class="subjects d-none d-sm-block" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
+                    <div class="share-post">
+                        <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
+                        <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
                     </div>
                 </div>
-                <span class="likes">{{ feed.likes.length }}</span>
-                <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                <span class="subjects d-none d-sm-block" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
-                <div class="share-post">
-                    <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
-                    <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
-                </div>
+                <div class="comment-box">
+                    <div class="inner-box">
+                        <div class="comment-row" *ngFor="let item of feed.comment">
+                            <div class="user">
+                                <img [src]="item.profile_img == null ? userAvatar : profilePath + item.profile_img" alt="user">
+                                <div class="name">
+                                    <h6>{{ item.username }}</h6>
+                                    <p class="comment">{{ item.comment }}</p>
+                                </div>
+                            </div>
+                            <div class="follow_ftr">
+                                <div class="action-btn">
+                                    <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isCommentLiked(item.reactionType) }" #likeBtn (click)="onLikeComment(feed.id, item.commentID, commentLikeType ? commentLikeType : getCommentLikeType(item.reactionType), likeBtn)">
+                                        <img [src]="checkCommentLikeType(item.reactionType)" alt="icon" />
+                                    </button>
+                                    <div class="follow_ftr react-btn-grp">
+                                        <button type="button" (click)="onLikeComment(feed.id, item.commentID, 0, likeBtn)">
+                                            <img src="assets/images/icons/like_icon.png" alt="icon" />
+                                        </button>
+                                        <button type="button" (click)="onLikeComment(feed.id, item.commentID, 1, likeBtn)">
+                                            <img src="assets/images/icons/lightbulb.png" alt="icon" />
+                                        </button>
+                                        <button type="button" (click)="onLikeComment(feed.id, item.commentID, 2, likeBtn)">
+                                            <img src="assets/images/icons/clap.png" alt="icon" />
+                                        </button>
+                                        <button type="button" (click)="onLikeComment(feed.id, item.commentID, 3, likeBtn)">
+                                            <img src="assets/images/icons/like.png" alt="icon" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <span class="likes">{{ item.reactionType.length }}</span>
+                                <!-- <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span> -->
+                                <span class="date">&nbsp; &nbsp; | &nbsp; &nbsp; {{ item.created | postCreated }}</span>
+                                <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="no-comment" *ngIf="feed.comment.length == 0">Be the first to comment!</p>
+                    <form class="write-comment" (submit)="onCommentOnPost(feed.id, cmntForm)" #cmntForm="ngForm">
+                        <input placeholder="Write your comment here..." type="text" name="comment" required ngModel>
+                        <button type="submit" [disabled]="!cmntForm.valid"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </form>
                 </div>
         </div>
     </div>

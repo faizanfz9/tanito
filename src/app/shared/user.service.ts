@@ -120,8 +120,8 @@ export class UserService {
   }
 
   // Get all post
-  getAllPost() {
-    return this.http.get(this.url + "/get_all_post");
+  getAllPost(pageNo: any) {
+    return this.http.get(this.url + "/get_all_post?per_page=" + pageNo);
   }
 
   // Get all post
@@ -175,4 +175,18 @@ export class UserService {
     return this.http.post(this.url + "/ratingByID", id);
   }
 
+  // Commnet on post
+  commentOnPost(comment: any) {
+    return this.http.post(this.url + "/users_comment", comment);
+  }
+
+  // Delete post
+  deleteComment(commentId: any) {
+    return this.http.post(this.url + "/comment_delete", commentId);
+  }
+
+  // Like post comment
+  likeComment(commentInfo: any) {
+    return this.http.post(this.url + "/comment_reaction", commentInfo);
+  }
 }

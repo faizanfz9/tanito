@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -151,6 +152,103 @@ export class TimelineComponent implements OnInit {
     let reactionBlock: any = document.getElementsByClassName("reactions");
     reactionBlock.classList.remove("active");
     el.classList.add("active");
+  }
+
+  onCommentOnPost(postId: any, form: NgForm) {
+    let commentData = new FormData();
+    commentData.append('from_id', this.loggedUser.id);
+    commentData.append('post_id', postId);
+    commentData.append('comment', form.value.comment);
+    this.loading = true;
+    let post = this.myData.user_post_data.find((item: any) => item.id == postId);
+    this.userService.commentOnPost(commentData).subscribe((res: any) => {
+      this.loading = false;
+      post.comment.push(res.data);
+      form.reset();
+    })
+  }
+
+  onDeleteComment(comment: any) {
+    let comment_Id = new FormData();
+    comment_Id.append('comment_id', comment.commentID);
+    let post = this.myData.user_post_data.find((item: any) => item.id == comment.post_id);
+    let r = confirm("Do you want to delete this comment?");
+    if (r == true) {
+      this.loading = true;
+      this.userService.deleteComment(comment_Id).subscribe(res => {
+        this.loading = false;
+        post.comment.splice(post.comment.findIndex((item: any) => item.commentID == comment.commentID), 1)
+      })
+    }
+  }
+
+  isCommentLiked(likes: any) {
+    return likes.some((item: any) => item.from_id == this.loggedUser.id);
+  }
+
+  checkCommentLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.from_id == this.loggedUser.id);
+    if(myLike) {
+      if(myLike.reactionType == 1) {
+        return "assets/images/icons/lightbulb.png"
+      }else if(myLike.reactionType == 2) {
+        return "assets/images/icons/clap.png"
+      }else if(myLike.reactionType == 3) {
+        return "assets/images/icons/like.png"
+      }else {
+        return "assets/images/icons/like_icon.png"
+      }
+    }else {
+      return "assets/images/icons/like_icon.png"
+    }
+  }
+
+  getCommentLikeType(likes: any): any {
+    let myLike = likes.find((item: any) => item.from_id == this.loggedUser.id);
+    if(myLike) {
+      return +myLike.reactionType;
+    }else {
+      return 0;
+    }
+  }
+
+  onLikeComment(postId: any, commentId: any, commentLikeType: any, el: HTMLElement) {
+    let postInfo = new FormData();
+    postInfo.append("from_id", this.loggedUser.id);
+    postInfo.append("post_id", postId);
+    postInfo.append("comment_id", commentId);
+    postInfo.append("reactionType", commentLikeType);
+
+    this.userService.likeComment(postInfo).subscribe((res: any) => {
+      let parentEl = el.parentElement;
+      let likesEl = parentEl?.nextSibling as HTMLElement;
+      let totalLikes = +likesEl.innerHTML as any;
+      let likeTypeEl = el.firstChild as HTMLElement;
+      switch(commentLikeType) {
+        case 1:
+          likeTypeEl.setAttribute("src", "assets/images/icons/lightbulb.png");
+          break;
+        case 2:
+          likeTypeEl.setAttribute("src", "assets/images/icons/clap.png");
+          break; 
+        case 3:
+        likeTypeEl.setAttribute("src", "assets/images/icons/like.png");
+        break;  
+        default:
+          likeTypeEl.setAttribute("src", "assets/images/icons/like_icon.png");
+      }
+      if(res.likeStatus == 1) {
+        el.classList.add("liked");
+        totalLikes += 1
+        likesEl.innerHTML = totalLikes;
+      }else if(res.likeStatus == 0) {
+        el.classList.remove("liked");
+        totalLikes -= 1
+        likesEl.innerHTML = totalLikes;
+        likeTypeEl.setAttribute("src", "assets/images/icons/like_icon.png");
+      }
+      this.userService.updateUser();
+    })
   }
 
   openModal(template: TemplateRef<any>) {

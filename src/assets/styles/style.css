@@ -353,6 +353,93 @@ footer.footer { padding: 30px 0 0; }
 .custom_card { background-color: #FFFFFF; border-radius: 30px; margin-bottom: 20px; }
 .student_sec { padding: 25px 0 30px; background-color: #F4F4F4; }
 .student_lft .custom_card { padding: 15px; }
+
+.custom_card .comment-box{
+    padding: 20px;
+    box-shadow: 0 0px 10px rgb(0 0 0 / 15%);
+    margin-top: 20px;
+    display: none;
+}
+.custom_card .comment-box .inner-box{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.custom_card .comment-box .no-comment{
+   font-size: 14px;
+}
+.custom_card .comment-box .write-comment{
+    display: flex;
+    background: #F4F4F4;
+    padding: 20px;
+}
+.custom_card .comment-box .write-comment input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    font-size: 14px;
+}
+.custom_card .comment-box .write-comment button{
+    width: 45px;
+    border: none;
+    background: rgba(81, 77, 197, .12);
+}
+.custom_card .comment-box.show{
+    display: block;
+}
+.custom_card .comment-box .comment-row {
+    border-bottom: 1px solid rgba(0,0,0,.10);
+    padding: 15px 0;
+}
+.custom_card .comment-box .comment-row .follow_ftr button{
+    width: 28px;
+    height: 28px;
+    padding: 0px 5px 5px 5px;
+}
+.custom_card .comment-box .comment-row .follow_ftr .likes{
+    font-size: 12px;
+}
+.custom_card .comment-box .comment-row .follow_ftr .view{
+    margin: 0 18px;
+}
+.custom_card .comment-box .comment-row .follow_ftr .date{
+    font-size: 12px;
+}
+.custom_card .comment-box .comment-row .follow_ftr .dlt-btn {
+    margin-left: auto;
+}
+.custom_card .comment-box .comment-row .follow_ftr .dlt-btn i{
+    color: #474747;
+}
+.custom_card .comment-box .comment-row:last-child {
+    border-bottom: none;
+}
+.custom_card .comment-box .comment-row p{
+    font-size: 14px;
+}
+.custom_card .comment-box .comment-row .user{
+    margin-bottom: 10px;
+}
+.custom_card .comment-box .comment-row .user img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.custom_card .comment-box .comment-row .user .name{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+}
+
+.custom_card .comment-box .comment-row .user .name h6{
+    margin-bottom: 0;
+}
+.custom_card .comment-box .comment-row .user .name p{
+    margin-bottom: 0;
+}
+.custom_card .comment-box .comment-row .user .name span{
+    font-size: 14px;
+}
 .profile_box .dp_box { width: 110px; height: 110px; border-radius: 50%; margin:0 auto; position: relative; }
 .profile_box .dp_box .user-type {
     position: absolute;
@@ -469,7 +556,8 @@ footer.footer { padding: 30px 0 0; }
     align-items: center;
 }
 .follow_ftr .likes{
-    font-size: 15px;
+    font-size: 14px;
+    margin-left: 7px;
 }
 .follow_ftr .view{
     margin-left: 30px;
@@ -481,17 +569,23 @@ footer.footer { padding: 30px 0 0; }
 .follow_ftr .view i{
     margin-right: 4px;
 }
+.follow_ftr .comment {
+    width: 20px;
+    height: 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
 .action-btn:hover .react-btn-grp{
     opacity: 1;
     visibility: visible;
 }
 .post-action-btn {
     width: 40px;
-    height: 40px;
+    height: 40px; 
     border: 1px solid #ccc !important;
     border-radius: 50%;
-    padding: 7px;
-    margin-right: 10px;
+    padding: 7px 0 10px;
+    /* margin-right: 10px; */
 }
 .post-action-btn.liked {
     background: rgba(81, 77, 197, .6) !important;

@@ -12,7 +12,7 @@
               <li>{{ activePlan.plan }} Plan</li>
               <li class="pricelist"> <span>{{ activePlan.amount | currency:'₹' }}</span></li>
             </ul>
-            <p>{{ activePlan.description }}</p>
+            <p [innerHtml]="activePlan.description"></p>
             <p>Pack Duration : {{ activePlan.validity }} Month <br>
               Pack Expires on : {{ activePlan.end_date }} </p>
           </div>

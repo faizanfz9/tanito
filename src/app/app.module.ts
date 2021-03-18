@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlyrModule } from 'ngx-plyr';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -63,6 +64,7 @@ import { PostComponent } from './layouts/post/post.component';
 import { AboutUsComponent } from './layouts/about-us/about-us.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 import { ChatTimePipe } from './pipes/chat-time.pipe';
+import { ShowCommentBoxDirective } from './directives/show-comment-box.directive';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,8 @@ import { ChatTimePipe } from './pipes/chat-time.pipe';
     PostComponent,
     AboutUsComponent,
     PageNotFoundComponent,
-    ChatTimePipe
+    ChatTimePipe,
+    ShowCommentBoxDirective
   ],
   imports: [
     BrowserModule,
@@ -127,6 +130,7 @@ import { ChatTimePipe } from './pipes/chat-time.pipe';
     ShareButtonsModule,
     ShareIconsModule,
     ScrollingModule,
+    InfiniteScrollModule,
     NgbModule
   ],
   providers: [
