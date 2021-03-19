@@ -194,4 +194,9 @@ export class UserService {
   viewCommentReaction(commentId: any) {
     return this.http.post(this.url + "/comment_like_by_user", commentId);
   }
+
+  // Get user comments
+  userComments(userId: any) {
+    return this.http.post(this.url + "/count_comment_by_id", userId);
+  }
 }

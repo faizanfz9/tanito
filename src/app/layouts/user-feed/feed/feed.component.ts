@@ -226,32 +226,37 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  onCommentOnPost(postId: any, form: NgForm) {
+  onCommentOnPost(userPost: any, form: NgForm) {
     let commentData = new FormData();
     commentData.append('from_id', this.loggedUser.id);
-    commentData.append('post_id', postId);
+    commentData.append('post_id', userPost.id);
     commentData.append('comment', form.value.comment);
-    let post = this.feeds.find((item: any) => item.id == postId);
-    let myComments = post.comment.filter((item: any) => item.user_id == this.loggedUser.id);
-    if(!this.activePlan) {
-      if(myComments.length < 5) {
+    let post = this.feeds.find((item: any) => item.id == userPost.id);
+    let loggedUserId = new FormData();
+    loggedUserId.append("id", this.loggedUser.id);
+    this.userService.userComments(loggedUserId).subscribe((res: any) => {
+      if(!this.activePlan) {
+        if(res.data < 5) {
+          this.loading = true;
+          this.userService.commentOnPost(commentData).subscribe((res: any) => {
+            this.loading = false;
+            post.comment.push(res.data);
+            // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
+            form.reset();
+          })
+        }else {
+          alert('Comment limit on one post has reached, Subscribe to our plans to comment further!');
+        }
+      }else {
         this.loading = true;
         this.userService.commentOnPost(commentData).subscribe((res: any) => {
           this.loading = false;
           post.comment.push(res.data);
+          // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
           form.reset();
         })
-      }else {
-        alert('Comment limit on one post has reached, Subscribe to our plans to comment further!');
       }
-    }else {
-      this.loading = true;
-      this.userService.commentOnPost(commentData).subscribe((res: any) => {
-        this.loading = false;
-        post.comment.push(res.data);
-        form.reset();
-      })
-    }
+    });
   }
 
   onDeleteComment(comment: any) {
@@ -298,11 +303,11 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  onLikeComment(postId: any, commentId: any, commentLikeType: any, el: HTMLElement) {
+  onLikeComment(postId: any, comment: any, commentLikeType: any, el: HTMLElement) {
     let postInfo = new FormData();
     postInfo.append("from_id", this.loggedUser.id);
     postInfo.append("post_id", postId);
-    postInfo.append("comment_id", commentId);
+    postInfo.append("comment_id", comment.commentID);
     postInfo.append("reactionType", commentLikeType);
 
     this.userService.likeComment(postInfo).subscribe((res: any) => {
@@ -328,7 +333,7 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.commentLikeType = commentLikeType;
-        // this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.body);
+        // this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has liked your comment: " + comment.comment);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1
