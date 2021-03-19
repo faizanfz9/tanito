@@ -118,7 +118,7 @@
                     </svg>
                     <span class="likes">{{ feed.comment.length }}</span>
                     <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                    <span class="subjects d-none d-sm-block" [hidden]="feed.subject.length == 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
+                    <span class="subjects d-none d-sm-block" *ngIf="feed.subject.length > 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
                     <div class="share-post">
                         <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
                         <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
@@ -155,9 +155,9 @@
                                     </div>
                                 </div>
                                 <span class="likes">{{ item.reactionType.length }}</span>
-                                <!-- <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span> -->
+                                <span class="view" (click)="onViewCommentReaction(item.commentID)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="date">&nbsp; &nbsp; | &nbsp; &nbsp; {{ item.created | postCreated }}</span>
-                                <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id && feed.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal_body_top">
-                    <h5>REACTIONS</h5>
+                    <h5>{{ reactionModalTitle }}</h5>
                 </div>
                 <mat-tab-group>
                     <mat-tab>

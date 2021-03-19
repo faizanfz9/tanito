@@ -29,12 +29,14 @@ export class FeedComponent implements OnInit {
   clapUserReaction: any;
   goodUserReaction: any;
   reactionFetched = false;
+  reactionModalTitle: any;
   catChanged = false;
   reportReason = ["Violence", "Harassment", "False Information", "Span", "Something else, specify in comment"];
   selectedReason = "";
   specifiedReason = "";
   selectedPost: any;
   currentPage = 1;
+  activePlan: any;
   @ViewChild("reportPost") reportPost: any;
   @ViewChild("viewReactions") viewReactions: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
@@ -61,23 +63,35 @@ export class FeedComponent implements OnInit {
         this.catChanged = true;
       }
       this.query = query.cat;
-      this.getFeeds(this.currentPage);
+      this.currentPage = 1;
+      this.getFeeds();
     })
   } 
 
   ngOnInit(): void {
-    this.getFeeds(this.currentPage);
+    this.getFeeds();
     this.baseurl = window.location.origin;
+    this.activePlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
   }
 
-  getFeeds(pageNo: any) {
+  getFeeds() {
     this.loading = true;
-    this.userService.getAllPost(pageNo).subscribe((res: any) => {
+    this.userService.getAllPost(this.currentPage, this.query).subscribe((res: any) => {
       this.loading = false;
-      if(this.query) {
-        this.feeds = res.data.user_post.filter((item: any) => item.subject == this.query);
-      }else {
+      if(res.data) {
         this.feeds = res.data.user_post;
+      }
+    })
+  }
+
+  onScroll() {
+    this.currentPage += 1;
+    console.log('running');
+    this.userService.getAllPost(this.currentPage, this.query).subscribe((res: any) => {
+      if(res.data) {
+        res.data.user_post.forEach((item: any) => {
+          this.feeds.push(item);
+        })
       }
     })
   }
@@ -130,6 +144,7 @@ export class FeedComponent implements OnInit {
     this.openModal(this.viewReactions);
     this.userService.viewReaction(postId).subscribe((res: any) => {
       this.reactionFetched = true;
+      this.reactionModalTitle = "Reactions";
       let reactions = res.data.my_post;
       this.totalUserReaction = reactions;
       this.okUserReaction = reactions.filter((item: any) => {
@@ -216,14 +231,27 @@ export class FeedComponent implements OnInit {
     commentData.append('from_id', this.loggedUser.id);
     commentData.append('post_id', postId);
     commentData.append('comment', form.value.comment);
-    this.loading = true;
     let post = this.feeds.find((item: any) => item.id == postId);
-    this.userService.commentOnPost(commentData).subscribe((res: any) => {
-      console.log(res);
-      this.loading = false;
-      post.comment.push(res.data);
-      form.reset();
-    })
+    let myComments = post.comment.filter((item: any) => item.user_id == this.loggedUser.id);
+    if(!this.activePlan) {
+      if(myComments.length < 5) {
+        this.loading = true;
+        this.userService.commentOnPost(commentData).subscribe((res: any) => {
+          this.loading = false;
+          post.comment.push(res.data);
+          form.reset();
+        })
+      }else {
+        alert('Comment limit on one post has reached, Subscribe to our plans to comment further!');
+      }
+    }else {
+      this.loading = true;
+      this.userService.commentOnPost(commentData).subscribe((res: any) => {
+        this.loading = false;
+        post.comment.push(res.data);
+        form.reset();
+      })
+    }
   }
 
   onDeleteComment(comment: any) {
@@ -313,11 +341,28 @@ export class FeedComponent implements OnInit {
     })
   }
 
-  onScroll() {
-    // if(this.currentPage < 4) {
-    //   this.currentPage += 1;
-    //   this.feeds.push(this.getFeeds(this.currentPage)); 
-    // }
+  onViewCommentReaction(comment_id: any) {
+    let commentId = new FormData();
+    commentId.append("comment_id", comment_id);
+    this.openModal(this.viewReactions);
+    this.userService.viewCommentReaction(commentId).subscribe((res: any) => {
+      this.reactionFetched = true;
+      this.reactionModalTitle = "Comment Reactions";
+      let reactions = res.data.my_post;
+      this.totalUserReaction = reactions;
+      this.okUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 0
+      });
+      this.innUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 1
+      });
+      this.clapUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 2
+      });
+      this.goodUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 3
+      });
+    })
   }
 
   openModal(template: TemplateRef<any>) {

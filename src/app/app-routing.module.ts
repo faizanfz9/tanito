@@ -21,6 +21,7 @@ import { MyPlansComponent } from './layouts/user-feed/my-plans/my-plans.componen
 import { PostComponent } from './layouts/post/post.component';
 import { AboutUsComponent } from './layouts/about-us/about-us.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
+import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent },
   { path: "about-us", component: AboutUsComponent },
+  { path: "contact-us", component: ContactUsComponent },
   { path: "404", component: PageNotFoundComponent },
   { path: "**", redirectTo: "404" }
 ];

@@ -120,8 +120,8 @@ export class UserService {
   }
 
   // Get all post
-  getAllPost(pageNo: any) {
-    return this.http.get(this.url + "/get_all_post?per_page=" + pageNo);
+  getAllPost(pageNo: any = 1, category: any = '') {
+    return this.http.get(this.url + "/get_all_post?per_page=" + pageNo + "&subject=" + category);
   }
 
   // Get all post
@@ -188,5 +188,10 @@ export class UserService {
   // Like post comment
   likeComment(commentInfo: any) {
     return this.http.post(this.url + "/comment_reaction", commentInfo);
+  }
+
+  // Like post comment
+  viewCommentReaction(commentId: any) {
+    return this.http.post(this.url + "/comment_like_by_user", commentId);
   }
 }

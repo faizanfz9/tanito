@@ -1,0 +1,70 @@
+<div class="info-box">
+    <div class="form-title">
+        <h5>Contact Us</h5>
+    </div>
+    <div class="inner-wrap">
+        <form class="registration-form" (submit)="onSubmit(queryForm)" #queryForm="ngForm">
+            <div class="form-group">
+              <label class="primary_color spcllbl">Full Name</label>
+              <input
+               type="text" 
+               class="form-control" 
+               placeholder="Joe Smith"
+               name="name"
+               ngModel 
+               #name="ngModel"
+               required>
+               <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+                Please enter name!
+              </div> 
+            </div>
+            <div class="form-group">
+              <label class="primary_color spcllbl">Phone No</label>
+              <input 
+              type="tel" 
+              class="form-control" 
+              placeholder="+876-9876543210"
+              name="phone"
+              ngModel
+              pattern="^[0-9]*$"
+              #phone="ngModel"
+              required>
+              <div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                <div *ngIf="phone.errors?.pattern; else invalidPhone">
+                  Please enter valid phone number!
+                </div>
+                <ng-template #invalidPhone>
+                  Please enter phone number!
+                </ng-template>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="primary_color spcllbl">Email</label>
+              <input 
+              type="email" 
+              class="form-control" 
+              placeholder="john@gmail.com"
+              name="email"
+              ngModel
+              pattern="^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$"
+              #email="ngModel"
+              required>
+              <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div *ngIf="phone.errors?.pattern; else invalidEmail">
+                  Please enter email!
+                </div>
+                <ng-template #invalidEmail>
+                  Please enter valid email!
+                </ng-template>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="primary_color spcllbl">Message*</label>
+              <textarea class="form-control" placeholder="Write your message..." name="message" id="message" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" [disabled]="!queryForm.valid" class="btn btn_primary btn-sm text-uppercase">Submit</button>
+            </div>
+          </form>
+    </div>
+</div>

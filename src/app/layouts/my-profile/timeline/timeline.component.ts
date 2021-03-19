@@ -18,9 +18,11 @@ export class TimelineComponent implements OnInit {
   innUserReaction: any;
   clapUserReaction: any;
   goodUserReaction: any;
+  reactionModalTitle: any;
   modalRef: any;
   reactionFetched = false;
   baseurl: any;
+  activePlan: any;
   @ViewChild("viewReactions") viewReactions: any;
   @ViewChild('postBlock', {static: true}) postBlock: any;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/";
@@ -40,6 +42,7 @@ export class TimelineComponent implements OnInit {
       localStorage.setItem("user", JSON.stringify(this.myData));
     })
     this.baseurl = window.location.origin;
+    this.activePlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
   }
 
   onDeletePost(postId: any) {
@@ -101,6 +104,7 @@ export class TimelineComponent implements OnInit {
     this.openModal(this.viewReactions);
     this.userService.viewReaction(postId).subscribe((res: any) => {
       this.reactionFetched = true;
+      this.reactionModalTitle = "Reactions";
       let reactions = res.data.my_post;
       this.totalUserReaction = reactions;
       this.okUserReaction = reactions.filter((item: any) => {
@@ -161,11 +165,26 @@ export class TimelineComponent implements OnInit {
     commentData.append('comment', form.value.comment);
     this.loading = true;
     let post = this.myData.user_post_data.find((item: any) => item.id == postId);
-    this.userService.commentOnPost(commentData).subscribe((res: any) => {
-      this.loading = false;
-      post.comment.push(res.data);
-      form.reset();
-    })
+    let myComments = post.comment.filter((item: any) => item.user_id == this.loggedUser.id);
+    if(!this.activePlan) {
+      if(myComments.length < 5) {
+        this.loading = true;
+        this.userService.commentOnPost(commentData).subscribe((res: any) => {
+          this.loading = false;
+          post.comment.push(res.data);
+          form.reset();
+        })
+      }else {
+        alert('Comment limit on one post has reached, Subscribe to our plans to comment further!');
+      }
+    }else {
+      this.loading = true;
+      this.userService.commentOnPost(commentData).subscribe((res: any) => {
+        this.loading = false;
+        post.comment.push(res.data);
+        form.reset();
+      })
+    }
   }
 
   onDeleteComment(comment: any) {
@@ -248,6 +267,30 @@ export class TimelineComponent implements OnInit {
         likeTypeEl.setAttribute("src", "assets/images/icons/like_icon.png");
       }
       this.userService.updateUser();
+    })
+  }
+  
+  onViewCommentReaction(comment_id: any) {
+    let commentId = new FormData();
+    commentId.append("comment_id", comment_id);
+    this.openModal(this.viewReactions);
+    this.userService.viewCommentReaction(commentId).subscribe((res: any) => {
+      this.reactionFetched = true;
+      this.reactionModalTitle = "Comment Reactions";
+      let reactions = res.data.my_post;
+      this.totalUserReaction = reactions;
+      this.okUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 0
+      });
+      this.innUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 1
+      });
+      this.clapUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 2
+      });
+      this.goodUserReaction = reactions.filter((item: any) => {
+        return item.reactionType == 3
+      });
     })
   }
 
