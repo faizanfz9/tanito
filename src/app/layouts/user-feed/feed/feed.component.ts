@@ -314,10 +314,10 @@ export class FeedComponent implements OnInit {
   }
 
   onScroll() {
-    if(this.currentPage < 4) {
-      this.currentPage += 1;
-      this.feeds.push(this.getFeeds(this.currentPage)); 
-    }
+    // if(this.currentPage < 4) {
+    //   this.currentPage += 1;
+    //   this.feeds.push(this.getFeeds(this.currentPage)); 
+    // }
   }
 
   openModal(template: TemplateRef<any>) {
