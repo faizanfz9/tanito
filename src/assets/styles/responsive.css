@@ -529,7 +529,14 @@
     min-height: 130px;
    }
     .user_info_btm h2 {
-    font-size: 38px;
+    font-size: 24px;
+   }
+   .user_info_btm h2 .tag_img {
+       width: 35px;
+       height: 35px;
+   }
+   .user_contact_info a {
+       font-size: 16px;
    }
     .student_lft .intro_box ul li {
     margin-bottom: 15px;

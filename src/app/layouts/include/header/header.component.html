@@ -23,7 +23,7 @@
                            <i class="fa fa-bell"></i> 
                            <span *ngIf="newNotifications.length > 0">{{ newNotifications.length }}</span> 
                         </a>
-                        <div *ngIf="newNotifications.length > 0" class="dropdown-menu my_account_dropmenu notification">
+                        <div *ngIf="notifications.length > 0" class="dropdown-menu my_account_dropmenu notification">
                            <ul>
                               <li *ngFor="let item of notifications">
                                  <img [src]="item.userPic" alt="userpic"> 

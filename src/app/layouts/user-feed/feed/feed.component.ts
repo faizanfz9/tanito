@@ -81,6 +81,9 @@ export class FeedComponent implements OnInit {
       if(res.data) {
         this.feeds = res.data.user_post;
       }
+    }, error => {
+      this.loading = false;
+      alert('Something went wrong!');
     })
   }
 
@@ -334,6 +337,7 @@ export class FeedComponent implements OnInit {
         likesEl.innerHTML = totalLikes;
         this.commentLikeType = commentLikeType;
         // this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has liked your comment: " + comment.comment);
+        console.log(comment.user_id);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1
