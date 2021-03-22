@@ -1,11 +1,10 @@
 <div class="row">
-  <div class="col-sm-6 col-xl-3" *ngFor="let follower of followers">
+  <div class="col-sm-6 col-xl-3 card-wrap" [routerLink]="'/user/' + follower.user_id" *ngFor="let follower of followers">
     <div class="testi-content text-center"> 
       <img [src]="path + follower.profile_img" 
       [alt]="follower.username" 
-      [routerLink]="'/user/' + follower.user_id" 
       class="img-fluid mx-auto d-block rounded-circle user-img">
-      <h5 class="mt-4 mb-4" [routerLink]="'/user/' + follower.user_id">{{ follower.username }} &nbsp;</h5>
+      <h5 class="mt-4 mb-4">{{ follower.username }} &nbsp;</h5>
       <p class="mb-4">{{ (follower.usertype == 3 ? 'Student at ':'Teacher at ') + follower.university }}</p>
   </div>
 </div>
