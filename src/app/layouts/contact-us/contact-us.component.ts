@@ -18,9 +18,8 @@ export class ContactUsComponent implements OnInit {
     let userQuery = new FormData();
     userQuery.append('name', form.value.name);
     userQuery.append('email', form.value.email);
-    userQuery.append('mobile', form.value.mobile);
+    userQuery.append('mobile', form.value.phone);
     userQuery.append('message', form.value.message);
-
     this.userService.sendQuery(userQuery).subscribe((res: any) => {
       if(res.status == false) {
         alert(res.msg)
