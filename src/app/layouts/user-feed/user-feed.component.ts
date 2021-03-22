@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ChatService } from 'src/app/shared/chat.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -13,7 +14,11 @@ export class UserFeedComponent implements OnInit {
   loggedUser: any;
   activePlan: any;
 
-  constructor(private userService: UserService, private chatService: ChatService, private notification: NotificationService) { 
+  constructor(private userService: UserService, 
+    private chatService: ChatService, 
+    private notification: NotificationService,
+    private authService: AuthService
+    ) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe((rooms: any) => {
       let inbox = {
@@ -42,7 +47,14 @@ export class UserFeedComponent implements OnInit {
     }
   }
 
+  get loggedTime(): any {
+    return localStorage.getItem('loggedTime');
+  }
+
   ngOnInit(): void {
+    if(new Date().setHours(0,0,0,0) > this.loggedTime) {
+      this.authService.logout();
+    }
   }
 
 }

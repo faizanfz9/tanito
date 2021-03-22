@@ -11,7 +11,9 @@ export class AuthService {
   // isLoggedIn = new Subject<boolean>();
   user = new BehaviorSubject<any>({});
 
-  constructor(private http: HttpClient, private router: Router) { }  
+  constructor(private http: HttpClient, private router: Router) { 
+    // let loggedTime = Date.parse(localStorage.getItem('loggedTime'));
+  }  
 
   // User Registration
   register(user: any) {
@@ -50,6 +52,7 @@ export class AuthService {
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("mobile", user.mobile);
+    localStorage.setItem('loggedTime', new Date().setHours(0,0,0,0).toString());
     this.user.next({
       isLoggedIn: true,
       data: user

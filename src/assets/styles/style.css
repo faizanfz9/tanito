@@ -418,6 +418,7 @@ footer.footer { padding: 30px 0 0; }
 }
 .custom_card .comment-box .comment-row .user{
     margin-bottom: 10px;
+    display: flex;
 }
 .custom_card .comment-box .comment-row .user img{
     width: 40px;
