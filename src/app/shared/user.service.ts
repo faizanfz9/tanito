@@ -199,4 +199,9 @@ export class UserService {
   userComments(userId: any) {
     return this.http.post(this.url + "/count_comment_by_id", userId);
   }
+
+  // Contact us query
+  sendQuery(userQuery: any) {
+    return this.http.post(this.url + "/contact_us", userQuery)
+  }
 }

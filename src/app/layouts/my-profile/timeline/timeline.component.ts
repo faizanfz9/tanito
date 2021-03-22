@@ -2,6 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class TimelineComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private modalService: BsModalService) { }
+  constructor(private userService: UserService, private modalService: BsModalService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
@@ -173,7 +174,6 @@ export class TimelineComponent implements OnInit {
           this.userService.commentOnPost(commentData).subscribe((res: any) => {
             this.loading = false;
             post.comment.push(res.data);
-            // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
             form.reset();
           })
         }else {
@@ -184,7 +184,6 @@ export class TimelineComponent implements OnInit {
         this.userService.commentOnPost(commentData).subscribe((res: any) => {
           this.loading = false;
           post.comment.push(res.data);
-          // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
           form.reset();
         })
       }
@@ -235,11 +234,11 @@ export class TimelineComponent implements OnInit {
     }
   }
 
-  onLikeComment(postId: any, commentId: any, commentLikeType: any, el: HTMLElement) {
+  onLikeComment(postId: any, comment: any, commentLikeType: any, el: HTMLElement) {
     let postInfo = new FormData();
     postInfo.append("from_id", this.loggedUser.id);
     postInfo.append("post_id", postId);
-    postInfo.append("comment_id", commentId);
+    postInfo.append("comment_id", comment.commentID);
     postInfo.append("reactionType", commentLikeType);
 
     this.userService.likeComment(postInfo).subscribe((res: any) => {
@@ -264,6 +263,10 @@ export class TimelineComponent implements OnInit {
         el.classList.add("liked");
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
+        if(comment.user_id !== this.loggedUser.id) {
+          this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, 
+            this.loggedUser.username + " has liked your comment: " + comment.comment);
+        }
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

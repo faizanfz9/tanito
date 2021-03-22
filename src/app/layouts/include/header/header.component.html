@@ -27,7 +27,7 @@
                            <ul>
                               <li *ngFor="let item of notifications">
                                  <img [src]="item.userPic" alt="userpic"> 
-                                 <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification }} <br> 
+                                 <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification | truncate }} <br> 
                                     <strong>{{ item.timestamp | postCreated }}</strong>
                                  </p> 
                               </li>

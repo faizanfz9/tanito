@@ -50,11 +50,11 @@ export class AuthService {
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("mobile", user.mobile);
-    this.router.navigate(['/feed']);
     this.user.next({
       isLoggedIn: true,
       data: user
     })
+    this.router.navigate(['/feed']);
   }
 
   authUser() {
@@ -68,6 +68,7 @@ export class AuthService {
       isLoggedIn: false,
       data: null
     });
+    window.open('/', "_self");
   }
 
 }

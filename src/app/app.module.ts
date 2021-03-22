@@ -66,6 +66,7 @@ import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.c
 import { ChatTimePipe } from './pipes/chat-time.pipe';
 import { ShowCommentBoxDirective } from './directives/show-comment-box.directive';
 import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
     PageNotFoundComponent,
     ChatTimePipe,
     ShowCommentBoxDirective,
-    ContactUsComponent
+    ContactUsComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

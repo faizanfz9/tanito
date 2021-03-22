@@ -89,7 +89,6 @@ export class FeedComponent implements OnInit {
 
   onScroll() {
     this.currentPage += 1;
-    console.log('running');
     this.userService.getAllPost(this.currentPage, this.query).subscribe((res: any) => {
       if(res.data) {
         res.data.user_post.forEach((item: any) => {
@@ -128,7 +127,10 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
-        this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.body);
+        if(feed.userId !== this.loggedUser.id) {
+          this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, 
+            this.loggedUser.username + " has liked your post: " + feed.body);
+        }
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1
@@ -244,7 +246,10 @@ export class FeedComponent implements OnInit {
           this.userService.commentOnPost(commentData).subscribe((res: any) => {
             this.loading = false;
             post.comment.push(res.data);
-            // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
+            if(userPost.user_id !== this.loggedUser.id) {
+              this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, 
+                this.loggedUser.username + " has commented on your post: " + userPost.body);
+            }
             form.reset();
           })
         }else {
@@ -255,7 +260,10 @@ export class FeedComponent implements OnInit {
         this.userService.commentOnPost(commentData).subscribe((res: any) => {
           this.loading = false;
           post.comment.push(res.data);
-          // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
+          if(userPost.user_id !== this.loggedUser.id) {
+            this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, 
+              this.loggedUser.username + " has commented on your post: " + userPost.body);
+          }
           form.reset();
         })
       }
@@ -336,8 +344,10 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.commentLikeType = commentLikeType;
-        // this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has liked your comment: " + comment.comment);
-        console.log(comment.user_id);
+        if(comment.user_id !== this.loggedUser.id) {
+          this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, 
+            this.loggedUser.username + " has liked your comment: " + comment.comment);
+        }
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

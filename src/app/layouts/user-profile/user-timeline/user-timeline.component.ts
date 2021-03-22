@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class UserTimelineComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private modalService: BsModalService) { }
+  constructor(private userService: UserService, private modalService: BsModalService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
@@ -135,12 +136,12 @@ export class UserTimelineComponent implements OnInit {
     }
   }
 
-  onCommentOnPost(postId: any, form: NgForm) {
+  onCommentOnPost(userPost: any, form: NgForm) {
     let commentData = new FormData();
     commentData.append('from_id', this.loggedUser.id);
-    commentData.append('post_id', postId);
+    commentData.append('post_id', userPost.id);
     commentData.append('comment', form.value.comment);
-    let post = this.userData.data.user_post_data.find((item: any) => item.id == postId);
+    let post = this.userData.data.user_post_data.find((item: any) => item.id == userPost.id);
     let loggedUserId = new FormData();
     loggedUserId.append("id", this.loggedUser.id);
     this.userService.userComments(loggedUserId).subscribe((res: any) => {
@@ -150,7 +151,8 @@ export class UserTimelineComponent implements OnInit {
           this.userService.commentOnPost(commentData).subscribe((res: any) => {
             this.loading = false;
             post.comment.push(res.data);
-            // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
+            this.notificationService.sendNotification(this.userData.data.results.user_id, this.loggedUser.profile_img, 
+            this.loggedUser.username + " has commented on your post: " + userPost.body);
             form.reset();
           })
         }else {
@@ -161,7 +163,8 @@ export class UserTimelineComponent implements OnInit {
         this.userService.commentOnPost(commentData).subscribe((res: any) => {
           this.loading = false;
           post.comment.push(res.data);
-          // this.notificationService.sendNotification(userPost.user_id, this.loggedUser.profile_img, this.loggedUser.username + " has commented on your post: " + userPost.body);
+          this.notificationService.sendNotification(this.userData.data.results.user_id, this.loggedUser.profile_img, 
+          this.loggedUser.username + " has commented on your post: " + userPost.body);
           form.reset();
         })
       }
@@ -212,11 +215,11 @@ export class UserTimelineComponent implements OnInit {
     }
   }
 
-  onLikeComment(postId: any, commentId: any, commentLikeType: any, el: HTMLElement) {
+  onLikeComment(postId: any, comment: any, commentLikeType: any, el: HTMLElement) {
     let postInfo = new FormData();
     postInfo.append("from_id", this.loggedUser.id);
     postInfo.append("post_id", postId);
-    postInfo.append("comment_id", commentId);
+    postInfo.append("comment_id", comment.commentId);
     postInfo.append("reactionType", commentLikeType);
 
     this.userService.likeComment(postInfo).subscribe((res: any) => {
@@ -242,7 +245,10 @@ export class UserTimelineComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.commentLikeType = commentLikeType;
-        // this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, this.loggedUser.username + " has liked your post: " + feed.body);
+        if(comment.user_id !== this.loggedUser.id) {
+          this.notificationService.sendNotification(comment.user_id, this.loggedUser.profile_img, 
+            this.loggedUser.username + " has liked your comment: " + comment.comment);
+        }
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

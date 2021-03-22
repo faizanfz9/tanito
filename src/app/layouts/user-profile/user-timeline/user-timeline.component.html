@@ -90,20 +90,20 @@
                     </div>
                     <div class="follow_ftr">
                         <div class="action-btn">
-                            <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isCommentLiked(item.reactionType) }" #likeBtn (click)="onLikeComment(post.id, item.commentID, commentLikeType ? commentLikeType : getCommentLikeType(item.reactionType), likeBtn)">
+                            <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isCommentLiked(item.reactionType) }" #likeBtn (click)="onLikeComment(post.id, item, commentLikeType ? commentLikeType : getCommentLikeType(item.reactionType), likeBtn)">
                                 <img [src]="checkCommentLikeType(item.reactionType)" alt="icon" />
                             </button>
                             <div class="follow_ftr react-btn-grp">
-                                <button type="button" (click)="onLikeComment(post.id, item.commentID, 0, likeBtn)">
+                                <button type="button" (click)="onLikeComment(post.id, item, 0, likeBtn)">
                                     <img src="assets/images/icons/like_icon.png" alt="icon" />
                                 </button>
-                                <button type="button" (click)="onLikeComment(post.id, item.commentID, 1, likeBtn)">
+                                <button type="button" (click)="onLikeComment(post.id, item, 1, likeBtn)">
                                     <img src="assets/images/icons/lightbulb.png" alt="icon" />
                                 </button>
-                                <button type="button" (click)="onLikeComment(post.id, item.commentID, 2, likeBtn)">
+                                <button type="button" (click)="onLikeComment(post.id, item, 2, likeBtn)">
                                     <img src="assets/images/icons/clap.png" alt="icon" />
                                 </button>
-                                <button type="button" (click)="onLikeComment(post.id, item.commentID, 3, likeBtn)">
+                                <button type="button" (click)="onLikeComment(post.id, item, 3, likeBtn)">
                                     <img src="assets/images/icons/like.png" alt="icon" />
                                 </button>
                             </div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <p class="no-comment" *ngIf="post.comment.length == 0">Be the first to comment!</p>
-            <form class="write-comment" (submit)="onCommentOnPost(post.id, cmntForm)" #cmntForm="ngForm">
+            <form class="write-comment" (submit)="onCommentOnPost(post, cmntForm)" #cmntForm="ngForm">
                 <input placeholder="Write your comment here..." type="text" name="comment" required ngModel>
                 <button type="submit" [disabled]="!cmntForm.valid"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
             </form>
