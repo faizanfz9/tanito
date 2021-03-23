@@ -4,18 +4,18 @@
         <h3>My Plans</h3>
       </div>
       <div class="network_btm">
-        <div class=" w-75 m-auto" *ngIf="activePlan">
-          <h4 class="primary_color mb-3">Active Plan</h4>
-          <div class="card card_plan card_plan01 ">
+        <div *ngIf="currentPlan">
+          <h4 class="primary_color mb-3">{{ isExpired ? 'Expired':'Active Plan' }}</h4>
+          <div class="card card_plan card_plan01" [ngClass]="{'card_plan02': isExpired }">
             <ul>
-              <li>{{ activePlan.plan }} Plan</li>
-              <li class="pricelist"> <span>{{ activePlan.amount | currency:'₹' }}</span></li>
+              <li>{{ currentPlan.plan }} Plan</li>
+              <li class="pricelist"> <span>{{ currentPlan.amount | currency:'₹' }}</span></li>
             </ul>
-            <p [innerHtml]="activePlan.description"></p>
-            <p>Pack Duration : {{ activePlan.validity }} Month <br>
-              Pack Expires on : {{ activePlan.end_date }} </p>
+            <p [innerHtml]="currentPlan.description"></p>
+            <p>Pack Duration : {{ currentPlan.validity }} Month <br>
+              Pack Expires on : {{ currentPlan.end_date }} </p>
           </div>
       </div>
-      <h5 *ngIf="!activePlan">You have no plan!</h5>
+      <h5 *ngIf="!currentPlan">You have no plan!</h5>
     </div>
   </div>

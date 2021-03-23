@@ -1,16 +1,22 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from './user.service';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService { 
+  url = environment.baseUrl;
   loggedUser: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService, private userService: UserService) { 
+  constructor(private db: AngularFireDatabase, 
+    private authService: AuthService,
+    private userService: UserService,
+    private http: HttpClient) { 
     this.authService.user.subscribe((res: any) => {
       this.loggedUser = res.data;
     })
@@ -43,5 +49,9 @@ export class NotificationService {
         })
       }
     })
+  }
+
+  getAnnouncement() {
+    return this.http.get(this.url + "/notification");
   }
 }

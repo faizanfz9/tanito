@@ -21,20 +21,20 @@
         <p class="subject d-block d-sm-none" [hidden]="post.subject.length == 0"> {{ post.subject | titlecase }}</p>
         <div class="follow_ftr">
             <div class="action-btn">
-                <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(post.likes) }" #likeBtn (click)="onLikePost(post.id, likeType ? likeType : getLikeType(post.likes), likeBtn)">
+                <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(post.likes) }" #likeBtn (click)="onLikePost(post.id, likeType ? likeType : getLikeType(post.likes), likeBtn, post)">
                     <img [src]="checkLikeType(post.likes)" alt="icon" />
                 </button>
                 <div class="follow_ftr react-btn-grp">
-                    <button type="button" (click)="onLikePost(post.id, 0, likeBtn)">
+                    <button type="button" (click)="onLikePost(post.id, 0, likeBtn, post)">
                         <img src="assets/images/icons/like_icon.png" alt="icon" />
                     </button>
-                    <button type="button" (click)="onLikePost(post.id, 1, likeBtn)">
+                    <button type="button" (click)="onLikePost(post.id, 1, likeBtn, post)">
                         <img src="assets/images/icons/lightbulb.png" alt="icon" />
                     </button>
-                    <button type="button" (click)="onLikePost(post.id, 2, likeBtn)">
+                    <button type="button" (click)="onLikePost(post.id, 2, likeBtn, post)">
                         <img src="assets/images/icons/clap.png" alt="icon" />
                     </button>
-                    <button type="button" (click)="onLikePost(post.id, 3, likeBtn)">
+                    <button type="button" (click)="onLikePost(post.id, 3, likeBtn, post)">
                         <img src="assets/images/icons/like.png" alt="icon" />
                     </button>
                 </div>

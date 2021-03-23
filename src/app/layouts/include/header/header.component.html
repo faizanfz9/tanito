@@ -3,6 +3,43 @@
       <div class="container-fluid">
          <div class="inner-wrap">
           <a class="navbar-brand" [routerLink]="isLoggedIn ? ['feed'] : ['/']"> <img src="assets/images/logo.svg" alt="logo" class="img-fluid head_logo" /> </a>
+          <div class="wishlish_icon mobile announcement">
+            <a (click)="onCheckNotification()" appShowMenu> 
+               <i class="fa fa-bullhorn" aria-hidden="true"></i>
+               <span></span> 
+            </a>
+            <div class="dropdown-menu my_account_dropmenu notification announcement">
+               <ul *ngIf="announcements.length > 0">
+                  <li *ngFor="let item of announcements">
+                     <!-- <img [src]="item.userPic" alt="userpic">  -->
+                     <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification | truncate }} <br> 
+                        <strong>{{ item.created | postCreated }}</strong>
+                     </p> 
+                  </li>
+               </ul>
+               <ul *ngIf="announcements.length == 0">
+                  <li>
+                     <p>No new announcement</p> 
+                  </li>
+               </ul>
+            </div>
+         </div>
+          <div class="wishlish_icon mobile">
+            <a (click)="onCheckNotification()" appShowMenu> 
+               <i class="fa fa-bell"></i> 
+               <span *ngIf="newNotifications.length > 0">{{ newNotifications.length }}</span> 
+            </a>
+            <div *ngIf="notifications.length > 0" class="dropdown-menu my_account_dropmenu notification">
+               <ul>
+                  <li *ngFor="let item of notifications">
+                     <img [src]="item.userPic" alt="userpic"> 
+                     <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification | truncate }} <br> 
+                        <strong>{{ item.timestamp | postCreated }}</strong>
+                     </p> 
+                  </li>
+               </ul>
+            </div>
+         </div>
           <div class="toggle-menu" [ngClass]="{ 'show': showMenu }" (click)="toggleMenu()">
              <span class="bar"></span>
              <span class="bar"></span>
@@ -17,6 +54,29 @@
                    </form>
                 </div>
                 <div class="nav">
+                  <div class="wishlist_card_head head_top_bar">
+                     <div class="wishlish_icon announcement">
+                        <a (click)="onCheckNotification()" appShowMenu> 
+                           <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                           <span></span> 
+                        </a>
+                        <div class="dropdown-menu my_account_dropmenu notification announcement">
+                           <ul *ngIf="announcements.length > 0">
+                              <li *ngFor="let item of announcements">
+                                 <!-- <img [src]="item.userPic" alt="userpic">  -->
+                                 <p [ngStyle]="{'fontWeight': item.isRead == false ? 'bold' : 'normal'}">{{ item.notification | truncate }} <br> 
+                                    <strong>{{ item.created | postCreated }}</strong>
+                                 </p> 
+                              </li>
+                           </ul>
+                           <ul *ngIf="announcements.length == 0">
+                              <li>
+                                 <p>No new announcement</p> 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
                   <div class="wishlist_card_head head_top_bar">
                      <div class="wishlish_icon">
                         <a (click)="onCheckNotification()" appShowMenu> 

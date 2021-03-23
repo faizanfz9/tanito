@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild("query") query: any;
   user: any;
   notifications: any = [];
+  announcements: any = [];
   newNotifications: any = [];
   isRead: any = false;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
@@ -47,6 +48,13 @@ export class HeaderComponent implements OnInit {
       if(user.mobile) {
         this.isLoggedIn = user.mobile == localStorage.getItem("mobile") ? true : false;
       }
+      this.notificationService.getAnnouncement().subscribe((res: any) => {
+        if(this.user.usertype == 3) {
+          this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'S' || item.share == 'A');
+        }else {
+          this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'T' || item.share == 'A');
+        }
+      });
     }
   }
 

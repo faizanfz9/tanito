@@ -67,6 +67,7 @@ import { ChatTimePipe } from './pipes/chat-time.pipe';
 import { ShowCommentBoxDirective } from './directives/show-comment-box.directive';
 import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { ToggleContentDirective } from './directives/toggle-content.directive';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     ChatTimePipe,
     ShowCommentBoxDirective,
     ContactUsComponent,
-    TruncatePipe
+    TruncatePipe,
+    ToggleContentDirective
   ],
   imports: [
     BrowserModule,

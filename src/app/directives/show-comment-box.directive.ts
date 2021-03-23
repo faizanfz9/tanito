@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 })
 export class ShowCommentBoxDirective {
 
-  constructor(private el: ElementRef, private renderer: Renderer2,) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   @HostListener('click') onClick() {
     let cardEl = this.el.nativeElement.parentElement.parentElement;

@@ -19,6 +19,7 @@ export class FeedComponent implements OnInit {
   likeType: any;
   commentLikeType: any;
   currPostId: any;
+  showFullContent = false;
   loading = false;
   modalRef: any;
   query: any;
@@ -87,6 +88,10 @@ export class FeedComponent implements OnInit {
     })
   }
 
+  toggleContent() {
+    this.showFullContent = !this.showFullContent;
+  }
+
   onScroll() {
     this.currentPage += 1;
     this.userService.getAllPost(this.currentPage, this.query).subscribe((res: any) => {
@@ -127,8 +132,8 @@ export class FeedComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
-        if(feed.userId !== this.loggedUser.id) {
-          this.notificationService.sendNotification(feed.userId, this.loggedUser.profile_img, 
+        if(feed.user_id !== this.loggedUser.id) {
+          this.notificationService.sendNotification(feed.user_id, this.loggedUser.profile_img, 
             this.loggedUser.username + " has liked your post: " + feed.body);
         }
       }else if(res.likeStatus == 0) {

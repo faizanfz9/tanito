@@ -41,7 +41,7 @@ export class UserTimelineComponent implements OnInit {
     this.activePlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
   }
 
-  onLikePost(postId: any, likeType: any, el: HTMLElement) {
+  onLikePost(postId: any, likeType: any, el: HTMLElement, feed: any) {
     let postInfo = new FormData();
     postInfo.append("user_id", this.loggedUser.id);
     postInfo.append("post_id", postId);
@@ -70,6 +70,8 @@ export class UserTimelineComponent implements OnInit {
         totalLikes += 1
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
+        this.notificationService.sendNotification(this.userData.data.results.user_id, this.loggedUser.profile_img, 
+        this.loggedUser.username + " has liked your post: " + feed.body);
       }else if(res.likeStatus == 0) {
         el.classList.remove("liked");
         totalLikes -= 1

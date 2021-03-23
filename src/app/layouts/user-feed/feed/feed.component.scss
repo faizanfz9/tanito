@@ -43,3 +43,19 @@
 .viewport {
     height: 1000px;
 }
+
+.follow_bdy {
+    .content-body {
+        &.clipped {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+    .read-more-link {
+        color: #007bff;
+        position: relative;
+        top: -10px;
+    }
+}
