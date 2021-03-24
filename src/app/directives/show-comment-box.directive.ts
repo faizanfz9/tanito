@@ -18,4 +18,5 @@ export class ShowCommentBoxDirective {
       this.el.nativeElement.style.fill = "#514DC5";
     }
   }
+  
 }
