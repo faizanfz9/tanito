@@ -11,12 +11,12 @@ export class ShowMenuDirective {
   @HostListener('click', ['$event']) onClick(event: Event) {
     event.stopPropagation();
     let dropdownMenu = this.el.nativeElement.nextSibling;
-    document.querySelectorAll(".dropdown-menu").forEach(function(el){
-      el.classList.remove("show");
-    })
     if(dropdownMenu.classList.contains("show")) {
       this.renderer.removeClass(dropdownMenu, "show");
     }else {
+      document.querySelectorAll(".dropdown-menu").forEach(function(el){
+        el.classList.remove("show");
+      })
       this.renderer.addClass(dropdownMenu, "show");
     }
   }
