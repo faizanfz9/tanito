@@ -112,6 +112,7 @@ export class PlansComponent implements OnInit {
       this.options.amount = this.planAmt * 100;
       this.rzp = new this.winRef.nativeWindow["Razorpay"](this.options);
       this.rzp.open();
+      this.modalService.hide();
     }
   }
 

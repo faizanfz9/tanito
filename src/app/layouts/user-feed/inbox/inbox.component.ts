@@ -5,6 +5,7 @@ import { UserService } from 'src/app/shared/user.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AngularFireStorage } from '@angular/fire/storage'
 import { VideoProcessingService } from 'src/app/shared/video-processing.service';
+import { MyPlanService } from 'src/app/shared/my-plan.service';
 
 @Component({
   selector: 'app-inbox',
@@ -41,6 +42,7 @@ export class InboxComponent implements OnInit{
     private userService: UserService, 
     private storage: AngularFireStorage,
     private videoService: VideoProcessingService,
+    private myPlanService: MyPlanService,
     private route: ActivatedRoute, 
     private modalService: BsModalService) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
@@ -73,16 +75,8 @@ export class InboxComponent implements OnInit{
   }
 
   ngOnInit(): void { 
-    let loggedUser = JSON.parse(this.userService.getUser());
-    let purchasedPlan = loggedUser.plan_subcription[loggedUser.plan_subcription.length - 1];
-    if(purchasedPlan) {
-      let planEndDate = new Date(purchasedPlan.end_date);
-      let currDate = new Date();
-      if(currDate > planEndDate) {
-        this.isPlanActive = false;
-      }else {
-        this.isPlanActive = true;
-      }
+    if(this.myPlanService.getCurrentPlan() && !this.myPlanService.isPlanExpired()) {
+      this.isPlanActive = true;
     }
 
     setTimeout(() => {

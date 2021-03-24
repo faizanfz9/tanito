@@ -54,4 +54,15 @@ export class NotificationService {
   getAnnouncement() {
     return this.http.get(this.url + "/notification");
   }
+
+  announcementUrlArr(annIdArr: any, userId: any) {
+    let array: any = [];
+    annIdArr.forEach((annId: any) => {
+      let notiInfo = new FormData();
+      notiInfo.append('user_id', userId);
+      notiInfo.append('noti_id', annId);
+      array.push(this.http.post(this.url + "/read_notification", notiInfo));
+    })
+    return array;
+  }
 }

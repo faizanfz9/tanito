@@ -2,6 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { MyPlanService } from 'src/app/shared/my-plan.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -23,7 +24,7 @@ export class TimelineComponent implements OnInit {
   modalRef: any;
   reactionFetched = false;
   baseurl: any;
-  activePlan: any;
+  isPlanActive: any;
   @ViewChild("viewReactions") viewReactions: any;
   @ViewChild('postBlock', {static: true}) postBlock: any;
   profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/";
@@ -33,7 +34,12 @@ export class TimelineComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private userService: UserService, private modalService: BsModalService, private notificationService: NotificationService) { }
+  constructor(private userService: UserService, 
+    private modalService: BsModalService, 
+    private notificationService: NotificationService,
+    private myPlanService: MyPlanService
+    ) 
+  { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(this.userService.getUser());
@@ -43,7 +49,10 @@ export class TimelineComponent implements OnInit {
       localStorage.setItem("user", JSON.stringify(this.myData));
     })
     this.baseurl = window.location.origin;
-    this.activePlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
+
+    if(this.myPlanService.getCurrentPlan() && !this.myPlanService.isPlanExpired()) {
+      this.isPlanActive = true;
+    }
   }
 
   onDeletePost(postId: any) {
@@ -168,7 +177,7 @@ export class TimelineComponent implements OnInit {
     let loggedUserId = new FormData();
     loggedUserId.append("id", this.loggedUser.id);
     this.userService.userComments(loggedUserId).subscribe((res: any) => {
-      if(!this.activePlan) {
+      if(!this.isPlanActive) {
         if(res.data < 5) {
           this.loading = true;
           this.userService.commentOnPost(commentData).subscribe((res: any) => {

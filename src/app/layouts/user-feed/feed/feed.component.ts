@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { NgForm } from '@angular/forms';
+import { MyPlanService } from 'src/app/shared/my-plan.service';
 
 @Component({
   selector: 'app-feed',
@@ -37,7 +38,7 @@ export class FeedComponent implements OnInit {
   specifiedReason = "";
   selectedPost: any;
   currentPage = 1;
-  activePlan: any;
+  isPlanActive: any;
   @ViewChild("reportPost") reportPost: any;
   @ViewChild("viewReactions") viewReactions: any;
   profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
@@ -54,6 +55,7 @@ export class FeedComponent implements OnInit {
   constructor(private userService: UserService, 
     private modalService: BsModalService, 
     public route: ActivatedRoute,
+    private myPlanService: MyPlanService,
     private notificationService: NotificationService
     ) {
     this.loggedUser = JSON.parse(this.userService.getUser());
@@ -72,7 +74,10 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
     this.getFeeds();
     this.baseurl = window.location.origin;
-    this.activePlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
+
+    if(this.myPlanService.getCurrentPlan() && !this.myPlanService.isPlanExpired()) {
+      this.isPlanActive = true;
+    }
   }
 
   getFeeds() {
@@ -245,7 +250,7 @@ export class FeedComponent implements OnInit {
     let loggedUserId = new FormData();
     loggedUserId.append("id", this.loggedUser.id);
     this.userService.userComments(loggedUserId).subscribe((res: any) => {
-      if(!this.activePlan) {
+      if(!this.isPlanActive) {
         if(res.data < 5) {
           this.loading = true;
           this.userService.commentOnPost(commentData).subscribe((res: any) => {

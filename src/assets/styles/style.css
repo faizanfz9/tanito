@@ -965,12 +965,11 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 }
 .wishlish_icon i { font-size: 2.4rem; margin-top: 6px; color: #a9a9a9; }
 .wishlish_icon { position: relative; }
-.wishlish_icon a span { position: absolute; top: 2px; background: #ff4d5e; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 13px; color: #fff; right: 0px; }
+.wishlish_icon a span { position: absolute; top: 2px; background: #ff4d5e; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 12px; color: #fff; right: 0px; }
 .wishlish_icon.announcement a span {
     top: 25px;
     right: -3px;
-    width: 15px;
-    height: 15px;
+    font-size: 12px;
 }
 .account_user_icon { position: relative; }
 .account_panel_head.head_top_bar { margin-right: 10px; }
