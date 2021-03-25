@@ -26,7 +26,10 @@ export class PostCratedPipe implements PipeTransform {
       return minutes + " minutes ago";
     }
     if(hours <= 24) {
-      return hours.toFixed(0) + "h ago";
+      if(minutes == 1) {
+        return minutes + " hour ago";
+      }
+      return hours.toFixed(0) + " hours ago";
     }
     return postDate + " " + postMonth + " " + postYear;
   }
