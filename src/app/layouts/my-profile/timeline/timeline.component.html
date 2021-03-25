@@ -24,7 +24,7 @@
     </div>
     <div class="follow_bdy">
       <p> {{ post.body }} </p>
-      <ul [hidden]="post.tags.length == 0" class="hashtags">
+      <ul *ngIf="post.tags !== null ? post.tags.length > 0 : post.tags !== null" class="hashtags">
           <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
       </ul>
       <img *ngIf="post.image.length > 0" class="post-img" [src]="imageDirPath + post.image">
@@ -123,7 +123,7 @@
                     <span class="likes">{{ item.reactionType.length }}</span>
                     <span class="view" (click)="onViewCommentReaction(item.commentID)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                     <span class="date">&nbsp; &nbsp; | &nbsp; &nbsp; {{ item.created | postCreated }}</span>
-                    <button class="dlt-btn" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>

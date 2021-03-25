@@ -34,7 +34,7 @@
         <div class="custom_card custom_crd_padd" *ngIf="feeds.length == 0 && query">
             <h5>No Post Found!</h5>
         </div>
-        <div class="custom_card custom_crd_padd feeds" *ngFor="let feed of feeds | shuffleFeeds">
+        <div class="custom_card custom_crd_padd feeds" *ngFor="let feed of feeds | recentPost">
             <div class="follow_top d-flex align-items-center">
                 <div class="follow_lft">
                     <img [routerLink]="feed.user_id == loggedUser.id ? '/myProfile' : '/user/'+feed.user_id" class="profile-img" [src]="feed.profile_img == null ? userAvatar : profilePath + feed.profile_img" [alt]="feed.username">
@@ -59,13 +59,13 @@
             <div class="follow_bdy">
                 <p class="content-body" [ngClass]="{'clipped': feed.body.length > 500 }"> {{ feed.body }} </p>
                 <a class="read-more-link" [hidden]="feed.body.length < 500" appToggleContent>Read More...</a>
-                <ul [hidden]="feed.tags.length == 0" class="hashtags">
+                <ul *ngIf="feed.tags !== null ? feed.tags.length > 0 : feed.tags !== null" class="hashtags">
                     <li *ngFor="let tag of feed.tags.split(',')">#{{ tag | lowercase }}</li>
                 </ul>
                 <img *ngIf="feed.image.length > 0" class="post-img" [src]="imageDirPath + feed.image">
                 <plyr *ngIf="feed.video.length > 0" style="display: block; max-width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: videoDirPath + feed.video }]"></plyr>
                 </div>
-                <p class="subject d-block d-sm-none" [hidden]="feed.subject.length == 0"> {{ feed.subject | titlecase }}</p>
+                <p class="subject d-block d-sm-none" *ngIf="feed.subject !== null ? feed.subject.length > 0 : feed.subject !== null"> {{ feed.subject | titlecase }}</p>
                 <div class="follow_ftr">
                     <div class="action-btn">
                         <button type="button" class="post-action-btn" [ngClass]="{ 'liked': isPostLiked(feed.likes) }" #likeBtn (click)="onLikePost(feed.id, likeType ? likeType : getLikeType(feed.likes), likeBtn, feed)">
@@ -119,7 +119,7 @@
                     </svg>
                     <span class="likes">{{ feed.comment.length }}</span>
                     <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                    <span class="subjects d-none d-sm-block" *ngIf="feed.subject.length > 0"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
+                    <span class="subjects d-none d-sm-block" *ngIf="feed.subject !== null ? feed.subject.length > 0 : feed.subject !== null"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
                     <div class="share-post">
                         <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
                         <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
@@ -158,7 +158,7 @@
                                 <span class="likes">{{ item.reactionType.length }}</span>
                                 <span class="view" (click)="onViewCommentReaction(item.commentID)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 <span class="date">&nbsp; &nbsp; | &nbsp; &nbsp; {{ item.created | postCreated }}</span>
-                                <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id && feed.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button class="dlt-btn" [hidden]="item.user_id !== loggedUser.id" (click)="onDeleteComment(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>

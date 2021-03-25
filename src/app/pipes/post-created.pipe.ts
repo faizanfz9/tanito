@@ -12,10 +12,21 @@ export class PostCratedPipe implements PipeTransform {
     let postYear = date.getFullYear();
 
     let currDate: any = new Date();
-    var hours = Math.abs(currDate - date) / 36e5;
+    let diff = Math.abs(currDate - date)
+    let hours = diff / 36e5;
+    let minutes = Math.floor((diff/1000)/60);
 
+    if(minutes == 0) {
+      return "Just now";
+    }
+    if(hours < 1) {
+      if(minutes == 1) {
+        return minutes + " minute ago";
+      }
+      return minutes + " minutes ago";
+    }
     if(hours <= 24) {
-      return hours.toFixed(0) + "h";
+      return hours.toFixed(0) + "h ago";
     }
     return postDate + " " + postMonth + " " + postYear;
   }
