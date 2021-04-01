@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         this.openModal(this.otpVerifyModal);
+        console.log(res);
         // this.firebaseRegister(form.value.email, form.value.password);
       }
     }, error => {

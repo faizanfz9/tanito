@@ -57,12 +57,14 @@ export class HeaderComponent implements OnInit {
 
   fetchAnnouncement() {
     this.notificationService.getAnnouncement().subscribe((res: any) => {
-      if(this.user.usertype == 3) {
-        this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'S' || item.share == 'A');
-      }else {
-        this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'T' || item.share == 'A');
+      if(this.user) {
+        if(this.user.usertype == 3) {
+          this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'S' || item.share == 'A');
+        }else {
+          this.announcements = res.data.result.reverse().filter((item: any) => item.share == 'T' || item.share == 'A');
+        }
+        this.newAnnouncements = this.announcements.filter((item: any) => !item.readBy.includes(this.user.id));
       }
-      this.newAnnouncements = this.announcements.filter((item: any) => !item.readBy.includes(this.user.id));
     });
   }
 

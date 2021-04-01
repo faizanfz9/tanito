@@ -101,6 +101,7 @@ export class ProfileSetupComponent implements OnInit {
     }else {
       this.mobile = JSON.parse(this.authService.getVerifiedUser()).mobile;
       this.userType = JSON.parse(this.authService.getVerifiedUser()).userType;
+      this.user = {usertype: this.userType};
     }
   }
 

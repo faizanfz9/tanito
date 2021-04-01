@@ -40,13 +40,14 @@
               required
               >
             </div>
-            <div class="col-md-6 col-12" [hidden]="user.usertype == 3">
+            <div class="col-md-6 col-12" *ngIf="user.usertype !== 3">
               <label class="primary_color spcllbl">Total Experience (in years)</label>
               <input 
               type="number" 
               class="form-control" 
               placeholder="Enter your experience"
               name="experience"
+              min="0"
               [ngModel]="user ? user.experience: '' "
               required>
             </div>

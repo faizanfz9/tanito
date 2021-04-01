@@ -39,6 +39,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
+  showFullText = false;
 
   visible: boolean = true;
   selectable: boolean = true;
@@ -186,7 +187,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       })
     }
   }
-
+  
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }

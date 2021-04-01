@@ -27,6 +27,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
+  showFullText = false;
 
   constructor(private userService: UserService, 
     private route: ActivatedRoute, 
