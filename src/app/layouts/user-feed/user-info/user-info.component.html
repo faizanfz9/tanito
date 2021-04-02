@@ -55,10 +55,10 @@
     <div class="custom_card category_card">
       <h3>Categories</h3>
       <div class="category_accord">
-        <h4 class="accord_btn" routerLink="/feed">All</h4>
+        <h4 class="accord_btn" routerLink="/feed" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All</h4>
       </div>
       <div class="category_accord" *ngFor="let subject of subjects | slice: 0 : showAll ? subjects.length : 5">
-        <h4 class="accord_btn" routerLink="/feed" [queryParams]="{ cat: subject}">{{ subject }}</h4>
+        <h4 class="accord_btn" routerLink="/feed" [queryParams]="{ cat: subject}" routerLinkActive="active">{{ subject }}</h4>
       </div>
       <a (click)="showAll = !showAll" class="see_all_btn">{{ showAll ? 'See Less' : 'See All' }}</a>
     </div>
