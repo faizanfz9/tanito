@@ -23,7 +23,8 @@
     </div>
     </div>
     <div class="follow_bdy">
-      <p> {{ post.body }} </p>
+      <p class="content-body" [ngClass]="{'clipped': post.body.length > 500 }"> {{ post.body }} </p>
+      <a class="read-more-link" [hidden]="post.body.length < 500" appToggleContent>Read More...</a>
       <ul *ngIf="post.tags !== null ? post.tags.length > 0 : post.tags !== null" class="hashtags">
           <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
       </ul>

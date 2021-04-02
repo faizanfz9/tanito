@@ -16,7 +16,7 @@
                   <div class="col-md-6">
                     <div class="user_contact_info"> <a href="#">{{ user.email }}</a>
                       <p [ngClass]="{'text-full': showFullText}">{{ user.description }}</p>
-                      <a [hidden]="user.description.length < 480" (click)="showFullText = !showFullText"> {{ showFullText ? '..Read Less' : 'Read More..' }} </a>
+                      <a *ngIf="user.description" [hidden]="user.description.length < 480" (click)="showFullText = !showFullText"> {{ showFullText ? '..Read Less' : 'Read More..' }} </a>
                     </div>
                   </div>
                   <div class="col-md-6">
