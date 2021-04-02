@@ -61,7 +61,7 @@
                             <ul>
                                 <li><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.data.results.qualification | uppercase}}</li>
                                 <li><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.data.results.university | titlecase }}</li>
-                                <li><img src="assets/images/icons/work.svg" alt="work" />{{ user.data.results.experience + ' Year' | titlecase }}</li>
+                                <li [hidden]="user.data.results.usertype == 3"><img src="assets/images/icons/work.svg" alt="work" />{{ user.data.results.experience + ' Year' | titlecase }}</li>
                                 <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.data.results.created | datefilter }}</li>
                                 <li><img src="assets/images/icons/gender.png" alt="gender" />{{ user.data.results.gender | titlecase }}</li>
                             </ul>
