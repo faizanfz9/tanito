@@ -58,7 +58,7 @@ export class UserService {
       let urlkey = res.data.urlkey;
       let usersArr: any = [];
       users = users.filter((user: any) => {
-        return user.id !== loggedUserId;
+        return user.id !== loggedUserId && (+user.usertype == 2 || +user.usertype == 3);
       })
       users.forEach(function(user: any){
         usersArr.push({
