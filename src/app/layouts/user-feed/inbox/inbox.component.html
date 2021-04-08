@@ -24,7 +24,7 @@
           <div class="d-flex">
             <span class="filename" *ngIf="file">{{ file.name }}</span>
             <input type="file" #fileInput id="attach" (change)="onSelectFile($event)" class="d-none" />
-            <label for="attach" class="m-0"><img src="assets/images/icons/attchment_icon.png" alt="attach icon" /></label>
+            <label for="attach" class="m-0"><img src="assets/images/icons/attached.svg" width="25" style="cursor: pointer;" alt="attach icon" /></label>
           </div>
           <i class="fa fa-trash" [hidden]="!file" (click)="fileReset()" aria-hidden="true"></i>
           <button type="submit"><img src="assets/images/icons/send_icon.png" (click)="onSendMsg()" alt="send" /></button>

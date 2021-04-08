@@ -6,7 +6,7 @@
                 <div class="user_info_btm">
                     <div class="row border_btm">
                         <div class="col-md-2">
-                            <div class="profile_img"><img [src]="user.data.results.profile_img.length == 0 ? userAvatar : profilePath + user.data.results.profile_img " [alt]="user.data.results.username" /></div>
+                            <div class="profile_img"><img [src]="!user.data.results.profile_img ? userAvatar : profilePath + user.data.results.profile_img " [alt]="user.data.results.username" /></div>
                         </div>
                         <div class="col-md-10 pl-0">
                             <h2>
@@ -17,7 +17,7 @@
                                     <div class="user_contact_info">
                                         <a>{{ user.data.results.email }}</a>
                                         <p [ngClass]="{'text-full': showFullText}">{{ user.data.results.description }}</p>
-                                        <a [hidden]="user.data.results.description.length < 480" (click)="showFullText = !showFullText"> {{ showFullText ? '..Read Less' : 'Read More..' }} </a>
+                                        <a [hidden]="user.data.results.description.length < 200" (click)="showFullText = !showFullText"> {{ showFullText ? '..Read Less' : 'Read More..' }} </a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -26,7 +26,7 @@
                                             <li><img src="assets/images/icons/users_gray.png" alt="user" /> {{ user.data.count_follower }}</li>
                                             <li><img src="assets/images/icons/user_check.png" alt="user" /> {{ user.data.count_following }}</li>
                                         </ul>
-                                        <button type="button" (click)="goToRoom()" class="message_btn purple_btn">Message</button>
+                                        <button type="button" (click)="goToRoom()" [hidden]="user.data.results.usertype == 0" class="message_btn purple_btn">Message</button>
                                         <button type="button" (click)="onFollowUser()" class="follow_btn purple_btn">{{ followed == true ? "Unfollow":"Follow" }}</button>
                                         <button type="button" (click)="reportModal()" class="report_btn purple_btn">Report Profile</button>
                                     </div>
