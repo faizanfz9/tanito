@@ -121,7 +121,7 @@
                     <span class="view" (click)="onViewReaction(feed.id)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                     <span class="subjects d-none d-sm-block" *ngIf="feed.subject !== null ? feed.subject.length > 0 : feed.subject !== null"> &nbsp; &nbsp; | &nbsp; &nbsp; {{ feed.subject | titlecase }}</span>
                     <div class="share-post">
-                        <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
+                        <share-buttons [show]="5" [include]="['facebook','twitter','linkedin','pinterest','reddit','copy']" description="This is description!" [url]="baseurl + '/#/post/' + feed.id"></share-buttons>
                         <button type="button" #shareBtn (click)="toggleShareGroup(shareBtn)" class="post-action-btn share-btn" data-toggle="modal" data-target="#report_mdl"><img src="assets/images/icons/share_icon.png" alt="icon" /></button>
                     </div>
                 </div>
