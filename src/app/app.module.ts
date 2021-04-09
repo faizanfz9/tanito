@@ -68,6 +68,7 @@ import { ShowCommentBoxDirective } from './directives/show-comment-box.directive
 import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ToggleContentDirective } from './directives/toggle-content.directive';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import { ToggleContentDirective } from './directives/toggle-content.directive';
     ShareIconsModule,
     ScrollingModule,
     InfiniteScrollModule,
-    NgbModule
+    NgbModule,
+    ScullyLibModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy}

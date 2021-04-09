@@ -20,7 +20,7 @@ export class AppComponent {
         if (!(evt instanceof NavigationEnd)) {
             return;
         }
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
     });
   }
 }

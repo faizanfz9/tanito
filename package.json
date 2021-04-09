@@ -11,7 +11,9 @@
     "dev:ssr": "ng run tanito:serve-ssr",
     "serve:ssr": "node dist/tanito/server/main.js",
     "build:ssr": "ng build --prod && ng run tanito:server:production",
-    "prerender": "ng run tanito:prerender"
+    "prerender": "ng run tanito:prerender",
+    "scully": "npx scully --",
+    "scully:serve": "npx scully serve --"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +39,9 @@
     "@nguniversal/express-engine": "^11.0.1",
     "@ngx-meta/core": "^9.0.0",
     "@ntegral/ngx-universal-window": "^1.0.2",
+    "@scullyio/init": "^1.1.3",
+    "@scullyio/ng-lib": "^1.0.0",
+    "@scullyio/scully": "^1.0.0",
     "@silmar/ng-lightbox": "^2.0.0",
     "@syncfusion/ej2-angular-buttons": "^18.4.33",
     "@syncfusion/ej2-angular-dropdowns": "^18.4.34",

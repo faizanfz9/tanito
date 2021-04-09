@@ -165,6 +165,7 @@ header .inner-wrap .toggle-menu span{
 .banner_content p {
 font-size:.90rem; line-height:23px; font-weight:300; }
 .banner_content h2 { font-size: 3.4rem; line-height: 3.4rem; }
+.banner_content p { font-size: 16px;}
 .hero-bg .registration-form { padding-right:80px; margin-top:15px; }
 .hero-bg .registration-form .form-control { height:71px; border: 3px solid #514DC5; }
 .registration-form .form-control { box-shadow: 0px 3px 3px #7D3B8A24; border: 2px solid #514DC5; height: 50px; border-radius: 12px; }
@@ -245,6 +246,17 @@ margin-bottom: 20px; box-shadow: none !important; padding-left: 19px; text-align
 .register_tab .registration-form .form-control { height: 57px; box-shadow: 0px 3px 3px #7D3B8A24; border: 2px solid #514DC5; }
 .register_title h4 { font-weight:500; font-size:1.25rem; }
 .register_tab .registration-form { padding-right: 0px; }
+
+@media screen and (max-width: 575px) {
+    .registration-form {
+        width: 100% !important;
+    }
+    .registration-form .form-group button:first-child {
+        margin: 0 auto 15px !important;
+        display: block;
+    }
+}
+
 .registration-form .field-icon { z-index: 2; position: absolute; right: 10px; top: 46%; }
 .limitless_learning p {
  font-size: .85rem; line-height: 1.25rem; margin-bottom: 15px !important; }

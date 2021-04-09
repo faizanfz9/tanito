@@ -4999,7 +4999,7 @@ class AppComponent {
             if (!(evt instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"])) {
                 return;
             }
-            window.scrollTo(0, 0);
+            // window.scrollTo(0, 0)
         });
     }
 }
@@ -9404,12 +9404,6 @@ function PostComponent_section_0_Template(rf, ctx) { if (rf & 1) {
 const _c2 = function () { return { backdropBorderRadius: "3px", fullScreenBackdrop: true }; };
 class PostComponent {
     constructor(userService, route, metaService) {
-        // this.metaService.updateTag([
-        //   { property: 'og:title', content: 'Tanito - Social Learning Platform' },
-        //   { property: 'og:url', content: 'https://www.imdb.com/title/tt0117500/' },
-        //   { property: 'og:image', content: 'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg' },
-        //   { property: 'og:description', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." }
-        // ]);
         this.userService = userService;
         this.route = route;
         this.metaService = metaService;
@@ -9420,7 +9414,12 @@ class PostComponent {
         this.userAvatar = "assets/images/icons/user_avatar.svg";
         this.teacherIcon = "assets/images/icons/teacher.png";
         this.studentIcon = "assets/images/icons/student.png";
-        this.metaService.updateTag({ property: 'og:title', content: 'Test Tantio' }, 'property="og:title"');
+        // this.metaService.updateTag([
+        //   { property: 'og:title', content: 'Tanito - Social Learning Platform' },
+        //   { property: 'og:url', content: 'https://www.imdb.com/title/tt0117500/' },
+        //   { property: 'og:image', content: 'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg' },
+        //   { property: 'og:description', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." }
+        // ]);
     }
     ngOnInit() {
         let id = this.route.snapshot.params.id;
@@ -9599,7 +9598,13 @@ const routes = [
     { path: "user/:id", component: _layouts_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_10__["UserProfileComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]] },
     { path: "search-user", component: _layouts_search_user_search_user_component__WEBPACK_IMPORTED_MODULE_17__["SearchUserComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]] },
     { path: "plans", component: _layouts_plans_plans_component__WEBPACK_IMPORTED_MODULE_18__["PlansComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]] },
-    { path: "post/:id", component: _layouts_post_post_component__WEBPACK_IMPORTED_MODULE_20__["PostComponent"] },
+    { path: "post/:id", component: _layouts_post_post_component__WEBPACK_IMPORTED_MODULE_20__["PostComponent"], data: {
+            seo: {
+                title: `About Sam`,
+                description: `I'm a 30 year old software engineer living in Belgium.`,
+                shareImg: '/assets/share/about.png',
+            }
+        } },
     { path: "terms-and-condition", component: _layouts_terms_and_condition_terms_and_condition_component__WEBPACK_IMPORTED_MODULE_9__["TermsAndConditionComponent"] },
     { path: "privacy-policy", component: _layouts_privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_6__["PrivacyPolicyComponent"] },
     { path: "about-us", component: _layouts_about_us_about_us_component__WEBPACK_IMPORTED_MODULE_21__["AboutUsComponent"] },

@@ -19,14 +19,12 @@ export class PostComponent implements OnInit {
   studentIcon = "assets/images/icons/student.png";
 
   constructor(private userService: UserService, private route: ActivatedRoute, private metaService: Meta) { 
-    // this.metaService.updateTag([
-    //   { property: 'og:title', content: 'Tanito - Social Learning Platform' },
-    //   { property: 'og:url', content: 'https://www.imdb.com/title/tt0117500/' },
-    //   { property: 'og:image', content: 'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg' },
-    //   { property: 'og:description', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." }
-    // ]);
-
-    this.metaService.updateTag({ property:'og:title', content:'Test Tantio'}, 'property="og:title"');
+    this.metaService.addTags([
+      { property: 'og:title', content: 'Tanito - Social Learning Platform' },
+      { property: 'og:url', content: 'https://www.imdb.com/title/tt0117500/' },
+      { property: 'og:image', content: 'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg' },
+      { property: 'og:description', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." }
+    ]);
   }
 
   ngOnInit(): void {

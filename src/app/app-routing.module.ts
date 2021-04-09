@@ -25,7 +25,7 @@ import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent, data: {'title': 'Tanito Login'} },
   { path: "register", component: RegisterComponent },
   { path: "profile-setup", component: ProfileSetupComponent},
   { path: "feed", component: UserFeedComponent, canActivate: [AuthGuard],
@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: "user/:id", component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: "search-user", component: SearchUserComponent, canActivate: [AuthGuard]},
   { path: "plans", component: PlansComponent, canActivate: [AuthGuard]},
-  { path: "post/:id", component: PostComponent},
+  { path: "post/:id", component: PostComponent },
   { path: "terms-and-condition", component: TermsAndConditionComponent },
   { path: "privacy-policy", component: PrivacyPolicyComponent },
   { path: "about-us", component: AboutUsComponent },
