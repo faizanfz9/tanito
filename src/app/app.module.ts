@@ -114,7 +114,7 @@ import { ToggleContentDirective } from './directives/toggle-content.directive';
     ToggleContentDirective
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,

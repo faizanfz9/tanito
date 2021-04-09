@@ -204,4 +204,9 @@ export class UserService {
   sendQuery(userQuery: any) {
     return this.http.post(this.url + "/contact_us", userQuery)
   }
+
+  // Get total number of teacher, students and posts
+  getTotalData() {
+    return this.http.get(this.url + "/count_all_data");
+  }
 }
