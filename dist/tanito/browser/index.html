@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Tanito</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta property="og:title" content="Test Test"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:image" content=""/>
+  <meta property="og:description" content=""/>
+  <link rel="icon" type="image/x-icon" href="./assets/images/logo.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+  <app-root></app-root>
+
+  <script>
+    if(window.location.hash.includes('post')) {
+      let postId = window.location.hash.replace("#/post/", '');
+
+      let titleMeta = document.querySelector('meta[property="og:title"]');
+      let urlMeta = document.querySelector('meta[property="og:url"]');
+      let imgMeta = document.querySelector('meta[property="og:image"]');
+      let desMeta = document.querySelector('meta[property="og:description"]');
+      console.log(postId);
+      fetch('http://demo.mbrcables.com/tanito/Api/get_post_by_id/' + postId)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        titleMeta.setAttribute('content', 'Test Check');
+        urlMeta.setAttribute('content', 'test.com');
+        imgMeta.setAttribute('content', 'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg');
+        desMeta.setAttribute('content', 'Here we are fetching a JSON file across the network and printing it to the console. The simplest use of fetch() takes one argument ');
+      });
+    }
+  </script>
+<script src="runtime.js" defer></script><script src="polyfills.js" defer></script><script src="scripts.js" defer></script><script src="vendor.js" defer></script><script src="main.js" defer></script></body>
+</html>
