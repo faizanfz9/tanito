@@ -71,6 +71,10 @@ export class LoginFormComponent implements OnInit {
     })
   }
 
+  backToLogin() {
+    this.modalRef.hide();
+  }
+
   goToNext(el: HTMLElement) {
     let nextEl = el.nextSibling as HTMLElement;
     let input = el as HTMLInputElement;

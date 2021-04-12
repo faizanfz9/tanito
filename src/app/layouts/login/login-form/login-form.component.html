@@ -94,7 +94,7 @@
                 required>
               </div>
               <div class="form-group text-center">
-                <button type="button" class="btn btn_primary btn-sm text-uppercase mr-3" >Back to Login</button>
+                <button type="button" (click)="backToLogin()" class="btn btn_primary btn-sm text-uppercase mr-3" >Back to Login</button>
                 <button type="submit" class="btn btn_primary btn-sm text-uppercase" [disabled]="forgotPwdForm.invalid">Get OTP</button>
               </div>
             </form>

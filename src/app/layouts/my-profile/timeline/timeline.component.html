@@ -95,9 +95,9 @@
         <div class="inner-box">
             <div class="comment-row" *ngFor="let item of post.comment">
                 <div class="user">
-                    <img [src]="item.profile_img == null ? userAvatar : profilePath + item.profile_img" alt="user">
+                    <img [routerLink]="item.user_id == loggedUser.id ? '/myProfile' : '/user/'+item.user_id" [src]="!item.profile_img ? userAvatar : profilePath + item.profile_img" alt="user">
                     <div class="name">
-                        <h6>{{ item.username }}</h6>
+                        <h6 [routerLink]="item.user_id == loggedUser.id ? '/myProfile' : '/user/'+item.user_id">{{ item.username }}</h6>
                         <p class="comment">{{ item.comment }}</p>
                     </div>
                 </div>
