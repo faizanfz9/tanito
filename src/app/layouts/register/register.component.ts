@@ -43,8 +43,8 @@ export class RegisterComponent implements OnInit {
     this.username = form.value.name;
     this.mobile = form.value.phone;
     this.loading = true;
-    this.authService.register(user).subscribe(res => {
-      if(res.status == "false") {
+    this.authService.register(user).subscribe((res: any) => {
+      if(res.status == false) {
         this.loading = false;
         alert(res.msg);
       }else {

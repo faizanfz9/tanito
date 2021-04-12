@@ -1,7 +1,7 @@
 <div #chatBox>
   <div class="student_rht chat_box_rht" *ngIf="isFetched || chatRooms.length > 0">
     <div class="chat_box">
-      <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched">
+      <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched && receiver">
         <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
           <h4 [routerLink]="'/user/' + receiver.user_id">
             {{ receiver.username }} 
@@ -38,7 +38,7 @@
           </div>
         </div> -->
         <div class="msg_panel_inr">
-          <div class="indvsl_msg_box" [routerLink]="'/feed/inbox/' + chatRoom.memberId" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let chatRoom of chatRooms">
+          <div class="indvsl_msg_box" [routerLink]="'/feed/inbox/' + chatRoom.memberId" routerLinkActive="active" *ngFor="let chatRoom of chatRooms">
             <div class="row" (click)="onMsgRead(chatRoom.memberId)">
               <div class="col-md-2"> <span><img [src]="profilePath + chatRoom.profileImg" alt="images" /></span> </div>
               <div class="col-md-10">

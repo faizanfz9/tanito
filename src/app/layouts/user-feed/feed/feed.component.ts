@@ -33,7 +33,7 @@ export class FeedComponent implements OnInit {
   reactionFetched = false;
   reactionModalTitle: any;
   catChanged = false;
-  reportReason = ["Violence", "Harassment", "False Information", "Span", "Something else, specify in comment"];
+  reportReason = ["Harassment", "False Information", "Spam", "Something else, specify in comment"];
   selectedReason = "";
   specifiedReason = "";
   selectedPost: any;

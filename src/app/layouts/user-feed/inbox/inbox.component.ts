@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -44,7 +44,8 @@ export class InboxComponent implements OnInit{
     private videoService: VideoProcessingService,
     private myPlanService: MyPlanService,
     private route: ActivatedRoute, 
-    private modalService: BsModalService) { 
+    private modalService: BsModalService,
+    private router: Router) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.route.params.subscribe(res => {
       let paramId: any;
@@ -56,19 +57,26 @@ export class InboxComponent implements OnInit{
           this.userService.getUserById(memberId).subscribe(res => {
             this.isFetched = true;
             this.receiver = res.data.results;
-          })
-          this.loading = true;
-          this.onMsgRead(paramId);
-          this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
-            this.chatRooms = res;
-            this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
-            if(this.isRoomFound) {
-              let chatRoom = this.chatRooms.find((item: any) => item.memberId == paramId);
-              this.chatRoomId = chatRoom.chatId;
+
+            if(this.receiver) {
+              this.loading = true;
+              this.onMsgRead(paramId);
+              this.chatService.getRooms(this.loggedUserId).valueChanges().subscribe(res => {
+                this.chatRooms = res;
+                this.isRoomFound = this.chatRooms.some((item: any) => item.memberId == paramId);
+                if(this.isRoomFound) {
+                  let chatRoom = this.chatRooms.find((item: any) => item.memberId == paramId);
+                  this.chatRoomId = chatRoom.chatId;
+                }else {
+                  this.chatRoomId = paramId + "&" + this.loggedUserId;
+                }
+                this.getFeeds();
+              })
             }else {
-              this.chatRoomId = paramId + "&" + this.loggedUserId;
+              this.loading = false;
+              alert("The user you had conversation with does'nt exist now!");
+              this.router.navigate(['/feed/inbox/' + this.chatRooms[0].memberId]);
             }
-            this.getFeeds();
           })
         } 
     })
