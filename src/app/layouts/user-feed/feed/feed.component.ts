@@ -117,7 +117,7 @@ export class FeedComponent implements OnInit {
     this.userService.likePost(postInfo).subscribe((res: any) => {
       let parentEl = el.parentElement;
       let likesEl = parentEl?.nextSibling as HTMLElement;
-      let totalLikes = +likesEl.innerHTML as any;
+      let totalLikes = parseInt(likesEl.innerHTML) as any;
       let likeTypeEl = el.firstChild as HTMLElement;
       switch(likeType) {
         case 1:
@@ -134,7 +134,7 @@ export class FeedComponent implements OnInit {
       }
       if(res.likeStatus == 1) {
         el.classList.add("liked");
-        totalLikes += 1
+        totalLikes += 1;
         likesEl.innerHTML = totalLikes;
         this.likeType = likeType;
         if(feed.user_id !== this.loggedUser.id) {
