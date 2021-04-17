@@ -26,8 +26,7 @@ export class HeaderComponent implements OnInit {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 
-  constructor(private router: Router, 
-    private location: Location,
+  constructor(private router: Router,
     private authService: AuthService,
     private userService: UserService,
     private notificationService: NotificationService) {
