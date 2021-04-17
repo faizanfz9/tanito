@@ -4,6 +4,7 @@ import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { UserService } from 'src/app/shared/user.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   studentIcon = "assets/images/icons/student.png";
 
   constructor(private router: Router, 
+    private location: Location,
     private authService: AuthService,
     private userService: UserService,
     private notificationService: NotificationService) {
@@ -43,6 +45,14 @@ export class HeaderComponent implements OnInit {
       this.notifications = res.reverse();
       this.newNotifications = res.filter((item: any) => item.isRead == false);
     })
+
+    // to close the mobile menu on route change
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        this.showMenu = false;
+    });
   }
 
   ngOnInit(): any {

@@ -8,7 +8,7 @@
       <div class="container-fluid">
          <div class="inner-wrap">
           <a class="navbar-brand" [routerLink]="isLoggedIn ? ['feed'] : ['/']"> <img src="assets/images/logo.svg" alt="logo" class="img-fluid head_logo" /> </a>
-          <div class="wishlish_icon mobile announcement">
+          <div class="wishlish_icon mobile announcement" *ngIf="isLoggedIn">
             <a (click)="onCheckAnnouncement()" appShowMenu> 
                <i class="fa fa-bullhorn" aria-hidden="true"></i>
                <span *ngIf="newAnnouncements.length > 0">{{ newAnnouncements.length }}</span>  
@@ -29,7 +29,7 @@
                </ul>
             </div>
          </div>
-          <div class="wishlish_icon mobile">
+          <div class="wishlish_icon mobile" *ngIf="isLoggedIn">
             <a (click)="onCheckNotification()" appShowMenu> 
                <i class="fa fa-bell"></i> 
                <span *ngIf="newNotifications.length > 0">{{ newNotifications.length }}</span> 
