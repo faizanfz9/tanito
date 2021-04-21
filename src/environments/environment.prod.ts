@@ -10,5 +10,5 @@ export const environment = {
     appId: "1:121851149069:web:4f2acf9707447e59bb4e44",
     measurementId: "G-C3HKZ0RE7J"
   },
-  baseUrl: "https://demo.mbrcables.com/tanito/Api"
+  baseUrl: "http://65.1.105.223/admin/Api"
 };

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = "https://demo.mbrcables.com/tanito/Api";
+  private url = environment.baseUrl;
   // isLoggedIn = new Subject<boolean>();
   user = new BehaviorSubject<any>({});
 

@@ -7,7 +7,104 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\admin\Desktop\sites\repos\tanito\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\Faizan\desktop\sites\tanito\src\polyfills.ts */"hN/g");
+
+
+/***/ }),
+
+/***/ "FGvd":
+/*!****************************************************!*\
+  !*** ./node_modules/zone.js/dist/task-tracking.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+* @license Angular v9.1.0-next.4+61.sha-e552591.with-local-changes
+* (c) 2010-2020 Google LLC. https://angular.io/
+* License: MIT
+*/
+(function (factory) {
+     true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) :
+        undefined;
+}((function () {
+    'use strict';
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A `TaskTrackingZoneSpec` allows one to track all outstanding Tasks.
+     *
+     * This is useful in tests. For example to see which tasks are preventing a test from completing
+     * or an automated way of releasing all of the event listeners at the end of the test.
+     */
+    var TaskTrackingZoneSpec = /** @class */ (function () {
+        function TaskTrackingZoneSpec() {
+            this.name = 'TaskTrackingZone';
+            this.microTasks = [];
+            this.macroTasks = [];
+            this.eventTasks = [];
+            this.properties = { 'TaskTrackingZone': this };
+        }
+        TaskTrackingZoneSpec.get = function () { return Zone.current.get('TaskTrackingZone'); };
+        TaskTrackingZoneSpec.prototype.getTasksFor = function (type) {
+            switch (type) {
+                case 'microTask':
+                    return this.microTasks;
+                case 'macroTask':
+                    return this.macroTasks;
+                case 'eventTask':
+                    return this.eventTasks;
+            }
+            throw new Error('Unknown task format: ' + type);
+        };
+        TaskTrackingZoneSpec.prototype.onScheduleTask = function (parentZoneDelegate, currentZone, targetZone, task) {
+            task['creationLocation'] = new Error("Task '" + task.type + "' from '" + task.source + "'.");
+            var tasks = this.getTasksFor(task.type);
+            tasks.push(task);
+            return parentZoneDelegate.scheduleTask(targetZone, task);
+        };
+        TaskTrackingZoneSpec.prototype.onCancelTask = function (parentZoneDelegate, currentZone, targetZone, task) {
+            var tasks = this.getTasksFor(task.type);
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i] == task) {
+                    tasks.splice(i, 1);
+                    break;
+                }
+            }
+            return parentZoneDelegate.cancelTask(targetZone, task);
+        };
+        TaskTrackingZoneSpec.prototype.onInvokeTask = function (parentZoneDelegate, currentZone, targetZone, task, applyThis, applyArgs) {
+            if (task.type === 'eventTask')
+                return parentZoneDelegate.invokeTask(targetZone, task, applyThis, applyArgs);
+            var tasks = this.getTasksFor(task.type);
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i] == task) {
+                    tasks.splice(i, 1);
+                    break;
+                }
+            }
+            return parentZoneDelegate.invokeTask(targetZone, task, applyThis, applyArgs);
+        };
+        TaskTrackingZoneSpec.prototype.clearEvents = function () {
+            while (this.eventTasks.length) {
+                Zone.current.cancelTask(this.eventTasks[0]);
+            }
+        };
+        return TaskTrackingZoneSpec;
+    }());
+    // Export the class so that new instances can be created with proper
+    // constructor params.
+    Zone['TaskTrackingZoneSpec'] = TaskTrackingZoneSpec;
+})));
 
 
 /***/ }),
@@ -234,6 +331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_localize_init__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_localize_init__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! zone.js/dist/zone */ "pDpN");
 /* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var zone_js_dist_task_tracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! zone.js/dist/task-tracking */ "FGvd");
+/* harmony import */ var zone_js_dist_task_tracking__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_task_tracking__WEBPACK_IMPORTED_MODULE_2__);
 /***************************************************************************************************
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
@@ -294,6 +393,11 @@ __webpack_require__.r(__webpack_exports__);
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+/***************************************************************************************************
+* SCULLY IMPORTS
+*/
+// tslint:disable-next-line: align
+
 
 
 /***/ }),

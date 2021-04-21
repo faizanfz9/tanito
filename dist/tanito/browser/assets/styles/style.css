@@ -165,6 +165,7 @@ header .inner-wrap .toggle-menu span{
 .banner_content p {
 font-size:.90rem; line-height:23px; font-weight:300; }
 .banner_content h2 { font-size: 3.4rem; line-height: 3.4rem; }
+.banner_content p { font-size: 16px;}
 .hero-bg .registration-form { padding-right:80px; margin-top:15px; }
 .hero-bg .registration-form .form-control { height:71px; border: 3px solid #514DC5; }
 .registration-form .form-control { box-shadow: 0px 3px 3px #7D3B8A24; border: 2px solid #514DC5; height: 50px; border-radius: 12px; }
