@@ -11,9 +11,9 @@ import { Meta } from '@angular/platform-browser';
 export class PostComponent implements OnInit {
   post: any;
   loading = false;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
-  imageDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/image/";
-  videoDirPath = "https://demo.mbrcables.com/tanito/assets/user-post-media/video/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/";
+  imageDirPath = "https://tanito.in/admin/assets/user-post-media/image/";
+  videoDirPath = "https://tanito.in/admin/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

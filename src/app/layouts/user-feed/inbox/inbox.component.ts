@@ -34,7 +34,7 @@ export class InboxComponent implements OnInit{
   vdoRegex = new RegExp(/\.(mp4|avi|mov|wmv|webm|mkv|flv)/g);
 
   isPlanActive = false;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
 

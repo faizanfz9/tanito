@@ -27,9 +27,9 @@ export class UserTimelineComponent implements OnInit {
   loading: any;
   isPlanActive: any;
   @ViewChild("viewReactions") viewReactions: any;
-  profilePath = "http://demo.mbrcables.com/tanito/assets/user-profile/"
-  imageDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/image/";
-  videoDirPath = "http://demo.mbrcables.com/tanito/assets/user-post-media/video/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/"
+  imageDirPath = "https://tanito.in/admin/assets/user-post-media/image/";
+  videoDirPath = "https://tanito.in/admin/assets/user-post-media/video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

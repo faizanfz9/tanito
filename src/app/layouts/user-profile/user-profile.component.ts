@@ -22,8 +22,8 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   selectedReason = "";
   specifiedReason = "";
   @ViewChild("reportProfile") reportProfile: any;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
-  teacherVideoPath = "http://demo.mbrcables.com/tanito/assets/teacher-video/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/"
+  teacherVideoPath = "https://tanito.in/admin/assets/teacher-video/";
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

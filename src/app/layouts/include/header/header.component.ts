@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   newNotifications: any = [];
   newAnnouncements: any = [];
   isRead: any = false;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
+  profilePath = "https://tanito.in/admin/assets/user-profile/"
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

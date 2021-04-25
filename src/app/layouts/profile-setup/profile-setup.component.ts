@@ -37,7 +37,7 @@ export class ProfileSetupComponent implements OnInit {
   selectedImg: any = new File([], "", undefined);
   selectedVideo: any = new File([], "", undefined);
   imgSrc: any = "assets/images/svg/file-upload.svg";
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/"
+  profilePath = "https://tanito.in/admin/assets/user-profile/"
   userAvatar = "assets/images/icons/user_avatar.svg";
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";

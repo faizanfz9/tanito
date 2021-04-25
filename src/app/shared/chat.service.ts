@@ -11,7 +11,7 @@ export class ChatService {
   receiverId: any;
   lastMsg: any;
   chatId: any;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/";
 
   constructor(private userService: UserService,
     private db: AngularFireDatabase) {

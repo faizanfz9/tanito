@@ -28,7 +28,7 @@ export class PlansComponent implements OnInit {
   public rzp: any;
 
   public options: any = {
-    key: 'rzp_test_hTt9ODldtNfwN7', // add razorpay key here\
+    key: '', // add razorpay key here\
     name: 'Tanito Learning Platform',
     description: '',
     amount: 0, // razorpay takes amount in paisa
@@ -70,6 +70,7 @@ export class PlansComponent implements OnInit {
   ngOnInit(): void {
     this.planService.getPlans().subscribe((res: any) => {
       this.plans = res.data.results;
+      this.options.key = res.data.razerpay[0].field_value;
     })
     this.modalService.onHidden.subscribe((res: any) => {
       this.planAmt = 0;

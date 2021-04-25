@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class NotificationService { 
   url = environment.baseUrl;
   loggedUser: any;
-  profilePath = "https://demo.mbrcables.com/tanito/assets/user-profile/";
+  profilePath = "https://tanito.in/admin/assets/user-profile/";
 
   constructor(private db: AngularFireDatabase, 
     private authService: AuthService,
