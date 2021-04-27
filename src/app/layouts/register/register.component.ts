@@ -24,12 +24,10 @@ export class RegisterComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.userType);
   }
 
   toggleUserType(type: number) {
     this.userType = type;
-    // console.log(this.userType);
   }
 
   onSignUp(form: NgForm) {
@@ -50,7 +48,6 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         this.openModal(this.otpVerifyModal);
-        console.log(res);
         // this.firebaseRegister(form.value.email, form.value.password);
       }
     }, error => {

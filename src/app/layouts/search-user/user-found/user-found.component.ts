@@ -1,3 +1,4 @@
+import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -54,7 +55,7 @@ export class UserFoundComponent implements OnInit {
     this.loading = true;
     this.userService.searchUser(queryRequest).subscribe((res: any) => {
       this.loading = false;
-      this.users = res.users;
+      this.users = res.users.filter((item: any) => item.data.profile_img !== null );
       this.path = res.urlkey;
     })
   }

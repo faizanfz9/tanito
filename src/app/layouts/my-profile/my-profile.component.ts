@@ -144,7 +144,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   }
 
   removeVideo() {
-    this.selectedImg = null;
+    this.selectedVideo = null;
     this.videoThumb = "";
   }
 

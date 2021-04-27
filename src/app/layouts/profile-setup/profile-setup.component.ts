@@ -127,6 +127,10 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   onDetailSave(form: NgForm): any {
+    if(this.imgSrc == 'assets/images/svg/file-upload.svg') {
+      alert("Please choose your profile picture!");
+      return false;
+    }
     if(form.value.experience < 0) {
       alert("Experience filed can't have negative value!");
       return false;
@@ -146,7 +150,6 @@ export class ProfileSetupComponent implements OnInit {
     userInfo.append("profile", this.selectedImg);
     userInfo.append("mobile", this.mobile);
     userInfo.append("video", this.selectedVideo);
-    console.log(form.value.experience);
     this.loading = true;
     this.authService.saveUserInfo(userInfo).subscribe((res: any) => {
       if(res.status == "false") {

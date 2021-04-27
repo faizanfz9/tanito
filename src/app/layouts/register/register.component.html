@@ -39,10 +39,11 @@
                     name="phone"
                     ngModel
                     pattern="^[0-9]*$"
+                    minlength="10"
                     #phone="ngModel"
                     required>
                     <div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-                      <div *ngIf="phone.errors?.pattern; else invalidPhone">
+                      <div *ngIf="phone.errors?.pattern || phone.errors?.minlength; else invalidPhone">
                         Please enter valid phone number!
                       </div>
                       <ng-template #invalidPhone>
