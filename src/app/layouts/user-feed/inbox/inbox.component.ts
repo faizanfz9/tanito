@@ -44,7 +44,7 @@ export class InboxComponent implements OnInit{
     private videoService: VideoProcessingService,
     private myPlanService: MyPlanService,
     private route: ActivatedRoute, 
-    private modalService: BsModalService,
+    public modalService: BsModalService,
     private router: Router) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
     this.route.params.subscribe(res => {

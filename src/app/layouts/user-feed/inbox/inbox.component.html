@@ -95,7 +95,7 @@
             <p>Share your experience by give rating to {{ receiver.username }}</p>
           </div>
           <div class="button_box d-flex align-items-center justify-content-center">
-            <a href="#" routerLink="/" class="back_to_home_btn mr-2">Back to Home</a>  
+            <a (click)="modalService.hide()" class="back_to_home_btn mr-2">Back to Home</a>  
             <button (click)="onRateTeacher()" type="button" class="ml-2">Submit</button>  
           </div>
         </div>

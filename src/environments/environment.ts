@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBpGGE7t8r5Q9tM13SeRlmpDwAUBcG1iEU",
-    authDomain: "tanito-e2cab.firebaseapp.com",
-    databaseURL: "https://tanito-e2cab-default-rtdb.firebaseio.com",
-    projectId: "tanito-e2cab",
-    storageBucket: "tanito-e2cab.appspot.com",
-    messagingSenderId: "121851149069",
-    appId: "1:121851149069:web:4f2acf9707447e59bb4e44",
-    measurementId: "G-C3HKZ0RE7J"
+    apiKey: "AIzaSyByz9GQ0aC5PbSgLgAjOw2cMncfP5YGN_4",
+    authDomain: "tanito-webapp-c0152.firebaseapp.com",
+    databaseURL: "https://tanito-webapp-c0152-default-rtdb.firebaseio.com",
+    projectId: "tanito-webapp-c0152",
+    storageBucket: "tanito-webapp-c0152.appspot.com",
+    messagingSenderId: "538474090610",
+    appId: "1:538474090610:web:4306325b062c267e5ef2eb",
+    measurementId: "G-269R29PSW9"
   },
   baseUrl: "https://tanito.in/admin/Api"
 };

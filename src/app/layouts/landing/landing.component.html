@@ -37,8 +37,11 @@
   <section class="position-relative limitless_learning grey-scale">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-lg-5 xsp-0">
-          <div class="people_need-img"> <img src="assets/images/limitless.jpg" alt="limitless" class="img-fluid mx-auto d-block"> </div>
+        <div class="col-lg-6 xsp-0">
+          <div class="people_need-img"> 
+            <!-- <img src="assets/images/limitless.jpg" alt="limitless" class="img-fluid mx-auto d-block">  -->
+            <plyr class="video" [plyrPlaysInline]="true" [plyrSources]="[{ src: 'assets/tanito_advertisement.mp4' }]"></plyr>
+          </div>
         </div>
         <div class="col-lg-6">
           <div class="pr-lg-5 mt-4 pl-5 count-area">
