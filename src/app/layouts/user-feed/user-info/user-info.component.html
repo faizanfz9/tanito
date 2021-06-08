@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="custom_card profile_box">
         <div class="dp_box">
-          <a routerLink="/myProfile"> <img [src]="user.profile_img.length > 0 ? profilePath + user.profile_img : userAvatar" alt="user image"> </a>
+          <a routerLink="/myProfile"> <img [src]="profilePath + user.profile_img" alt="user image"> </a>
           <img class="user-type" [src]="user.usertype == 3 ? studentIcon : teacherIcon " alt="user type">
         </div>
         <div class="text-center pb-2">
