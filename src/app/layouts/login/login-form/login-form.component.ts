@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-login-form',
@@ -22,8 +24,8 @@ export class LoginFormComponent implements OnInit {
   mobile = "";
 
   constructor(private authService: AuthService, 
-   private modalService: BsModalService, 
-   private firebaseAuth: AngularFireAuth) 
+   private socialAuthService: SocialAuthService,
+   private modalService: BsModalService) 
    { }
 
   ngOnInit(): void {
@@ -41,18 +43,9 @@ export class LoginFormComponent implements OnInit {
       }else {
         this.loading = false;
         this.authService.storeUser(res.data);
-        // this.firebaseSignIn(res.data.email, form.value.password);
       }
     })
   }
-
-  // firebaseSignIn(email: any, pwd: any) {
-  //   return this.firebaseAuth.signInWithEmailAndPassword(email, pwd)
-  //   .then((result: any) => {
-  //   }).catch((error: any) => {
-  //     console.log(error);
-  //   })
-  // }
 
   onForgotPwd(form: NgForm) {
     let mobile = new FormData;
@@ -141,5 +134,11 @@ export class LoginFormComponent implements OnInit {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
 
+  // Social login
+  signInWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
+      console.log(res);
+    })
+  }
 
 }

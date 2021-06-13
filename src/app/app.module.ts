@@ -21,7 +21,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { LocationStrategy, HashLocationStrategy } from "@angular/common"
+import { LocationStrategy, HashLocationStrategy } from "@angular/common";
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -139,10 +141,29 @@ import { ScullyLibModule } from '@scullyio/ng-lib';
     ScrollingModule,
     InfiniteScrollModule,
     NgbModule,
-    ScullyLibModule
+    ScullyLibModule,
+    SocialLoginModule
   ],
   providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '255000344308-ae231b1vqlhiur2sms2a3rddkobpiv0u.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

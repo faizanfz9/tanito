@@ -48,6 +48,7 @@
     "@syncfusion/ej2-angular-inputs": "^18.4.33",
     "@types/events": "^3.0.0",
     "angularfire2": "^5.4.2",
+    "angularx-social-login": "^3.5.7",
     "bad-words": "^3.0.4",
     "bootstrap": "^4.5.0",
     "domino": "^2.1.6",
