@@ -53,7 +53,8 @@ export class AuthService {
   storeUser(user: any) {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("mobile", user.mobile);
-    localStorage.setItem('loggedTime', new Date().setHours(0,0,0,0).toString());
+    localStorage.setItem('loggedTime', new Date().getMinutes().toString());
+    localStorage.setItem("profileAlert", "0");
     this.user.next({
       isLoggedIn: true,
       data: user
@@ -75,4 +76,8 @@ export class AuthService {
     window.open('/', "_self");
   }
 
+  // Social Login
+  socialRegister(user: any) {
+    return this.http.post(this.url + "/social_register", user);
+  }
 }

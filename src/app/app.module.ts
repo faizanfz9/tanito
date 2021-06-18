@@ -159,7 +159,7 @@ import { ScullyLibModule } from '@scullyio/ng-lib';
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId')
+            provider: new FacebookLoginProvider('496448634971269')
           }
         ]
       } as SocialAuthServiceConfig

@@ -11,6 +11,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import "bad-words"
+import { MyPlanService } from 'src/app/shared/my-plan.service';
 var Filter = require('bad-words'), filter = new Filter();
 declare var require: any
 
@@ -40,6 +41,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   teacherIcon = "assets/images/icons/teacher.png";
   studentIcon = "assets/images/icons/student.png";
   showFullText = false;
+  isPlanActive = false;
 
   visible: boolean = true;
   selectable: boolean = true;
@@ -58,6 +60,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private videoService: VideoProcessingService,
+    private myPlanService: MyPlanService,
     private router: Router ) 
   { 
     this.userService.storeUpdatedUser().subscribe(res => {
@@ -75,7 +78,8 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       res.data.tags.forEach((item: any) => {
         this.allTags.push(item.tags);
       })
-      this.filteredTags = this.subjectCtrl.valueChanges.startWith(null).map(contact => contact ? this.filterTag(contact) : this.allTags.slice());
+      this.filteredTags = this.subjectCtrl.valueChanges.startWith(null).map(contact => 
+        contact ? this.filterTag(contact) : this.allTags.slice());
     })
   }
 
@@ -104,6 +108,10 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    if(this.myPlanService.getCurrentPlan() && !this.myPlanService.isPlanExpired()) {
+      this.isPlanActive = true;
+    }
+
     this.user = JSON.parse(this.userService.getUser());
     if(this.route.snapshot.queryParams.post) {
       this.openModal(this.createPost); 
@@ -158,7 +166,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
     })
   }
 
-  onCreatePost(form: NgForm) {
+  onCreatePost(form: NgForm): any {
     if(filter.isProfane(form.value.body)) {
       alert("The post content contains offensive words!");
     }else {
@@ -169,6 +177,13 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       post.append("video", this.selectedVideo);
       post.append("subject", form.value.subject);
       post.append("tags", this.selectedTags.toString());
+      if(!this.isPlanActive) {
+        if(this.user.user_post_data.length >= 2) {
+          alert("No of posting limit has reached, Kindly subscribe the plan!");
+          this.modalRef.hide();
+          return false;
+        }
+      }
       this.loading = true;
       this.userService.createPost(post).subscribe(res => {
         if(res.status == "false") {

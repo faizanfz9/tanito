@@ -3,7 +3,7 @@
   <div class="custom_card custom_crd_padd" *ngFor="let post of myData.user_post_data | recentPost">
     <div class="follow_top d-flex align-items-center">
       <div class="follow_lft profile-pic"> 
-        <img [src]="myData.profile_img.length > 0 ? profilePath + myData.profile_img : userAvatar" alt="profile image">
+        <img [src]="myData.profile_img" alt="profile image">
         </div>
       <div class="follow_rht">
         <div class="d-flex align-items-center">
@@ -95,7 +95,7 @@
         <div class="inner-box">
             <div class="comment-row" *ngFor="let item of post.comment">
                 <div class="user">
-                    <img [routerLink]="item.user_id == loggedUser.id ? '/myProfile' : '/user/'+item.user_id" [src]="!item.profile_img ? userAvatar : profilePath + item.profile_img" alt="user">
+                    <img [routerLink]="item.user_id == loggedUser.id ? '/myProfile' : '/user/'+item.user_id" [src]="item.profile_img" alt="user">
                     <div class="name">
                         <h6 [routerLink]="item.user_id == loggedUser.id ? '/myProfile' : '/user/'+item.user_id">{{ item.username }}</h6>
                         <p class="comment">{{ item.comment }}</p>

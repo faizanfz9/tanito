@@ -117,6 +117,7 @@ export class TimelineComponent implements OnInit {
       this.reactionModalTitle = "Reactions";
       let reactions = res.data.my_post;
       this.totalUserReaction = reactions;
+      console.log(reactions)
       this.okUserReaction = reactions.filter((item: any) => {
         return item.like_type == 0
       });

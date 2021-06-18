@@ -1,0 +1,16 @@
+.btn-grp {
+    .btn {
+        margin: 5px;
+        @media screen and (max-width: 480px) {
+            font-size: 12px;
+        }
+    }
+}
+
+.social-login-modal {
+    .col-wrap {
+        p {
+            margin-bottom: 10px;
+        }
+    }
+}

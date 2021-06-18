@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { response } from 'express';
 
 @Component({
   selector: 'app-login-form',
@@ -19,6 +20,8 @@ export class LoginFormComponent implements OnInit {
   modalRef: any;
   @ViewChild("otpVerify") otpVerifyModal: any;
   @ViewChild("resetPwd") resetPwdModal: any;
+  @ViewChild("signInAsGoogle") signInAsGoogle: any;
+  @ViewChild("signInAsFacebook") signInAsFacebook: any;
   showPwd = false;
   showConfirmPwd = false;
   mobile = "";
@@ -134,10 +137,45 @@ export class LoginFormComponent implements OnInit {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
 
+  initiateGoogleLogin() {
+    this.openModal(this.signInAsGoogle);
+  }
+
+  initiateFacebookLogin() {
+    this.openModal(this.signInAsFacebook);
+  }
+
   // Social login
-  signInWithGoogle(): void {
+  signInWithGoogle(usertype: any): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
-      console.log(res);
+      let user = new FormData();
+      user.append("username", res.name);
+      user.append("email", res.email);
+      user.append("profile_img", res.photoUrl);
+      user.append("social_id", res.id);
+      user.append("usertype", usertype);
+      user.append("register_from", "G");
+      this.modalRef.hide();
+      this.authService.socialRegister(user).subscribe((response: any) => {
+        this.authService.storeUser(response.data);
+      })
+    })
+  }
+
+  signInWithFacebook(usertype: any): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => {
+      let user = new FormData();
+      user.append("username", res.name);
+      user.append("email", res.email);
+      user.append("profile_img", res.photoUrl);
+      user.append("social_id", res.id);
+      user.append("usertype", usertype);
+      user.append("register_from", "G");
+      // console.log(res.response.picture.data.url);
+      this.modalRef.hide();
+      this.authService.socialRegister(user).subscribe((response: any) => {
+        this.authService.storeUser(response.data);
+      })
     })
   }
 

@@ -13,6 +13,7 @@ export class UserFeedComponent implements OnInit {
   loggedUserId: any;
   loggedUser: any;
   activePlan: any;
+  profileAlert = false;
 
   constructor(private userService: UserService, 
     private chatService: ChatService, 
@@ -51,10 +52,21 @@ export class UserFeedComponent implements OnInit {
     return localStorage.getItem('loggedTime');
   }
 
+  profileCompleteAlert() {
+    let currentTime = new Date().getMinutes();
+
+    if(currentTime > +this.loggedTime + 5) {
+      localStorage.setItem("profileAlert", "1");
+      alert("Hey please complete your profile!");
+    } 
+  }
+
   ngOnInit(): void {
-    if(new Date().setHours(0,0,0,0) > this.loggedTime) {
-      this.authService.logout();
-    }
+    let isAlertShown: any = localStorage.getItem("profileAlert");
+    console.log(isAlertShown);
+    if(!+isAlertShown) {
+      this.profileCompleteAlert();
+    } 
   }
 
 }

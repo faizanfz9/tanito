@@ -1,7 +1,7 @@
 <div *ngIf="userData.data.user_post_data.length > 0">
     <div class="custom_card custom_crd_padd" *ngFor="let post of userData.data.user_post_data | recentPost">
         <div class="follow_top d-flex align-items-center">
-          <div class="follow_lft"> <img class="profile-img" [src]="profilePath + userData.data.results.profile_img" [alt]="userData.data.results.username" />  </div>
+          <div class="follow_lft"> <img class="profile-img" [src]="userData.data.results.profile_img" [alt]="userData.data.results.username" />  </div>
           <div class="follow_rht">
             <div class="d-flex align-items-center">
               <h3>{{ userData.data.results.username }}</h3>
