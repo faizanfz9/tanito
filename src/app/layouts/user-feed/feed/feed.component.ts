@@ -86,6 +86,8 @@ export class FeedComponent implements OnInit {
       this.loading = false;
       if(res.data) {
         this.feeds = res.data.user_post;
+      }else {
+        this.feeds = [];
       }
     }, error => {
       this.loading = false;
