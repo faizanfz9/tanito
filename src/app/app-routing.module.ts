@@ -22,6 +22,7 @@ import { PostComponent } from './layouts/post/post.component';
 import { AboutUsComponent } from './layouts/about-us/about-us.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
+import { ResourcesComponent } from './layouts/user-feed/resources/resources.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -52,6 +53,9 @@ const routes: Routes = [
       },
       {
         path: "my-plans", component: MyPlansComponent
+      },
+      {
+        path: "resources", component: ResourcesComponent
       },
     ] 
   },

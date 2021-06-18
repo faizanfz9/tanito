@@ -2,7 +2,7 @@
   <div class="student_rht chat_box_rht" *ngIf="isFetched || chatRooms.length > 0">
     <div class="chat_box">
       <div class="chat_box_top d-flex align-items-center" *ngIf="isFetched && receiver">
-        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="profilePath + receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
+        <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
           <h4 [routerLink]="'/user/' + receiver.user_id">
             {{ receiver.username }} 
             <span>{{ (receiver.usertype == 3 ? "Student at ":"Teacher at ") +  receiver.university }}

@@ -64,7 +64,7 @@ export class UserFeedComponent implements OnInit {
   ngOnInit(): void {
     let isAlertShown: any = localStorage.getItem("profileAlert");
     console.log(isAlertShown);
-    if(!+isAlertShown) {
+    if(!+isAlertShown && !this.loggedUser.gender) {
       this.profileCompleteAlert();
     } 
   }

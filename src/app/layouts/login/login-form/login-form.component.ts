@@ -167,7 +167,7 @@ export class LoginFormComponent implements OnInit {
       let user = new FormData();
       user.append("username", res.name);
       user.append("email", res.email);
-      user.append("profile_img", res.photoUrl);
+      user.append("profile_img", res.response.picture.data.url);
       user.append("social_id", res.id);
       user.append("usertype", usertype);
       user.append("register_from", "G");

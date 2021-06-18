@@ -71,6 +71,7 @@ import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ToggleContentDirective } from './directives/toggle-content.directive';
 import { ScullyLibModule } from '@scullyio/ng-lib';
+import { ResourcesComponent } from './layouts/user-feed/resources/resources.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { ScullyLibModule } from '@scullyio/ng-lib';
     ShowCommentBoxDirective,
     ContactUsComponent,
     TruncatePipe,
-    ToggleContentDirective
+    ToggleContentDirective,
+    ResourcesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -209,4 +209,8 @@ export class UserService {
   getTotalData() {
     return this.http.get(this.url + "/count_all_data");
   }
+
+  getResources() {
+    return this.http.get(this.url + "/resource");
+  }
 }
