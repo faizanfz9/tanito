@@ -9,6 +9,6 @@
         <h6>{{ resource.title }}</h6>
         <div class="description" [innerHtml]="resource.description"></div>
         <plyr *ngIf="!resource.resource.includes('pdf')" style="display: block; max-width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: path + resource.resource }]"></plyr>
-        <embed *ngIf="resource.resource.includes('pdf')" [src]="path + resource.resource" width="800px" height="2100px" />
+        <!-- <embed *ngIf="resource.resource.includes('pdf')" [src]="path + resource.resource" width="800px" height="2100px" /> -->
     </div>
 </div>
