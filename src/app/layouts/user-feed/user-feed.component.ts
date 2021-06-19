@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ChatService } from 'src/app/shared/chat.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -9,15 +11,19 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './user-feed.component.html',
   styleUrls: ['./user-feed.component.scss']
 })
-export class UserFeedComponent implements OnInit {
+export class UserFeedComponent implements OnInit, AfterViewInit {
   loggedUserId: any;
   loggedUser: any;
   activePlan: any;
   profileAlert = false;
+  modalRef: any;
+  @ViewChild('profileAlertModal') profileAlertModal: any;
 
   constructor(private userService: UserService, 
     private chatService: ChatService, 
     private notification: NotificationService,
+    private modalService: BsModalService,
+    private router: Router,
     private authService: AuthService
     ) { 
     this.loggedUserId = JSON.parse(this.userService.getUser()).id;
@@ -52,21 +58,33 @@ export class UserFeedComponent implements OnInit {
     return localStorage.getItem('loggedTime');
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
+  }
+
   profileCompleteAlert() {
     let currentTime = new Date().getMinutes();
 
     if(currentTime > +this.loggedTime + 5) {
       localStorage.setItem("profileAlert", "1");
-      alert("Hey please complete your profile!");
+      this.openModal(this.profileAlertModal);
     } 
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
     let isAlertShown: any = localStorage.getItem("profileAlert");
     console.log(isAlertShown);
     if(!+isAlertShown && !this.loggedUser.gender) {
       this.profileCompleteAlert();
     } 
+  }
+
+  initUpdateProfile() {
+    this.modalRef.hide();
+    this.router.navigate(['/profile-setup']);
   }
 
 }
