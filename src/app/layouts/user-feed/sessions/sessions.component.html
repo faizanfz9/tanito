@@ -1,0 +1,18 @@
+<div class="student_rht network_rht">
+    <div class="custom_card">
+        <h5>Your Upcoming Sessions</h5>
+    </div>
+    <div class="custom_card" *ngFor="let session of sessions">
+        <div class="row">
+            <div class="col-6">
+                <h6>{{ session.title }}</h6>
+                <p>Scheduled on : <i>{{ session.date }}</i></p>
+                <p>Start Time: <i>{{ session.start_time }}</i> &nbsp; &nbsp; | &nbsp; &nbsp; End Time: <i>{{ session.end_time }}</i></p>
+            </div>
+            <div class="col-6 text-right">
+                <p><button class="btn btn_primary" (click)="startSession(session)">Start Session</button></p>
+                <!-- <button class="dlt-session"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+            </div>
+        </div>
+    </div>
+</div>

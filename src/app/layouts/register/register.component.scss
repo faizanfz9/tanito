@@ -12,3 +12,12 @@
         color: #007bff;
     }
 }
+
+.btn-grp {
+    .btn {
+        margin: 5px;
+        @media screen and (max-width: 480px) {
+            font-size: 12px;
+        }
+    }
+}

@@ -101,7 +101,11 @@ export class HeaderComponent implements OnInit {
     var r = confirm("Do you want to logout?");
       if (r == true) {
         event.preventDefault()
-        this.authService.logout();
+        let usreId = new FormData;
+        usreId.append("user_id", this.user.id)
+        this.authService.intiLogout(usreId).subscribe(res => {
+            this.authService.logout()
+        })
       }
   }
 

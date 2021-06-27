@@ -106,6 +106,16 @@
                     <button type="submit" [disabled]="password.value !== confirmPwd.value || signUpForm.invalid" class="btn btn_primary btn-sm text-uppercase">Sign Up</button>
                     <p class="text-center signnote mt-3"> Already have an account? <a routerLink="/login" class="primary_color">SIGN IN</a> 
                   </div>
+                  <div class="text-center btn-grp">
+                    <button type="button" (click)="signInWithGoogle()" class="btn btn_primary btn-sm text-uppercase">
+                      <img src="../../../../assets/images/google.png" class="mr-2" style="vertical-align: sub;" alt="google">
+                      Sign Up with google
+                    </button>
+                    <button type="button" (click)="signInWithFacebook()" class="btn btn_primary btn-sm text-uppercase">
+                      <img src="../../../../assets/images/facebook.png" class="mr-2" style="vertical-align: sub;" alt="facebook">
+                      Sign Up with facebook
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -135,6 +145,61 @@
               <input type="text" (keyup)="goToNext(otpDigit4)" (keydown)="goToPrev(otpDigit4, $event)" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit4>
             </div>
             <button type="button" class="btn btn_primary btn-sm text-uppercase mb-2" (click)="onVerifyOtp(otpDigit1.value, otpDigit2.value, otpDigit3.value, otpDigit4.value)">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #socialVerify>
+    <div class="modal_tanito" id="signotpmodal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">OTP VERIFICATION</h5>
+          </div>
+          <div class="modal-body">
+            <p class="mb-4">Please enter the One Time Password received on your registered mobile number or email to verify your account. </p>
+            <h6 class="mb-4">VERIFY YOUR ACCOUNT</h6>
+            <div class="form-group verfOtp_box">
+              <input type="text" (keyup)="goToNext(otpDigit1)" (keydown)="goToPrev(otpDigit1, $event)" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit1>
+              <input type="text" (keyup)="goToNext(otpDigit2)" (keydown)="goToPrev(otpDigit2, $event)" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit2>
+              <input type="text" (keyup)="goToNext(otpDigit3)" (keydown)="goToPrev(otpDigit3, $event)" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit3>
+              <input type="text" (keyup)="goToNext(otpDigit4)" (keydown)="goToPrev(otpDigit4, $event)" class="form-control otp-number-input" placeholder="0" maxlength="1" #otpDigit4>
+            </div>
+            <button type="button" class="btn btn_primary btn-sm text-uppercase mb-2" (click)="onSocialVerify(otpDigit1.value, otpDigit2.value, otpDigit3.value, otpDigit4.value)">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #socialAuth>
+    <div class="modal_tanito" id="forgotpmodal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">SOCIAL AUTHENTICATION</h5>
+          </div>
+          <div class="modal-body">
+            <p class="mb-4">Please enter your registered mobile number &amp; we will send you a verification code so that you can sing up.</p>
+            <form class="registration-form w-75 m-auto" (submit)="onSocialAuth(socialAuthForm)" #socialAuthForm="ngForm">
+              <div class="form-group mb-4">
+                <label class="primary_color spcllbl">Phone No</label>
+                <input 
+                type="tel" 
+                class="form-control" 
+                placeholder="+876-9876543210"
+                name="phone"
+                pattern="^[0-9]*$"
+                minlength="10"
+                ngModel
+                required>
+              </div>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn_primary btn-sm text-uppercase" [disabled]="socialAuthForm.invalid">Get OTP</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

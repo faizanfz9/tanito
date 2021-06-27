@@ -76,8 +76,16 @@ export class AuthService {
     window.open('/', "_self");
   }
 
+  intiLogout(userId: any) {
+    return this.http.post(this.url + "/logout", userId)
+  }
+
   // Social Login
   socialRegister(user: any) {
     return this.http.post(this.url + "/social_register", user);
+  }
+
+  socialAuth(mobile: any) {
+      return this.http.post(this.url + "/social_mobile", mobile);
   }
 }

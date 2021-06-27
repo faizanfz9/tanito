@@ -12,6 +12,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import "bad-words"
 import { MyPlanService } from 'src/app/shared/my-plan.service';
+import { map, startWith } from 'rxjs/operators';
 var Filter = require('bad-words'), filter = new Filter();
 declare var require: any
 
@@ -55,6 +56,11 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   selectedTags: any = [];
   allTags: any = [];
 
+  members: any = [];
+  filteredMembers: any;
+  memberId: any;
+  myControl = new FormControl();
+
   constructor(
     private userService: UserService, 
     private route: ActivatedRoute,
@@ -80,6 +86,22 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       })
       this.filteredTags = this.subjectCtrl.valueChanges.startWith(null).map(contact => 
         contact ? this.filterTag(contact) : this.allTags.slice());
+    })
+
+    this.userService.fetchAllUser().subscribe(res => {
+      res.users.forEach((item: any) => {
+        this.members.push({name: item.data.username, id: item.data.id});
+      })
+      this.filteredMembers = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => {
+          this.memberId = value.id;
+          console.log(this.memberId);
+          return typeof value === 'string' ? value : value.name;
+        }),
+        map(name => name ? this._filter(name) : this.members.slice())
+      );
     })
   }
 
@@ -116,7 +138,6 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
     if(this.route.snapshot.queryParams.post) {
       this.openModal(this.createPost); 
     }
-
     this.myInbox = JSON.parse(this.inbox);
   }
 
@@ -177,6 +198,8 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       post.append("video", this.selectedVideo);
       post.append("subject", form.value.subject);
       post.append("tags", this.selectedTags.toString());
+      post.append("tag_user", this.memberId);
+      console.log(this.memberId);
       if(!this.isPlanActive) {
         if(this.user.user_post_data.length >= 2) {
           alert("No of posting limit has reached, Kindly subscribe the plan!");
@@ -201,6 +224,15 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
         }
       })
     }
+  }
+
+  displayFn(member: any) {
+    return member && member.name ? member.name : '';
+  }
+
+  private _filter(name: string) {
+    const filterValue = name.toLowerCase();
+    return this.members.filter((member: any) => member.name.toLowerCase().includes(filterValue));
   }
   
   openModal(template: TemplateRef<any>) {

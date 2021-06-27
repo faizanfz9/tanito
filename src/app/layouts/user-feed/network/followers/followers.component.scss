@@ -1,3 +1,18 @@
 .card-wrap {
     cursor: pointer;
 }
+
+.testi-content {
+    .img-wrap {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        margin: 0 auto;
+        .user_online {
+            bottom: 5px;
+            width: 20px;
+            height: 20px;
+            right: 5px;
+        }
+    }
+} 

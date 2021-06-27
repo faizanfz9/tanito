@@ -210,7 +210,18 @@ export class UserService {
     return this.http.get(this.url + "/count_all_data");
   }
 
+  // Get Resources
   getResources() {
     return this.http.get(this.url + "/resource");
+  }
+
+  // Create Session
+  createSession(session: any) {
+    return this.http.post(this.url + "/create_session", session)
+  }
+
+  // Get Session
+  getSessions(userId: any) {
+      return this.http.post(this.url + "/get_session", userId)
   }
 }

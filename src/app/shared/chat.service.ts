@@ -28,7 +28,7 @@ export class ChatService {
       message: msg,
       attachment: attachment,
       timeSent: Date(),
-      senderPic: this.profilePath + this.sender.profile_img,
+      senderPic: this.sender.profile_img,
       senderType: this.sender.usertype,
       senderId: this.senderId
     })

@@ -23,6 +23,7 @@ import { AboutUsComponent } from './layouts/about-us/about-us.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 import { ContactUsComponent } from './layouts/contact-us/contact-us.component';
 import { ResourcesComponent } from './layouts/user-feed/resources/resources.component';
+import { SessionsComponent } from './layouts/user-feed/sessions/sessions.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: LandingComponent },
@@ -56,6 +57,9 @@ const routes: Routes = [
       },
       {
         path: "resources", component: ResourcesComponent
+      },
+      {
+        path: "sessions", component: SessionsComponent
       },
     ] 
   },

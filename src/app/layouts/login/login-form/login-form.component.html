@@ -28,11 +28,11 @@
       <p class="text-center signnote mb-4"> New to Tanito? <a routerLink="/register" class="primary_color text-uppercase">Sign up</a> </p>
 
       <div class="text-center btn-grp mb-4">
-        <button type="button" (click)="initiateGoogleLogin()" class="btn btn_primary btn-sm text-uppercase">
+        <button type="button" (click)="signInWithGoogle()" class="btn btn_primary btn-sm text-uppercase">
           <img src="../../../../assets/images/google.png" class="mr-2" style="vertical-align: sub;" alt="google">
           Sign in with google
         </button>
-        <button type="button" (click)="initiateFacebookLogin()" class="btn btn_primary btn-sm text-uppercase">
+        <button type="button" (click)="signInWithFacebook()" class="btn btn_primary btn-sm text-uppercase">
           <img src="../../../../assets/images/facebook.png" class="mr-2" style="vertical-align: sub;" alt="facebook">
           Sign in with facebook
         </button>
@@ -137,53 +137,5 @@
       </div>
     </div>
   </ng-template>
-
-  <ng-template #signInAsGoogle>
-    <div class="modal_tanito report_modal">
-      <div class="modal-dialog">
-        <div class="modal-content text-center">
-          <div class="modal-header primary_bg">
-            <h5 class="modal-title text-uppercase">Sign In As</h5>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-12 col-sm-6 mb-4 mb-sm-0 text-center">
-                  <p><img src="../../../../assets/images/female.png" alt="teacher"></p> 
-                  <button type="button" (click)="signInWithGoogle(2)" class="btn btn_primary btn-sm">Sign In As Teacher</button>
-              </div>
-              <div class="col-12 col-sm-6 mb-4 mb-sm-0 text-center">
-                <p><img src="../../../../assets/images/reading.png" alt="student"></p>
-                <button type="button" (click)="signInWithGoogle(3)" class="btn btn_primary btn-sm">Sign In As Student</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</ng-template>
-
-<ng-template #signInAsFacebook>
-  <div class="modal_tanito report_modal">
-    <div class="modal-dialog">
-      <div class="modal-content text-center">
-        <div class="modal-header primary_bg">
-          <h5 class="modal-title text-uppercase">Sign In As</h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12 col-sm-6 mb-2 mb-sm-0 text-center">
-                <p><img src="../../../../assets/images/female.png" alt="teacher"></p> 
-                <button type="button" (click)="signInWithFacebook(2)" class="btn btn_primary btn-sm">Sign In As Teacher</button>
-            </div>
-            <div class="col-12 col-sm-6 mb-2 mb-sm-0 text-center">
-              <p><img src="../../../../assets/images/reading.png" alt="student"></p>
-              <button type="button" (click)="signInWithFacebook(3)" class="btn btn_primary btn-sm">Sign In As Student</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

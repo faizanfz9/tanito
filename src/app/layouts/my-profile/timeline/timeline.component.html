@@ -10,7 +10,8 @@
           <h3>{{ myData.username }}</h3>
           <img class="user-type" [src]="myData.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
         </div>
-        <p>{{ (myData.usertype == 3 ? "Student at ":"Teacher at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
+        <p *ngIf="myData.university">{{ (myData.usertype == 3 ? "Student at ":"Teacher at ") +  myData.university }} &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
+        <p *ngIf="!myData.university">Guest User &nbsp; | &nbsp; {{ post.created | postCreated }}</p>
       </div>
       <!-- <button type="button" (click)="onDeletePost(post.id)" class="dots_btn" data-toggle="modal" data-target="#rate_mdl"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
       <div class="option">
@@ -25,6 +26,7 @@
     <div class="follow_bdy">
       <p class="content-body" [ngClass]="{'clipped': post.body.length > 500 }"> {{ post.body }} </p>
       <a class="read-more-link" [hidden]="post.body.length < 500" appToggleContent>Read More...</a>
+      <a class="mention" [hidden]="!post.tag_user" [routerLink]=" '/user/'+ post.tag_user_id ">{{ post.tag_user }}</a>
       <ul *ngIf="post.tags !== null ? post.tags.length > 0 : post.tags !== null" class="hashtags">
           <li *ngFor="let tag of post.tags.split(',')">#{{ tag | lowercase }}</li>
       </ul>
@@ -155,7 +157,7 @@
                           <span class="badge badge-primary" *ngIf="reactionFetched">{{ totalUserReaction.length }}</span>
                       </ng-template>
                       <div class="d-flex align-items-center mb-4" *ngFor="let user of totalUserReaction">
-                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <span class="profile_dp"><img [src]="user.profile_img" [alt]="user.username"></span>
                           <h5>{{ user.username }}</h5>
                       </div>
                   </mat-tab>
@@ -166,7 +168,7 @@
                           <span class="badge badge-primary ml-" *ngIf="reactionFetched">{{ okUserReaction.length }}</span>
                       </ng-template>
                       <div class="d-flex align-items-center mb-4" *ngFor="let user of okUserReaction">
-                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <span class="profile_dp"><img [src]="user.profile_img" [alt]="user.username"></span>
                           <h5>{{ user.username }}</h5>
                       </div>
                   </mat-tab>
@@ -177,7 +179,7 @@
                           <span class="badge badge-primary" *ngIf="reactionFetched">{{ innUserReaction.length }}</span>
                       </ng-template>
                       <div class="d-flex align-items-center mb-4" *ngFor="let user of innUserReaction">
-                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <span class="profile_dp"><img [src]="user.profile_img" [alt]="user.username"></span>
                           <h5>{{ user.username }}</h5>
                       </div>
                   </mat-tab>
@@ -188,7 +190,7 @@
                           <span class="badge badge-primary" *ngIf="reactionFetched">{{ clapUserReaction.length }}</span>
                       </ng-template>
                       <div class="d-flex align-items-center mb-4" *ngFor="let user of clapUserReaction">
-                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <span class="profile_dp"><img [src]="user.profile_img" [alt]="user.username"></span>
                           <h5>{{ user.username }}</h5>
                       </div>
                   </mat-tab>
@@ -199,7 +201,7 @@
                           <span class="badge badge-primary" *ngIf="reactionFetched">{{ goodUserReaction.length }}</span>
                       </ng-template>
                       <div class="d-flex align-items-center mb-4" *ngFor="let user of goodUserReaction">
-                          <span class="profile_dp"><img [src]="profilePath + user.profile_img" [alt]="user.username"></span>
+                          <span class="profile_dp"><img [src]="user.profile_img" [alt]="user.username"></span>
                           <h5>{{ user.username }}</h5>
                       </div>
                   </mat-tab>

@@ -5,7 +5,10 @@
         <div class="chatBoxTop_lft d-flex align-items-center"> <span class="dp_box"><img [src]="receiver.profile_img" [routerLink]="'/user/' + receiver.user_id" alt="profile" /></span>
           <h4 [routerLink]="'/user/' + receiver.user_id">
             {{ receiver.username }} 
-            <span>{{ (receiver.usertype == 3 ? "Student at ":"Teacher at ") +  receiver.university }}
+            <span *ngIf="receiver.university">{{ (receiver.usertype == 3 ? "Student at ":"Teacher at ") +  receiver.university }}
+              <img class="user-type" [src]="receiver.usertype == 3 ? studentIcon : teacherIcon " alt="user type"> 
+            </span> 
+            <span *ngIf="!receiver.university">Guest User
               <img class="user-type" [src]="receiver.usertype == 3 ? studentIcon : teacherIcon " alt="user type"> 
             </span> 
           </h4>
@@ -40,7 +43,7 @@
         <div class="msg_panel_inr">
           <div class="indvsl_msg_box" [routerLink]="'/feed/inbox/' + chatRoom.memberId" routerLinkActive="active" *ngFor="let chatRoom of chatRooms">
             <div class="row" (click)="onMsgRead(chatRoom.memberId)">
-              <div class="col-md-2"> <span><img [src]="profilePath + chatRoom.profileImg" alt="images" /></span> </div>
+              <div class="col-md-2"> <span><img [src]="chatRoom.profileImg" alt="images" /></span> </div>
               <div class="col-md-10">
                 <div class="d-flex align-items-center justify-content-between">
                   <h3>{{ chatRoom.memberName }}

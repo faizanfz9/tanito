@@ -54,6 +54,12 @@
                   Resources
               </a>
             </li>
+            <li>
+              <a routerLink="sessions" routerLinkActive="active">
+                <img src="assets/images/icons/interview.png" alt="resources">
+                  Sessions
+              </a>
+            </li>
         </ul>
     </div>
   </div>
@@ -68,5 +74,68 @@
       </div>
       <a (click)="showAll = !showAll" class="see_all_btn">{{ showAll ? 'See Less' : 'See All' }}</a>
     </div>
+    <div class="custom_card category_card">
+      <button class="btn btn_primary" (click)="initSession()">Create Session</button>
+    </div>
   </div>
 </div>
+
+<ng-template #createSession>
+  <div class="modal_tanito report_modal">
+    <div class="modal-dialog">
+       <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+             <h5 class="modal-title text-uppercase">Create Session</h5>
+          </div>
+          <div class="modal-body setup_profile text-center">
+             <form class="registration-form" (submit)="onCreateSession(createSessionForm)" #createSessionForm="ngForm">
+                <div class="form-group row">
+                   <div class="col-12 mb-4">
+                     <label class="primary_color spcllbl">Title </label>
+                     <input type="text" placeholder="Enter Title" name="title" class="form-control" ngModel required>
+                    </div>
+                   <div class="col-12 mb-4">
+                      <label class="primary_color spcllbl">Select Member</label>
+                      <select name="member" class="form-control" ngModel required>
+                         <option value="1">Mohd Shehzad</option>
+                         <option value="73">Yogesh Rawat</option>
+                         <option value="95">Parvez Alam</option>
+                         <option value="174">Tanito</option>
+                         <option value="182">Rajesh Kumar</option>
+                         <option value="188">Faizan Ahmed</option>
+                         <option value="189">John Doe</option>
+                         <option value="197">Sanjeet K</option>
+                         <option value="199">Divay Kumar</option>
+                         <option value="214">Ariba</option>
+                         <option value="218">AKASH KUMAR</option>
+                         <option value="247">Aman Kumar</option>
+                         <option value="116">Owais Khan</option>
+                         <!---->
+                      </select>
+                   </div>
+                   <div class="col-12 mb-4">
+                     <label class="primary_color spcllbl">Date</label>
+                     <input type="date" name="date" class="form-control" ngModel required>
+                    </div>
+                   <div class="col-12 mb-4">
+                      <div class="row">
+                         <div class="col-6">
+                           <label class="primary_color spcllbl">Start Time</label>
+                           <input type="time" name="start-time" class="form-control" ngModel required>
+                          </div>
+                         <div class="col-6">
+                           <label class="primary_color spcllbl">End Time</label>
+                           <input type="time" name="end-time" class="form-control" ngModel required>
+                          </div>
+                      </div>
+                   </div>
+                   <button type="submit" class="btn btn_primary" [disabled]="!createSessionForm.valid">Submit</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

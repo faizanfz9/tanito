@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 // import firebase from 'firebase/app';
 
 @Component({
@@ -12,13 +13,23 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  userType = 2;
+  userType = 3;
   loading = false;
   username = "";
   mobile = "";
   @ViewChild("otpVerify") otpVerifyModal: any;
+  @ViewChild("socialAuth") socialAuthModal: any;
+  @ViewChild("socialVerify") socialVerifyModal: any;
 
-  constructor(private authService: AuthService, private router: Router, private modalService: BsModalService, 
+  socialId: any;
+  socialMobile: any;
+  socialUser = new FormData();
+  modalRef: any;
+
+  constructor(private authService: AuthService, 
+    private router: Router, 
+    private modalService: BsModalService, 
+    private socialAuthService: SocialAuthService,
     public firebaseAuth: AngularFireAuth
     ) { 
     }
@@ -47,22 +58,14 @@ export class RegisterComponent implements OnInit {
         alert(res.msg);
       }else {
         this.loading = false;
+        localStorage.setItem('userId', res.data.user_id);
+        console.log(res);
         this.openModal(this.otpVerifyModal);
-        // this.firebaseRegister(form.value.email, form.value.password);
       }
     }, error => {
       console.log(error);
     })
   }
-
-  // firebaseRegister(email: any, pwd: any) {
-  //   return this.firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-  //   .then((result: any) => {
-  //     console.log(result);
-  //   }).catch((error: any) => {
-  //     console.log(error);
-  //   })
-  // }
 
   goToNext(el: HTMLElement) {
     let nextEl = el.nextSibling as HTMLElement;
@@ -94,7 +97,7 @@ export class RegisterComponent implements OnInit {
         alert(res.msg);
       }else {
         this.loading = false;
-        this.otpVerifyModal.hide();
+        this.modalRef.hide();
         this.authService.sendVerifiedUser(this.mobile, this.userType);
         this.router.navigate(['/profile-setup']);
       }
@@ -102,6 +105,87 @@ export class RegisterComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.otpVerifyModal = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
+  }
+
+  // Social register
+  onSocialVerify(digit1: string,  digit2: string, digit3: string, digit4: string) {
+    let otp: any = new FormData();
+    otp.append("mobile", this.socialMobile);
+    otp.append("otp", +(digit1+digit2+digit3+digit4));
+    this.loading = true;
+    this.authService.verifyOtp(otp).subscribe(res=> {
+      if(res.status == "false") {
+        this.loading = false;
+        alert(res.msg);
+      }else {
+        this.loading = false;
+        this.modalRef.hide();
+        this.authService.socialRegister(this.socialUser).subscribe((response: any) => {
+          this.authService.storeUser(response.data);
+        })
+      }
+    })
+  }
+
+  onSocialAuth(form: NgForm) {
+    let mobile = new FormData();
+    mobile.append("mobile", form.value.phone);
+    mobile.append("social_id", this.socialId);
+    this.socialMobile = form.value.phone;
+
+    this.loading = true;
+    this.authService.socialAuth(mobile).subscribe((res: any) => {
+      this.loading = false;
+      if(res.status == false) {
+        this.loading = false;
+        alert(res.msg);
+      }else {
+        this.loading = false;
+        this.modalRef.hide();
+        this.openModal(this.socialVerifyModal);
+      }
+    })
+  }
+
+  signInWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
+      // let user = new FormData();
+      this.socialUser.append("username", res.name);
+      this.socialUser.append("email", res.email);
+      this.socialUser.append("profile_img", res.photoUrl);
+      this.socialUser.append("social_id", res.id);
+      this.socialUser.append("usertype", this.userType.toString());
+      this.socialUser.append("register_from", "G");
+      
+      this.socialId = res.id;
+      this.authService.socialRegister(this.socialUser).subscribe((response: any) => {
+        if(response.status == false) {
+          this.openModal(this.socialAuthModal);
+        }else {
+          this.authService.storeUser(response.data);
+        }
+      })
+    })
+  }
+
+  signInWithFacebook(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => {
+      // let user = new FormData();
+      this.socialUser.append("username", res.name);
+      this.socialUser.append("email", res.email);
+      this.socialUser.append("profile_img", res.response.picture.data.url);
+      this.socialUser.append("social_id", res.id);
+      this.socialUser.append("usertype", this.userType.toString());
+      this.socialUser.append("register_from", "F");
+      this.socialId = res.id;
+      this.authService.socialRegister(this.socialUser).subscribe((response: any) => {
+        if(response.status == false) {
+          this.openModal(this.socialAuthModal);
+        }else {
+          this.authService.storeUser(response.data);
+        }
+      })
+    })
   }
 }

@@ -34,15 +34,7 @@
               "src/styles.scss",
               "node_modules/plyr/dist/plyr.css"
             ],
-            "scripts": [
-              "./src/assets/js/jquery-3.4.1.min.js",
-              "./src/assets/js/popper.min.js",
-              "./src/assets/js/theme.js",
-              "./src/assets/js/owl.carousel.min.js",
-              "./src/assets/js/mmenu-light.js",
-              "./src/assets/js/wow.min.js",
-              "./src/assets/js/custom.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -107,15 +99,7 @@
               "src/styles.scss",
               "node_modules/plyr/dist/plyr.css"
             ],
-            "scripts": [
-              "./src/assets/js/jquery-3.4.1.min.js",
-              "./src/assets/js/popper.min.js",
-              "./src/assets/js/theme.js",
-              "./src/assets/js/owl.carousel.min.js",
-              "./src/assets/js/mmenu-light.js",
-              "./src/assets/js/wow.min.js",
-              "./src/assets/js/custom.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {

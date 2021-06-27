@@ -79,7 +79,9 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
-    this.getUserProfile();
+    this.route.params.subscribe(res => {
+      this.getUserProfile();
+    })
     this.myInbox = JSON.parse(this.inbox);
   }
 

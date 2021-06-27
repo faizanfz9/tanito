@@ -149,6 +149,7 @@ export class ProfileSetupComponent implements OnInit {
     userInfo.append("subjects", filledSubjects.toString());
     userInfo.append("profile", this.selectedImg);
     userInfo.append("mobile", this.mobile);
+    userInfo.append("user_id", localStorage.getItem("userId") ? localStorage.getItem("userId") : this.user.id);
     userInfo.append("video", this.selectedVideo);
     this.loading = true;
     this.authService.saveUserInfo(userInfo).subscribe((res: any) => {
@@ -169,32 +170,32 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   onSkip() {
-    let userInfo: FormData = new FormData();
-    userInfo.append("qualification", '');
-    userInfo.append("experience", '');
-    userInfo.append("university", '');
-    userInfo.append("gender", '');
-    userInfo.append("description", '');
-    userInfo.append("subjects", '');
-    userInfo.append("profile", this.selectedImg);
-    userInfo.append("mobile", this.mobile);
-    userInfo.append("video", this.selectedVideo);
-    this.loading = true;
-    this.authService.saveUserInfo(userInfo).subscribe((res: any) => {
-      if(res.status == "false") {
-        this.loading = false;
-        alert(res.msg);
-      }else {
-        var r = confirm("Do you want to skip?");
-        if (r == true) {
+    if(JSON.parse(this.userService.getUser())) {
+      this.router.navigate(['/myProfile']);
+    }else {
+      let userId: any = localStorage.getItem("userId")
+      let userInfo: FormData = new FormData();
+      userInfo.append("profile", this.selectedImg);
+      userInfo.append("mobile", this.mobile);
+      userInfo.append("user_id", userId);
+      userInfo.append("video", this.selectedVideo);
+      this.loading = true;
+      this.authService.saveUserInfo(userInfo).subscribe((res: any) => {
+        if(res.status == "false") {
           this.loading = false;
-          this.authService.storeUser(res.data);
-          this.router.navigate(['/feed']);
+          alert(res.msg);
         }else {
-          this.loading = false;
+          var r = confirm("Do you want to skip?");
+          if (r == true) {
+            this.loading = false;
+            this.authService.storeUser(res.data);
+            this.router.navigate(['/feed']);
+          }else {
+            this.loading = false;
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   openModal(template: TemplateRef<any>) {

@@ -17,13 +17,15 @@ export class MyPlanService {
     return this.currentPlan;
   }
 
-  isPlanExpired() {
+  isPlanExpired(): any {
     let currentDate = new Date();
-    let planEndDate = new Date(this.currentPlan.end_date);
-    if(currentDate > planEndDate) {
-     return true;
-    }else {
-      return false;
+    if(this.currentPlan) {
+      let planEndDate = new Date(this.currentPlan.end_date);
+      if(currentDate > planEndDate) {
+       return true;
+      }else {
+        return false;
+      }
     }
   }
 }

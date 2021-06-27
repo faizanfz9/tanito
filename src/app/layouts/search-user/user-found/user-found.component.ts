@@ -55,7 +55,7 @@ export class UserFoundComponent implements OnInit {
     this.loading = true;
     this.userService.searchUser(queryRequest).subscribe((res: any) => {
       this.loading = false;
-      this.users = res.users.filter((item: any) => item.data.profile_img !== null );
+      this.users = res.users;
       this.path = res.urlkey;
     })
   }

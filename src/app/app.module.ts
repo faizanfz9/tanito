@@ -73,6 +73,7 @@ import { ToggleContentDirective } from './directives/toggle-content.directive';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { ResourcesComponent } from './layouts/user-feed/resources/resources.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { SessionsComponent } from './layouts/user-feed/sessions/sessions.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { SafePipe } from './pipes/safe.pipe';
     TruncatePipe,
     ToggleContentDirective,
     ResourcesComponent,
-    SafePipe
+    SafePipe,
+    SessionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

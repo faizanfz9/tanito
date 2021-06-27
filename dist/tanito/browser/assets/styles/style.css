@@ -175,7 +175,7 @@ font-size:.90rem; line-height:23px; font-weight:300; }
  .registration-form .form-group label.spcllbl::after {
  content: "";
  position: absolute;
- border: 2px solid #fff;
+ border: 3px solid #fff;
  width: 100%;
  left: 0;
  top: 9px;
@@ -820,7 +820,12 @@ span.dots { color: #000000; font-size: 18px; font-weight: 500; }
 }
 .chat_box_top h4 { font-size: 20px; margin-left: 15px; font-weight: 500; margin-bottom: 0; }
 .chat_box_top h4 span { display: block; color: #808080; font-size: 12px; position: relative;}
-.chat_box_top h4 span img{ position: absolute; top: -20px; right: -45px; width: 35px;}
+.chat_box_top h4 span img{ 
+    position: absolute;
+    top: -27px;
+    right: -45px;
+    width: 30px;
+}
 .chatBoxTop_lft { flex: 0 0 60%; max-width: 60%; }
 .chatBoxTop_rht { flex: 0 0 40%; max-width: 40%; }
 .chatBoxTop_rht button { display: none; border: none; background-color: transparent; }

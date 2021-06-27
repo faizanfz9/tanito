@@ -70,10 +70,10 @@
                     <li [hidden]="!user.gender"><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
                 </ul>
               </div>
-              <div class="custom_card intro_box" *ngIf="user.usertype == 2">
+              <!-- <div class="custom_card intro_box" *ngIf="user.usertype == 2">
                 <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro Video</h4>
                 <plyr plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: teacherVideoPath + user.video }]"></plyr>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-8 col-lg-9">
@@ -131,7 +131,8 @@
                   <span>{{ user.username }}</span>
                   <img [src]="user.usertype == 3 ? studentIcon : teacherIcon" alt="user type">
                 </h6>
-                <p>{{ (user.usertype == 3 ? "Student at ":"Teacher at ") +  user.university }}</p> 
+                <p *ngIf="user.university">{{ (user.usertype == 3 ? "Student at ":"Teacher at ") +  user.university }}</p> 
+                <p *ngIf="!user.university">Guest User</p> 
               </div>
             </div>
             <form action="#" class="registration-form" (submit)="onCreatePost(createPostForm)" #createPostForm="ngForm">
@@ -171,6 +172,15 @@
                   <i class="remove fa fa-times" (click)="removeVideo()" aria-hidden="true"></i>
                 </div>
                 
+              </div>
+              <div class="form-group">
+                <label class="primary_color spcllbl">Mention User</label>
+                <input type="text" class="form-control mention-input" matInput [formControl]="myControl" [matAutocomplete]="mention">
+                <mat-autocomplete #mention="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let member of filteredMembers | async" [value]="member">
+                    {{member.name}}
+                  </mat-option>
+                </mat-autocomplete>
               </div>
               <div class="form-group">
                 <label class="primary_color spcllbl">Select Subjects</label>

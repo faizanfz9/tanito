@@ -28,6 +28,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private authService: AuthService, 
    private socialAuthService: SocialAuthService,
+   private router: Router,
    private modalService: BsModalService) 
    { }
 
@@ -137,44 +138,44 @@ export class LoginFormComponent implements OnInit {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'tanito' }));
   }
 
-  initiateGoogleLogin() {
-    this.openModal(this.signInAsGoogle);
-  }
-
-  initiateFacebookLogin() {
-    this.openModal(this.signInAsFacebook);
-  }
-
   // Social login
-  signInWithGoogle(usertype: any): void {
+  signInWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
       let user = new FormData();
       user.append("username", res.name);
       user.append("email", res.email);
       user.append("profile_img", res.photoUrl);
       user.append("social_id", res.id);
-      user.append("usertype", usertype);
+      // user.append("usertype", usertype);
       user.append("register_from", "G");
-      this.modalRef.hide();
+      // this.modalRef.hide();
       this.authService.socialRegister(user).subscribe((response: any) => {
-        this.authService.storeUser(response.data);
+        if(response.status == false) {
+          this.router.navigate(['/register']);
+        }else {
+          this.authService.storeUser(response.data);
+        }
       })
     })
   }
 
-  signInWithFacebook(usertype: any): void {
+  signInWithFacebook(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => {
       let user = new FormData();
       user.append("username", res.name);
       user.append("email", res.email);
       user.append("profile_img", res.response.picture.data.url);
       user.append("social_id", res.id);
-      user.append("usertype", usertype);
-      user.append("register_from", "G");
+      // user.append("usertype", usertype);
+      user.append("register_from", "F");
       // console.log(res.response.picture.data.url);
-      this.modalRef.hide();
+      // this.modalRef.hide();
       this.authService.socialRegister(user).subscribe((response: any) => {
-        this.authService.storeUser(response.data);
+        if(response.status == false) {
+          this.router.navigate(['/register']);
+        }else {
+          this.authService.storeUser(response.data);
+        }
       })
     })
   }

@@ -28,7 +28,7 @@ export class NotificationService {
     let notifications = this.getNotification(userId);
     notifications.push({
       notification: notification,
-      userPic: this.profilePath + userPic,
+      userPic: userPic,
       timestamp: timestamp,
       isRead: false
     })

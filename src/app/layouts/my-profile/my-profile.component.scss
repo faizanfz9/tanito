@@ -160,3 +160,14 @@
 //         max-height: 250px;
 //     }
 // }
+
+.mention-input {
+    text-align: left !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+}
+
+.student_rht {
+    max-height: 2000px;
+    overflow-y: scroll;
+}
