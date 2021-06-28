@@ -171,3 +171,12 @@
     max-height: 2000px;
     overflow-y: scroll;
 }
+
+.dropdown-menu {
+    .dropdown-item {
+        color: #000;
+        &.active {
+            color: #fff;
+        }
+    }
+}

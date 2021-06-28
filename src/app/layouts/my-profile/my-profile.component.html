@@ -171,16 +171,14 @@
                   <img [src]="videoThumb" alt="">
                   <i class="remove fa fa-times" (click)="removeVideo()" aria-hidden="true"></i>
                 </div>
-                
               </div>
               <div class="form-group">
                 <label class="primary_color spcllbl">Mention User</label>
-                <input type="text" class="form-control mention-input" matInput [formControl]="myControl" [matAutocomplete]="mention">
-                <mat-autocomplete #mention="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let member of filteredMembers | async" [value]="member">
-                    {{member.name}}
-                  </mat-option>
-                </mat-autocomplete>
+                <input id="typeahead-template" type="text" name="member" class="form-control" [(ngModel)]="member" [ngbTypeahead]="search" [resultTemplate]="rt"
+                [inputFormatter]="formatter" />
+                <ng-template #rt let-r="result" let-t="term">
+                  <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                </ng-template>
               </div>
               <div class="form-group">
                 <label class="primary_color spcllbl">Select Subjects</label>

@@ -12,7 +12,8 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import "bad-words"
 import { MyPlanService } from 'src/app/shared/my-plan.service';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import {Observable, OperatorFunction} from 'rxjs';
 var Filter = require('bad-words'), filter = new Filter();
 declare var require: any
 
@@ -57,9 +58,16 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
   allTags: any = [];
 
   members: any = [];
-  filteredMembers: any;
-  memberId: any;
-  myControl = new FormControl();
+  public member: any;
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      map(term => term === '' ? []
+        : this.members.filter((v: any) => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+
+  formatter = (x: {name: string}) => x.name;
 
   constructor(
     private userService: UserService, 
@@ -92,16 +100,6 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       res.users.forEach((item: any) => {
         this.members.push({name: item.data.username, id: item.data.id});
       })
-      this.filteredMembers = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => {
-          this.memberId = value.id;
-          console.log(this.memberId);
-          return typeof value === 'string' ? value : value.name;
-        }),
-        map(name => name ? this._filter(name) : this.members.slice())
-      );
     })
   }
 
@@ -198,8 +196,7 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       post.append("video", this.selectedVideo);
       post.append("subject", form.value.subject);
       post.append("tags", this.selectedTags.toString());
-      post.append("tag_user", this.memberId);
-      console.log(this.memberId);
+      post.append("tag_user", this.member.id);
       if(!this.isPlanActive) {
         if(this.user.user_post_data.length >= 2) {
           alert("No of posting limit has reached, Kindly subscribe the plan!");
