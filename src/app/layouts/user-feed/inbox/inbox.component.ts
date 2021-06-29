@@ -57,6 +57,7 @@ export class InboxComponent implements OnInit{
           this.userService.getUserById(memberId).subscribe(res => {
             this.isFetched = true;
             this.receiver = res.data.results;
+            console.log(this.receiver);
 
             if(this.receiver) {
               this.loading = true;
