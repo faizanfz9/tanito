@@ -8,7 +8,7 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./sessions.component.scss']
 })
 export class SessionsComponent implements OnInit {
-  sessions: any;
+  sessions: any = [];
 
   constructor(private userService: UserService, private router: Router) { }
 

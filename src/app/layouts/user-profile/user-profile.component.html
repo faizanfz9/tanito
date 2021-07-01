@@ -68,10 +68,10 @@
                                 <li [hidden]="!user.data.results.gender"><img src="assets/images/icons/gender.png" alt="gender" />{{ user.data.results.gender | titlecase }}</li>
                             </ul>
                         </div>
-                        <!-- <div class="custom_card intro_box" *ngIf="user.data.results.video.length > 0">
+                        <div class="custom_card intro_box" *ngIf="user.data.results.video">
                            <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro Video</h4>
                            <plyr plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: teacherVideoPath + user.data.results.video }]"></plyr>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-9">

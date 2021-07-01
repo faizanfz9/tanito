@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild("otpVerify") otpVerifyModal: any;
   @ViewChild("socialAuth") socialAuthModal: any;
   @ViewChild("socialVerify") socialVerifyModal: any;
+  @ViewChild("signUpAs") signUpAsModal: any;
 
   socialId: any;
   socialMobile: any;
@@ -148,6 +149,12 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  onChooseUserType(userType: any) {
+    this.socialUser.append("usertype", userType);
+    this.modalRef.hide();
+    this.openModal(this.socialAuthModal);
+  }
+
   signInWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
       // let user = new FormData();
@@ -155,13 +162,13 @@ export class RegisterComponent implements OnInit {
       this.socialUser.append("email", res.email);
       this.socialUser.append("profile_img", res.photoUrl);
       this.socialUser.append("social_id", res.id);
-      this.socialUser.append("usertype", this.userType.toString());
+      // this.socialUser.append("usertype", this.userType.toString());
       this.socialUser.append("register_from", "G");
       
       this.socialId = res.id;
       this.authService.socialRegister(this.socialUser).subscribe((response: any) => {
         if(response.status == false) {
-          this.openModal(this.socialAuthModal);
+          this.openModal(this.signUpAsModal);
         }else {
           this.authService.storeUser(response.data);
         }
@@ -176,12 +183,12 @@ export class RegisterComponent implements OnInit {
       this.socialUser.append("email", res.email);
       this.socialUser.append("profile_img", res.response.picture.data.url);
       this.socialUser.append("social_id", res.id);
-      this.socialUser.append("usertype", this.userType.toString());
+      // this.socialUser.append("usertype", this.userType.toString());
       this.socialUser.append("register_from", "F");
       this.socialId = res.id;
       this.authService.socialRegister(this.socialUser).subscribe((response: any) => {
         if(response.status == false) {
-          this.openModal(this.socialAuthModal);
+          this.openModal(this.signUpAsModal);
         }else {
           this.authService.storeUser(response.data);
         }

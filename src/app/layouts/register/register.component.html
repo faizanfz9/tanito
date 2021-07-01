@@ -35,7 +35,7 @@
                     <input 
                     type="tel" 
                     class="form-control" 
-                    placeholder="+917898765645"
+                    placeholder="+91 XXXXXXXXXX"
                     name="phone"
                     ngModel
                     pattern="^[0-9]*$"
@@ -189,7 +189,7 @@
                 <input 
                 type="tel" 
                 class="form-control" 
-                placeholder="+876-9876543210"
+                placeholder="+91 XXXXXXXXXX"
                 name="phone"
                 pattern="^[0-9]*$"
                 minlength="10"
@@ -205,5 +205,29 @@
       </div>
     </div>
   </ng-template>
+
+  <ng-template #signUpAs>
+    <div class="modal_tanito report_modal">
+      <div class="modal-dialog">
+        <div class="modal-content text-center">
+          <div class="modal-header primary_bg">
+            <h5 class="modal-title text-uppercase">Sign Up As</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 col-sm-6 mb-4 mb-sm-0 text-center">
+                  <p><img src="../../../../assets/images/female.png" alt="teacher"></p> 
+                  <button type="button" (click)="onChooseUserType(2)" class="btn btn_primary btn-sm">Sign Up As Teacher</button>
+              </div>
+              <div class="col-12 col-sm-6 mb-4 mb-sm-0 text-center">
+                <p><img src="../../../../assets/images/reading.png" alt="student"></p>
+                <button type="button" (click)="onChooseUserType(3)" class="btn btn_primary btn-sm">Sign Up As Student</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</ng-template>
 
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

@@ -65,15 +65,15 @@
                 <ul>
                     <li [hidden]="!user.qualification"><img src="assets/images/icons/graduated.png" alt="graduate" />{{ user.qualification | uppercase }}</li>
                     <li [hidden]="!user.university"><img src="assets/images/icons/graduation-hat.png" alt="graduation hat" />{{ user.university | titlecase }}</li>
-                    <li [hidden]="user.usertype == 3"><img src="assets/images/icons/work.svg" alt="work" />{{ user.experience + ' Year' | titlecase }}</li>
+                    <li [hidden]="!user.experience"><img src="assets/images/icons/work.svg" alt="work" />{{ user.experience + ' Year' | titlecase }}</li>
                     <li><img src="assets/images/icons/clock.png" alt="clock" />Joined on {{ user.created | datefilter }}</li>
                     <li [hidden]="!user.gender"><img src="assets/images/icons/gender.png" alt="gender" />{{ user.gender | titlecase }}</li>
                 </ul>
               </div>
-              <!-- <div class="custom_card intro_box" *ngIf="user.usertype == 2">
+              <div class="custom_card intro_box" *ngIf="user.video">
                 <h4><img src="assets/images/icons/earth-globe.png" alt="icon" /> Intro Video</h4>
                 <plyr plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="[{ src: teacherVideoPath + user.video }]"></plyr>
-              </div> -->
+              </div>
             </div>
           </div>
           <div class="col-md-8 col-lg-9">

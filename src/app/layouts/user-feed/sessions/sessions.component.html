@@ -1,6 +1,6 @@
 <div class="student_rht network_rht">
     <div class="custom_card">
-        <h5>Your Upcoming Sessions</h5>
+        <h5>{{ sessions.length == 0 ?  'No Upcoming Sessions' : 'Your Upcoming Sessions' }}</h5>
     </div>
     <div class="custom_card" *ngFor="let session of sessions">
         <div class="row">
