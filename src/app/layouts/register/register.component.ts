@@ -60,7 +60,6 @@ export class RegisterComponent implements OnInit {
       }else {
         this.loading = false;
         localStorage.setItem('userId', res.data.user_id);
-        console.log(res);
         this.openModal(this.otpVerifyModal);
       }
     }, error => {

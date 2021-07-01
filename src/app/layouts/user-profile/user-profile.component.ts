@@ -63,7 +63,6 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
     this.userService.getUserById(userId).subscribe(res => {
       this.loading = false;
       this.user = res;
-      console.log(this.user);
       this.followed = this.loggedUser.following_id.some((user: any) => user.follower == this.id);
     })
   }
