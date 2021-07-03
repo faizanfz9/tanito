@@ -196,7 +196,9 @@ export class MyProfileComponent implements OnInit, AfterContentChecked {
       post.append("video", this.selectedVideo);
       post.append("subject", form.value.subject);
       post.append("tags", this.selectedTags.toString());
-      post.append("tag_user", this.member.id);
+      if(this.member) {
+        post.append("tag_user", this.member.id);
+      }
       if(!this.isPlanActive) {
         if(this.user.user_post_data.length >= 2) {
           alert("No of posting limit has reached, Kindly subscribe the plan!");

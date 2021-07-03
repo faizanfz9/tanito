@@ -23,6 +23,7 @@ export class PlansComponent implements OnInit {
   discountApplied = false;
   @ViewChild("confirmationBox") confirmationBox: any;
   @ViewChild("applyPromocode") applyPromocode: any;
+  loading = false;
   
   private _window: ICustomWindow;
   public rzp: any;
@@ -123,13 +124,16 @@ export class PlansComponent implements OnInit {
       let planInfo = new FormData();
       planInfo.append("plan_id", this.selectedPlanId);
       planInfo.append("user_id", this.loggedUser.id);
+      this.loading = true;
       this.planService.buyPlan(planInfo).subscribe((res: any) => {
-        this.openModal(this.confirmationBox);
         this.userService.updateUser();
         this.notification.sendNotification(this.loggedUser.id, this.loggedUser.profile_img , "You have subscribed our " + this.options.description + " plan");
         let promo = new FormData();
         promo.append("promocode", this.promocode);
         this.planService.redeemPromo(promo).subscribe(res);
+        this.loading = false;
+        // this.openModal(this.confirmationBox);
+        window.open('/feed', "_self");
       })
     });
   }

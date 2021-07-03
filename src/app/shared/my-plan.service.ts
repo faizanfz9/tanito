@@ -9,6 +9,10 @@ export class MyPlanService {
   currentPlan: any;
 
   constructor(private userService: UserService) { 
+    this.userService.storeUpdatedUser().subscribe(res => {
+      this.loggedUser = res;
+      console.log(res);
+    })
     this.loggedUser = JSON.parse(this.userService.getUser());
     this.currentPlan = this.loggedUser.plan_subcription[this.loggedUser.plan_subcription.length - 1];
   }

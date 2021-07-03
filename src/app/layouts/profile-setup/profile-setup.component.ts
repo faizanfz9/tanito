@@ -142,7 +142,9 @@ export class ProfileSetupComponent implements OnInit {
     
     let userInfo: FormData = new FormData();
     userInfo.append("qualification", form.value.qualification);
-    userInfo.append("experience", form.value.experience);
+    if(this.userType == 2) {
+      userInfo.append("experience", form.value.experience);
+    }
     userInfo.append("university", form.value.university);
     userInfo.append("gender", form.value.gender);
     userInfo.append("description", form.value.description);
