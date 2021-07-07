@@ -133,7 +133,7 @@ export class PlansComponent implements OnInit {
         this.planService.redeemPromo(promo).subscribe(res);
         this.loading = false;
         // this.openModal(this.confirmationBox);
-        window.open('/feed', "_self");
+        window.location.reload();
       })
     });
   }
