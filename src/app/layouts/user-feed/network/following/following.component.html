@@ -2,13 +2,13 @@
   <div class="col-sm-6 col-xl-3 card-wrap" [routerLink]="'/user/' + followingEach.follower" *ngFor="let followingEach of following">
     <div class="testi-content text-center"> 
       <div class="img-wrap">
-        <img [src]="path + followingEach.profile_img" 
+        <img [src]="followingEach.profile_img"
         [alt]="followingEach.username" 
         class="img-fluid mx-auto d-block rounded-circle user-img">
         <span [hidden]="followingEach.online == 0" class="user_online"></span>
       </div>
       <h5 class="mt-4 mb-4">{{ followingEach.username }} &nbsp;</h5>
-      <p class="mb-4">{{ (followingEach.usertype == 3 ? 'Student at ':'Teacher at ') + followingEach.university }}</p>
+      <p class="mb-4" *ngIf="followingEach.university">{{ (followingEach.usertype == 3 ? 'Student at ':'Teacher at ') + followingEach.university }}</p>
   </div>
 </div>
 <!-- <button type="button" class="see_all_btn">See all</button> -->

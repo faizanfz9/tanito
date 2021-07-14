@@ -2,13 +2,13 @@
   <div class="col-sm-6 col-xl-3 card-wrap" [routerLink]="'/user/' + follower.user_id" *ngFor="let follower of followers">
     <div class="testi-content text-center"> 
       <div class="img-wrap">
-        <img [src]="path + follower.profile_img" 
+        <img [src]="follower.profile_img" 
         [alt]="follower.username" 
         class="img-fluid mx-auto d-block rounded-circle user-img">
         <span [hidden]="follower.online == 0" class="user_online"></span>
       </div>
       <h5 class="mt-4 mb-4">{{ follower.username }} &nbsp;</h5>
-      <p class="mb-4">{{ (follower.usertype == 3 ? 'Student at ':'Teacher at ') + follower.university }}</p>
+      <p class="mb-4" *ngIf="follower.university">{{ (follower.usertype == 3 ? 'Student at ':'Teacher at ') + follower.university }}</p>
   </div>
 </div>
 
